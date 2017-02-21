@@ -2,97 +2,124 @@ body
 {
 	margin: 0;
 	padding: 0;
-  background-color: #eaeaea !important;
+	background-color: #eaeaea !important;
 }
 
 
 @font-face {
-   font-family:Gotham-Book;
-  
-   src: url(font/Gotham-Book.otf) , url(font/Gotham-Book.eot);
-  
+	font-family:Gotham-Book;
+
+	src: url(font/Gotham-Book.otf) , url(font/Gotham-Book.eot);
+
 }
 @font-face {
-   font-family:Gotham-Medium;
-  
-   src: url(font/Gotham-Medium.otf) , url(font/Gotham-Medium.eot);
-  
+	font-family:Gotham-Medium;
+
+	src: url(font/Gotham-Medium.otf) , url(font/Gotham-Medium.eot);
+
 }
 
 @font-face {
-   font-family:Gotham-Bold;
-  
-   src: url(font/Gotham-Bold.otf) , url(font/Gotham-Bold.eot);
-  
+	font-family:Gotham-Bold;
+
+	src: url(font/Gotham-Bold.otf) , url(font/Gotham-Bold.eot);
+
 }
 
 @font-face {
-   font-family:Gotham-Light;
-  
-   src: url(font/Gotham-Light.otf) , url(font/Gotham-Light.eot);
-  
+	font-family:Gotham-Light;
+
+	src: url(font/Gotham-Light.otf) , url(font/Gotham-Light.eot);
+
 }
 @font-face {
-   font-family:Gotham-XLight;
-  
-   src: url(font/Gotham-XLight.otf) , url(font/Gotham-ExtraLight.eot);
-  
+	font-family:Gotham-XLight;
+
+	src: url(font/Gotham-XLight.otf) , url(font/Gotham-ExtraLight.eot);
+
 }
 
 @font-face {
-   font-family:Gotham-Thin;
-  
-   src: url(font/Gotham-Thin.otf) , url(font/Gotham-Thin.eot);
-  
+	font-family:Gotham-Thin;
+
+	src: url(font/Gotham-Thin.otf) , url(font/Gotham-Thin.eot);
+
 }
 .pageHolder
 {
-    width: 90%;
-    background-color: #fff;
+	width: 90%;
+	background-color: #fff;
+}
+
+.centerAllIMGUL
+{
+	padding:0;
+	margin: 0;
+	list-style-type: none;
+}
+.centerAllIMGLI
+{
+	float: left;
+	width: 16%;
+}
+.centerAllIMGDiv
+{
+	padding: 20px;
+	cursor: pointer;
+}
+.mobileNEWIMG
+{
+	width: 100%;
+}
+.mobileNameSpan
+{
+	padding-top: 10px;
+	display: block;
+
 }
 
 .container-fluid {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-    margin-right: auto;
-    margin-left: auto;
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+	margin-right: auto;
+	margin-left: auto;
 }
 label {
-    display: inline-block;
-    max-width: 100%;
-     margin-bottom: 0px !important; 
-    font-weight: normal !important;
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 0px !important;
+	font-weight: normal !important;
 }
 .row
 {
-  margin-right: 0px !important;
-  margin-left: 0px !important;
+	margin-right: 0px !important;
+	margin-left: 0px !important;
 }
 .topHadder
 {
 	width: 100%;
-  
-    font-family: Gotham-Medium;
-    font-size: 16px;
-    padding: 15px 0 15px;
+
+	font-family: Gotham-Medium;
+	font-size: 16px;
+	padding: 15px 0 15px;
 }
 .locationimg
 {
-    position: absolute;
-    top: 12px;
-    left: 25px;
-    width: 12px;
+	position: absolute;
+	top: 12px;
+	left: 25px;
+	width: 12px;
 }
 .loadIconHolder
 {
-    height: 25px;
-    width: 30px;
-    position: absolute;
-    top: 0px;
-    right: 16px;
-    border-left: 1px solid;
-    margin: 8px;
-    color: #e8e8e8;
+	height: 25px;
+	width: 30px;
+	position: absolute;
+	top: 0px;
+	right: 16px;
+	border-left: 1px solid;
+	margin: 8px;
+	color: #e8e8e8;
 }
 .calendarHolder
 {
@@ -100,773 +127,773 @@ label {
 }
 .loadIcon
 {
-      position: absolute;
-    top: 4px;
-    right: 2px;
+	position: absolute;
+	top: 4px;
+	right: 2px;
 }
 .heartImg
 {
-  padding-left: 5%;
-  padding-right: 2%;
-  vertical-align: middle;
+	padding-left: 5%;
+	padding-right: 2%;
+	vertical-align: middle;
 }
 .locationLabel
 {
-  font-family:Gotham-Book;
-  font-size: 14px;
-  color: white;
-      padding: 10px;
+	font-family:Gotham-Book;
+	font-size: 14px;
+	color: white;
+	padding: 10px;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
 }
 .mySmallbtn
 {
-  margin: 0 5px;
+	margin: 0 5px;
 }
 .inputLocation
 {
-      font-family: Gotham-Book;
-    font-size: 14px;
-    box-sizing: border-box;
-    padding: 10px 40px 10px 30px;
-    width: 100%;
-    border-radius: 5px;
-    border: none;
+	font-family: Gotham-Book;
+	font-size: 14px;
+	box-sizing: border-box;
+	padding: 10px 40px 10px 30px;
+	width: 100%;
+	border-radius: 5px;
+	border: none;
 }
 .locationHolder
 {
-  width: 100%;
-  /*height: 80px;*/
-  background-color: #4b10c1;
+	width: 100%;
+	/*height: 80px;*/
+	background-color: #4b10c1;
 }
 .locationContent
 {
-      padding: 24px 0;
-    width: 820px;
-    left: 0;
-    right: 0;
-    margin: auto;
+	padding: 24px 0;
+	width: 820px;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 .menuHolder
 {
-  width: 100%;
-  border-bottom:1px solid #4bd800;
+	width: 100%;
+	border-bottom:1px solid #4bd800;
 }
 .pickUpMenuActive
 {
-    font-family: Gotham-Bold !important;
-    padding-bottom: 6px;
-    border-bottom: 3px solid #4bd800;
-    height: 32px;
+	font-family: Gotham-Bold !important;
+	padding-bottom: 6px;
+	border-bottom: 3px solid #4bd800;
+	height: 32px;
 }
 .pickUplabel
 {
-    font-size: 18px;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 18px;
-    padding-bottom: 6px;
-    font-family: Gotham-Book;
+	font-size: 18px;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 18px;
+	padding-bottom: 6px;
+	font-family: Gotham-Book;
 }
 .dropofflabel
 {
-  font-size: 18px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 6px;
-  font-family: Gotham-Book;
-  /*padding-left: 25px;*/
+	font-size: 18px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 6px;
+	font-family: Gotham-Book;
+	/*padding-left: 25px;*/
 
 }
 .menuContent
 {
-  text-align: center;
-  padding-top: 40px;
+	text-align: center;
+	padding-top: 40px;
 }
 .detailsHolder
 {
-  width: 1000px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  padding-top: 50px;
+	width: 1000px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	padding-top: 50px;
 
 }
 .pickuppagelocation
 {
-      text-align: right;
-    line-height: 20px;
+	text-align: right;
+	line-height: 20px;
 }
 .labelDetails
 {
-  font-size: 13px;
-   font-family: Gotham-Book;
+	font-size: 13px;
+	font-family: Gotham-Book;
 }
 .inputdetails
 {
-  font-size: 12px;
-   font-family: Gotham-Book;
-   border: none;
-   border-bottom: 1px solid #bbbbbb;
-   outline: none;
-  padding: 5px 0;
-      width: 100%;
-      position: relative;
-      background:transparent;
-      z-index: 1;
+	font-size: 12px;
+	font-family: Gotham-Book;
+	border: none;
+	border-bottom: 1px solid #bbbbbb;
+	outline: none;
+	padding: 5px 0;
+	width: 100%;
+	position: relative;
+	background:transparent;
+	z-index: 1;
 }
 .activeBtn
 {
-      border-color: #4bd800 !important;
-    color: #4bd800 !important;
+	border-color: #4bd800 !important;
+	color: #4bd800 !important;
 }
 .greenRewordContentHolder
 {
-      padding-left: 2%;
+	padding-left: 2%;
 }
 .newgreenRewordContentHolderUL
 {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
 }
 
 .greenRewordContentHolderUL
 {
-  padding: 0;
-  margin: auto;
-  list-style-type: none;
-  left: 0;
-  right: 0;
-  width: 800px;
+	padding: 0;
+	margin: auto;
+	list-style-type: none;
+	left: 0;
+	right: 0;
+	width: 800px;
 }
 .newOTPHide
 {
-    width: 65px;
-    height: 68px;
-    position: absolute;
-    background-color: #fff;
-    right: 0px;
-    top: -10px;
-    z-index: 1001;
+	width: 65px;
+	height: 68px;
+	position: absolute;
+	background-color: #fff;
+	right: 0px;
+	top: -10px;
+	z-index: 1001;
 }
 .landingLargeButton
 {
-    background: #4bd800;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 14px !important;
-    padding: 10px 100px !important;
-     font-family: Gotham-Medium;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    user-select: none;
-    background-image: none;
-    border-radius: 4px;
-    border: none;
+	background: #4bd800;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 14px !important;
+	padding: 10px 100px !important;
+	font-family: Gotham-Medium;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	user-select: none;
+	background-image: none;
+	border-radius: 4px;
+	border: none;
 }
 .grContentDiv
 {
-  width: 250px;
-  background: #f2f2f2;
-  height: 150px;
-  padding: 20px;
-  border-radius: 5px;
-  position: relative;
+	width: 250px;
+	background: #f2f2f2;
+	height: 150px;
+	padding: 20px;
+	border-radius: 5px;
+	position: relative;
 }
 .grContentDivLeft
 {
-  width: 90%;
-  float: left;
+	width: 90%;
+	float: left;
 }
 .grContentDivRight
 {
-    bottom: 10px;
-    position: absolute;
-    right: 20px;
+	bottom: 10px;
+	position: absolute;
+	right: 20px;
 }
 .cutapple
 {
-  position: absolute;
-    bottom: 18px;
+	position: absolute;
+	bottom: 18px;
 }
 .iphone7Label
 {
-  font-family: Gotham-Medium;
-  font-size: 13px;
-      display: block;
+	font-family: Gotham-Medium;
+	font-size: 13px;
+	display: block;
 }
 .LuckyDip
 {
-   font-family: Gotham-Light;
-   font-size: 13px;
-  display: block;
+	font-family: Gotham-Light;
+	font-size: 13px;
+	display: block;
 }
 .greenRewordContentHolderLI
 {
-  float: left;
-  margin: 1%;
-  padding-bottom: 10px;
+	float: left;
+	margin: 1%;
+	padding-bottom: 10px;
 }
 .btn
 {
-  font-family: Gotham-Book;
-  background-color: #fff;
-  border-color: #333;
-  border: 1px solid !important;
+	font-family: Gotham-Book;
+	background-color: #fff;
+	border-color: #333;
+	border: 1px solid !important;
 }
 .detailsContent
 {
-  padding-bottom: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
+	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 .detailsContentbutton
 {
-  padding-top: 15px;
-  padding-bottom: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 .detailsContentlargeButton
 {
-  text-align: center;
-      padding-bottom: 20px;
-    padding-top: 20px;
+	text-align: center;
+	padding-bottom: 20px;
+	padding-top: 20px;
 }
 .pickUPlargebutton
 {
-  background: #4bd800;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 14px !important;
-    padding: 10px 100px !important;
-     font-family: Gotham-Medium;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    user-select: none;
-    background-image: none;
-    border-radius: 4px;
-    border: none;
+	background: #4bd800;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 14px !important;
+	padding: 10px 100px !important;
+	font-family: Gotham-Medium;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	user-select: none;
+	background-image: none;
+	border-radius: 4px;
+	border: none;
 }
 .largebutton
 {
-  background: #4bd800;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 14px !important;
-    padding: 8px 60px !important;
-     font-family: Gotham-Medium;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    user-select: none;
-    background-image: none;
-    border-radius: 4px;
-    border: none;
+	background: #4bd800;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 14px !important;
+	padding: 8px 60px !important;
+	font-family: Gotham-Medium;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	user-select: none;
+	background-image: none;
+	border-radius: 4px;
+	border: none;
 }
 .btn.focus, .btn:focus, .btn:hover
-    {
-    color: #4bd800 !important;
-    text-decoration: none;
-    }
+{
+	color: #4bd800 !important;
+	text-decoration: none;
+}
 .footerHolder
 {
-  padding-bottom: 30px;
-  padding-top: 50px;
+	padding-bottom: 30px;
+	padding-top: 50px;
 }
- .poweredBy
- {
-  font-size: 12px;
-  font-family: Gotham-Book;
-  color: #4c10c1;
- }  
- .poweredByContent
- {
-  padding-left: 5%;
- } 
- .servifylogo
- {
-      width: 175px;
-    padding-bottom: 10px;
-    padding-top: 10px;
- }
- .policyTerm
- {
-     font-family: Gotham-Book;
-     font-size: 10px;
- }
- .policyTermContent
- {
-  text-align: right;
-    padding-right: 5%;
- }
- .calendar
- {
-      position: absolute;
-    width: 20px;
-    top: 20px;
-    right: 28px;
- }
+.poweredBy
+{
+	font-size: 12px;
+	font-family: Gotham-Book;
+	color: #4c10c1;
+}
+.poweredByContent
+{
+	padding-left: 5%;
+}
+.servifylogo
+{
+	width: 175px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+.policyTerm
+{
+	font-family: Gotham-Book;
+	font-size: 10px;
+}
+.policyTermContent
+{
+	text-align: right;
+	padding-right: 5%;
+}
+.calendar
+{
+	position: absolute;
+	width: 20px;
+	top: 20px;
+	right: 28px;
+}
 
- .overlay {
-      height: 100%;
-      width: 100%;
-      position: fixed;
-      z-index: 9;
-      top: 0;
-      left: 0;
-      background-color: rgb(0,0,0);
-      background-color: rgba(0,0,0, 0.8);
-      overflow-x: hidden;
-      transition: 0.5s;
-  }
+.overlay {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	z-index: 9;
+	top: 0;
+	left: 0;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0, 0.8);
+	overflow-x: hidden;
+	transition: 0.5s;
+}
 
-  .otpHolder{
-      width: 320px;
-      height: 275px;
-      padding: 25px;
-      border: none;
-      left: 0;
-      right: 0;
-      margin: auto;
-      color: black;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      background:#ffffff;
-  }
-  .otpinputHolder
-  {
-    position: relative;
-    padding-top: 10px;
-  }
-  .otpLabel
-  {
-    font-family: Gotham-Medium;
-    font-size: 24px;
-    color: #393939;
-  }
-  .Verification
-  {
-    font-family:Gotham-XLight;
-    font-size: 24px;
-    color: #393939;
-    display: block;
-  }
-  .recived
-  {
-    font-family: Gotham-Book;
-    font-size: 11px;
-  }
-  .getback
-  {
-    font-family: Gotham-Medium;
-    font-size: 11px;
-    color: #333;
-  }
-  .cross
-  {
-    position: absolute;
-    right: 25px;
-    cursor: pointer;
-  }
-  .bottomContent
-  {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  .otpinput
-  {
-       outline: none;
-    letter-spacing: 40px;
-    padding: 10px 10px 0 10px;
-    width: 100%;
-    border: none;
+.otpHolder{
+	width: 320px;
+	height: 275px;
+	padding: 25px;
+	border: none;
+	left: 0;
+	right: 0;
+	margin: auto;
+	color: black;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background:#ffffff;
+}
+.otpinputHolder
+{
+	position: relative;
+	padding-top: 10px;
+}
+.otpLabel
+{
+	font-family: Gotham-Medium;
+	font-size: 24px;
+	color: #393939;
+}
+.Verification
+{
+	font-family:Gotham-XLight;
+	font-size: 24px;
+	color: #393939;
+	display: block;
+}
+.recived
+{
+	font-family: Gotham-Book;
+	font-size: 11px;
+}
+.getback
+{
+	font-family: Gotham-Medium;
+	font-size: 11px;
+	color: #333;
+}
+.cross
+{
+	position: absolute;
+	right: 25px;
+	cursor: pointer;
+}
+.bottomContent
+{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.otpinput
+{
+	outline: none;
+	letter-spacing: 40px;
+	padding: 10px 10px 0 10px;
+	width: 100%;
+	border: none;
 
-  }
-  .otpUnderline
-  {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
-  .separators
-  {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #eaeaea;
-  }
-  .userContent
-  {
-    float: right;
-    padding-top: 15px;
-    padding-right: 5%;
-  }
-  .userContentUL
-  {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-  }
-  .userContentLI
-  {
-    float: left;
-    padding-left: 20px;
-  }
-  .pickupInfoHolder
-  {
+}
+.otpUnderline
+{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.separators
+{
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #eaeaea;
+}
+.userContent
+{
+	float: right;
+	padding-top: 15px;
+	padding-right: 5%;
+}
+.userContentUL
+{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+.userContentLI
+{
+	float: left;
+	padding-left: 20px;
+}
+.pickupInfoHolder
+{
 
-  }
-  .pickupInfoContent
-  {
-    padding-left: 5%;
-    padding-top: 30px;
-  }
-  .earthHolder
-  {
-    padding: 20px;
-    max-width: 250px;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-  .earth
-  {
-    width: 100%;
-  }
-  .awesomeInfoContent
-  {
-    text-align: center;
-    padding-top: 30px;
-  }
-  .awesomeLabel
-  {
-    font-size: 32px;
-    font-family:Gotham-Bold;
-  }
-  .congo
-  {
-    font-size: 32px;
-    font-family:Gotham-Bold;
-  }
-  .recyle
-  {
-    font-family: Gotham-Book;
-    font-size: 32px;
-    padding-bottom: 15px;
-  }
-  .deviceInfo
-  {
-    position: relative;
-    margin-left: -15px;
-  }
+}
+.pickupInfoContent
+{
+	padding-left: 5%;
+	padding-top: 30px;
+}
+.earthHolder
+{
+	padding: 20px;
+	max-width: 250px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.earth
+{
+	width: 100%;
+}
+.awesomeInfoContent
+{
+	text-align: center;
+	padding-top: 30px;
+}
+.awesomeLabel
+{
+	font-size: 32px;
+	font-family:Gotham-Bold;
+}
+.congo
+{
+	font-size: 32px;
+	font-family:Gotham-Bold;
+}
+.recyle
+{
+	font-family: Gotham-Book;
+	font-size: 32px;
+	padding-bottom: 15px;
+}
+.deviceInfo
+{
+	position: relative;
+	margin-left: -15px;
+}
 
-  .devicelabel
-  {
-     font-family: Gotham-Book;
-    font-size: 13px;
-    padding-bottom: 5px;
-    padding-top: 20px;
-    color: #393939;
-  }
-  .deciceInfoLabel
-  {
-    font-family: Gotham-Medium;
-    font-size: 13px;
-    color: #555555;
-  }
-  .devicelabelContent
-  {
-    padding-left: 3.2%;
-    padding-top: 10px;
-  }
-  .greenReword
-  {
+.devicelabel
+{
+	font-family: Gotham-Book;
+	font-size: 13px;
+	padding-bottom: 5px;
+	padding-top: 20px;
+	color: #393939;
+}
+.deciceInfoLabel
+{
+	font-family: Gotham-Medium;
+	font-size: 13px;
+	color: #555555;
+}
+.devicelabelContent
+{
+	padding-left: 3.2%;
+	padding-top: 10px;
+}
+.greenReword
+{
 
-  }
-  .divHeadinglabelHolder
-  {
-    padding-bottom: 15px;
-    padding-left: 2px;
-  }
-  .divHeadinglabel
-  {
-     font-family: Gotham-Medium;
-    font-size: 16px;
-  }
-  .deviceNamelabelHolder
-  {
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-  .chooseDevice
-  {
-    font-size: 24px;
-    font-family: Gotham-Medium;
-      padding-left: 20px;
-    padding-right: 20px;
-    
-  }
-  .ChooseDeviceHolder
-  {
-    text-align: center;
-  }
-  .recycleLabel
-  {
-     font-family:Gotham-Light;
-     font-size: 24px;
-     display: block;
-  }
-  .betterPlace
-  {
-    font-size: 20px;
-    display: block;
-    font-family: Gotham-Medium;
-  }
-  .recyclingHub
-  {
-    font-family:Gotham-Book;
-     font-size: 20px;
-  }
-  .deviceName
-  {
-   font-size: 24px;
-    font-family: Gotham-Medium;
-    border-bottom: 1px solid #d0d0d0;
-    padding-left: 20px;
-    padding-right: 20px;
-    line-height: 60px;
-  }
-  .submitButton
-  {
-    padding-left: 3%;
-    padding-top: 50px;
-    padding-bottom: 30px;
-  }
-  .continueButton
-  {
+}
+.divHeadinglabelHolder
+{
+	padding-bottom: 15px;
+	padding-left: 2px;
+}
+.divHeadinglabel
+{
+	font-family: Gotham-Medium;
+	font-size: 16px;
+}
+.deviceNamelabelHolder
+{
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.chooseDevice
+{
+	font-size: 24px;
+	font-family: Gotham-Medium;
+	padding-left: 20px;
+	padding-right: 20px;
 
-    padding-top: 50px;
-    padding-bottom: 30px;
-  }
-  .awesometextHolder
-  {
-    text-align: center;
-    padding-bottom: 30px;
-    padding-top: 30px;
-  }
-  .landingSubmitButton
-  {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 50px;
-  }
- .trackLabel
- {
-  font-family:Gotham-Bold;
-  font-size: 28px;
- }
- .requestlabel
- {
-  font-family:Gotham-Book;
-  font-size: 28px;
-      padding-bottom: 30px;
- }
- .trackHolder
- {
-  padding-left: 4%;
-  padding-top: 60px;
- }
- .phoneLabel
- {
-  font-family:Gotham-Bold;
-  font-size: 18px;
- }
- .raisedLabel
- {
-    font-family: Gotham-Medium;
-    font-size: 14px;
-    position: relative;
- }
- .REQUESTColor
- {
-  color: #4bd800;
- }
- .loggedrightArrowHolder
- {
+}
+.ChooseDeviceHolder
+{
+	text-align: center;
+}
+.recycleLabel
+{
+	font-family:Gotham-Light;
+	font-size: 24px;
+	display: block;
+}
+.betterPlace
+{
+	font-size: 20px;
+	display: block;
+	font-family: Gotham-Medium;
+}
+.recyclingHub
+{
+	font-family:Gotham-Book;
+	font-size: 20px;
+}
+.deviceName
+{
+	font-size: 24px;
+	font-family: Gotham-Medium;
+	border-bottom: 1px solid #d0d0d0;
+	padding-left: 20px;
+	padding-right: 20px;
+	line-height: 60px;
+}
+.submitButton
+{
+	padding-left: 3%;
+	padding-top: 50px;
+	padding-bottom: 30px;
+}
+.continueButton
+{
 
- }
- .loggedrightArrowtrack
- {
+	padding-top: 50px;
+	padding-bottom: 30px;
+}
+.awesometextHolder
+{
+	text-align: center;
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
+.landingSubmitButton
+{
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+.trackLabel
+{
+	font-family:Gotham-Bold;
+	font-size: 28px;
+}
+.requestlabel
+{
+	font-family:Gotham-Book;
+	font-size: 28px;
+	padding-bottom: 30px;
+}
+.trackHolder
+{
+	padding-left: 4%;
+	padding-top: 60px;
+}
+.phoneLabel
+{
+	font-family:Gotham-Bold;
+	font-size: 18px;
+}
+.raisedLabel
+{
+	font-family: Gotham-Medium;
+	font-size: 14px;
+	position: relative;
+}
+.REQUESTColor
+{
+	color: #4bd800;
+}
+.loggedrightArrowHolder
+{
 
- }
- .loggedrightArrow
- {
-   position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    right: -20px;
-    width: 8px;
- }
-  .orderInfo
-  {
-    padding-top: 20px;
-    padding-left: 3%;
-  }
-  .iphone4
-  {
-    padding-right: 5px;
-  }
-  .orderInfoHolder
-  {
-    padding-bottom: 50px;
-  }
+}
+.loggedrightArrowtrack
+{
 
- .progressBarHolder
-  {
-    padding-top: 50px;
-    width: 90%;
-    right: 0;
-    margin: auto;
-  }
+}
+.loggedrightArrow
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	right: -20px;
+	width: 8px;
+}
+.orderInfo
+{
+	padding-top: 20px;
+	padding-left: 3%;
+}
+.iphone4
+{
+	padding-right: 5px;
+}
+.orderInfoHolder
+{
+	padding-bottom: 50px;
+}
+
+.progressBarHolder
+{
+	padding-top: 50px;
+	width: 90%;
+	right: 0;
+	margin: auto;
+}
 
 .myProgress1 {
-  position: relative;
-  width: 100%;
-  height: 2px;
-  background-color: #ddd;
+	position: relative;
+	width: 100%;
+	height: 2px;
+	background-color: #ddd;
 }
 .PickUpHref
 {
-  text-decoration: none;
-  color: #393939;
+	text-decoration: none;
+	color: #393939;
 
 }
 .nav-tabs
 {
-  border-bottom: 0 !important;
+	border-bottom: 0 !important;
 }
 a:focus, a:hover
 {
-  text-decoration: none !important;
-  color: #393939 !important;
+	text-decoration: none !important;
+	color: #393939 !important;
 }
 .myBar1 {
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  background-color: #4bd800;
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	background-color: #4bd800;
 }
 .activeState
 {
-  color: #4bd800;
+	color: #4bd800;
 }
 .currentState
 {
-   font-family: Gotham-Bold;
-   color: #4bd800;
+	font-family: Gotham-Bold;
+	color: #4bd800;
 }
 .label1 {
-  text-align: center;
-  line-height: 30px;
-  color: white;
+	text-align: center;
+	line-height: 30px;
+	color: white;
 }
 .spriteIMGUL
 {
-   padding: 0;
-  margin: 0;
-  list-style-type: none;
-    text-align: center;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	text-align: center;
 }
 .spriteIMGLI
 {
-   float: left;
-    font-size: 12px;
-    width: 20%;
-    padding-top: 20px;
-    
+	float: left;
+	font-size: 12px;
+	width: 20%;
+	padding-top: 20px;
+
 }
 .policyTerm a
 {
-  color: #393939;
+	color: #393939;
 }
 .newCircleBox
 {
-  width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background-color: #fff;
-    position: absolute;
-    top: 45px;
-    border: 2px solid lightgrey;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background-color: #fff;
+	position: absolute;
+	top: 45px;
+	border: 2px solid lightgrey;
 }
 .activeCircle
 {
-  border: 2px solid #4bd800;
+	border: 2px solid #4bd800;
 }
 .currentCircleBox
 {
-  border: 2px solid #4bd800;
-   background-color: #4bd800;
+	border: 2px solid #4bd800;
+	background-color: #4bd800;
 }
 .homePagerightArro
 {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  right:0;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	right:0;
 }
 .homePageleftArro
-  {  position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    left: 0;
- }   
+{  position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	left: 0;
+}
 .progressBarUL
 {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  text-align: center;
-  color: lightgrey;
-  font-family: Gotham-Book;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	text-align: center;
+	color: lightgrey;
+	font-family: Gotham-Book;
 }
 .progressBarLI
 {
-  float: left;
-    font-size: 12px;
-    width: 20%;
-    padding-top: 20px;
-    
+	float: left;
+	font-size: 12px;
+	width: 20%;
+	padding-top: 20px;
+
 }
 .tracksliderHolder
 {
@@ -874,285 +901,285 @@ a:focus, a:hover
 }
 .HomepageTopBoxLabel
 {
-      font-size: 30px;
-    font-family: Gotham-Medium;
-    position: absolute;
-    top: 10%;
-    left: 0;
-    margin: auto;
-    color: white;
-    padding: 5%;
-    line-height: 30px;
+	font-size: 30px;
+	font-family: Gotham-Medium;
+	position: absolute;
+	top: 10%;
+	left: 0;
+	margin: auto;
+	color: white;
+	padding: 5%;
+	line-height: 30px;
 }
 .homepageBoxSlider1
 {
-    background-image: url(../images/homepageslider1.png);
-    width: 100%;
-    min-height: 170px;
-    background-size: cover;
-    background-position: 50% 50%;
+	background-image: url(../images/homepageslider1.png);
+	width: 100%;
+	min-height: 170px;
+	background-size: cover;
+	background-position: 50% 50%;
 }
 .homepageBoxSlider2
 {
-  background-image: url(../images/homepageslider2.png);
-    width: 100%;
-    min-height: 170px;
-    background-size: cover;
-    background-position: 50% 50%;
+	background-image: url(../images/homepageslider2.png);
+	width: 100%;
+	min-height: 170px;
+	background-size: cover;
+	background-position: 50% 50%;
 }
 .homepageBoxSlider3
 {
-  background-image: url(../images/homepageslider3.png);
-    width: 100%;
-    min-height: 170px;
-    background-size: cover;
-    background-position: 50% 50%;
+	background-image: url(../images/homepageslider3.png);
+	width: 100%;
+	min-height: 170px;
+	background-size: cover;
+	background-position: 50% 50%;
 }
 .homepageBoxContent
 {
-      background-color: rgba(0,0,0,0.4);
-    width: 100%;
-    min-height: 300px;
+	background-color: rgba(0,0,0,0.4);
+	width: 100%;
+	min-height: 300px;
 }
 
 .homepageCenterBoxLabel
 {
-  font-family: Gotham-XLight;
-    font-size: 30px;
-    position: absolute;
-    top: 25%;
-    left: 0;
-    margin: auto;
-    color: white;
-    padding: 5%;
-    line-height: 30px;
+	font-family: Gotham-XLight;
+	font-size: 30px;
+	position: absolute;
+	top: 25%;
+	left: 0;
+	margin: auto;
+	color: white;
+	padding: 5%;
+	line-height: 30px;
 }
 .homepageBoxIMG
 {
-  width: 100%;
+	width: 100%;
 }
 .progressBarContent
 {
-      width: 80%;
-    left: 0;
-    right: 0;
-    margin: auto;
+	width: 80%;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 .boxDate
 {
-  font-family:Gotham-Bold;
-  font-size: 14px;
+	font-family:Gotham-Bold;
+	font-size: 14px;
 }
 .boxContentDiv
 {
-    background: #f4f4f4;
-    border: 1px solid #e8e8e8;
-    padding: 10px;
-    border-radius: 3px;
-    text-align: left;
-    min-height: 160px;
-    color: #393939;
+	background: #f4f4f4;
+	border: 1px solid #e8e8e8;
+	padding: 10px;
+	border-radius: 3px;
+	text-align: left;
+	min-height: 160px;
+	color: #393939;
 }
 .boxTime
 {
-  font-size: 14px;
-   font-family: Gotham-Medium;
+	font-size: 14px;
+	font-family: Gotham-Medium;
 }
 
 
 /*--home page slider here start--*/
 
 .swiper-container {
-        width: 100%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-    }
+	width: 100%;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
 
-    .sliderDiv
-    {
+.sliderDiv
+{
 
-  /*cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;*/
-    }
-  /* ############# custom CSS ########### */
-  .spotHolder{
-    height: 700px;
-  }
-  #sliderSpot1{
-    background-image: url("../images/bg1.png");
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-  }
-  #sliderSpot2{
-    background-image: url("../images/bg2.png");
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-  }
-  #sliderSpot3{
-    background-image: url("../images/bg3.png");
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-  }
-  #sliderSpot4{
-    background-image: url("../images/bg4.png");
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-  }
-  #sliderSpot5{
-    background-image: url("../images/bg5.png");
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-  }
+	/*cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;*/
+}
+/* ############# custom CSS ########### */
+.spotHolder{
+	height: 700px;
+}
+#sliderSpot1{
+	background-image: url("../images/bg1.png");
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+#sliderSpot2{
+	background-image: url("../images/bg2.png");
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+#sliderSpot3{
+	background-image: url("../images/bg3.png");
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+#sliderSpot4{
+	background-image: url("../images/bg4.png");
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+#sliderSpot5{
+	background-image: url("../images/bg5.png");
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
 .sliderHolder
 {
-  cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;
-} 
+	cursor:default;position:relative;top:0px;left:0px;width:1300px;height:500px;overflow:hidden;
+}
 .topImg
 {
-  position:absolute;top:25%;
-  left:5%;
- 
-  z-index:0;font-size:50px;color:#ffffff;line-height:60px;
+	position:absolute;top:25%;
+	left:5%;
+
+	z-index:0;font-size:50px;color:#ffffff;line-height:60px;
 }
 
 .appstoreLogo
 {
-  position:absolute;
-  top:5%;
-  right:5%;
-  z-index:0;font-size:50px;color:#ffffff;line-height:60px;
+	position:absolute;
+	top:5%;
+	right:5%;
+	z-index:0;font-size:50px;color:#ffffff;line-height:60px;
 }
 .middelContent
 {
-  position:absolute;
-  top:50%;
-  left:5%;
-  z-index:0;font-size:30px;color:#ffffff;
-  text-align: left;
+	position:absolute;
+	top:50%;
+	left:5%;
+	z-index:0;font-size:30px;color:#ffffff;
+	text-align: left;
 }
 .firstTextLabel
 {
-  font-family:Gotham-Light;
-  font-size: 48px;
+	font-family:Gotham-Light;
+	font-size: 48px;
 }
 .secondTextLabel
 {
-  font-family:Gotham-XLight;
-  font-size: 24px;
+	font-family:Gotham-XLight;
+	font-size: 24px;
 }
 .nextfirstTextLabel
 {
-  font-family: Gotham-Medium;
-  font-size: 40px;
-  color: black;
+	font-family: Gotham-Medium;
+	font-size: 40px;
+	color: black;
 }
 .nextsecondTextLabel
 {
-  font-family:Gotham-Light;
-  font-size: 40px;
-  color: black;
+	font-family:Gotham-Light;
+	font-size: 40px;
+	color: black;
 }
 .recyleHomeBtnHolder
 {
-  padding-top: 35px;
+	padding-top: 35px;
 }
 .recyleHomeBtn
 {
-  font-size: 13px;
-  font-family:Gotham-Light;
-  background: transparent;
-  border: 1px solid;
-  border-radius: 5px;
-  padding: 15px 30px;
-  outline: none;
+	font-size: 13px;
+	font-family:Gotham-Light;
+	background: transparent;
+	border: 1px solid;
+	border-radius: 5px;
+	padding: 15px 30px;
+	outline: none;
 }
 .trackHolderContent
 {
-      border-bottom: 1px solid #e8e8e8;
-      width: 90%;
+	border-bottom: 1px solid #e8e8e8;
+	width: 90%;
 }
 .loginHolder
 {
-    background-size: cover;
-    background-position: 50% 50%;
-    width: 100%;
-    background-image: url(../images/loginBG.png);
-    min-height:500px;
+	background-size: cover;
+	background-position: 50% 50%;
+	width: 100%;
+	background-image: url(../images/loginBG.png);
+	min-height:500px;
 }
 .unlockHolder
 {
-    color: #8e949c;
-    padding-top: 60px;
-    padding-bottom: 100px;
-    text-align: center;
+	color: #8e949c;
+	padding-top: 60px;
+	padding-bottom: 100px;
+	text-align: center;
 }
 .unlocklabel
 {
-  font-family:Gotham-Thin;
-  font-size: 90px;
+	font-family:Gotham-Thin;
+	font-size: 90px;
 }
 .hiddenLabel
 {
-  font-family:Gotham-Book;
-  font-size: 22px;
+	font-family:Gotham-Book;
+	font-size: 22px;
 }
 .inputButtonHolder
 {
-  text-align: center;
-  color: #8e949c;
-    padding-top: 100px;
-    padding-bottom: 100px;
+	text-align: center;
+	color: #8e949c;
+	padding-top: 100px;
+	padding-bottom: 100px;
 }
 .inputEmaillogin
 {
-    font-family: Gotham-Light;
-    font-size: 16px;
-    border: none;
-    border-bottom: 1px solid;
-    background: transparent;
-    outline: none;
-    margin: 10px;
-    padding: 5px;
+	font-family: Gotham-Light;
+	font-size: 16px;
+	border: none;
+	border-bottom: 1px solid;
+	background: transparent;
+	outline: none;
+	margin: 10px;
+	padding: 5px;
 }
 .updateloginButton
 {
-    font-family: Gotham-Light;
-    font-size: 16px;
-    border: 1px solid;
-    background: transparent;
-    padding: 5px 10px;
-    border-radius: 3px;
-    margin: 10px;
-    outline: none;
+	font-family: Gotham-Light;
+	font-size: 16px;
+	border: 1px solid;
+	background: transparent;
+	padding: 5px 10px;
+	border-radius: 3px;
+	margin: 10px;
+	outline: none;
 }
 .smartphoneP
 {
- 
-  font-family:Gotham-Book;
- font-size: 30px;
-  margin-top: 50px;
+
+	font-family:Gotham-Book;
+	font-size: 30px;
+	margin-top: 50px;
 }
 .twitterholderIMG
 {
@@ -1160,412 +1187,416 @@ a:focus, a:hover
 }
 .topBorder
 {
-  border-top: 1px solid #e1e1e1;
+	border-top: 1px solid #e1e1e1;
 }
 .smartPhone
 {
-  width: 47%;
+	width: 47%;
 }
 .smartPhoneHolder
 {
-  padding: 20px;
-    margin-top: 50px;
+	padding: 20px;
+	margin-top: 50px;
 }
 .aboutTextP
 {
-   font-family: Gotham-Light;
-  font-size: 18px;
+	font-family: Gotham-Light;
+	font-size: 18px;
 }
 .underline
 {
-  border-bottom: 2px solid black;
-    width: 50px;
-    height: 20px;
-    position: absolute;
+	border-bottom: 2px solid black;
+	width: 50px;
+	height: 20px;
+	position: absolute;
 }
 
 .loginunderline
 {
-  border-bottom: 2px solid black;
-    width: 50px;
-    height: 40px;
-    position: absolute;
+	border-bottom: 2px solid black;
+	width: 50px;
+	height: 40px;
+	position: absolute;
 }
 .TheHiddenlabel
 {
-  font-family:Gotham-Book;
- font-size: 30px;
-  
+	font-family:Gotham-Book;
+	font-size: 30px;
+
 }
 .hiddenFutureHolder
 {
-      padding: 20px;
-    margin-top: 50px;
+	padding: 20px;
+	margin-top: 50px;
 }
 .boxContentLabelDate
 {
-  line-height: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+	line-height: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 }
 .boxContentDivActive
 {
- border: 1px solid #4bd800;
+	border: 1px solid #4bd800;
 }
 .boxContentLabelDownload
 {
-  position: absolute;
-  bottom: 10px;
-  color: #4bd800;
-  font-size: 13px;
-  font-family: Gotham-Medium;
+	position: absolute;
+	bottom: 10px;
+	color: #4bd800;
+	font-size: 13px;
+	font-family: Gotham-Medium;
 }
 .boxContentCircle
 {
-     width: 15px;
-    height: 15px;
-    background-color: #4bd800;
-    border-radius: 50%;
-    position: absolute;
-    top: 14px;
-    right: 14px;
+	width: 15px;
+	height: 15px;
+	background-color: #4bd800;
+	border-radius: 50%;
+	position: absolute;
+	top: 14px;
+	right: 14px;
 }
 .boxContentLabelMessage
 {
-  padding-bottom: 15px;
+	padding-bottom: 15px;
 }
 .boxContentLabelTime
 {
-      line-height: 18px;
-    padding-bottom: 25px;
+	line-height: 18px;
+	padding-bottom: 25px;
 }
 .ConversationHolder
 {
-   padding: 20px;
-    margin-top: 50px;
-    margin-bottom: 20px;
+	padding: 20px;
+	margin-top: 50px;
+	margin-bottom: 20px;
 }
 .tracksliderHolderMargin
 {
-      width: 96%;
-    position: relative;
-    left: 0;
-    right: 0;
-    margin: auto;
+	width: 96%;
+	position: relative;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 .servifytag
 {
-  text-decoration: none;
-  color: #393939;
-  font-size: 12px;
-  font-family:Gotham-Book;
+	text-decoration: none;
+	color: #393939;
+	font-size: 12px;
+	font-family:Gotham-Book;
 }
 .servifytag:hover
 {
-  text-decoration: none;
-  color: #4bd800;
+	text-decoration: none;
+	color: #4bd800;
 }
 .twitHolder
 {
- 
-    padding: 20px;
-    
+
+	padding: 20px;
+
 
 }
 .centerAllIMGHolder
 
 {
-      width: 850px;
-    left: 0;
-    right: 0;
-    margin: auto;
+	width: 850px;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 .cenetrAllIMG
 {
-  width: 100%;
+	width: 100%;
 }
 .twitterName
 {
-  font-family: Gotham-Book;
-    font-size: 16px;
+	font-family: Gotham-Book;
+	font-size: 16px;
 }
 .twitterMassage
 {
-  font-family: Gotham-Light;
-    font-size: 12px;
+	font-family: Gotham-Light;
+	font-size: 12px;
 }
 .twitterSMSButton
 {
-  border: 1px solid;
-    background: transparent;
-    padding: 5px 10px;
-    border-radius: 3px;
+	border: 1px solid;
+	background: transparent;
+	padding: 5px 10px;
+	border-radius: 3px;
 }
 .loginSecondHolder
 {
-  padding-bottom: 50px;
+	padding-bottom: 50px;
 }
 .mySlider
 {
-  width: 96%;
-    left: 0;
-    right: 0;
-    margin: auto;
+	width: 96%;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 #tweetPreloadDiv{
-    left: -5px;
-    top: 30px;
-    position: relative;
+	left: -5px;
+	top: 30px;
+	position: relative;
 }
+
+
+
+
 
 
 @media only screen and (max-width: 1100px) {
-    .homepageBoxContent
-    {
-      min-height:250px;
-    }
-    .detailsHolder 
-    {
-      width: 100%;
-    }
-   
+	.homepageBoxContent
+	{
+		min-height:250px;
+	}
+	.detailsHolder
+	{
+		width: 100%;
+	}
+
 
 }
 @media only screen and (max-width: 1000px) {
-    
-     .HomepageTopBoxLabel
-    {
-      font-size: 24px;
-      padding: 2%;
-     line-height: 24px;
-    }
-    .homepageCenterBoxLabel
-    {
-       font-size: 24px;
-      padding: 2%;
-     line-height: 24px;
-    }
-    .centerAllIMGHolder
-    {
-      width: 100%;
-    }
+
+	.HomepageTopBoxLabel
+	{
+		font-size: 24px;
+		padding: 2%;
+		line-height: 24px;
+	}
+	.homepageCenterBoxLabel
+	{
+		font-size: 24px;
+		padding: 2%;
+		line-height: 24px;
+	}
+	.centerAllIMGHolder
+	{
+		width: 100%;
+	}
+	.greenRewordContentHolderUL
+	{
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 820px) {
-   .locationContent {
-       width: 100%;
-      text-align: center;
-       padding: 12px 0;
-    }
-    .pickuppagelocation
-    {
-      text-align: center;
-    }
-    .progressBarHolder
-    {
-      width: 100%;
-    }
-    
+	.locationContent {
+		width: 100%;
+		text-align: center;
+		padding: 12px 0;
+	}
+	.pickuppagelocation
+	{
+		text-align: center;
+	}
+	.progressBarHolder
+	{
+		width: 100%;
+	}
+
 }
 
 
 @media only screen and (max-width: 780px) {
-   .hiddenFutureHolder
-   {
-    padding: 0;
-   }
-   .ConversationHolder
-   {
-    padding: 0;
-    margin-bottom: 30px;
-   }
-   .twitHolder
-   {
-    padding: 0;
-   }
-   .smartPhoneHolder
-   {
-    text-align: center;
-   }
-   .smartphoneP
-   {
-    font-size: 24px;
-   }
-   .aboutTextP
-   {
-    font-size: 15px;
-   }
-   .TheHiddenlabel
-   {
-    font-size: 28px;
-   }
-   .unlocklabel
-   {
-    font-size: 75px;
-   }
-   .hiddenLabel
-   {
-    font-size: 18px;
-   }
-   .detailsContentbutton
-   {
-    text-align: center;
-   }
-   .greenRewordContentHolderUL
-   {
-    width: 100%;
-   }
+	.hiddenFutureHolder
+	{
+		padding: 0;
+	}
+	.ConversationHolder
+	{
+		padding: 0;
+		margin-bottom: 30px;
+	}
+	.twitHolder
+	{
+		padding: 0;
+	}
+	.smartPhoneHolder
+	{
+		text-align: center;
+	}
+	.smartphoneP
+	{
+		font-size: 24px;
+	}
+	.aboutTextP
+	{
+		font-size: 15px;
+	}
+	.TheHiddenlabel
+	{
+		font-size: 28px;
+	}
+	.unlocklabel
+	{
+		font-size: 75px;
+	}
+	.hiddenLabel
+	{
+		font-size: 18px;
+	}
+	.detailsContentbutton
+	{
+		text-align: center;
+	}
 
-    
+
+
 }
 
 
 @media only screen and (max-width: 600px) {
-   .locationContent {
-       width: 100%;
-      text-align: center;
-       padding: 12px 0;
-    }
-    .pickUplabel
-    {
-      padding-left: 5px;
-      padding-right: 5px;
-      font-size: 16px;
-    }
-    .dropofflabel
-    {
-      font-size: 16px;
-      padding-left: 0;
-    }
-     .homepageBoxContent
-    {
-      min-height:200px;
-    }
+	.locationContent {
+		width: 100%;
+		text-align: center;
+		padding: 12px 0;
+	}
+	.pickUplabel
+	{
+		padding-left: 5px;
+		padding-right: 5px;
+		font-size: 16px;
+	}
+	.dropofflabel
+	{
+		font-size: 16px;
+		padding-left: 0;
+	}
+	.homepageBoxContent
+	{
+		min-height:200px;
+	}
 
-     .HomepageTopBoxLabel
-    {
-      font-size: 20px;
-      padding: 2%;
-     line-height: 20px;
-    }
-    .homepageCenterBoxLabel
-    {
-       font-size: 20px;
-      padding: 2%;
-     line-height: 20px;
-    }
+	.HomepageTopBoxLabel
+	{
+		font-size: 20px;
+		padding: 2%;
+		line-height: 20px;
+	}
+	.homepageCenterBoxLabel
+	{
+		font-size: 20px;
+		padding: 2%;
+		line-height: 20px;
+	}
 
-    .greenRewordContentHolder
-    {
-      padding-left: 0;
-    }
-    .greenRewordContentHolderLI
-    {
-      width: 98%;
-    }
-    .grContentDiv
-    {
-      left: 0;
-    right: 0;
-    margin: auto;
-    }
-    .submitButton
-    {
-      padding-left:0;
-      text-align: center;
-    }
-    .devicelabelContent
-    {
-      padding-left:5%;
-    }
-    .divHeadinglabelHolder
-    {
-      text-align: center;
-    }
-    .firstTextLabel
-    {
-      font-size: 30px;
-    }
-    .secondTextLabel
-    {
-      font-size: 18px;
-    }
-    .nextfirstTextLabel
-    {
-      font-size: 25px;
-    }
-    .nextsecondTextLabel
-    {
-      font-size: 25px;
-    }
-    .landingLargeButton
-    {
-      padding: 10px 28px !important;
-    }
-    .pageHolder
-    {
-      width: 94%;
-    }
+	.greenRewordContentHolder
+	{
+		padding-left: 0;
+	}
+	.greenRewordContentHolderLI
+	{
+		width: 98%;
+	}
+	.grContentDiv
+	{
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+	.submitButton
+	{
+		padding-left:0;
+		text-align: center;
+	}
+	.devicelabelContent
+	{
+		padding-left:5%;
+	}
+	.divHeadinglabelHolder
+	{
+		text-align: center;
+	}
+	.firstTextLabel
+	{
+		font-size: 30px;
+	}
+	.secondTextLabel
+	{
+		font-size: 18px;
+	}
+	.nextfirstTextLabel
+	{
+		font-size: 25px;
+	}
+	.nextsecondTextLabel
+	{
+		font-size: 25px;
+	}
+	.landingLargeButton
+	{
+		padding: 10px 28px !important;
+	}
+	.pageHolder
+	{
+		width: 94%;
+	}
 
 }
 
 @media only screen and (max-width: 400px) {
-   .progressBarLI
-   {
-    font-size: 9px;
-   }
-    .homepageBoxContent
-    {
-      min-height:170px;
-    }
-    .pickUPlargebutton
-    {
-      padding: 10px 70px !important;
-    }
-    .boxContentDiv
-    {
-      min-height: 180px;
-    }
-    .otpHolder
-    {
-      width: 280px;
-    }
+	.progressBarLI
+	{
+		font-size: 9px;
+	}
+	.homepageBoxContent
+	{
+		min-height:170px;
+	}
+	.pickUPlargebutton
+	{
+		padding: 10px 70px !important;
+	}
+	.boxContentDiv
+	{
+		min-height: 180px;
+	}
+	.otpHolder
+	{
+		width: 280px;
+	}
 }
 
 @media only screen and (max-width: 300px) {
-  .unlockHolder
-  {
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
-  .inputButtonHolder
-  {
-    padding-top: 50px;
-    padding-bottom: 0;
-  }
-  .congo , .recyle
-  {
-    font-size: 25px;
-  }
-  .grContentDiv
-  {
-    width: 200px;
-  }
-  .userContentLI
-  {
-    padding-left: 8px;
-  }
-  .mySmallbtn
-  {
-    margin: 0;
-  } 
-  .pageHolder
-  {
-    width: 96%;
-  }
-  .otpHolder
-    {
-      width: 250px;
-    }
+	.unlockHolder
+	{
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+	.inputButtonHolder
+	{
+		padding-top: 50px;
+		padding-bottom: 0;
+	}
+	.congo , .recyle
+	{
+		font-size: 25px;
+	}
+	.grContentDiv
+	{
+		width: 200px;
+	}
+	.userContentLI
+	{
+		padding-left: 8px;
+	}
+	.mySmallbtn
+	{
+		margin: 0;
+	}
+	.pageHolder
+	{
+		width: 96%;
+	}
+	.otpHolder
+	{
+		width: 250px;
+	}
 }
-

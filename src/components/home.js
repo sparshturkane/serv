@@ -1,5 +1,9 @@
+// dependencies
 import React from 'react';
 
+// javascript pages
+import ChooseDeviceHolder from '../containers/all_mobiles';
+import RewardList from '../containers/rewards_list';
 class Home extends React.Component {
     // constructor(props) {
     //     super(props);
@@ -99,104 +103,13 @@ class Home extends React.Component {
                     </div>
                 </div>
 
-                {/* device photos */}
-                <div className="ChooseDeviceHolder">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="deviceNamelabelHolder">
-                                <label className="chooseDevice">Choose </label>
-                                <label className="recycleLabel">Device To Recycle</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="greenRewordContentHolder">
-                                <div className="centerAllIMGHolder">
-                                    <img src="images/allmobile.png" className="cenetrAllIMG" alt="allmobile"/>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                {/* ChooseDeviceHolder */}
+                <ChooseDeviceHolder />
+                {/* ..//ChooseDeviceHolder */}
 
                 {/* rewards based on perticular device */}
-                <div className="greenReword">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="deviceNamelabelHolder">
-                                <label className="deviceName">iPhone 4</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="greenRewordContentHolder">
-                                <ul className="greenRewordContentHolderUL">
-                                    <li className="greenRewordContentHolderLI">
-                                        <div className="divHeadinglabelHolder">
-                                            <label className="divHeadinglabel">iTunes Rewards</label>
-                                        </div>
-                                        <div className="grContentDiv">
-                                            <div className="grContentDivLeft">
-                                                <label className="iphone7Label">iTunes Gift Card</label>
-                                                <label className="LuckyDip">INR 500</label>
-                                                <div className="cutapple">
-                                                    <img src="images/cutapple.png" alt="appleLogo"/>
-                                                </div>
-                                            </div>
-                                            <div className="grContentDivRight">
-                                                <img src="images/colorapple.png" alt="applelogo"/>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className="greenRewordContentHolderLI">
-                                        <div className="divHeadinglabelHolder">
-                                            <label className="divHeadinglabel">Additional Rewards</label>
-                                        </div>
-                                        <div className="grContentDiv">
-                                            <div className="grContentDivLeft">
-                                                <label className="iphone7Label">Flipkart Vouchers</label>
-                                                <label className="LuckyDip">INR 300</label>
-                                                <label className="LuckyDip">Till 5th Jan 17</label>
-                                                <div className="cutapple">
-                                                    <img src="images/flipcard.png" alt="flipcardlogo"/>
-                                                </div>
-                                            </div>
-                                            <div className="grContentDivRight">
-                                                <img src="images/shoppingBag.png" alt="shoppingBag"/>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className="greenRewordContentHolderLI">
-                                        <div className="divHeadinglabelHolder">
-                                            <label className="divHeadinglabel">Lucky Dip</label>
-                                        </div>
-                                        <div className="grContentDiv">
-                                            <div className="grContentDivLeft">
-                                                <label className="iphone7Label">iphone 7</label>
-                                                <label className="LuckyDip">Lucky Dip</label>
-                                                <label className="LuckyDip">Eligible</label>
-                                                <div className="cutapple">
-                                                    <img src="images/cutapple.png" alt="applelogo"/>
-                                                </div>
-                                            </div>
-                                            <div className="grContentDivRight">
-                                                <img src="images/iphone7.png" alt="iphone7"/>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row landingSubmitButton">
-                        <div className="col-sm-12">
-                            <button type="button" className="landingLargeButton ">Recycle My iPhone 4</button>
-                        </div>
-                    </div>
-                </div>
+                <RewardList />
+                {/* ..//rewards based on perticular device */}
 
                 <div className="separators"></div>
 

@@ -1,12 +1,12 @@
-import { FETCH_SUPPORTED_MOBILES } from '../actions/index';
+import { SET_PRODUCT_NAME } from '../actions/index';
 
-const INITIAL_STATE = { supportedMobilesList: [] };
+const INITIAL_STATE = { ProductName: '' };
 
 export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case FETCH_SUPPORTED_MOBILES:
-        // console.log(action.payload.data.data);
-        return { ...state, supportedMobilesList: action.payload.data.data };
+        case SET_PRODUCT_NAME:
+        console.log("selected mobile name  :"+action.payload);
+        return { ...state, ProductName: action.payload };
         // case FETCH_POSTS:
         // return { ...state, all: action.payload.data };
         default:

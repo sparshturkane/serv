@@ -2,8 +2,7 @@ import axios from 'axios';
 
 export const FETCH_SUPPORTED_MOBILES = 'FETCH_SUPPORTED_MOBILES';
 export const GET_REWARDS_LIST = 'GET_REWARD_LIST';
-export const FETCH_POST = 'FETCH_POST';
-export const DELETE_POST = 'DELETE_POST';
+export const SET_PRODUCT_NAME = 'SET_PRODUCT_NAME';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -19,11 +18,18 @@ export function getProductBasedOnSupportedModes() {
 
 // Handelling on click of mobiles
 export function getRewardsList(ProductID) {
-    var ProductID = ProductID;
     const request = axios.post(`${ROOT_URL}/Reward/getRewardsList`, ProductID );
-    console.log(request);
+    // console.log(request);
     return {
         type: GET_REWARDS_LIST,
         payload: request,
+    };
+}
+
+//storing selected mobile name
+export function setMobileName(ProductName) {
+    return {
+        type: SET_PRODUCT_NAME,
+        payload: ProductName,
     };
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 class RewardList extends React.Component {
     // constructor(props) {
@@ -41,7 +42,7 @@ class RewardList extends React.Component {
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="deviceNamelabelHolder">
-                            <label className="deviceName">iPhone 4</label>
+                            <label className="deviceName">{this.props.ProductName}</label>
                         </div>
                     </div>
                 </div>
@@ -56,7 +57,7 @@ class RewardList extends React.Component {
                 </div>
                 <div className="row landingSubmitButton">
                     <div className="col-sm-12">
-                        <button type="button" className="landingLargeButton ">Recycle My iPhone 4</button>
+                        <Link to="/home" type="button" className="landingLargeButton ">Recycle My {this.props.ProductName}</Link>
                     </div>
                 </div>
             </div>
@@ -67,6 +68,7 @@ class RewardList extends React.Component {
 function mapStateToProps(state) {
     return {
         rewardList: state.rewardsList.rewardsListData,
+        ProductName: state.setMobileName.ProductName
     };
 }
 

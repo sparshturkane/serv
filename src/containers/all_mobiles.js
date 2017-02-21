@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getProductBasedOnSupportedModes, getRewardsList } from '../actions/index';
+import { getProductBasedOnSupportedModes, getRewardsList, setMobileName } from '../actions/index';
 
 
 class ChooseDeviceHolder extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeMobileName: '',
+        }
+    }
 
     componentWillMount(){
         this.props.getProductBasedOnSupportedModes()
@@ -15,6 +18,14 @@ class ChooseDeviceHolder extends React.Component {
         //     // blog post create, nav to index
         //     this.renderSupportedMobiles();
         // })
+    }
+
+    handleProductClick(ProductIDArray, ProductName) {
+        this.props.getRewardsList(ProductIDArray);
+        this.props.setMobileName(ProductName);
+        this.setState({
+            activeMobileName : ProductName
+        });
     }
 
     renderSupportedMobiles(){
@@ -26,7 +37,7 @@ class ChooseDeviceHolder extends React.Component {
             };
             return (
 
-                <li className="centerAllIMGLI" key={mobile.ProductID} onClick={ () => this.props.getRewardsList(ProductIDArray) }>
+                <li className="centerAllIMGLI" key={mobile.ProductID} onClick={this.handleProductClick.bind(this,ProductIDArray,mobile.ProductName)}>
                     <div className="centerAllIMGDiv" >
                         <img src="images/smartPhone.png" className="mobileNEWIMG" alt="smartPhone" />
                         <span className="mobileNameSpan">{mobile.ProductName}</span>
@@ -71,12 +82,14 @@ class ChooseDeviceHolder extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { supportedMobiles: state.supportedMobiles.supportedMobilesList };
+    return {
+        supportedMobiles: state.supportedMobiles.supportedMobilesList
+    };
 }
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList}, dispatch);
+    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseDeviceHolder);

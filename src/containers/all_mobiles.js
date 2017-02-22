@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getProductBasedOnSupportedModes, getRewardsList, setMobileName } from '../actions/index';
+import { getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes } from '../actions/index';
 
 
 class ChooseDeviceHolder extends React.Component {
@@ -20,9 +20,10 @@ class ChooseDeviceHolder extends React.Component {
         // })
     }
 
-    handleProductClick(ProductIDArray, ProductName) {
+    handleProductClick(ProductIDArray, ProductName, SupportedModes) {
         this.props.getRewardsList(ProductIDArray);
         this.props.setMobileName(ProductName);
+        this.props.setSupportedModes(SupportedModes);
         this.setState({
             activeMobileName : ProductName
         });
@@ -37,7 +38,7 @@ class ChooseDeviceHolder extends React.Component {
             };
             return (
 
-                <li className="centerAllIMGLI" key={mobile.ProductID} onClick={this.handleProductClick.bind(this,ProductIDArray,mobile.ProductName)}>
+                <li className="centerAllIMGLI" key={mobile.ProductID} onClick={this.handleProductClick.bind(this,ProductIDArray, mobile.ProductName, mobile.SupportedModes)}>
                     <div className="centerAllIMGDiv" >
                         <img src="images/smartPhone.png" className="mobileNEWIMG" alt="smartPhone" />
                         <span className="mobileNameSpan">{mobile.ProductName}</span>
@@ -89,7 +90,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName }, dispatch);
+    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseDeviceHolder);

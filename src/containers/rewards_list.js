@@ -24,11 +24,11 @@ class RewardList extends React.Component {
                             <label className="LuckyDip">{reward.Rewards.RewardValue}</label>
                             <label className="LuckyDip">Eligible</label>
                             <div className="cutapple">
-                                <img src="images/cutapple.png" alt="applelogo"/>
+                                <img  src={reward.Rewards.RewardPartner.PartnerLogoUrl} alt="applelogo" className="appleLogosmall" />
                             </div>
                         </div>
                         <div className="grContentDivRight">
-                            <img src="images/iphone7.png" alt="iphone7"/>
+                            <img src={reward.Rewards.RewardPartner.RewardUrl} alt="iphone7" className="appleLogoBig"/>
                         </div>
                     </div>
                 </li>
@@ -68,7 +68,7 @@ class RewardList extends React.Component {
 function mapStateToProps(state) {
     return {
         rewardList: state.rewardsList.rewardsListData,
-        ProductName: state.setMobileName.ProductName
+        ProductName: state.productData.ProductName
     };
 }
 

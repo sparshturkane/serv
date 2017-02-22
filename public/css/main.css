@@ -51,33 +51,6 @@ body
 	background-color: #fff;
 }
 
-.centerAllIMGUL
-{
-	padding:0;
-	margin: 0;
-	list-style-type: none;
-}
-.centerAllIMGLI
-{
-	float: left;
-	width: 16%;
-}
-.centerAllIMGDiv
-{
-	padding: 20px;
-	cursor: pointer;
-}
-.mobileNEWIMG
-{
-	width: 100%;
-}
-.mobileNameSpan
-{
-	padding-top: 10px;
-	display: block;
-
-}
-
 .container-fluid {
 	padding-right: 0 !important;
 	padding-left: 0 !important;
@@ -155,6 +128,14 @@ input[type=number]::-webkit-outer-spin-button {
 {
 	margin: 0 5px;
 }
+.appleLogosmall
+{
+	max-width: 50px;
+}
+.appleLogoBig
+{
+	max-width: 120px;
+}
 .inputLocation
 {
 	font-family: Gotham-Book;
@@ -224,6 +205,20 @@ input[type=number]::-webkit-outer-spin-button {
 	padding-top: 50px;
 
 }
+.yourDetailsHolderTOP
+{
+	border-bottom: 1px solid #bbbbbb;
+	padding-top: 20px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+.editContent
+{
+	padding-top: 60px;
+	float: right;
+	color: blue;
+
+}
 .pickuppagelocation
 {
 	text-align: right;
@@ -246,6 +241,106 @@ input[type=number]::-webkit-outer-spin-button {
 	position: relative;
 	background:transparent;
 	z-index: 1;
+}
+.inputdetailsError
+{
+	border-bottom: 1px solid red;
+}
+
+.inputdetailsWithoutBorder
+{
+	font-size: 12px;
+	font-family: Gotham-Book;
+	border: none;
+	outline: none;
+	padding: 5px 0;
+	width: 100%;
+	position: relative;
+	background:transparent;
+	z-index: 1;
+}
+.notificationDiv
+{
+	padding:20px 20px 20px 25px;
+	position: relative;
+}
+.notificationDivBorder
+{
+
+	border-bottom: 1px solid #b6b6b6;
+}
+.activeDIVCircle
+{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: #4bd800;
+	border-radius: 50%;
+	left: -5px;
+	top: 25px;
+}
+
+input[type="checkbox"] {
+	display:none;
+}
+
+
+input[type="checkbox"] + label span {
+	display:inline-block;
+	width:19px;
+	height:19px;
+	margin:-2px 10px 0 0;
+	vertical-align:middle;
+	background:url(../images/checkBox.png) left top no-repeat;
+	cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+	background:url(../images/checkBox.png) -33px top no-repeat;
+}
+
+.ActionContent
+{
+	padding-top: 60px;
+	float: right;
+}
+.SelectAll
+{
+	padding: 0 20px;
+}
+.DeleteSelected
+{
+	color: red;
+}
+
+.notificationCheckBox
+{
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	left:0px;
+	top: 22px;
+	font-size: 12px;
+	font-family: Gotham-Book;
+	background-color: white;
+}
+.notificationHolder
+{
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 30px;
+	padding-bottom: 80px;
+}
+.notificationLabel
+{
+	font-family: Gotham-Medium;
+	font-size: 15px;
+	display: block;
+}
+.notificationContent
+{
+	font-size: 12px;
+	font-family: Gotham-Book;
 }
 .activeBtn
 {
@@ -371,6 +466,19 @@ input[type=number]::-webkit-outer-spin-button {
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
+.detailsSaveContentlargeButton
+{
+	padding-left: 10px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+.SettingContentlargeButton
+{
+	padding-left:0px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
 .pickUPlargebutton
 {
 	background: #4bd800;
@@ -573,6 +681,12 @@ input[type=number]::-webkit-outer-spin-button {
 {
 	padding-left: 5%;
 	padding-top: 30px;
+}
+.newpickupInfoContent
+{
+	padding-left: 5%;
+	padding-top: 30px;
+
 }
 .earthHolder
 {
@@ -1345,7 +1459,32 @@ a:focus, a:hover
 	position: relative;
 }
 
+.centerAllIMGUL
+{
+	padding:0;
+	margin: 0;
+	list-style-type: none;
+}
+.centerAllIMGLI
+{
+	float: left;
+	width: 14%;
+}
+.centerAllIMGDiv
+{
+	padding: 20px;
+	cursor: pointer;
+}
+.mobileNEWIMG
+{
+	width: 100%;
+}
+.mobileNameSpan
+{
+	padding-top: 10px;
+	display: block;
 
+}
 
 
 
@@ -1446,7 +1585,14 @@ a:focus, a:hover
 	{
 		text-align: center;
 	}
-
+	.greenRewordContentHolderUL
+	{
+		width: 100%;
+	}
+	.newpickupInfoContent
+	{
+		padding-left: 0;
+	}
 
 
 }

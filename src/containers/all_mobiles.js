@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes } from '../actions/index';
+import { getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData } from '../actions/index';
 
 
 class ChooseDeviceHolder extends React.Component {
@@ -20,10 +20,12 @@ class ChooseDeviceHolder extends React.Component {
         // })
     }
 
-    handleProductClick(ProductIDArray, ProductName, SupportedModes) {
+    handleProductClick(ProductIDArray, ProductName, SupportedModes, ProductData) {
         this.props.getRewardsList(ProductIDArray);
         this.props.setMobileName(ProductName);
         this.props.setSupportedModes(SupportedModes);
+        console.log("active all mobile product data" + ProductData);
+        this.props.setActiveProductData(ProductData);
         this.setState({
             activeMobileName : ProductName
         });
@@ -38,7 +40,7 @@ class ChooseDeviceHolder extends React.Component {
             };
             return (
 
-                <li className="centerAllIMGLI" key={mobile.ProductID} onClick={this.handleProductClick.bind(this,ProductIDArray, mobile.ProductName, mobile.SupportedModes)}>
+                <li className="centerAllIMGLI" key={mobile.ProductID} onClick={this.handleProductClick.bind(this,ProductIDArray, mobile.ProductName, mobile.SupportedModes, mobile)}>
                     <div className="centerAllIMGDiv" >
                         <img src="images/smartPhone.png" className="mobileNEWIMG" alt="smartPhone" />
                         <span className="mobileNameSpan">{mobile.ProductName}</span>
@@ -90,7 +92,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes }, dispatch);
+    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseDeviceHolder);

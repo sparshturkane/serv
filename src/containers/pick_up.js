@@ -1,14 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import HeaderDiv from './header'
 import LocationSearch from './location_search';
-import { pickUpPageFormSubmit } from '../actions/index';
+import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData } from '../actions/index';
 
 class PickUpPage extends React.Component {
     // constructor(props) {
     //     super(props);
     // }
+
+    componentWillMount(){
+        // since this is pickup.js page so we will call pickup service here
+    }
+
     supportedModesDisplay(){
         return this.props.ProductData.SupportedModes.map((value) => {
             switch (value) {
@@ -37,26 +43,26 @@ class PickUpPage extends React.Component {
         * const title = this.props.fields.title;
         */
         // const { fields:{ userName, MobileNo, email, alternateNumber, imeiNumber, pickUpDate, userAddress }, handleSubmit } = this.props;
-        const { fields:{ MobileNo,TempConsumerID }, handleSubmit } = this.props;
-        console.log(MobileNo);
+        // const { fields:{ MobileNo,TempConsumerID }, handleSubmit } = this.props;
+        // console.log(MobileNo);
         return(
             <div>
                 <HeaderDiv />
                 <LocationSearch />
-                
+
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
                         <label className="pickUplabel active pickUpMenuActive"><a data-toggle="tab" className="PickUpHref" href="#home" >Pick Up</a>
                         </label>
-                        <label className="dropofflabel"><a data-toggle="tab" className="PickUpHref" href="#menu1" >Drop Off Locations</a>
-                        </label>
+                        {/*<label className="dropofflabel"><a data-toggle="tab" className="PickUpHref" href="#menu1" >Drop Off Locations</a>
+                        </label>*/}
                     </div>
                 </div>
                 <div className="tab-content">
                     <div id="home" className="tab-pane fade in active">
                         <div className="detailsHolder ">
                             <div className="row">
-                                <form onSubmit={ handleSubmit(this.props.pickUpPageFormSubmit) }>
+                                <form>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Name*</label>
@@ -65,12 +71,11 @@ class PickUpPage extends React.Component {
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
-                                        <div className={`detailsContent ${MobileNo.touched && MobileNo.invalid ? 'has-danger' : ''}`}>
+                                        <div className="detailsContent">
                                             <label className="labelDetails">Mobile Number*</label>
                                             <br />
-                                            <input type="number"  placeholder="Mobile No" className={`inputdetails ${MobileNo.touched && MobileNo.invalid ? 'inputdetailsError' : ''}`} {...MobileNo}  />
-                                            {/*{MobileNo.touched ? MobileNo.error : ''}*/}
-                                            {/*<input type="text"  placeholder="TempConsumerID" className="inputdetails" {...TempConsumerID} value="0" />*/}
+                                            <input type="number"  placeholder="Mobile No" className="inputdetails" />
+
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
@@ -98,7 +103,7 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Pickup Date*</label>
                                             <br />
-                                            <input className="inputdetails"  id="date" placeholder="MM/DD/YYYY" type="text" required />
+                                            <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" required />
                                             <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                         </div>
                                     </div>
@@ -178,24 +183,40 @@ class PickUpPage extends React.Component {
     }
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         rewardList: state.rewardsList.rewardsListData,
-//         ProductData: state.productData
-//     };
+// export default PickUpPage;
+function mapStateToProps(state) {
+    return {
+        supportedMobiles: state.supportedMobiles.supportedMobilesList,
+        productData: state.productData,
+    };
+}
+
+// {
+//     "Lat": "19.1122275845444",//GeoLocationData
+//     "Lng": "72.8611849227308", //GeoLocationData
+//     "Zipcode": 400099, //GeoLocationData
+//     "ServiceTypeID" : 9, //9 Pickup
+//     "ProductID" : 4 // Selected in first service
 // }
 
-function validate(values) {
-    const errors = {};
-    if (!values.MobileNo) {
-        errors.MobileNo = 'Enter a mobileNo';
-    }
 
-    if (!values.TempConsumerID) {
-        errors.TempConsumerID = 'TempConsumerID cannot be empty';
-    }
-    return errors;
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ setActiveProductData }, dispatch);
 }
+//
+export default connect(mapStateToProps, mapDispatchToProps)(PickUpPage);
+
+// function validate(values) {
+//     const errors = {};
+//     if (!values.MobileNo) {
+//         errors.MobileNo = 'Enter a mobileNo';
+//     }
+//
+//     if (!values.TempConsumerID) {
+//         errors.TempConsumerID = 'TempConsumerID cannot be empty';
+//     }
+//     return errors;
+// }
 
 // export default connect(mapStateToProps)(PickUpPage);
 // fields: [
@@ -207,11 +228,11 @@ function validate(values) {
 //     'pickUpDate',
 //     'userAddress'
 // ]
-export default reduxForm({
-    form: 'PickUpFrom',
-    fields: [
-        'MobileNo',
-        'TempConsumerID'
-    ],
-    validate
-}, null, { pickUpPageFormSubmit })(PickUpPage)
+// export default reduxForm({
+//     form: 'PickUpFrom',
+//     fields: [
+//         'MobileNo',
+//         'TempConsumerID'
+//     ],
+//     validate
+// }, null, { pickUpPageFormSubmit })(PickUpPage)

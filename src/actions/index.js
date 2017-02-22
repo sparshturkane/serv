@@ -6,6 +6,8 @@ export const SET_PRODUCT_NAME = 'SET_PRODUCT_NAME';
 export const SET_SUPPORTED_MODES = 'SET_SUPPORTED_MODES';
 export const GET_OTP = 'GET_OTP';
 export const GET_LAT_LNG = 'GET_LAT_LNG';
+export const POST_REQUEST_PICKUP_LOCATION = 'POST_REQUEST_PICKUP_LOCATION';
+export const SET_ACTIVE_PRODUCT_DATA = 'SET_ACTIVE_PRODUCT_DATA';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -31,6 +33,14 @@ export function getRewardsList(ProductID) {
     return {
         type: GET_REWARDS_LIST,
         payload: request,
+    };
+}
+
+//storing selected mobile data
+export function setActiveProductData(ProductData) {
+    return {
+        type: SET_ACTIVE_PRODUCT_DATA,
+        payload: ProductData,
     };
 }
 
@@ -67,6 +77,16 @@ export function fetchGeoLocation(Landmark) { //testing
 
     return {
         type: GET_LAT_LNG,
+        payload: request,
+    };
+}
+
+// calling serviceAvailability(PickUp)
+export function fetchPickUpLocations(pickUpLocationRequest) { //testing
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/serviceAvailability`, pickUpLocationRequest);
+
+    return {
+        type: POST_REQUEST_PICKUP_LOCATION,
         payload: request,
     };
 }

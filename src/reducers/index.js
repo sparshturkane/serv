@@ -4,6 +4,8 @@ import rewardsList from './reducer_rewards_list';
 import productData from './reducer_active_mobile';
 import { reducer as formReducer} from 'redux-form';
 import GeoLocationData from './reducer_geo_location'
+import PickUpServiceLocationData from './reducer_pickup_locations';
+import ActiveProductData from './reducer_active_product_data';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +13,8 @@ const rootReducer = combineReducers({
     rewardsList : rewardsList,
     productData: productData,
     form: formReducer,
-    GeoLocationData: GeoLocationData
+    GeoLocationData: GeoLocationData,
+    PickUpServiceLocationData: PickUpServiceLocationData,
 });
 
 export default rootReducer;

@@ -57,7 +57,7 @@ class RewardList extends React.Component {
                 </div>
                 <div className="row landingSubmitButton">
                     <div className="col-sm-12">
-                        <Link to="/home" type="button" className="landingLargeButton ">Recycle My {this.props.ProductName}</Link>
+                        <Link to="/pickup-dropoff" type="button" className="landingLargeButton ">Recycle My {this.props.ProductName}</Link>
                     </div>
                 </div>
             </div>

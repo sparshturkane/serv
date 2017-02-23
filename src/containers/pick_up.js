@@ -7,16 +7,19 @@ import LocationSearch from './location_search';
 import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData } from '../actions/index';
 
 class PickUpPage extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-
-    componentWillMount(){
-        // since this is pickup.js page so we will call pickup service here
+    constructor(props) {
+        super(props);
+        // ServiceTypeID = 9 for PickUp
+        // ServiceTypeID = 13 for Dropoff
+        this.state = {
+            ServiceTypeID : 9,
+        }
     }
 
+
+
     supportedModesDisplay(){
-        return this.props.ProductData.SupportedModes.map((value) => {
+        return this.props.productData.SupportedModes.map((value) => {
             switch (value) {
                 case 9:
                 return (
@@ -33,6 +36,7 @@ class PickUpPage extends React.Component {
         });
     }
 
+    
     render(){
         //
         //
@@ -48,7 +52,7 @@ class PickUpPage extends React.Component {
         return(
             <div>
                 <HeaderDiv />
-                <LocationSearch />
+                <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>
 
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
@@ -187,7 +191,8 @@ class PickUpPage extends React.Component {
 function mapStateToProps(state) {
     return {
         supportedMobiles: state.supportedMobiles.supportedMobilesList,
-        productData: state.productData,
+        productData: state.productData.ActiveProductData,
+        geoLocationData: state.GeoLocationData,
     };
 }
 
@@ -201,7 +206,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setActiveProductData }, dispatch);
+    return bindActionCreators({ setActiveProductData, fetchPickUpLocations }, dispatch);
 }
 //
 export default connect(mapStateToProps, mapDispatchToProps)(PickUpPage);

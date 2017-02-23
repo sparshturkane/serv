@@ -11,8 +11,7 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, SupportedModes: action.payload};
 
         case SET_ACTIVE_PRODUCT_DATA:
-        console.log("ActiveProductData"+action.payload);
-        return { ...state, ActiveProductData: action.payload.ProductData};
+        return { ...state, ActiveProductData: action.payload};
 
         default:
         return state;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchGeoLocation } from '../actions/index';
+import { fetchGeoLocation, fetchPickUpLocations, getSlot } from '../actions/index';
 
 class LocationSearch extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            Landmark:'',
+            Landmark:'Andheri West',
 
         }
         this.handleLocationFormSubmit = this.handleLocationFormSubmit.bind(this);
@@ -15,7 +15,38 @@ class LocationSearch extends React.Component {
 
     handleLocationFormSubmit(event){
         event.preventDefault();
-        this.props.fetchGeoLocation(this.state.Landmark);
+        this.props.fetchGeoLocation(this.state.Landmark).then( () => {
+
+            if(this.props.ServiceTypeID === 9){
+                // calling fetchPickUpLocations action serviceAvailability
+                const pickUpLocationRequest = {
+                    Lat: this.props.geoLocationData.latitude,
+                    Lng: this.props.geoLocationData.longitude,
+                    Zipcode: this.props.geoLocationData.pincode,
+                    ServiceTypeID: 9,
+                    ProductID: this.props.productData.ProductID,
+                };
+                this.props.fetchPickUpLocations(pickUpLocationRequest).then( () =>{
+                    // this.props.fetchPickUpLocations
+                    const getSlotsRequest = {
+                        Lat : this.props.geoLocationData.latitude,//v
+                        Lng : this.props.geoLocationData.longitude,//v
+                        CurrentDate : new Date().toISOString().slice(0,10), //v
+                        ServiceTypeID : 9,//varia
+                        CurrentTime : new Date().toLocaleTimeString(), //v
+                        PartnerServiceLocationID : this.props.pickUpSerivceLocations.PartnerServiceLocationID, //variable
+                        DeliveryMode : this.props.pickUpSerivceLocations.DeliveryMode, //only at the time of pickup
+                    };
+                    this.props.getSlot(getSlotsRequest);
+                })
+            }// if ends here this space is for pickup
+        } )
+
+        // this.props.createPost(props)
+        // .then(() => {
+        //     // blog post create, nav to index
+        //     this.context.router.push('/');
+        // })
 
     }
 
@@ -36,7 +67,7 @@ class LocationSearch extends React.Component {
                             </div>
 
                             <div className="col-sm-8">
-                                <input type="text" value={this.state.Landmark} onChange={this.handleOnChange.bind(this)} placeholder="Andheri West" className="inputLocation" />
+                                <input type="text" onBlur={this.handleLocationFormSubmit} value={this.state.Landmark} onChange={this.handleOnChange.bind(this)} placeholder="Andheri West" className="inputLocation" />
                                 <img src="images/location.png" className="locationimg" alt="Location" />
                                 <span className="loadIconHolder"><img src="images/loadIcon.png" className="loadIcon" alt="loadIcon" /></span>
                             </div>
@@ -53,15 +84,17 @@ class LocationSearch extends React.Component {
 //   return { posts: state.posts.all };
 // }
 
-// function mapStateToProps(state) {
-//     return {
-//         supportedMobiles: state.supportedMobiles.supportedMobilesList
-//     };
-// }
+function mapStateToProps(state) {
+    return {
+        productData: state.productData.ActiveProductData,
+        geoLocationData: state.GeoLocationData,
+        pickUpSerivceLocations: state.PickUpDropOffServiceLocationData.PickUpServiceLocations,
+    };
+}
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({fetchGeoLocation }, dispatch);
+    return bindActionCreators({fetchGeoLocation, fetchPickUpLocations, getSlot }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(LocationSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);

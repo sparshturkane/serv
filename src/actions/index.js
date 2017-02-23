@@ -8,6 +8,7 @@ export const GET_OTP = 'GET_OTP';
 export const GET_LAT_LNG = 'GET_LAT_LNG';
 export const POST_REQUEST_PICKUP_LOCATION = 'POST_REQUEST_PICKUP_LOCATION';
 export const SET_ACTIVE_PRODUCT_DATA = 'SET_ACTIVE_PRODUCT_DATA';
+export const POST_CONSUMER_SERVICE_REQUEST_GET_SLOT = 'POST_CONSUMER_SERVICE_REQUEST_GET_SLOT';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -87,6 +88,16 @@ export function fetchPickUpLocations(pickUpLocationRequest) { //testing
 
     return {
         type: POST_REQUEST_PICKUP_LOCATION,
+        payload: request,
+    };
+}
+
+// getSlots
+export function getSlot(getSlotRequest) { //testing
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/getSlot`, getSlotRequest);
+
+    return {
+        type: POST_CONSUMER_SERVICE_REQUEST_GET_SLOT,
         payload: request,
     };
 }

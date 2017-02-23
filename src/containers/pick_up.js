@@ -1,18 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reduxForm } from 'redux-form';
+// import { reduxForm } from 'redux-form';
 import HeaderDiv from './header'
 import LocationSearch from './location_search';
-import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData } from '../actions/index';
+import OtpPage from './otp_page';
+import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP } from '../actions/index';
 
 class PickUpPage extends React.Component {
     constructor(props) {
         super(props);
         // ServiceTypeID = 9 for PickUp
         // ServiceTypeID = 13 for Dropoff
+        this.handleInputFieldsChange = this.handleInputFieldsChange.bind(this);
+        this.handleOnSubmitPickUpForm = this.handleOnSubmitPickUpForm.bind(this);
         this.state = {
             ServiceTypeID : 9,
+            userName : '',
+            userMobileNo : '',
+            date : '',
+            userEmail : '',
+            userAlternateNo : '',
+            userIMEINumber : '',
+            userCompleteAddress : '',
+            displayOtpModal : 0,
         }
     }
 
@@ -36,7 +47,65 @@ class PickUpPage extends React.Component {
         });
     }
 
-    
+    handleOnSubmitPickUpForm(event){
+        event.preventDefault();
+        //
+        /**
+        * if user is registered then
+        1. schedule recycle request (if imeiNumber then also give to srr)
+        2. add device (can be called after slots ignore what is written brackets)
+        */
+
+        /**
+        * if user is new / TempConsumer
+        1. otp
+        2. signup
+        3. updateProfile
+        4. schedule recycle request ( if imeiNumber then give to srr)
+        5. add device (can be called after slots ignore what is written brackets)
+        */
+
+        //
+        /**
+        * currently assuming that every user is new user
+        1. store userData in SessionStorage
+        2. user call otp service
+        3. if status is successfull then open otp page hidden conditional rendering
+        4.
+        */
+        const userDataRequest= {
+            userName : this.state.userName,
+            userMobileNo : this.state.userMobileNo,
+            date : this.state.date,
+            userEmail : this.state.userEmail,
+            userAlternateNo : this.state.userAlternateNo,
+            userIMEINumber : this.state.userIMEINumber,
+            userCompleteAddress : this.state.userCompleteAddress,
+        }
+
+        const getOTPRequest = {
+            TempConsumerID : 0,// we will have to change it in revisions
+            MobileNo : this.state.userMobileNo,
+        }
+
+        this.props.tempConsumerGetOTP(getOTPRequest).then(()=>{
+            this.props.sessionStorageUserData(userDataRequest);
+            // display otp modal
+            this.setState({
+                displayOtpModal : 1,
+            })
+        });
+    }
+
+    handleInputFieldsChange(event){
+        this.setState(
+            {
+                [event.target.name]: event.target.value,
+                // userName: event.target.value
+            }
+        );
+    }
+
     render(){
         //
         //
@@ -51,6 +120,9 @@ class PickUpPage extends React.Component {
         // console.log(MobileNo);
         return(
             <div>
+                {this.state.displayOtpModal == 1 &&
+                    <OtpPage />
+                }
                 <HeaderDiv />
                 <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>
 
@@ -66,48 +138,52 @@ class PickUpPage extends React.Component {
                     <div id="home" className="tab-pane fade in active">
                         <div className="detailsHolder ">
                             <div className="row">
-                                <form>
+                                <form onSubmit={this.handleOnSubmitPickUpForm}>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Name*</label>
                                             <br />
-                                            <input type="text"  placeholder="Name" className="inputdetails" required />
+                                            <input type="text" name="userName" value={this.state.userName} onChange={this.handleInputFieldsChange} placeholder="Name" className="inputdetails" required />
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Mobile Number*</label>
                                             <br />
-                                            <input type="number"  placeholder="Mobile No" className="inputdetails" />
 
+                                            <input type="number" name="userMobileNo" value={this.state.userMobileNo} onChange={this.handleInputFieldsChange} placeholder="Mobile No" className="inputdetails" required/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Email*</label>
                                             <br />
-                                            <input type="email"  placeholder="Email" className="inputdetails" required />
+                                            <input type="email" name="userEmail" value={this.state.userEmail} onChange={this.handleInputFieldsChange} placeholder="Email" className="inputdetails" required />
+
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Alternate Number</label>
                                             <br />
-                                            <input type="text"  placeholder="Number" className="inputdetails" required />
+                                            <input type="text" name="userAlternateNo" value={this.state.userAlternateNo} onChange={this.handleInputFieldsChange} placeholder="Number" className="inputdetails" />
+
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">IMEI Number of Device For Recycle</label>
                                             <br />
-                                            <input type="text" className="inputdetails" />
+                                            <input type="text" name="userIMEINumber" value={this.state.userIMEINumber} onChange={this.handleInputFieldsChange} className="inputdetails" />
+
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Pickup Date*</label>
                                             <br />
-                                            <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" required />
+                                            <input className="inputdetails" name="date" value={this.state.date} onChange={this.handleInputFieldsChange} id="date" placeholder="DD/MM/YYYY" type="text" required />
+
                                             <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                         </div>
                                     </div>
@@ -115,12 +191,13 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Complete Address*</label>
                                             <br />
-                                            <input type="text"  placeholder="Flat, Building Name, Street, City" className="inputdetails" required />
+                                            <input type="text" name="userCompleteAddress" value={this.state.userCompleteAddress} onChange={this.handleInputFieldsChange} placeholder="Flat, Building Name, Street, City" className="inputdetails" required />
+
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContentbutton">
-                                            <button type="button" className="btn  activeBtn mySmallbtn">Home</button>
+                                            <button type="button" className="btn mySmallbtn">Home</button>
                                             <button type="button" className="btn mySmallbtn">Office</button>
                                             <button type="button" className="btn mySmallbtn">Other</button>
                                         </div>
@@ -206,7 +283,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setActiveProductData, fetchPickUpLocations }, dispatch);
+    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP }, dispatch);
 }
 //
 export default connect(mapStateToProps, mapDispatchToProps)(PickUpPage);

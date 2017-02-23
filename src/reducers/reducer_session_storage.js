@@ -1,13 +1,11 @@
-import { POST_TEMP_CONSUMER_SIGN_UP } from '../actions/index';
+import { STORE_USER_DATA } from '../actions/index';
 
 const INITIAL_STATE = { };
 
 export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case POST_TEMP_CONSUMER_SIGN_UP:
-        return { ...state, SignUpData: action.payload.data };
-
-
+        case STORE_USER_DATA:
+        return { ...state, UserData: action.payload };
         // case FETCH_POSTS:
         // return { ...state, all: action.payload.data };
         default:

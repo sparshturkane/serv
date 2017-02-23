@@ -14,7 +14,7 @@ export default function(state = INITIAL_STATE, action) {
         var searchPostalCode = "";
 
         searchAddressComponents.forEach( function(map){
-            if(map.types[0]=="postal_code"){
+            if(map.types[0]==="postal_code"){
                 searchPostalCode=map.short_name;
             }
         });

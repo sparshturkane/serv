@@ -7,7 +7,7 @@ class LocationSearch extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            Landmark:'Andheri West',
+            Landmark:'',
 
         }
         this.handleLocationFormSubmit = this.handleLocationFormSubmit.bind(this);
@@ -41,6 +41,10 @@ class LocationSearch extends React.Component {
                 })
             }// if ends here this space is for pickup
         } )
+
+        .catch(error => {
+            console.log(error);
+        });
 
         // this.props.createPost(props)
         // .then(() => {

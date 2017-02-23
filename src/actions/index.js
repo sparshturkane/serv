@@ -9,6 +9,9 @@ export const GET_LAT_LNG = 'GET_LAT_LNG';
 export const POST_REQUEST_PICKUP_LOCATION = 'POST_REQUEST_PICKUP_LOCATION';
 export const SET_ACTIVE_PRODUCT_DATA = 'SET_ACTIVE_PRODUCT_DATA';
 export const POST_CONSUMER_SERVICE_REQUEST_GET_SLOT = 'POST_CONSUMER_SERVICE_REQUEST_GET_SLOT';
+export const POST_TEMP_CONSUMER_GET_OTP = 'POST_TEMP_CONSUMER_GET_OTP';
+export const STORE_USER_DATA = "STORE_USER_DATA";
+export const POST_TEMP_CONSUMER_SIGN_UP = 'POST_TEMP_CONSUMER_SIGN_UP';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -98,6 +101,34 @@ export function getSlot(getSlotRequest) { //testing
 
     return {
         type: POST_CONSUMER_SERVICE_REQUEST_GET_SLOT,
+        payload: request,
+    };
+}
+
+// getotp
+export function tempConsumerGetOTP(getOTPRequest) { //testing
+    const request = axios.post(`${ROOT_URL}/TempConsumer/getOTP`, getOTPRequest);
+
+    return {
+        type: POST_TEMP_CONSUMER_GET_OTP,
+        payload: request,
+    };
+}
+
+// session store user data
+export function sessionStorageUserData(userData) {
+    return {
+        type: STORE_USER_DATA,
+        payload: userData,
+    };
+}
+
+// tempconsumer signup
+export function tempConsumerSignUp(signUpRequest) { //testing
+    const request = axios.post(`${ROOT_URL}/TempConsumer/signup`, signUpRequest);
+
+    return {
+        type: POST_TEMP_CONSUMER_SIGN_UP,
         payload: request,
     };
 }

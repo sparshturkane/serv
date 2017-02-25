@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { consumerProductAddDevice, consumerScheduleRecycleRequest } from '../../actions/index';
 
@@ -50,7 +51,9 @@ class SubmitRecycleRequestButton extends React.Component {
 
         }
 
-        this.props.consumerScheduleRecycleRequest(scheduleRecycleRequestData);
+        this.props.consumerScheduleRecycleRequest(scheduleRecycleRequestData).then(()=>{
+            browserHistory.push('/awesome');
+        })
         console.log(scheduleRecycleRequestData);
         // console.log(this.props.consumerDetail.data);
     }

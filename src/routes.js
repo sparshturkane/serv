@@ -5,6 +5,8 @@ import App from './components/app';
 import Home from './components/home';
 import PickUpPage from './containers/pick_up';
 import ConfirmRecycleRequest from './components/confirm_recycle_request';
+import AwesomePage from './components/awesome';
+
 
 // <Route path="posts/new" component={ PostsNew } />
 
@@ -13,5 +15,6 @@ export default (
         <IndexRoute component={Home} />
         <Route path="pickup-dropoff" component={ PickUpPage } />
         <Route path="confirmation" component={ ConfirmRecycleRequest } />
+        <Route path="awesome" component={ AwesomePage } />
     </Route>
 );

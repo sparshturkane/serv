@@ -159,8 +159,10 @@ class PickUpPage extends React.Component {
 
 
         console.log(updateProfileData);
-        this.props.consumerUpdateProfile(updateProfileData);
-        browserHistory.push('/confirmation');
+        this.props.consumerUpdateProfile(updateProfileData).then( () => {
+            browserHistory.push('/confirmation');
+        })
+
     }
 
     handleInputFieldsChange(event){

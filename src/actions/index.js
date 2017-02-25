@@ -15,6 +15,8 @@ export const POST_TEMP_CONSUMER_SIGN_UP = 'POST_TEMP_CONSUMER_SIGN_UP';
 export const MAKING_PAGES_ACTIVE = 'MAKING_PAGES_ACTIVE';
 export const CONSUMER_UPDATE_PROFILE = 'CONSUMER_UPDATE_PROFILE';
 export const STORE_LOCATION_DATA = 'STORE_LOCATION_DATA';
+export const POST_CONSUMER_PRODUCT_ADD_DEVICE = 'POST_CONSUMER_PRODUCT_ADD_DEVICE';
+export const POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -161,6 +163,26 @@ export function consumerUpdateProfile(updateProfileData) { //testing
 
     return {
         type: CONSUMER_UPDATE_PROFILE,
+        payload: request,
+    };
+}
+
+// consumer adding product
+export function consumerProductAddDevice(addDeviceRequest) {
+    const request = axios.post(`${ROOT_URL}/ConsumerProduct/addDevice`, addDeviceRequest );
+    // console.log(request);
+    return {
+        type: POST_CONSUMER_PRODUCT_ADD_DEVICE,
+        payload: request,
+    };
+}
+
+// schedule recycle request
+export function consumerScheduleRecycleRequest(scheduleRecycleRequestData) {
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/scheduleRecycleRequest`, scheduleRecycleRequestData );
+    // console.log(request);
+    return {
+        type: POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST,
         payload: request,
     };
 }

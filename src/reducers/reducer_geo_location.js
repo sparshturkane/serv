@@ -13,13 +13,15 @@ export default function(state = INITIAL_STATE, action) {
         var searchAddressComponents = action.payload.data.results[0].address_components;
         var searchPostalCode = "";
 
+        var Landmark = action.payload.data.results[0].formatted_address;
+
         searchAddressComponents.forEach( function(map){
             if(map.types[0]==="postal_code"){
                 searchPostalCode=map.short_name;
             }
         });
 
-        return { ...state, latitude: lat, longitude:lng, pincode:searchPostalCode };
+        return { ...state, latitude: lat, longitude:lng, pincode:searchPostalCode, Landmark: Landmark };
         // case FETCH_POSTS
         // return { ...state, all: action.payload.data };
         default:

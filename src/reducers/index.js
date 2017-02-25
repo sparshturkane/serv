@@ -11,6 +11,7 @@ import SessionStorage from './reducer_session_storage';
 import TempConsumer from './reducer_temp_consumer';
 import MakePagesActive from './reducer_making_page_active';
 import Consumer from './reducer_consumer';
+import ConsumerProduct from './reducer_consumer_product'
 
 
 const rootReducer = combineReducers({
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     SessionStorage: SessionStorage,
     TempConsumer : TempConsumer,
     MakePagesActive : MakePagesActive,
-    Consumer: Consumer
+    Consumer: Consumer,
+    ConsumerProduct: ConsumerProduct
 });
 
 export default rootReducer;

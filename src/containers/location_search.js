@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchGeoLocation, fetchPickUpLocations, getSlot } from '../actions/index';
+import { fetchGeoLocation, fetchPickUpLocations, getSlot, sessionStorageLocationData } from '../actions/index';
 
 class LocationSearch extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class LocationSearch extends React.Component {
                     LandmarkError: 'Please Enter Valid Landmark'
                 })
             }
-            
+
             if(this.props.ServiceTypeID === 9){
                 // calling fetchPickUpLocations action serviceAvailability
 
@@ -46,6 +46,13 @@ class LocationSearch extends React.Component {
                         DeliveryMode : this.props.pickUpSerivceLocations.DeliveryMode, //only at the time of pickup
                     };
                     this.props.getSlot(getSlotsRequest);
+                    this.props.sessionStorageLocationData(
+                        {
+                            Landmark: this.state.Landmark,
+                            latitude: this.props.geoLocationData.latitude,
+                            longitude : this.props.geoLocationData.longitude
+                        }
+                    );
                 })
             }// if ends here this space is for pickup
         } )
@@ -117,7 +124,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({fetchGeoLocation, fetchPickUpLocations, getSlot }, dispatch);
+    return bindActionCreators({fetchGeoLocation, fetchPickUpLocations, getSlot, sessionStorageLocationData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);

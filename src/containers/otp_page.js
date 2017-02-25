@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { tempConsumerSignUp } from '../actions/index';
+import { tempConsumerSignUp, consumerUpdateProfile } from '../actions/index';
 
 class OtpPage extends React.Component {
     constructor(props) {
@@ -37,18 +38,48 @@ class OtpPage extends React.Component {
         */
         const signUpRequest = {
             TempConsumerID : 0,
-            MobileNo: this.props.sessionStorage.userMobileNo,
+            MobileNo: this.props.sessionStorageUserData.userMobileNo,
             Otp: this.state.otpNumber
         }
         // console.log(this.props.sessionStorage);
         this.props.tempConsumerSignUp(signUpRequest)
-        // .then(()=>{
-        //     // here i will have to save the user data on localmachine
-        //
-        // })
+        .then(()=>{
+            // here i will have to save the user data on localmachine
+            // update user profile
+            this.updateUserProfile();
+            browserHistory.push('/confirmation');
+        })
 
 
     }
+    updateUserProfile(){
+        // in this case we have consumer id from localStorage
+        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        console.log("signupdata" +SignUpData);
+        const updateProfileData = {
+            updateObj : {
+                EmailID : this.props.sessionStorageUserData.userEmail,
+                Name : this.props.sessionStorageUserData.userName,
+                FirstRegisteredFrom : "Consumer-Web",
+                AlternateMobileNo : this.props.sessionStorageUserData.userAlternateNo,
+                Zipcode : this.props.sessionStorageLocationData.pincode,
+                Lat : this.props.sessionStorageLocationData.latitude,
+                Lng : this.props.sessionStorageLocationData.longitude,
+                Landmark : this.props.sessionStorageLocationData.Landmark,
+                Address : this.props.sessionStorageUserData.userCompleteAddress,
+                AddressType :'Home'
+            },
+            isNew : SignUpData.data.isNew ? true : false,
+            ConsumerID :SignUpData.data.ConsumerID
+        }
+
+
+
+        console.log(updateProfileData);
+        this.props.consumerUpdateProfile(updateProfileData);
+        browserHistory.push('/confirmation');
+    }
+
     render(){
         return(
             <div className="overlay"  id="overlay">
@@ -85,11 +116,12 @@ function mapStateToProps(state) {
         productData: state.productData.ActiveProductData,
         geoLocationData: state.GeoLocationData,
         pickUpSerivceLocations: state.PickUpDropOffServiceLocationData.PickUpServiceLocations,
-        sessionStorage: state.SessionStorage.UserData,
+        sessionStorageUserData: state.SessionStorage.UserData,
+        sessionStorageLocationData: state.SessionStorage.LocationData,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ tempConsumerSignUp }, dispatch);
+    return bindActionCreators({ tempConsumerSignUp, consumerUpdateProfile }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OtpPage);

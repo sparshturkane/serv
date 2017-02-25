@@ -13,6 +13,8 @@ export const POST_TEMP_CONSUMER_GET_OTP = 'POST_TEMP_CONSUMER_GET_OTP';
 export const STORE_USER_DATA = "STORE_USER_DATA";
 export const POST_TEMP_CONSUMER_SIGN_UP = 'POST_TEMP_CONSUMER_SIGN_UP';
 export const MAKING_PAGES_ACTIVE = 'MAKING_PAGES_ACTIVE';
+export const CONSUMER_UPDATE_PROFILE = 'CONSUMER_UPDATE_PROFILE';
+export const STORE_LOCATION_DATA = 'STORE_LOCATION_DATA';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -141,5 +143,24 @@ export function makePagesActive(pageData) { //testing
     return {
         type: MAKING_PAGES_ACTIVE,
         payload: pageData,
+    };
+}
+
+// session store location data
+export function sessionStorageLocationData(locationData) { //testing
+    return {
+        type: STORE_LOCATION_DATA,
+        payload: locationData,
+    };
+}
+
+// UPDAING CONSUMER USER profile
+
+export function consumerUpdateProfile(updateProfileData) { //testing
+    const request = axios.post(`${ROOT_URL}/Consumer/updateProfile`, updateProfileData);
+
+    return {
+        type: CONSUMER_UPDATE_PROFILE,
+        payload: request,
     };
 }

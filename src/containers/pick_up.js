@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 import HeaderDiv from './header'
 import LocationSearch from './location_search';
 import OtpPage from './otp_page';
-import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP } from '../actions/index';
+import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile } from '../actions/index';
 
 class PickUpPage extends React.Component {
     constructor(props) {
@@ -30,9 +30,9 @@ class PickUpPage extends React.Component {
 
     componentWillMount(){
         // console.log(this.props.makePagesActive.pickUp.status);
-        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
-        console.log(SignUpData);
-        
+        // const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        // console.log(SignUpData.data.ConsumerID);
+
         if(this.props.makePagesActive.pickUp === undefined){
             browserHistory.push('/');
         }else if (this.props.makePagesActive.pickUp.status === '0') {
@@ -96,29 +96,71 @@ class PickUpPage extends React.Component {
             userCompleteAddress : this.state.userCompleteAddress,
         }
 
-        const getOTPRequest = {
+        this.props.sessionStorageUserData(userDataRequest);
+
+        const getOTPRequestData = {
             TempConsumerID : 0,// we will have to change it in revisions
             MobileNo : this.state.userMobileNo,
         }
 
-        this.props.tempConsumerGetOTP(getOTPRequest).then(()=>{
-            this.props.sessionStorageUserData(userDataRequest);
-            // display otp modal
-            /**
-            * sudo code for checking is the customer is registered
-            var accesstoken
-            const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
-            if: accesstoken is present
-                browserHistory.push(/confirmation page)
-            else:
-                this.setState({ displayOtpModal })
-            */
+        this.getOTPRequest(getOTPRequestData, userDataRequest);
+
+    }
+
+    getOTPRequest(getOTPRequestData, userDataRequest){
+
+        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        console.log("signupdata" +SignUpData);
+        if( SignUpData !== null){
+
+            if(SignUpData.data.ConsumerID){
+                // will have to remove this and push "/confirmation"
+                // this.setState({
+                //     displayOtpModal : 1,
+                // })
+
+                // call update user profile
+                this.updateUserProfile();
+
+            }
+        } else {
+            this.props.tempConsumerGetOTP(getOTPRequestData).then(()=>{
+                this.props.sessionStorageUserData(userDataRequest);
+                this.setState({
+                    displayOtpModal : 1,
+                })
+            });
+
+        }
+
+    }
+
+    updateUserProfile(){
+        // in this case we have consumer id from localStorage
+        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        console.log("signupdata" +SignUpData);
+        const updateProfileData = {
+            updateObj : {
+                EmailID : this.state.userEmail,
+                Name : this.state.userName,
+                FirstRegisteredFrom : "Consumer-Web",
+                AlternateMobileNo : this.state.userAlternateNo,
+                Zipcode : this.props.geoLocationData.pincode,
+                Lat : this.props.geoLocationData.latitude,
+                Lng : this.props.geoLocationData.longitude,
+                Landmark : this.props.storedUserData.LocationData.Landmark,
+                Address : this.state.userCompleteAddress,
+                AddressType :'Home'
+            },
+            isNew : SignUpData.data.isNew ? true : false,
+            ConsumerID :SignUpData.data.ConsumerID
+        }
 
 
-            this.setState({
-                displayOtpModal : 1,
-            })
-        });
+
+        console.log(updateProfileData);
+        this.props.consumerUpdateProfile(updateProfileData);
+        browserHistory.push('/confirmation');
     }
 
     handleInputFieldsChange(event){
@@ -295,6 +337,7 @@ function mapStateToProps(state) {
         productData: state.productData.ActiveProductData,
         geoLocationData: state.GeoLocationData,
         makePagesActive: state.MakePagesActive,
+        storedUserData : state.SessionStorage
     };
 }
 
@@ -308,7 +351,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP }, dispatch);
+    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile }, dispatch);
 }
 //
 export default connect(mapStateToProps, mapDispatchToProps)(PickUpPage);

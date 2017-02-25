@@ -1,4 +1,4 @@
-import { STORE_USER_DATA } from '../actions/index';
+import { STORE_USER_DATA, STORE_LOCATION_DATA } from '../actions/index';
 
 const INITIAL_STATE = { };
 
@@ -8,6 +8,8 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, UserData: action.payload };
         // case FETCH_POSTS:
         // return { ...state, all: action.payload.data };
+        case STORE_LOCATION_DATA:
+        return{ ...state, LocationData: action.payload };
         default:
         return state;
     }

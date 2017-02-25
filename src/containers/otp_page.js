@@ -42,6 +42,10 @@ class OtpPage extends React.Component {
         }
         // console.log(this.props.sessionStorage);
         this.props.tempConsumerSignUp(signUpRequest)
+        // .then(()=>{
+        //     // here i will have to save the user data on localmachine
+        //
+        // })
 
 
     }

@@ -8,6 +8,7 @@ class LocationSearch extends React.Component {
         super(props);
         this.state={
             Landmark:'',
+            LandmarkError: '',
 
         }
         this.handleLocationFormSubmit = this.handleLocationFormSubmit.bind(this);
@@ -17,8 +18,15 @@ class LocationSearch extends React.Component {
         event.preventDefault();
         this.props.fetchGeoLocation(this.state.Landmark).then( () => {
 
+            if(this.props.geoLocationData.pincode === ''){
+                this.setState({
+                    LandmarkError: 'Please Enter Valid Landmark'
+                })
+            }
+            
             if(this.props.ServiceTypeID === 9){
                 // calling fetchPickUpLocations action serviceAvailability
+
                 const pickUpLocationRequest = {
                     Lat: this.props.geoLocationData.latitude,
                     Lng: this.props.geoLocationData.longitude,
@@ -43,7 +51,11 @@ class LocationSearch extends React.Component {
         } )
 
         .catch(error => {
-            console.log(error);
+            // console.log(error);
+            // alert(error);
+            this.setState({
+                LandmarkError: 'Please Enter Valid Landmark'
+            })
         });
 
         // this.props.createPost(props)
@@ -56,11 +68,17 @@ class LocationSearch extends React.Component {
 
     handleOnChange(event){
         this.setState({
-            Landmark : event.target.value
+            Landmark : event.target.value,
+            LandmarkError : ''
         })
     }
 
     render(){
+        const LandmarkError = this.state.LandmarkError;
+        var LandmarkStyle = {
+            color: 'red',
+        };
+
         return(
             <div className="locationHolder">
                 <div className="locationContent ">
@@ -72,6 +90,7 @@ class LocationSearch extends React.Component {
 
                             <div className="col-sm-8">
                                 <input type="text" onBlur={this.handleLocationFormSubmit} value={this.state.Landmark} onChange={this.handleOnChange.bind(this)} placeholder="Andheri West" className="inputLocation" />
+                                <p style={LandmarkStyle}>{LandmarkError}</p>
                                 <img src="images/location.png" className="locationimg" alt="Location" />
                                 <span className="loadIconHolder"><img src="images/loadIcon.png" className="loadIcon" alt="loadIcon" /></span>
                             </div>

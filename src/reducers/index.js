@@ -9,6 +9,7 @@ import ActiveProductData from './reducer_active_product_data';
 import ConsumerServicerequest from './reducer_consumer_service_request';
 import SessionStorage from './reducer_session_storage';
 import TempConsumer from './reducer_temp_consumer';
+import MakePagesActive from './reducer_making_page_active';
 
 
 const rootReducer = combineReducers({
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     PickUpDropOffServiceLocationData: PickUpDropOffServiceLocationData,
     ConsumerServicerequest: ConsumerServicerequest,
     SessionStorage: SessionStorage,
-    TempConsumer : TempConsumer
+    TempConsumer : TempConsumer,
+    MakePagesActive : MakePagesActive
 });
 
 export default rootReducer;

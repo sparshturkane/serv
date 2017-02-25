@@ -14,10 +14,33 @@ class ChooseDeviceHolder extends React.Component {
 
     componentWillMount(){
         this.props.getProductBasedOnSupportedModes()
+        .then( () => {
+            const mobile = this.props.supportedMobiles[0];
+            var ProductIDArray = {
+                ProductIDs: [mobile.ProductID]
+            };
+
+            var ProductName = mobile.ProductName;
+            var SupportedModes = mobile.SupportedModes;
+            // productData = mobile
+            this.handleProductClick(ProductIDArray, ProductName, SupportedModes, mobile)
+        })
         // .then(() => {
         //     // blog post create, nav to index
         //     this.renderSupportedMobiles();
         // })
+        
+        // {
+        //     "AlternateMobileNo":
+        //     "MobileNo":
+        //     "EmailID":
+        //     "Name":
+        //     "Zipcode":
+        //     "Lat":
+        //     "Lng":
+        //     "Landmark"
+        //
+        // }
     }
 
     handleProductClick(ProductIDArray, ProductName, SupportedModes, ProductData) {

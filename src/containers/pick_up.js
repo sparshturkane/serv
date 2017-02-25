@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 // import { reduxForm } from 'redux-form';
 import HeaderDiv from './header'
 import LocationSearch from './location_search';
@@ -27,7 +28,19 @@ class PickUpPage extends React.Component {
         }
     }
 
+    componentWillMount(){
+        // console.log(this.props.makePagesActive.pickUp.status);
+        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        console.log(SignUpData);
+        
+        if(this.props.makePagesActive.pickUp === undefined){
+            browserHistory.push('/');
+        }else if (this.props.makePagesActive.pickUp.status === '0') {
+            browserHistory.push('/');
+        }
 
+        // browserHistory.push('/');
+    }
 
     supportedModesDisplay(){
         return this.props.productData.SupportedModes.map((value) => {
@@ -91,6 +104,17 @@ class PickUpPage extends React.Component {
         this.props.tempConsumerGetOTP(getOTPRequest).then(()=>{
             this.props.sessionStorageUserData(userDataRequest);
             // display otp modal
+            /**
+            * sudo code for checking is the customer is registered
+            var accesstoken
+            const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+            if: accesstoken is present
+                browserHistory.push(/confirmation page)
+            else:
+                this.setState({ displayOtpModal })
+            */
+
+
             this.setState({
                 displayOtpModal : 1,
             })
@@ -270,6 +294,7 @@ function mapStateToProps(state) {
         supportedMobiles: state.supportedMobiles.supportedMobilesList,
         productData: state.productData.ActiveProductData,
         geoLocationData: state.GeoLocationData,
+        makePagesActive: state.MakePagesActive,
     };
 }
 

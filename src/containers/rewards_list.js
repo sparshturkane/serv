@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { makePagesActive } from '../actions/index';
+import { browserHistory } from 'react-router';
 
 class RewardList extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+        this.handleRecyclMyPhoneClick = this.handleRecyclMyPhoneClick.bind(this)
+    }
 
     // reward.Rewards.RewardPartner.PartnerLogoUrl
     // reward.Rewards.RewardPartner.RewardUrl
@@ -36,6 +40,19 @@ class RewardList extends React.Component {
         });
     }
 
+    handleRecyclMyPhoneClick(event){
+        event.preventDefault();
+        console.log("recycle my phone clicked");
+        const pageData = {
+            pageName : 'pickUp',
+            status : '1'
+        }
+        console.log(pageData);
+        this.props.makePagesActive(pageData);
+        browserHistory.push('/pickup-dropoff');
+
+    }
+
     render(){
         return(
             <div className="greenReword">
@@ -57,7 +74,7 @@ class RewardList extends React.Component {
                 </div>
                 <div className="row landingSubmitButton">
                     <div className="col-sm-12">
-                        <Link to="/pickup-dropoff" type="button" className="landingLargeButton ">Recycle My {this.props.ProductName}</Link>
+                        <Link to="/pickup-dropoff" type="button" onClick={this.handleRecyclMyPhoneClick} className="landingLargeButton ">Recycle My {this.props.ProductName}</Link>
                     </div>
                 </div>
             </div>
@@ -72,4 +89,8 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(RewardList);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ makePagesActive }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RewardList);

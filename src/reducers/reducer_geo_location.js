@@ -6,7 +6,7 @@ export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
         case GET_LAT_LNG:
         // console.log(action.payload.data.data);
-        console.log(action.payload);
+        // console.log(action.payload);
         var lat = action.payload.data.results[0].geometry.location.lat;
         var lng = action.payload.data.results[0].geometry.location.lng;
 

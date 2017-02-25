@@ -12,6 +12,7 @@ export const POST_CONSUMER_SERVICE_REQUEST_GET_SLOT = 'POST_CONSUMER_SERVICE_REQ
 export const POST_TEMP_CONSUMER_GET_OTP = 'POST_TEMP_CONSUMER_GET_OTP';
 export const STORE_USER_DATA = "STORE_USER_DATA";
 export const POST_TEMP_CONSUMER_SIGN_UP = 'POST_TEMP_CONSUMER_SIGN_UP';
+export const MAKING_PAGES_ACTIVE = 'MAKING_PAGES_ACTIVE';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -130,5 +131,15 @@ export function tempConsumerSignUp(signUpRequest) { //testing
     return {
         type: POST_TEMP_CONSUMER_SIGN_UP,
         payload: request,
+    };
+}
+
+// making pages active
+export function makePagesActive(pageData) { //testing
+
+
+    return {
+        type: MAKING_PAGES_ACTIVE,
+        payload: pageData,
     };
 }

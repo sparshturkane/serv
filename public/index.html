@@ -38,6 +38,7 @@
 
         <script>
             $(document).ready(function() {
+                console.log('datapicker called');
                 var date_input = $('input[name="date"]'); //our date input has the name "date"
                 var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
 
@@ -60,18 +61,20 @@
             });
         </script>
 
-        <script src="js/swiper.min.js"></script>
+        <script src="%PUBLIC_URL%/js/swiper.min.js"></script>
 
         <!-- Initialize Swiper -->
         <script>
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                slidesPerView: 1,
-                paginationClickable: true,
-                spaceBetween: 30,
-                loop: true
+            $(document).ready(function() {
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    slidesPerView: 1,
+                    paginationClickable: true,
+                    spaceBetween: 30,
+                    loop: true
+                });
             });
         </script>
     </body>

@@ -47,11 +47,16 @@ class OtpPage extends React.Component {
             // here i will have to save the user data on localmachine
             // update user profile
             this.updateUserProfile();
-            browserHistory.push('/confirmation');
+            // browserHistory.push('/confirmation');
         })
 
 
     }
+
+    // componentWillUnmount(){
+    //     this.updateUserProfile();
+    // }
+
     updateUserProfile(){
         // in this case we have consumer id from localStorage
         const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
@@ -76,8 +81,10 @@ class OtpPage extends React.Component {
 
 
         console.log(updateProfileData);
-        this.props.consumerUpdateProfile(updateProfileData);
-        browserHistory.push('/confirmation');
+        this.props.consumerUpdateProfile(updateProfileData).then(()=>{
+            browserHistory.push('/confirmation');
+        })
+
     }
 
     render(){

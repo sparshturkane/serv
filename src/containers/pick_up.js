@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
+import $ from 'jquery';
+import DateTimeField from 'react-datetime';
 // import { reduxForm } from 'redux-form';
 import HeaderDiv from './header'
 import LocationSearch from './location_search';
@@ -38,6 +40,8 @@ class PickUpPage extends React.Component {
         }else if (this.props.makePagesActive.pickUp.status === '0') {
             browserHistory.push('/');
         }
+
+        // $(React.ReactDOM.findDOMNode(this.refs.date)).datepicker();
 
         // browserHistory.push('/');
     }
@@ -174,6 +178,10 @@ class PickUpPage extends React.Component {
         );
     }
 
+    avaliableDates(){
+
+    }
+
     render(){
         //
         //
@@ -250,7 +258,8 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Pickup Date*</label>
                                             <br />
-                                            <input className="inputdetails" name="date" value={this.state.date} onChange={this.handleInputFieldsChange} id="date" placeholder="DD/MM/YYYY" type="text" required />
+                                            <input className="inputdetails" name="date"  value={this.state.date} onChange={this.handleInputFieldsChange} id="date" placeholder="DD/MM/YYYY" type="text" required />
+                                            <DateTimeField timeFormat={false} dateFormat="DD/MM/YYYY"/>
 
                                             <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                         </div>

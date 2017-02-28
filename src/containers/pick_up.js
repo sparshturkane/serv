@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import $ from 'jquery';
 import DateTimeField from 'react-datetime';
 // import { reduxForm } from 'redux-form';
 import HeaderDiv from './header'
@@ -22,11 +21,14 @@ class PickUpPage extends React.Component {
             userName : '',
             userMobileNo : '',
             date : '',
+            dateNew:'',
             userEmail : '',
             userAlternateNo : '',
             userIMEINumber : '',
             userCompleteAddress : '',
             displayOtpModal : 0,
+            firstDate: '',
+            lastDate: '',
         }
     }
 
@@ -44,6 +46,26 @@ class PickUpPage extends React.Component {
         // $(React.ReactDOM.findDOMNode(this.refs.date)).datepicker();
 
         // browserHistory.push('/');
+    }
+
+    componentDidUpdate(){
+        // if(this.props.getSlotsData.getSlot !== undefined){
+        //     console.log(this.props.getSlotsData.getSlot.data.length);
+        //     var firstDateObj = this.props.getSlotsData.getSlot.data[0];
+        //     var lastDateObj = this.props.getSlotsData.getSlot.data[this.props.getSlotsData.getSlot.data.length - 1];
+        //
+        //     console.log(new Date(firstDateObj.date).toISOString().slice(0,10));
+        //
+        //     console.log(new Date(lastDateObj.date).toISOString().slice(0,10));
+        //
+        //     this.setState(
+        //         {
+        //             firstDate : new Date(firstDateObj.date).toISOString().slice(0,10),
+        //             lastDateObj : new Date(lastDateObj.date).toISOString().slice(0,10)
+        //         }
+        //     )
+        // }
+
     }
 
     supportedModesDisplay(){
@@ -93,13 +115,15 @@ class PickUpPage extends React.Component {
         const userDataRequest= {
             userName : this.state.userName,
             userMobileNo : this.state.userMobileNo,
-            date : this.state.date,
+            date : event.target.date.value,
+            // dateNew : event.target.dateNew.value,
             userEmail : this.state.userEmail,
             userAlternateNo : this.state.userAlternateNo,
             userIMEINumber : this.state.userIMEINumber,
             userCompleteAddress : this.state.userCompleteAddress,
         }
 
+        console.log(userDataRequest);
         this.props.sessionStorageUserData(userDataRequest);
 
         const getOTPRequestData = {
@@ -179,6 +203,17 @@ class PickUpPage extends React.Component {
     }
 
     avaliableDates(){
+        // this.props.getSlotsData.getSlot.data;
+
+    }
+
+
+
+    handleDateTimeSelect(date) {
+
+        const currentDate = DateTimeField.moment();
+        date = date < currentDate ? currentDate : date;
+        this.setState({ dateNew:date });
 
     }
 
@@ -194,6 +229,36 @@ class PickUpPage extends React.Component {
         // const { fields:{ userName, MobileNo, email, alternateNumber, imeiNumber, pickUpDate, userAddress }, handleSubmit } = this.props;
         // const { fields:{ MobileNo,TempConsumerID }, handleSubmit } = this.props;
         // console.log(MobileNo);
+        var firstDate = '';
+        var lastDate = '';
+        if(this.props.getSlotsData.getSlot !== undefined){
+            // console.log(this.props.getSlotsData.getSlot.data.length);
+            var firstDateObj = this.props.getSlotsData.getSlot.data[0];
+            var lastDateObj = this.props.getSlotsData.getSlot.data[this.props.getSlotsData.getSlot.data.length - 1];
+
+            // console.log(new Date(firstDateObj.date).toISOString().slice(0,10));
+            //
+            // console.log(new Date(lastDateObj.date).toISOString().slice(0,10));
+
+            firstDate = new Date(firstDateObj.date).toISOString().slice(0,10);
+            lastDate = new Date(lastDateObj.date).toISOString().slice(0,10);
+
+        }
+
+        const inputProps = {
+            name: 'date',
+            placeholder: 'DD/MM/YYYY',
+            className: 'inputdetails'
+
+        }
+        var yesterday = DateTimeField.moment().subtract(1, 'day');
+        var valid = function( current ){
+            // console.log(current.isAfter( yesterday ));
+            // return current.isAfter( yesterday );
+
+            return current.isBetween( firstDate, lastDate, null, '[]' );
+        };
+
         return(
             <div>
                 {this.state.displayOtpModal == 1 &&
@@ -258,8 +323,15 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Pickup Date*</label>
                                             <br />
-                                            <input className="inputdetails" name="date"  value={this.state.date} onChange={this.handleInputFieldsChange} id="date" placeholder="DD/MM/YYYY" type="text" required />
-                                            <DateTimeField timeFormat={false} dateFormat="DD/MM/YYYY"/>
+                                            {/* <input className="inputdetails" name="date"  value={this.state.date} onChange={this.handleInputFieldsChange} id="date" placeholder="DD/MM/YYYY" type="text" required /> */}
+
+                                            <DateTimeField
+                                                timeFormat={false}
+                                                dateFormat="DD/MM/YYYY"
+                                                inputProps={inputProps}
+                                                isValidDate={ valid }
+                                                closeOnSelect={ true }
+                                            />
 
                                             <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                         </div>
@@ -348,7 +420,8 @@ function mapStateToProps(state) {
         productData: state.productData.ActiveProductData,
         geoLocationData: state.GeoLocationData,
         makePagesActive: state.MakePagesActive,
-        storedUserData : state.SessionStorage
+        storedUserData : state.SessionStorage,
+        getSlotsData: state.ConsumerServicerequest,
     };
 }
 

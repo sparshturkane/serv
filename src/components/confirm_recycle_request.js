@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import GreenRewards from '../containers/green_rewards';
 import FooterDiv from './footer.js';
 import HeaderDiv from '../containers/common/header';
@@ -13,7 +14,7 @@ class ConfirmRecycleRequest extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv />
+                <HeaderDiv productData={this.props.productData} userData={this.props.userData}/>
                 <div className="separators"></div>
 
                 <RecycleUserDetail />
@@ -37,4 +38,17 @@ class ConfirmRecycleRequest extends React.Component {
     }
 }
 
-export default ConfirmRecycleRequest;
+function mapStateToProps(state) {
+    return {
+        productData: state.productData.ActiveProductData,
+        userData: state.SessionStorage.UserData
+
+    };
+}
+
+
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData }, dispatch);
+// }
+
+export default connect(mapStateToProps, null)(ConfirmRecycleRequest);

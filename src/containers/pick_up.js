@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import DateTimeField from 'react-datetime';
 // import { reduxForm } from 'redux-form';
-import HeaderDiv from './header'
+import HeaderDiv from './common/header'
 import LocationSearch from './location_search';
 import OtpPage from './otp_page';
 import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile } from '../actions/index';
@@ -264,7 +264,7 @@ class PickUpPage extends React.Component {
                 {this.state.displayOtpModal == 1 &&
                     <OtpPage />
                 }
-                <HeaderDiv />
+                <HeaderDiv productData={this.props.productData}/>
                 <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>
 
                 <div className="menuHolder">

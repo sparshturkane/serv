@@ -18,6 +18,7 @@ export const STORE_LOCATION_DATA = 'STORE_LOCATION_DATA';
 export const POST_CONSUMER_PRODUCT_ADD_DEVICE = 'POST_CONSUMER_PRODUCT_ADD_DEVICE';
 export const POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST';
 export const POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS = 'POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS';
+export const POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -207,6 +208,16 @@ export function getConsumerServiceRequestDetails(requestObj) {
     // console.log(request);
     return {
         type: POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS,
+        payload: request,
+    };
+}
+
+// tracking details
+export function getConsumerServiceRequestTrackRequest(requestObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/trackRequest`, requestObj );
+    // console.log(request);
+    return {
+        type: POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST,
         payload: request,
     };
 }

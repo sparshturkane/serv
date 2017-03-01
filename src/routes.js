@@ -7,6 +7,7 @@ import PickUpPage from './containers/pick_up';
 import ConfirmRecycleRequest from './components/confirm_recycle_request';
 import AwesomePage from './components/awesome';
 import LoggedInDashboard from './components/dashboard';
+import TrackingPage from './containers/tracking/tracking';
 
 
 // <Route path="posts/new" component={ PostsNew } />
@@ -14,9 +15,11 @@ import LoggedInDashboard from './components/dashboard';
 export default (
     <Route path="/" component={App} >
         <IndexRoute component={Home} />
-        <Route path="pickup-dropoff" component={ PickUpPage } />
-        <Route path="confirmation" component={ ConfirmRecycleRequest } />
-        <Route path="awesome" component={ AwesomePage } />
-        <Route path="dashboard" component={ LoggedInDashboard } />
+        <Route path="/pickup-dropoff" component={ PickUpPage } />
+        <Route path="/confirmation" component={ ConfirmRecycleRequest } />
+        <Route path="/awesome" component={ AwesomePage } />
+        <Route path="/dashboard" component={ LoggedInDashboard } />
+        // <Route path="tracking" component={ TrackingPage } />
+        <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
     </Route>
 );

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 import { getConsumerServiceRequestDetails } from '../../actions/index';
 
 import React from 'react';
@@ -56,9 +57,11 @@ class RecycleRequestList extends React.Component {
                         </div>
                         <div className="col-sm-4">
                             <div className="loggedrightArrowHolder phoneLabelHolderTab">
-                                <label className="raisedLabel REQUESTColor">TRACK REQUEST
-                                    <img src={rightarrow} className="loggedrightArrow" alt="rightarrow" />
-                                </label>
+                                <Link to={`/tracking/${requestList.ConsumerServiceRequest.ConsumerServiceRequestID}`}>
+                                    <label className="raisedLabel REQUESTColor">TRACK REQUEST
+                                        <img src={rightarrow} className="loggedrightArrow" alt="rightarrow" />
+                                    </label>
+                                </Link>
                             </div>
                         </div>
                     </div>

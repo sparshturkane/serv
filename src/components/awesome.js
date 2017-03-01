@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderDiv from '../containers/common/header';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 class AwesomePage extends React.Component {
@@ -10,7 +11,7 @@ class AwesomePage extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv />
+                <HeaderDiv productData={this.props.productData} userData={this.props.userData} />
                 <div className="separators"></div>
 
                 <div className="awesomeInfoHolder">
@@ -44,4 +45,19 @@ class AwesomePage extends React.Component {
     }
 }
 
-export default AwesomePage;
+// export default AwesomePage;
+
+function mapStateToProps(state) {
+    return {
+        productData: state.productData.ActiveProductData,
+        userData: state.SessionStorage.UserData
+
+    };
+}
+
+
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData }, dispatch);
+// }
+
+export default connect(mapStateToProps, null)(AwesomePage);

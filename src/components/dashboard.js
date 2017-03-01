@@ -14,6 +14,20 @@ class LoggedInDashboard extends React.Component {
         super(props);
     }
 
+    componentWillMount(){
+        const script = document.createElement("script");
+        var t = document.createTextNode(`var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: 1,
+            paginationClickable: true,
+            spaceBetween: 30,
+            loop: true
+        });`);
+        script.appendChild(t);
+        document.body.appendChild(script);
+    }
     render(){
         return(
             <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchGeoLocation, fetchPickUpLocations, getSlot, sessionStorageLocationData } from '../actions/index';
+import { fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData } from '../actions/index';
 
 class LocationSearch extends React.Component {
     constructor(props) {
@@ -16,7 +16,9 @@ class LocationSearch extends React.Component {
 
     handleLocationFormSubmit(event){
         event.preventDefault();
+        // this.props.fetchGeoLocationPrediction(this.state.Landmark);
         this.props.fetchGeoLocation(this.state.Landmark).then( () => {
+
 
             if(this.props.geoLocationData.pincode === ''){
                 this.setState({
@@ -78,6 +80,26 @@ class LocationSearch extends React.Component {
             Landmark : event.target.value,
             LandmarkError : ''
         })
+
+        this.props.fetchGeoLocationPrediction(this.state.Landmark);
+    }
+
+    browserLocation(){
+        console.log("browserLocation hit");
+        // function getLocation() {
+        //     if (navigator.geolocation) {
+        //         navigator.geolocation.getCurrentPosition(showPosition);
+        //     } else {
+        //         // x.innerHTML = "Geolocation is not supported by this browser.";
+        //         console.log("Geolocation is not supported by this browser.");
+        //     }
+        // }
+        //
+        // function showPosition(position) {
+        //     // x.innerHTML = "Latitude: " + position.coords.latitude +
+        //     // "<br>Longitude: " + position.coords.longitude;
+        //     console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+        // }
     }
 
     render(){
@@ -96,10 +118,19 @@ class LocationSearch extends React.Component {
                             </div>
 
                             <div className="col-sm-8">
-                                <input type="text" onBlur={this.handleLocationFormSubmit} value={this.state.Landmark} onChange={this.handleOnChange.bind(this)} placeholder="Andheri West" className="inputLocation" />
+                                <input
+                                    type="text"
+                                    onBlur={this.handleLocationFormSubmit}
+                                    value={this.state.Landmark}
+                                    onChange={this.handleOnChange.bind(this)}
+                                    placeholder="Andheri West"
+                                    className="inputLocation"
+                                />
                                 <p style={LandmarkStyle}>{LandmarkError}</p>
                                 <img src="images/location.png" className="locationimg" alt="Location" />
-                                <span className="loadIconHolder"><img src="images/loadIcon.png" className="loadIcon" alt="loadIcon" /></span>
+                                <span className="loadIconHolder" onClick={this.browserLocation()} >
+                                    <img src="images/loadIcon.png" className="loadIcon" alt="loadIcon"/>
+                                </span>
                             </div>
                         </form>
                     </div>
@@ -124,7 +155,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({fetchGeoLocation, fetchPickUpLocations, getSlot, sessionStorageLocationData }, dispatch);
+    return bindActionCreators({fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);

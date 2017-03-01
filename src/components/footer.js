@@ -1,4 +1,5 @@
 import React from 'react';
+import servifylogo from '../images/servifylogo.png'; // Tell Webpack this JS file uses this image
 
 class FooterDiv extends React.Component {
 
@@ -10,7 +11,7 @@ class FooterDiv extends React.Component {
                         <div className="poweredByContent">
                             <span className="poweredBy">Powered By</span>
                             <br/>
-                            <a href="https://servify.in/" target="blanck"><img src="images/servifylogo.png" className="servifylogo" alt="Servify logo" />
+                            <a href="https://servify.in/" target="blanck"><img src={servifylogo} className="servifylogo" alt="Servify logo" />
                             </a>
                         </div>
                     </div>

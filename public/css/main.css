@@ -832,6 +832,7 @@ input[type="checkbox"]:checked + label span {
 {
 	font-family:Gotham-Bold;
 	font-size: 28px;
+	display: block;
 }
 .requestlabel
 {
@@ -843,17 +844,28 @@ input[type="checkbox"]:checked + label span {
 {
 	padding-left: 4%;
 	padding-top: 60px;
+	padding-right: 4%;
 }
 .phoneLabel
 {
 	font-family:Gotham-Bold;
 	font-size: 18px;
 }
+.phoneLabelHolderContent
+{
+	border-top: 1px solid #e8e8e8;
+}
+.phoneLabelHolderTab
+{
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
 .raisedLabel
 {
 	font-family: Gotham-Medium;
 	font-size: 14px;
 	position: relative;
+	cursor: pointer;
 }
 .REQUESTColor
 {
@@ -1229,11 +1241,6 @@ a:focus, a:hover
 	padding: 15px 30px;
 	outline: none;
 }
-.trackHolderContent
-{
-	border-bottom: 1px solid #e8e8e8;
-	width: 90%;
-}
 .loginHolder
 {
 	background-size: cover;
@@ -1599,6 +1606,16 @@ a:focus, a:hover
 
 
 @media only screen and (max-width: 600px) {
+	.trackLabel
+	{
+		font-size: 22px;
+		display: inline;
+		margin-right: 5px;
+	}
+	.requestlabel
+	{
+		font-size: 20px;
+	}
 	.locationContent {
 		width: 100%;
 		text-align: center;
@@ -1684,6 +1701,11 @@ a:focus, a:hover
 	{
 		width: 94%;
 	}
+	.phoneLabelHolderTab
+	{
+		padding-top: 10px;
+		padding-bottom: 5px;
+	}
 
 }
 
@@ -1746,6 +1768,7 @@ a:focus, a:hover
 		width: 250px;
 	}
 }
+
 
 /* date picker*/
 /*!

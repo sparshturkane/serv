@@ -17,12 +17,16 @@ export const CONSUMER_UPDATE_PROFILE = 'CONSUMER_UPDATE_PROFILE';
 export const STORE_LOCATION_DATA = 'STORE_LOCATION_DATA';
 export const POST_CONSUMER_PRODUCT_ADD_DEVICE = 'POST_CONSUMER_PRODUCT_ADD_DEVICE';
 export const POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST';
+export const POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS = 'POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
 // https://maps.googleapis.com/maps/api/geocode/json?address=anderi+west&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
 // https://maps.googleapis.com/maps/api/geocode/json?latlng=19.1363246,72.82766&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
 const GOOGLE_MAPS_GEOCODING_ROOT_URL = 'https://maps.googleapis.com/maps/api'; // /geocode/json?address=abc+def&key=
+
+// RAW https://maps.googleapis.com/maps/api/place/autocomplete/json?input=miraroad&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
+// const GOOGLE_MAPS_AUTOCOMPLETE_ROOT_URL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=miraroad&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes';
 const GOOGLE_MAPS_GEOCODING_API_KEY = 'AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes';
 
 // getting mobile on supportedModes
@@ -90,8 +94,18 @@ export function fetchGeoLocation(Landmark) { //testing
     };
 }
 
+export function fetchGeoLocationPrediction(SearchKeyword) { //testing
+    // const request = axios.post(`${GOOGLE_MAPS_GEOCODING_ROOT_URL}/place/autocomplete/json?input=${SearchKeyword}&types=geocode&key=${GOOGLE_MAPS_GEOCODING_API_KEY}`);
+    const request = axios.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Paris&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes');
+    // /place/autocomplete/json?input=miraroad&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
+    return {
+        type: GET_LAT_LNG,
+        payload: request,
+    };
+}
+
 // calling serviceAvailability(PickUp)
-export function fetchPickUpLocations(pickUpLocationRequest) { //testing
+export function fetchPickUpLocations(pickUpLocationRequest) {
     const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/serviceAvailability`, pickUpLocationRequest);
 
     return {
@@ -101,7 +115,7 @@ export function fetchPickUpLocations(pickUpLocationRequest) { //testing
 }
 
 // getSlots
-export function getSlot(getSlotRequest) { //testing
+export function getSlot(getSlotRequest) {
     const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/getSlot`, getSlotRequest);
 
     return {
@@ -111,7 +125,7 @@ export function getSlot(getSlotRequest) { //testing
 }
 
 // getotp
-export function tempConsumerGetOTP(getOTPRequest) { //testing
+export function tempConsumerGetOTP(getOTPRequest) {
     const request = axios.post(`${ROOT_URL}/TempConsumer/getOTP`, getOTPRequest);
 
     return {
@@ -129,7 +143,7 @@ export function sessionStorageUserData(userData) {
 }
 
 // tempconsumer signup
-export function tempConsumerSignUp(signUpRequest) { //testing
+export function tempConsumerSignUp(signUpRequest) {
     const request = axios.post(`${ROOT_URL}/TempConsumer/signup`, signUpRequest);
 
     return {
@@ -139,7 +153,7 @@ export function tempConsumerSignUp(signUpRequest) { //testing
 }
 
 // making pages active
-export function makePagesActive(pageData) { //testing
+export function makePagesActive(pageData) {
 
 
     return {
@@ -149,7 +163,7 @@ export function makePagesActive(pageData) { //testing
 }
 
 // session store location data
-export function sessionStorageLocationData(locationData) { //testing
+export function sessionStorageLocationData(locationData) {
     return {
         type: STORE_LOCATION_DATA,
         payload: locationData,
@@ -158,7 +172,7 @@ export function sessionStorageLocationData(locationData) { //testing
 
 // UPDAING CONSUMER USER profile
 
-export function consumerUpdateProfile(updateProfileData) { //testing
+export function consumerUpdateProfile(updateProfileData) {
     const request = axios.post(`${ROOT_URL}/Consumer/updateProfile`, updateProfileData);
 
     return {
@@ -183,6 +197,16 @@ export function consumerScheduleRecycleRequest(scheduleRecycleRequestData) {
     // console.log(request);
     return {
         type: POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST,
+        payload: request,
+    };
+}
+
+// list of all recycle request
+export function getConsumerServiceRequestDetails(requestObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/getConsumerServiceRequestDetails`, requestObj );
+    // console.log(request);
+    return {
+        type: POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS,
         payload: request,
     };
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import DateTimeField from 'react-datetime';
+import { Link } from 'react-router';
 // import { reduxForm } from 'redux-form';
 import HeaderDiv from './common/header'
 import LocationSearch from './location_search';
@@ -256,7 +257,7 @@ class PickUpPage extends React.Component {
             // console.log(current.isAfter( yesterday ));
             // return current.isAfter( yesterday );
 
-            return current.isBetween( firstDate, lastDate, null, '[]' );
+            return current.isBetween( firstDate, lastDate, null, '[]' ) && current.day() !== 0;
         };
 
         return(
@@ -269,10 +270,8 @@ class PickUpPage extends React.Component {
 
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
-                        <label className="pickUplabel active pickUpMenuActive"><a data-toggle="tab" className="PickUpHref" href="#home" >Pick Up</a>
-                        </label>
-                        {/*<label className="dropofflabel"><a data-toggle="tab" className="PickUpHref" href="#menu1" >Drop Off Locations</a>
-                        </label>*/}
+                        <Link to={'/pickup-dropoff'} className="pickUplabel  PickUpHref active pickUpMenuActive">Pick Up</Link>
+                        <Link to={'/dropoff'} className="dropofflabel PickUpHref ">Drop Off Locations</Link>
                     </div>
                 </div>
                 <div className="tab-content">

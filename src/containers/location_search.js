@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData } from '../actions/index';
+import { fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData, fetchDropOffLocations } from '../actions/index';
 
 class LocationSearch extends React.Component {
     constructor(props) {
@@ -56,7 +56,23 @@ class LocationSearch extends React.Component {
                         }
                     );
                 })
-            }// if ends here this space is for pickup
+            } else if(this.props.ServiceTypeID === 13){// if ends here this space is for pickup
+                const dropOffLocationRequest = 	{
+                    Authorised:0, //s
+                    BrandID:this.props.productData.BrandID,
+                    IsExclusive:0, //s
+                    Lat: this.props.geoLocationData.latitude,
+                    Lng: this.props.geoLocationData.longitude,
+                    OrderBy:0, //s
+                    Page:1, //s
+                    Partnered:1, //s
+                    ProductID:this.props.productData.ProductID,
+                    ProductSubCategoryID:this.props.productData.ProductSubCategoryID,
+                    Radius:80 //s
+                }
+
+                this.props.fetchDropOffLocations(dropOffLocationRequest)
+            }
         } )
 
         .catch(error => {
@@ -81,14 +97,15 @@ class LocationSearch extends React.Component {
             LandmarkError : ''
         })
 
-        this.props.fetchGeoLocationPrediction(this.state.Landmark)
-        .catch(error => {
-            console.log(error);
-            // alert(error);
-            // this.setState({
-            //     LandmarkError: 'Please Enter Valid Landmark'
-            // })
-        });
+        // --------suggested location try here
+        // this.props.fetchGeoLocationPrediction(this.state.Landmark)
+        // .catch(error => {
+        //     console.log(error);
+        //     // alert(error);
+        //     // this.setState({
+        //     //     LandmarkError: 'Please Enter Valid Landmark'
+        //     // })
+        // });
     }
 
     browserLocation(){
@@ -162,7 +179,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData }, dispatch);
+    return bindActionCreators({fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData, fetchDropOffLocations }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);

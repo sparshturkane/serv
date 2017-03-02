@@ -1,4 +1,4 @@
-import { GET_LAT_LNG } from '../actions/index';
+import { GET_LAT_LNG, FETCH_LOCATION_PREDICTION } from '../actions/index';
 
 const INITIAL_STATE = {  };
 
@@ -9,10 +9,8 @@ export default function(state = INITIAL_STATE, action) {
         // console.log(action.payload);
         var lat = action.payload.data.results[0].geometry.location.lat;
         var lng = action.payload.data.results[0].geometry.location.lng;
-
         var searchAddressComponents = action.payload.data.results[0].address_components;
         var searchPostalCode = "";
-
         var Landmark = action.payload.data.results[0].formatted_address;
 
         searchAddressComponents.forEach( function(map){
@@ -22,8 +20,10 @@ export default function(state = INITIAL_STATE, action) {
         });
 
         return { ...state, latitude: lat, longitude:lng, pincode:searchPostalCode, Landmark: Landmark };
-        // case FETCH_POSTS
-        // return { ...state, all: action.payload.data };
+
+        case FETCH_LOCATION_PREDICTION:
+        return { ...state,  LocationPrediction: action.payload};
+
         default:
         return state;
     }

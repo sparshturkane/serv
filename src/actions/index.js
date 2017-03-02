@@ -1,4 +1,5 @@
 import axios from 'axios';
+import $ from 'jquery';
 
 export const FETCH_SUPPORTED_MOBILES = 'FETCH_SUPPORTED_MOBILES';
 export const GET_REWARDS_LIST = 'GET_REWARD_LIST';
@@ -19,6 +20,8 @@ export const POST_CONSUMER_PRODUCT_ADD_DEVICE = 'POST_CONSUMER_PRODUCT_ADD_DEVIC
 export const POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST';
 export const POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS = 'POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS';
 export const POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST';
+export const FETCH_LOCATION_PREDICTION = 'FETCH_LOCATION_PREDICTION';
+export const POST_REQUEST_DROPOFF_LOCATION = 'POST_REQUEST_DROPOFF_LOCATION';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -96,14 +99,48 @@ export function fetchGeoLocation(Landmark) { //testing
 }
 
 export function fetchGeoLocationPrediction(SearchKeyword) { //testing
+    var config = {
+        headers: {
+            'Access-Control-Allow-Origin' : '*',
+            'Content-Type': 'application/json'
+        }
+    };
+
     // const request = axios.post(`${GOOGLE_MAPS_GEOCODING_ROOT_URL}/place/autocomplete/json?input=${SearchKeyword}&types=geocode&key=${GOOGLE_MAPS_GEOCODING_API_KEY}`);
-    const request = axios.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Paris&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes');
+    const request = axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${SearchKeyword}&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes`, config);
     // /place/autocomplete/json?input=miraroad&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
     return {
-        type: GET_LAT_LNG,
+        type: FETCH_LOCATION_PREDICTION,
         payload: request,
     };
 }
+//
+// export function fetchGeoLocationPrediction(SearchKeyword) { //testing
+//     // var config = {
+//     //     headers: {
+//     //         'Access-Control-Allow-Origin' : '*',
+//     //         'Content-Type': 'application/json'
+//     //     }
+//     // };
+//
+//     // const request = axios.post(`${GOOGLE_MAPS_GEOCODING_ROOT_URL}/place/autocomplete/json?input=${SearchKeyword}&types=geocode&key=${GOOGLE_MAPS_GEOCODING_API_KEY}`);
+//     // const request = axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${SearchKeyword}&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes`, config);
+//     // /place/autocomplete/json?input=miraroad&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
+//     $.ajax({
+//         url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${SearchKeyword}&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes`,
+//         type: "GET",
+//         dataType: 'json',
+//         cache: false,
+//         success: function(response){
+//             return {
+//                 type: FETCH_LOCATION_PREDICTION,
+//                 payload: response,
+//             };
+//         }
+//     });
+//
+//
+// }
 
 // calling serviceAvailability(PickUp)
 export function fetchPickUpLocations(pickUpLocationRequest) {
@@ -111,6 +148,16 @@ export function fetchPickUpLocations(pickUpLocationRequest) {
 
     return {
         type: POST_REQUEST_PICKUP_LOCATION,
+        payload: request,
+    };
+}
+
+// calling carry in service
+export function fetchDropOffLocations(dropOffLocationRequest) {
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/getServiceLocationsForCarryIn`, dropOffLocationRequest);
+
+    return {
+        type: POST_REQUEST_DROPOFF_LOCATION,
         payload: request,
     };
 }

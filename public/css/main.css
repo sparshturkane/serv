@@ -933,7 +933,7 @@ a:focus, a:hover
 }
 .myBar1 {
 	position: absolute;
-	width: 50%;
+	/*width: 50%;*/
 	height: 100%;
 	background-color: #4bd800;
 }

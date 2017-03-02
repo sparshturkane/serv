@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 // import './swiperlocal.js';
 // BUG: swiper is not working
 import whiteHeart from '../images/whiteheart.png';
@@ -15,18 +16,21 @@ class LoggedInDashboard extends React.Component {
     }
 
     componentWillMount(){
-        const script = document.createElement("script");
-        var t = document.createTextNode(`var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            slidesPerView: 1,
-            paginationClickable: true,
-            spaceBetween: 30,
-            loop: true
-        });`);
-        script.appendChild(t);
-        document.body.appendChild(script);
+        // const script = document.createElement("script");
+        // var t = document.createTextNode(`var swiper = new Swiper('.swiper-container', {
+        //     pagination: '.swiper-pagination',
+        //     nextButton: '.swiper-button-next',
+        //     prevButton: '.swiper-button-prev',
+        //     slidesPerView: 1,
+        //     paginationClickable: true,
+        //     spaceBetween: 30,
+        //     loop: true
+        // });`);
+        // script.appendChild(t);
+        // document.body.appendChild(script);
+    }
+    pushHomePage(){
+        browserHistory.push('/');
     }
     render(){
         return(
@@ -48,7 +52,7 @@ class LoggedInDashboard extends React.Component {
                                             <span className="firstTextLabel">Make This World A Better Place</span><br />
                                             <span className="secondTextLabel">Take a pledge & Spread the word</span><br />
                                             <div className="recyleHomeBtnHolder">
-                                                <button type="button" className="recyleHomeBtn">Recycle your Apple device</button>
+                                                <button type="button" className="recyleHomeBtn" onClick={this.pushHomePage.bind(this)}>Recycle your Apple device</button>
                                             </div>
                                         </div>
                                     </div>

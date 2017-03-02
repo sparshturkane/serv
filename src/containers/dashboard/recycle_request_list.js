@@ -30,11 +30,11 @@ class RecycleRequestList extends React.Component {
             ServiceTypeID : [9,13]
         }
         this.props.getConsumerServiceRequestDetails(requestObj).then(()=>{
-            console.log(this.props.recycleRequestList.data);
+            // console.log(this.props.recycleRequestList.data);
             this.setState({
                 requestList: this.props.recycleRequestList.data
             });
-            console.log(this.props.recycleRequestList);
+            // console.log(this.props.recycleRequestList);
         })
     }
 

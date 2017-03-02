@@ -81,7 +81,14 @@ class LocationSearch extends React.Component {
             LandmarkError : ''
         })
 
-        this.props.fetchGeoLocationPrediction(this.state.Landmark);
+        this.props.fetchGeoLocationPrediction(this.state.Landmark)
+        .catch(error => {
+            console.log(error);
+            // alert(error);
+            // this.setState({
+            //     LandmarkError: 'Please Enter Valid Landmark'
+            // })
+        });
     }
 
     browserLocation(){

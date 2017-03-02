@@ -17,7 +17,7 @@ import rightarrow from '../../images/rightarrow.png';
 class TrackingPage extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.params.ConsumerServiceRequestID);
+        // console.log(this.props.params.ConsumerServiceRequestID);
         /**
         * done tracking
         1. have  ConsumerServiceRequestID
@@ -26,20 +26,20 @@ class TrackingPage extends React.Component {
         4. reducer
 
         */
+        this.state = {
+            trackingList : undefined
+        }
     }
 
     componentWillMount(){
-
-        const script = document.createElement("script");
-        var t = document.createTextNode("$(function() {$('#first').carouseller({});});");
-        script.appendChild(t);
-        document.body.appendChild(script);
-
-
         const requestObj = {
             ConsumerServiceRequestID: this.props.params.ConsumerServiceRequestID,
         }
-        this.props.getConsumerServiceRequestTrackRequest(requestObj)
+        this.props.getConsumerServiceRequestTrackRequest(requestObj).then(()=>{
+            this.setState({
+                trackingList: this.props.trackingList.data
+            });
+        })
     }
 
     render(){
@@ -49,9 +49,13 @@ class TrackingPage extends React.Component {
 
                 <div className="separators"></div>
 
-                <TrackingInfoBar />
+                {this.state.trackingList !== undefined &&
+                    <TrackingInfoBar trackingList={this.state.trackingList} ConsumerServiceRequestID={this.props.params.ConsumerServiceRequestID}/>
+                }
 
-                <TrackingSlider />
+                {this.state.trackingList !== undefined &&
+                    <TrackingSlider trackingList={this.state.trackingList} />
+                }
 
                 <div className="separators"></div>
             </div>
@@ -63,7 +67,8 @@ class TrackingPage extends React.Component {
 function mapStateToProps(state) {
     return {
         productData: state.productData.ActiveProductData,
-        userData: state.SessionStorage.UserData
+        userData: state.SessionStorage.UserData,
+        trackingList: state.ConsumerServicerequest.ConsumerServiceRequestTrackRequest,
 
     };
 }

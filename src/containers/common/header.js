@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import heart from '../../images/heart.png';
+import user from '../../images/user.png';
+import bell from '../../images/bell.png';
+import setting from '../../images/setting.png';
 // import { bindActionCreators } from 'redux';
 
 
@@ -31,13 +34,13 @@ class HeaderDiv extends React.Component {
                                     </label>
                                 </li>
                                 <li className="userContentLI">
-                                    <img src="images/user.png" alt="user" />
+                                    <img src={user} alt="user" />
                                 </li>
                                 <li className="userContentLI">
-                                    <img src="images/bell.png" alt="Bell" />
+                                    <img src={bell} alt="Bell" />
                                 </li>
                                 <li className="userContentLI">
-                                    <img src="images/setting.png" alt="Setting" />
+                                    <img src={setting} alt="Setting" />
                                 </li>
                             </ul>
                         </div>

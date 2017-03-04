@@ -38,11 +38,17 @@ class ProgressBarHolder extends React.Component {
     }
 
     progressBarUL(){
+        var pickUpDropOffLable = '';
+        if (this.props.trackingList.ServiceTypeID == 9) {
+            pickUpDropOffLable = 'PICKUP';
+        } else if( this.props.trackingList.ServiceTypeID == 13 ){
+            pickUpDropOffLable = 'DROPOFF';
+        }
         switch (this.props.GroupId) {
             case 3:
             return (
                 <ul className="progressBarUL">
-                    <li className="progressBarLI currentState">PICKUP</li>
+                    <li className="progressBarLI currentState">{pickUpDropOffLable}</li>
                     <li className="progressBarLI ">RECEIVED</li>
                     <li className="progressBarLI ">REWARDS</li>
                     <li className="progressBarLI ">RECYCLE</li>
@@ -53,7 +59,7 @@ class ProgressBarHolder extends React.Component {
             case 4:
             return (
                 <ul className="progressBarUL">
-                <li className="progressBarLI activeState">PICKUP</li>
+                <li className="progressBarLI activeState">{pickUpDropOffLable}</li>
                 <li className="progressBarLI currentState">RECEIVED</li>
                 <li className="progressBarLI ">REWARDS</li>
                 <li className="progressBarLI ">RECYCLE</li>
@@ -64,7 +70,7 @@ class ProgressBarHolder extends React.Component {
             case 5:
             return (
                 <ul className="progressBarUL">
-                <li className="progressBarLI activeState">PICKUP</li>
+                <li className="progressBarLI activeState">{pickUpDropOffLable}</li>
                 <li className="progressBarLI activeState">RECEIVED</li>
                 <li className="progressBarLI currentState">REWARDS</li>
                 <li className="progressBarLI ">RECYCLE</li>
@@ -75,7 +81,7 @@ class ProgressBarHolder extends React.Component {
             case 6:
             return (
                 <ul className="progressBarUL">
-                <li className="progressBarLI activeState">PICKUP</li>
+                <li className="progressBarLI activeState">{pickUpDropOffLable}</li>
                 <li className="progressBarLI activeState">RECEIVED</li>
                 <li className="progressBarLI activeState">REWARDS</li>
                 <li className="progressBarLI currentState">RECYCLE</li>
@@ -86,7 +92,7 @@ class ProgressBarHolder extends React.Component {
             case 7:
             return (
                 <ul className="progressBarUL">
-                <li className="progressBarLI activeState">PICKUP</li>
+                <li className="progressBarLI activeState">{pickUpDropOffLable}</li>
                 <li className="progressBarLI activeState">RECEIVED</li>
                 <li className="progressBarLI activeState">REWARDS</li>
                 <li className="progressBarLI activeState">RECYCLE</li>

@@ -938,10 +938,11 @@ input[type="checkbox"]:checked + label span {
 .REQUESTColor
 {
 	color: #4bd800;
+	cursor: pointer;
 }
 .loggedrightArrowHolder
 {
-	cursor: pointer;
+
 }
 .loggedrightArrowtrack
 {

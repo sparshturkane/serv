@@ -8,7 +8,8 @@ class OtpPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            otpNumber : ''
+            otpNumber : '',
+            displayOtpModal : 'block'
         };
         this.handelInputChange = this.handelInputChange.bind(this);
         this.handleOptFromSubmit = this.handleOptFromSubmit.bind(this);
@@ -53,30 +54,54 @@ class OtpPage extends React.Component {
 
     }
 
-    // componentWillUnmount(){
-    //     this.updateUserProfile();
-    // }
+    componentWillMount(){
+        // this.updateUserProfile();
+        const script = document.createElement("script");
+        var t = document.createTextNode("function close(){document.getElementById('overlay').style.display = 'none';}");
+        script.appendChild(t);
+        document.body.appendChild(script);
+
+
+    }
 
     updateUserProfile(){
         // in this case we have consumer id from localStorage
         const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
         console.log("signupdata" +SignUpData);
-        const updateProfileData = {
-            updateObj : {
-                EmailID : this.props.sessionStorageUserData.userEmail,
-                Name : this.props.sessionStorageUserData.userName,
-                FirstRegisteredFrom : "Consumer-Web",
-                AlternateMobileNo : this.props.sessionStorageUserData.userAlternateNo,
-                Zipcode : this.props.sessionStorageLocationData.pincode,
-                Lat : this.props.sessionStorageLocationData.latitude,
-                Lng : this.props.sessionStorageLocationData.longitude,
-                Landmark : this.props.sessionStorageLocationData.Landmark,
-                Address : this.props.sessionStorageUserData.userCompleteAddress,
-                AddressType :'Home'
-            },
-            isNew : SignUpData.data.isNew ? true : false,
-            ConsumerID :SignUpData.data.ConsumerID
+        var updateProfileData = undefined;
+        if ( this.props.ServiceTypeID == '9' ) {
+            updateProfileData = {
+                updateObj : {
+                    EmailID : this.props.sessionStorageUserData.userEmail,
+                    Name : this.props.sessionStorageUserData.userName,
+                    FirstRegisteredFrom : "Consumer-Web",
+                    AlternateMobileNo : this.props.sessionStorageUserData.userAlternateNo,
+                    Zipcode : this.props.sessionStorageLocationData.pincode,
+                    Lat : this.props.sessionStorageLocationData.latitude,
+                    Lng : this.props.sessionStorageLocationData.longitude,
+                    Landmark : this.props.sessionStorageLocationData.Landmark,
+                    Address : this.props.sessionStorageUserData.userCompleteAddress,
+                    AddressType :'Home'
+                },
+                isNew : SignUpData.data.isNew ? true : false,
+                ConsumerID :SignUpData.data.ConsumerID
+            }
+        } else if( this.props.ServiceTypeID == '13' ) {
+            updateProfileData = {
+                updateObj : {
+                    EmailID : this.state.userEmail,
+                    Name : this.state.userName,
+                    FirstRegisteredFrom : "Consumer-Web",
+                    Zipcode : this.props.geoLocationData.pincode,
+                    Lat : this.props.geoLocationData.latitude,
+                    Lng : this.props.geoLocationData.longitude,
+                    Landmark : this.props.sessionStorageLocationData.Landmark,
+                },
+                isNew : SignUpData.data.isNew ? true : false,
+                ConsumerID :SignUpData.data.ConsumerID
+            }
         }
+
 
 
 
@@ -87,12 +112,21 @@ class OtpPage extends React.Component {
 
     }
 
+    onCloseModal(){
+        // this.setState({
+        //     displayOtpModal : "none"
+        // })
+        console.log("close modal");
+    }
     render(){
+        var display = {
+            display: this.state.displayOtpModal,
+        };
         return(
-            <div className="overlay"  id="overlay">
+            <div className="overlay"  id="overlay" style={display}>
                 <div className="otpHolder" >
                     <form onSubmit={this.handleOptFromSubmit}>
-                        <img src="images/cross.png" id="close" className="cross" alt="cross"/>
+                        <img src="images/cross.png" id="close" className="cross" alt="cross" />
                         <div className="otpLabel">
                             <label>OTP</label>
                             <label className="Verification">Verification</label>
@@ -100,13 +134,13 @@ class OtpPage extends React.Component {
                         </div>
                         <div className="otpinputHolder">
                             <div className="newOTPHide"> </div>
-                            <input type="text" name="otpnumber" value={this.state.otpNumber} onChange={this.handelInputChange} className="otpinput" maxLength="4" pattern="\d{4}" required/>
+                            <input type="text" name="otpnumber" value={this.state.otpNumber} onChange={this.handelInputChange} className="otpinput" maxLength="4" pattern="\d{4}"/>
                             <img src="images/otpUnderline.png" className="otpUnderline" alt="otpUnderline"/>
                         </div>
 
                         <div className="bottomContent">
                             <span className="recived Verification">Did not receive an OTP?</span>
-                            <span className="getback">Get a call back</span>
+                            <span className="getback" onClick={this.onCloseModal()} >Get a call back</span>
                         </div>
 
                         <button type="submit" className="largebutton">Submit</button>

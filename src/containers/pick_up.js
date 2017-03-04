@@ -122,6 +122,7 @@ class PickUpPage extends React.Component {
             userAlternateNo : this.state.userAlternateNo,
             userIMEINumber : this.state.userIMEINumber,
             userCompleteAddress : this.state.userCompleteAddress,
+            ServiceTypeID : this.state.ServiceTypeID,
         }
 
         console.log(userDataRequest);
@@ -263,7 +264,7 @@ class PickUpPage extends React.Component {
         return(
             <div>
                 {this.state.displayOtpModal == 1 &&
-                    <OtpPage />
+                    <OtpPage ServiceTypeID={this.state.ServiceTypeID}/>
                 }
                 <HeaderDiv productData={this.props.productData}/>
                 <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>

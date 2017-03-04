@@ -72,6 +72,13 @@ class LocationSearch extends React.Component {
                 }
 
                 this.props.fetchDropOffLocations(dropOffLocationRequest)
+                this.props.sessionStorageLocationData(
+                    {
+                        Landmark: this.state.Landmark,
+                        latitude: this.props.geoLocationData.latitude,
+                        longitude : this.props.geoLocationData.longitude
+                    }
+                );
             }
         } )
 

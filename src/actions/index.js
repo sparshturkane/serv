@@ -22,6 +22,7 @@ export const POST_CONSUMER_SERVICE_REQUEST_GET_CONSUMER_SERVICE_REQUEST_DETAILS 
 export const POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST';
 export const FETCH_LOCATION_PREDICTION = 'FETCH_LOCATION_PREDICTION';
 export const POST_REQUEST_DROPOFF_LOCATION = 'POST_REQUEST_DROPOFF_LOCATION';
+export const SET_ACTIVE_DROP_OFF_SERVICE_LOCATION = 'SET_ACTIVE_DROP_OFF_SERVICE_LOCATION';
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -159,6 +160,14 @@ export function fetchDropOffLocations(dropOffLocationRequest) {
     return {
         type: POST_REQUEST_DROPOFF_LOCATION,
         payload: request,
+    };
+}
+
+//ActiveDropOffServiceLocation
+export function activeDropOffServiceLocation(activeServiceLocationObj) {
+    return {
+        type: SET_ACTIVE_DROP_OFF_SERVICE_LOCATION,
+        payload: activeServiceLocationObj,
     };
 }
 

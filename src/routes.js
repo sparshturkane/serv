@@ -9,6 +9,7 @@ import AwesomePage from './components/awesome';
 import LoggedInDashboard from './components/dashboard';
 import TrackingPage from './containers/tracking/tracking';
 import DropOffIndex from './containers/dropoff/dropoff_index';
+import DropOffForm from './containers/dropoff/dropoff_form';
 
 
 // <Route path="posts/new" component={ PostsNew } />
@@ -18,6 +19,7 @@ export default (
         <IndexRoute component={Home} />
         <Route path="/pickup-dropoff" component={ PickUpPage } />
         <Route path="/dropoff" component={ DropOffIndex } />
+        <Route path="/dropoff-form" component={ DropOffForm } />
         <Route path="/confirmation" component={ ConfirmRecycleRequest } />
         <Route path="/awesome" component={ AwesomePage } />
         <Route path="/dashboard" component={ LoggedInDashboard } />

@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
-import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile } from '../../actions/index';
+import { browserHistory } from 'react-router';
+import { getSlot, activeDropOffServiceLocation } from '../../actions/index';
 import HeaderDiv from '../common/header'
 import LocationSearch from '../location_search';
 
@@ -12,6 +13,7 @@ class DropOffIndex extends React.Component {
         this.state = {
             ServiceTypeID : 13, //dropoff ServiceTypeID
             DropOffServiceLocations : undefined,
+            PartnerServiceLocationID : undefined,
             // userName : '',
             // userMobileNo : '',
             // date : '',
@@ -23,7 +25,31 @@ class DropOffIndex extends React.Component {
             // displayOtpModal : 0,
             // firstDate: '',
             // lastDate: '',
+        };
+        // this.handleSetAppointment = this.handleSetAppointment.bind(this);
+    }
+
+
+    handleSetAppointment(location){
+
+        var PartnerServiceLocationID = location.PartnerServiceLocationID;
+        //set active drop off location
+        this.props.activeDropOffServiceLocation(location);
+        console.log("set Appointment clicked !"+PartnerServiceLocationID);
+        this.setState({
+            PartnerServiceLocationID : PartnerServiceLocationID
+        });
+        const getSlotsRequest = {
+            Lat : this.props.geoLocationData.latitude,//v
+            Lng : this.props.geoLocationData.longitude,//v
+            CurrentDate : new Date().toISOString().slice(0,10), //v
+            ServiceTypeID : this.state.ServiceTypeID,
+            CurrentTime : new Date().toLocaleTimeString(), //v
+            PartnerServiceLocationID : PartnerServiceLocationID, //variable
         }
+        this.props.getSlot(getSlotsRequest).then(()=>{
+            browserHistory.push('/dropoff-form');
+        });
     }
 
     mapDropOffLocations(){
@@ -32,8 +58,8 @@ class DropOffIndex extends React.Component {
         // });
         return this.props.DropOffServiceLocations.map((location) => {
             return (
-                <div>
-                    <div className="row">
+                <div key={location.PartnerServiceLocationID} >
+                    <div className="row" >
                         <div className="dropOFFHolderContent">
                             <div className="col-sm-8">
                                 <div className="leftDropOFF">
@@ -50,7 +76,11 @@ class DropOffIndex extends React.Component {
                             <div className="col-sm-4">
                                 <div className="rightDropOFF">
                                     <div className="SetAppointmentbtnHolder">
-                                        <a href="dropOffDetails.html"><button className="SetAppointmentbtn">Set Appointment</button></a>
+
+                                        {/* <Link to={'/dropoff-form'} > */}
+                                        <button className="SetAppointmentbtn" onClick={this.handleSetAppointment.bind(this, location)}>Set Appointment</button>
+                                        {/* </Link> */}
+
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +145,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile }, dispatch);
+    return bindActionCreators({ getSlot, activeDropOffServiceLocation }, dispatch);
 }
 //
 export default connect(mapStateToProps, mapDispatchToProps)(DropOffIndex);

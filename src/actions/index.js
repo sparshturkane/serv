@@ -15,6 +15,7 @@ export const STORE_USER_DATA = "STORE_USER_DATA";
 export const POST_TEMP_CONSUMER_SIGN_UP = 'POST_TEMP_CONSUMER_SIGN_UP';
 export const MAKING_PAGES_ACTIVE = 'MAKING_PAGES_ACTIVE';
 export const CONSUMER_UPDATE_PROFILE = 'CONSUMER_UPDATE_PROFILE';
+export const CONSUMER_GET_PROFILE = 'CONSUMER_GET_PROFILE';
 export const STORE_LOCATION_DATA = 'STORE_LOCATION_DATA';
 export const POST_CONSUMER_PRODUCT_ADD_DEVICE = 'POST_CONSUMER_PRODUCT_ADD_DEVICE';
 export const POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST = 'POST_CONSUMER_SERVICE_REQUEST_SCHEDULE_RECYCLE_REQUEST';
@@ -23,6 +24,7 @@ export const POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST = 'POST_CONSUMER_SERVIC
 export const FETCH_LOCATION_PREDICTION = 'FETCH_LOCATION_PREDICTION';
 export const POST_REQUEST_DROPOFF_LOCATION = 'POST_REQUEST_DROPOFF_LOCATION';
 export const SET_ACTIVE_DROP_OFF_SERVICE_LOCATION = 'SET_ACTIVE_DROP_OFF_SERVICE_LOCATION';
+
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
 
@@ -234,6 +236,16 @@ export function consumerUpdateProfile(updateProfileData) {
 
     return {
         type: CONSUMER_UPDATE_PROFILE,
+        payload: request,
+    };
+}
+
+// get user profile
+export function consumerGetProfile(userIDObj) {
+    const request = axios.post(`${ROOT_URL}/Consumer/getProfile`, userIDObj);
+
+    return {
+        type: CONSUMER_GET_PROFILE,
         payload: request,
     };
 }

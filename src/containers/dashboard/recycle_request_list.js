@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
-import { getConsumerServiceRequestDetails } from '../../actions/index';
+import { getConsumerServiceRequestDetails, consumerGetProfile } from '../../actions/index';
 
 import React from 'react';
 import iphone4 from '../../images/iphone4.png';
@@ -35,6 +35,10 @@ class RecycleRequestList extends React.Component {
                 requestList: this.props.recycleRequestList.data
             });
             // console.log(this.props.recycleRequestList);
+            const userIDObj = {
+                ConsumerID : SignUpData.data.ConsumerID
+            }
+            this.props.consumerGetProfile(userIDObj);
         })
     }
 
@@ -99,7 +103,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getConsumerServiceRequestDetails }, dispatch);
+    return bindActionCreators({ getConsumerServiceRequestDetails, consumerGetProfile }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecycleRequestList);

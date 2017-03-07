@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
-import { sessionStorageUserData, tempConsumerGetOTP } from '../../actions/index';
+import { sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile } from '../../actions/index';
 import HeaderDiv from '../common/header'
 import LocationSearch from '../location_search';
 import OtpPage from '../otp_page';
@@ -213,7 +213,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP }, dispatch);
+    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropOffForm);

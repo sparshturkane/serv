@@ -16,15 +16,120 @@ import EditUserProfile from './containers/userProfile/edit_user_profile';
 
 // <Route path="posts/new" component={ PostsNew } />
 
+
+// console.log(SignUpData);
+
+// if (SignUpData !== null) {
+//     // here user is logged in
+//     function customRoutes() {
+//         return(
+//             <Route path="/" component={App} >
+//                 <IndexRoute component={Home} />
+//                 <Route path="/pickup-dropoff" component={ PickUpPage } />
+//                 <Route path="/dropoff" component={ DropOffIndex } />
+//                 <Route path="/dropoff-form" component={ DropOffForm } />
+//                 <Route path="/confirmation" component={ ConfirmRecycleRequest } />
+//                 <Route path="/awesome" component={ AwesomePage } />
+//                 <Route path="/dashboard" component={ LoggedInDashboard } />
+//                 // <Route path="tracking" component={ TrackingPage } />
+//                 <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
+//                 <Route path="/user-profile" component={ ViewUserProfile } />
+//                 <Route path="/user-edit" component={ EditUserProfile } />
+//             </Route>
+//         );
+//     }
+// } else {
+//     // here user is logged out
+//     function customRoutes() {
+//         return (
+//             <Route path="/" component={App} >
+//                 <IndexRoute component={Home} />
+//                 <Route path="/pickup-dropoff" component={ PickUpPage } />
+//                 <Route path="/dropoff" component={ DropOffIndex } />
+//                 <Route path="/dropoff-form" component={ DropOffForm } />
+//                 <Route path="/confirmation" component={ ConfirmRecycleRequest } />
+//                 <Route path="/awesome" component={ AwesomePage } />
+//                 <Route path="/dashboard" component={ LoggedInDashboard } />
+//                 // <Route path="tracking" component={ TrackingPage } />
+//                 <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
+//                 <Route path="/user-profile" component={ ViewUserProfile } />
+//                 <Route path="/user-edit" component={ EditUserProfile } />
+//             </Route>
+//         );
+//     }
+// }
+
+// function customRoutes() {
+//     if (SignUpData !== null) {
+//         return (
+//             <Route path="/" component={App} >
+//                 <IndexRoute component={Home} />
+//                 <Route path="/pickup-dropoff" component={ PickUpPage } />
+//                 <Route path="/dropoff" component={ DropOffIndex } />
+//                 <Route path="/dropoff-form" component={ DropOffForm } />
+//                 <Route path="/confirmation" component={ ConfirmRecycleRequest } />
+//                 <Route path="/awesome" component={ AwesomePage } />
+//                 <Route path="/dashboard" component={ LoggedInDashboard } />
+//                 // <Route path="tracking" component={ TrackingPage } />
+//                 <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
+//                 <Route path="/user-profile" component={ ViewUserProfile } />
+//                 <Route path="/user-edit" component={ EditUserProfile } />
+//             </Route>
+//         );
+//     } else {
+//         return (
+//             <Route path="/" component={App} >
+//                 <IndexRoute component={Home} />
+//                 <Route path="/pickup-dropoff" component={ PickUpPage } />
+//                 <Route path="/dropoff" component={ DropOffIndex } />
+//                 <Route path="/dropoff-form" component={ DropOffForm } />
+//                 <Route path="/confirmation" component={ ConfirmRecycleRequest } />
+//                 <Route path="/awesome" component={ AwesomePage } />
+//                 <Route path="/dashboard" component={ LoggedInDashboard } />
+//                 // <Route path="tracking" component={ TrackingPage } />
+//                 <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
+//                 <Route path="/user-profile" component={ ViewUserProfile } />
+//                 <Route path="/user-edit" component={ EditUserProfile } />
+//             </Route>
+//         );
+//     }
+//
+// }
+
+
+// export default (customRoutes);
+const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+// if (SignUpData !== null) {
+//     // import Home from './components/dashboard';
+//     Home = LoggedInDashboard
+// }
+// <IndexRoute component={Home} />
+// homePage(){
+//
+//     if (SignUpData !== null) {
+//         return(
+//             <IndexRoute component={LoggedInDashboard} />
+//         );
+//     } else {
+//         <IndexRoute component={Home} />
+//     }
+//
+// };
 export default (
     <Route path="/" component={App} >
-        <IndexRoute component={Home} />
+        {SignUpData !== null &&
+            <IndexRoute component={LoggedInDashboard} />
+        }
+        {SignUpData == null &&
+            <IndexRoute component={Home} />
+        }
         <Route path="/pickup-dropoff" component={ PickUpPage } />
         <Route path="/dropoff" component={ DropOffIndex } />
         <Route path="/dropoff-form" component={ DropOffForm } />
         <Route path="/confirmation" component={ ConfirmRecycleRequest } />
         <Route path="/awesome" component={ AwesomePage } />
         <Route path="/dashboard" component={ LoggedInDashboard } />
+        <Route path="/home" component={ Home } />
         // <Route path="tracking" component={ TrackingPage } />
         <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
         <Route path="/user-profile" component={ ViewUserProfile } />

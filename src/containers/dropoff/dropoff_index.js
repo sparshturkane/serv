@@ -29,6 +29,13 @@ class DropOffIndex extends React.Component {
         // this.handleSetAppointment = this.handleSetAppointment.bind(this);
     }
 
+    componentWillMount(){
+        // if(this.props.makePagesActive.dropOff === undefined){
+        //     browserHistory.push('/');
+        // }else if (this.props.makePagesActive.dropOff.status === '0') {
+        //     browserHistory.push('/');
+        // }
+    }
 
     handleSetAppointment(location){
 
@@ -94,6 +101,42 @@ class DropOffIndex extends React.Component {
         });
     }
 
+    supportedModesPickup(){
+        return this.props.productData.SupportedModes.map((value) => {
+            switch (value) {
+                case 9: //pickup
+                return (
+                    <Link key={value} to={'/pickup-dropoff'} className="pickUplabel PickUpHref">Pick Up</Link>
+                );
+
+                // case 13:
+                // return (
+                //     <p key={value}>dropoff</p>
+                // );
+                default:
+            }
+
+        });
+    }
+
+    supportedModesDropOff(){
+        return this.props.productData.SupportedModes.map((value) => {
+            switch (value) {
+                // case 9:
+                // return (
+                //     <p key={value}>pickup</p>
+                // );
+
+                case 13://dropoff
+                return (
+                    <Link key={value} to={'/dropoff'} className="dropofflabel PickUpHref active pickUpMenuActive">Drop Off Locations</Link>
+                );
+                default:
+            }
+
+        });
+    }
+
     render(){
 
         return(
@@ -102,8 +145,11 @@ class DropOffIndex extends React.Component {
                 <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
-                        <Link to={'/pickup-dropoff'} className="pickUplabel PickUpHref">Pick Up</Link>
-                        <Link to={'/dropoff'} className="dropofflabel PickUpHref active pickUpMenuActive">Drop Off Locations</Link>
+                        {/* <Link to={'/pickup-dropoff'} className="pickUplabel PickUpHref">Pick Up</Link> */}
+                        {this.supportedModesPickup()}
+
+                        {/* <Link to={'/dropoff'} className="dropofflabel PickUpHref active pickUpMenuActive">Drop Off Locations</Link> */}
+                        {this.supportedModesDropOff()}
                     </div>
                 </div>
 

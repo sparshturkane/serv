@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { consumerProductAddDevice, consumerScheduleRecycleRequest } from '../../actions/index';
+import { consumerProductAddDevice, consumerScheduleRecycleRequest, makePagesActive } from '../../actions/index';
 
 class SubmitRecycleRequestButton extends React.Component {
     constructor(props) {
@@ -83,6 +83,12 @@ class SubmitRecycleRequestButton extends React.Component {
         }
 
 
+        const pageDataAwesome = {
+            pageName : 'awesome',
+            status : '1'
+        }
+        this.props.makePagesActive(pageDataAwesome);
+
         this.props.consumerScheduleRecycleRequest(scheduleRecycleRequestData).then(()=>{
             browserHistory.push('/awesome');
         })
@@ -119,7 +125,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ consumerProductAddDevice, consumerScheduleRecycleRequest }, dispatch);
+    return bindActionCreators({ consumerProductAddDevice, consumerScheduleRecycleRequest, makePagesActive }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitRecycleRequestButton);

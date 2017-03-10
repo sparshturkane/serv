@@ -11,11 +11,18 @@ import rightarrow from '../images/rightarrow.png';
 import RecycleRequestList from '../containers/dashboard/recycle_request_list';
 
 class LoggedInDashboard extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     componentWillMount(){
+        // unauthorized users cannot use the page
+        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        if (SignUpData == null) {
+            browserHistory.push('/');
+            // browserHistory.go(1);
+        }
+
         // const script = document.createElement("script");
         // var t = document.createTextNode(`var swiper = new Swiper('.swiper-container', {
         //     pagination: '.swiper-pagination',
@@ -28,9 +35,10 @@ class LoggedInDashboard extends React.Component {
         // });`);
         // script.appendChild(t);
         // document.body.appendChild(script);
+
     }
     pushHomePage(){
-        browserHistory.push('/');
+        browserHistory.push('/home');
     }
     render(){
         return(
@@ -115,7 +123,7 @@ class LoggedInDashboard extends React.Component {
                                 <div className="phoneLabelHolderContent">
                                     <div className="col-sm-6">
                                         <div className="loggedrightArrowHolder phoneLabelHolderTab">
-                                            <Link to={`/`} >
+                                            <Link to={`/home`} >
                                                 <label  className="raisedLabel REQUESTColor">ADD ANOTHER DEVICE
                                                     <img src={rightarrow} className="loggedrightArrow" alt="leftarrow" />
                                                 </label>

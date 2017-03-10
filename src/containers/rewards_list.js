@@ -20,7 +20,7 @@ class RewardList extends React.Component {
     //     console.log(this.props.rewardList);
     //     return this.props.rewardList.map((reward) => {
     //         return (
-    // 
+    //
     //             <li className="greenRewordContentHolderLI" key={reward.ProductRewardID}>
     //                 <div className="divHeadinglabelHolder">
     //                     <label className="divHeadinglabel">{reward.Rewards.RewardTypeName}</label>
@@ -50,8 +50,14 @@ class RewardList extends React.Component {
             pageName : 'pickUp',
             status : '1'
         }
-        console.log(pageData);
+        // console.log(pageData);
         this.props.makePagesActive(pageData);
+
+        const pageDataDropOff = {
+            pageName : 'dropOff',
+            status : '1'
+        }
+        this.props.makePagesActive(pageDataDropOff);
         browserHistory.push('/pickup-dropoff');
 
     }

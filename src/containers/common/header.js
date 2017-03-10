@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory, Link } from 'react-router';
 import heart from '../../images/heart.png';
 import user from '../../images/user.png';
 import bell from '../../images/bell.png';
@@ -12,13 +13,15 @@ class HeaderDiv extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userData: undefined
+            userData: undefined,
+            userLogo: user
         };
+        this.handleViewUserProfile = this.handleViewUserProfile.bind(this);
     }
 
     componentWillMount(){
         const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
-        console.log("signupdata" +SignUpData);
+        // console.log("signupdata" +SignUpData);
 
         if (SignUpData !== null) {
             const consumerID = {ConsumerID : SignUpData.data.ConsumerID}
@@ -29,15 +32,28 @@ class HeaderDiv extends React.Component {
             })
         }
 
+        if(this.props.userLogo != undefined){
+            this.setState({
+                userLogo : this.props.userLogo
+            })
+        }
+
     }
 
     // componentDidMount(){
     //     this.setState
     // }
+    handleViewUserProfile(){
+        console.log("you are viewing userprofile");
+        browserHistory.push('/user-profile');
+    }
 
     showHideUserSettings(){
         const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
-        console.log("signupdata" +SignUpData);
+        // console.log("signupdata" +SignUpData);
+        var imageStyle = {
+            cursor: "pointer",
+        };
         if( SignUpData !== null){
             return(
 
@@ -51,8 +67,8 @@ class HeaderDiv extends React.Component {
                                     }
                                 </label>
                             </li>
-                            <li className="userContentLI">
-                                <img src={user} alt="user" />
+                            <li className="userContentLI" >
+                                <img src={this.state.userLogo} alt="user" onClick={this.handleViewUserProfile} style={imageStyle} />
                             </li>
                             <li className="userContentLI">
                                 <img src={bell} alt="Bell" />
@@ -72,14 +88,25 @@ class HeaderDiv extends React.Component {
             );
         }
     }
+
+    onClickBrand(){
+        browserHistory.push('/');
+    }
     render(){
+
+        var imageStyle = {
+            cursor: "pointer",
+        };
         return(
             <div className="topHadder row">
                 <div className="heartHolder col-sm-6">
                     <img
                         src={heart}
                         className="heartImg"
-                        alt="Heart" />
+                        alt="Heart"
+                        onClick={this.onClickBrand.bind(this)}
+                        style={imageStyle}
+                    />
                     <span className="topHeading">
                         {this.props.productData.ProductName} Recycle
                     </span>

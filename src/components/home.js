@@ -1,5 +1,6 @@
 // dependencies
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 // javascript pages
 import ChooseDeviceHolder from '../containers/all_mobiles';
@@ -8,6 +9,16 @@ class Home extends React.Component {
     // constructor(props) {
     //     super(props);
     // }
+    componentWillMount(){
+        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        // console.log(SignUpData);
+        // if (SignUpData !== null) {
+        // if (SignUpData !== null) {
+        //     browserHistory.push('/dashboard');
+        // } else {
+        //     browserHistory.push('/');
+        // }
+    }
 
     render(){
         return(

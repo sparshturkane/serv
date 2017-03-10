@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { consumerGetProfile } from '../../actions/index';
 import HeaderDiv from '../common/header';
+import user from '../../images/userFill.png';
 
 class ViewUserProfile extends React.Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class ViewUserProfile extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv/>
+                <HeaderDiv userLogo={user}/>
                 <div className="separators"></div>
                 <div className="pickupInfoHolder">
                     <div className="yourDetailsHolderTOP">
@@ -93,7 +94,7 @@ class ViewUserProfile extends React.Component {
                                         <div className="col-sm-5">
                                             <div className="detailsContent">
                                                 <label className="labelDetails">IMEI Number of Device For Recycle</label><br />
-                                                <label className="inputdetailsWithoutBorder">{this.state.userData.AlternateMobileNo}</label>
+                                                <label className="inputdetailsWithoutBorder"></label>
 
                                             </div>
                                         </div>

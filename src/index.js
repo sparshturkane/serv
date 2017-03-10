@@ -18,7 +18,7 @@ import promise from 'redux-promise';
 //     document.getElementById('root')
 // );
 
-
+// console.log(routes);
 
 const enhancers = compose(
      window.devToolsExtension ? window.devToolsExtension(): f=>f

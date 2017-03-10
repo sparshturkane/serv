@@ -1,11 +1,19 @@
 import React from 'react';
 import HeaderDiv from '../containers/common/header';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 class AwesomePage extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentWillMount(){
+        // if(this.props.makePagesActive.awesome === undefined){
+        //     browserHistory.push('/');
+        // }else if (this.props.makePagesActive.awesome.status === '0') {
+        //     browserHistory.push('/');
+        // }
     }
 
     render(){
@@ -50,7 +58,8 @@ class AwesomePage extends React.Component {
 function mapStateToProps(state) {
     return {
         productData: state.productData.ActiveProductData,
-        userData: state.SessionStorage.UserData
+        userData: state.SessionStorage.UserData,
+        makePagesActive: state.MakePagesActive,
 
     };
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import GreenRewards from '../containers/green_rewards';
 import FooterDiv from './footer.js';
 import HeaderDiv from '../containers/common/header';
@@ -10,6 +12,13 @@ class ConfirmRecycleRequest extends React.Component {
     // constructor(props) {
     //     super(props);
     // }
+    componentWillMount(){
+        // if(this.props.makePagesActive.confirmation === undefined){
+        //     browserHistory.push('/');
+        // }else if (this.props.makePagesActive.confirmation.status === '0') {
+        //     browserHistory.push('/');
+        // }
+    }
 
     render(){
         return(
@@ -41,7 +50,8 @@ class ConfirmRecycleRequest extends React.Component {
 function mapStateToProps(state) {
     return {
         productData: state.productData.ActiveProductData,
-        userData: state.SessionStorage.UserData
+        userData: state.SessionStorage.UserData,
+        makePagesActive: state.MakePagesActive,
 
     };
 }

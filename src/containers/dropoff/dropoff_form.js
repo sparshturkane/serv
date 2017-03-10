@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
-import { sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile } from '../../actions/index';
+import { sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive } from '../../actions/index';
 import HeaderDiv from '../common/header'
 import LocationSearch from '../location_search';
 import OtpPage from '../otp_page';
@@ -26,6 +26,12 @@ class DropOffForm extends React.Component {
     }
 
     componentWillMount(){
+        // if(this.props.makePagesActive.dropOff === undefined){
+        //     browserHistory.push('/');
+        // }else if (this.props.makePagesActive.dropOff.status === '0') {
+        //     browserHistory.push('/');
+        // }
+
         const script = document.createElement("script");
         var t = document.createTextNode("$(document).ready(function() { var date_input=$('input[name="+"date"+"]');"+
         "var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : 'body';"+
@@ -52,6 +58,12 @@ class DropOffForm extends React.Component {
 
     handleOnSubmitPickUpForm(event){
         event.preventDefault();
+        // making confirmation page active
+        const pageDataConfirmation = {
+            pageName : 'confirmation',
+            status : '1'
+        }
+        this.props.makePagesActive(pageDataConfirmation);
 
         const userDataRequest= {
             userName : this.state.userName,
@@ -205,7 +217,7 @@ function mapStateToProps(state) {
         // supportedMobiles: state.supportedMobiles.supportedMobilesList,
         productData: state.productData.ActiveProductData,
         geoLocationData: state.GeoLocationData,
-        // makePagesActive: state.MakePagesActive,
+        makePagesActive: state.MakePagesActive,
         storedUserData : state.SessionStorage,
         // getSlotsData: state.ConsumerServicerequest,
         // DropOffServiceLocations: state.PickUpDropOffServiceLocationData.DropOffServiceLocations
@@ -213,7 +225,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile }, dispatch);
+    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropOffForm);

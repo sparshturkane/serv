@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 import HeaderDiv from './common/header'
 import LocationSearch from './location_search';
 import OtpPage from './otp_page';
-import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile } from '../actions/index';
+import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive  } from '../actions/index';
 
 class PickUpPage extends React.Component {
     constructor(props) {
@@ -38,11 +38,11 @@ class PickUpPage extends React.Component {
         // const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
         // console.log(SignUpData.data.ConsumerID);
 
-        if(this.props.makePagesActive.pickUp === undefined){
-            browserHistory.push('/');
-        }else if (this.props.makePagesActive.pickUp.status === '0') {
-            browserHistory.push('/');
-        }
+        // if(this.props.makePagesActive.pickUp === undefined){
+        //     browserHistory.push('/');
+        // }else if (this.props.makePagesActive.pickUp.status === '0') {
+        //     browserHistory.push('/');
+        // }
 
         // $(React.ReactDOM.findDOMNode(this.refs.date)).datepicker();
 
@@ -69,17 +69,35 @@ class PickUpPage extends React.Component {
 
     }
 
-    supportedModesDisplay(){
+    supportedModesPickup(){
         return this.props.productData.SupportedModes.map((value) => {
             switch (value) {
-                case 9:
+                case 9: //pickup
                 return (
-                    <p key={value}>pickup</p>
+                    <Link key={value} to={'/pickup-dropoff'} className="pickUplabel  PickUpHref active pickUpMenuActive">Pick Up</Link>
                 );
 
-                case 13:
+                // case 13:
+                // return (
+                //     <p key={value}>dropoff</p>
+                // );
+                default:
+            }
+
+        });
+    }
+
+    supportedModesDropOff(){
+        return this.props.productData.SupportedModes.map((value) => {
+            switch (value) {
+                // case 9:
+                // return (
+                //     <p key={value}>pickup</p>
+                // );
+
+                case 13://dropoff
                 return (
-                    <p key={value}>dropoff</p>
+                    <Link key={value} to={'/dropoff'} className="dropofflabel PickUpHref ">Drop Off Locations</Link>
                 );
                 default:
             }
@@ -89,6 +107,12 @@ class PickUpPage extends React.Component {
 
     handleOnSubmitPickUpForm(event){
         event.preventDefault();
+        // making confirmation page active
+        const pageDataConfirmation = {
+            pageName : 'confirmation',
+            status : '1'
+        }
+        this.props.makePagesActive(pageDataConfirmation);
         //
         /**
         * if user is registered then
@@ -271,8 +295,11 @@ class PickUpPage extends React.Component {
 
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
-                        <Link to={'/pickup-dropoff'} className="pickUplabel  PickUpHref active pickUpMenuActive">Pick Up</Link>
-                        <Link to={'/dropoff'} className="dropofflabel PickUpHref ">Drop Off Locations</Link>
+
+                        {/* <Link to={'/pickup-dropoff'} className="pickUplabel  PickUpHref active pickUpMenuActive">Pick Up</Link> */}
+                        {this.supportedModesPickup()}
+                        {/* <Link to={'/dropoff'} className="dropofflabel PickUpHref ">Drop Off Locations</Link> */}
+                        {this.supportedModesDropOff()}
                     </div>
                 </div>
                 <div className="tab-content">
@@ -435,7 +462,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile }, dispatch);
+    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive }, dispatch);
 }
 //
 export default connect(mapStateToProps, mapDispatchToProps)(PickUpPage);

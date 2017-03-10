@@ -18,9 +18,19 @@ class RecycleMyPhone extends React.Component {
             pageName : 'pickUp',
             status : '1'
         }
-        console.log(pageData);
-        this.props.makePagesActive(pageData);
-        browserHistory.push('/pickup-dropoff');
+
+        const pageDataDropOff = {
+            pageName : 'dropOff',
+            status : '1'
+        }
+        // console.log(pageData);
+        this.props.makePagesActive(pageData).then(()=>{
+            this.props.makePagesActive(pageDataDropOff).then(()=>{
+                browserHistory.push('/pickup-dropoff');
+            })
+
+        })
+
 
     }
 

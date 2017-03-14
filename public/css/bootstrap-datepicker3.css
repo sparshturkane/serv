@@ -134,15 +134,17 @@
 .prev
 {
   border-top-left-radius: 4px;
+  display: block;
 }
 .next
 {
   border-top-right-radius: 4px;
+  display: block;
 }
 /*.datepicker thead tr:first-child
 {
-    border-bottom-left-radius: 25px;    
-    border-bottom-right-radius: 25px;   
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }*/
 /*.datepicker table tr td.today:hover,
 .datepicker table tr td.today:hover:hover,
@@ -484,7 +486,7 @@ fieldset[disabled] .datepicker table tr td.selected.disabled:hover.active {
 .datepicker table tr td.active.disabled:hover {
   color: #ffffff;
   background-color: #428bca;
-  
+
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .datepicker table tr td.active:hover,
@@ -612,8 +614,8 @@ fieldset[disabled] .datepicker table tr td.active.disabled:hover.active {
 .datepicker table tr td span.active.disabled,
 .datepicker table tr td span.active.disabled:hover {
   color: #ffffff;
- 
-  
+
+
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .datepicker table tr td span.active:hover,
@@ -726,7 +728,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 }
 
 
-.datepicker thead tr:first-child 
+.datepicker thead tr:first-child
 {
   cursor: pointer;
   background-color: #4b10c1;

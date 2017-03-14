@@ -33,41 +33,194 @@ class PickUpPage extends React.Component {
         }
     }
 
-    componentWillMount(){
-        // console.log(this.props.makePagesActive.pickUp.status);
-        // const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
-        // console.log(SignUpData.data.ConsumerID);
-
-        // if(this.props.makePagesActive.pickUp === undefined){
-        //     browserHistory.push('/');
-        // }else if (this.props.makePagesActive.pickUp.status === '0') {
-        //     browserHistory.push('/');
-        // }
-
-        // $(React.ReactDOM.findDOMNode(this.refs.date)).datepicker();
-
-        // browserHistory.push('/');
-    }
-
     componentDidUpdate(){
-        // if(this.props.getSlotsData.getSlot !== undefined){
-        //     console.log(this.props.getSlotsData.getSlot.data.length);
-        //     var firstDateObj = this.props.getSlotsData.getSlot.data[0];
-        //     var lastDateObj = this.props.getSlotsData.getSlot.data[this.props.getSlotsData.getSlot.data.length - 1];
-        //
-        //     console.log(new Date(firstDateObj.date).toISOString().slice(0,10));
-        //
-        //     console.log(new Date(lastDateObj.date).toISOString().slice(0,10));
-        //
-        //     this.setState(
-        //         {
-        //             firstDate : new Date(firstDateObj.date).toISOString().slice(0,10),
-        //             lastDateObj : new Date(lastDateObj.date).toISOString().slice(0,10)
-        //         }
-        //     )
+        // if(this.props.makePagesActive.dropOff === undefined){
+        //     browserHistory.push('/');
+        // }else if (this.props.makePagesActive.dropOff.status === '0') {
+        //     browserHistory.push('/');
         // }
+        var firstDate;
+        var lastDate;
+        var enabledDates = [];
+
+        // getting dates which have IsActive == true
+        if(this.props.getSlotsData.getSlot !== undefined){
+            // console.log(this.props.getSlotsData.getSlot.data);
+            this.props.getSlotsData.getSlot.data.map((value) => {
+                console.log(value.date);
+                value.slots.map((slots) => {
+                    if(slots.IsActive==true){
+                        enabledDates.push(value.date);
+                    }
+                });
+
+            });
+
+        }
+
+
+        //making array unique
+        var uniqueEnabledDates = enabledDates.filter((v, i, a) => a.indexOf(v) === i);
+        console.log(uniqueEnabledDates);
+        // we will have to add another loop to change date fromat
+
+        // dd/mm/yyyy conversion function
+        function format(entryFormated) {
+            var date = new Date(entryFormated);
+            if (!isNaN(date.getTime())) {
+                var day = date.getDate().toString();
+                var month = (date.getMonth() + 1).toString();
+                // Months use 0 index.
+
+                // return (month[1] ? month : '0' + month[0]) + '/' +
+                // (day[1] ? day : '0' + day[0]) + '/' +
+                return (day[1] ? day : '0' + day[0]) + '/' +
+                (month[1] ? month : '0' + month[0]) + '/' +
+                date.getFullYear();
+            }
+        };
+
+        function getDay(entryFormated) {
+            var date = new Date(entryFormated);
+            if (!isNaN(date.getTime())) {
+                var day = date.getDate().toString();
+                var month = (date.getMonth() + 1).toString();
+                // Months use 0 index.
+
+                // return (month[1] ? month : '0' + month[0]) + '/' +
+                // (day[1] ? day : '0' + day[0]) + '/' +
+                return (day[1] ? day : '0' + day[0]);
+            }
+        };
+
+        // looping through enabledDates and converting them to dd/mm/yyyy using function format
+        var uniqueEnabledDatesFormated = [];
+        var uniqueEnabledDatesFormatedToDay = [];
+        uniqueEnabledDates.forEach(function(entry) {
+            var entryFormated = new Date(entry).toISOString().slice(0,10)
+            var entryFormatedToDay = new Date(entry).toISOString().slice(0,10)
+            entryFormated = format(entryFormated);
+            uniqueEnabledDatesFormated.push(entryFormated);
+
+            entryFormatedToDay = getDay(entryFormatedToDay);
+            uniqueEnabledDatesFormatedToDay.push(entryFormatedToDay);
+        });
+
+        // getting first and last dates
+        console.log(uniqueEnabledDatesFormated);
+        console.log(uniqueEnabledDatesFormatedToDay);
+        var startCalenderDate = uniqueEnabledDatesFormated[0];
+        console.log(startCalenderDate);
+        var endCalenderDate = uniqueEnabledDatesFormated[uniqueEnabledDatesFormated.length - 1]
+        console.log(endCalenderDate);
+
+
+        // var d = new Date( startCalenderDate );
+        console.log('month');
+        // console.log(formatGetMonth(startCalenderDate));
+        console.log('date');
+        // console.log(d.getFullYear());
+
+        // adding quotes to first and last dates
+        var startQuotes = '"';
+        var endQuotes = '"';
+        startCalenderDate = startQuotes+startCalenderDate+endQuotes;
+        endCalenderDate = startQuotes+endCalenderDate+endQuotes;
+
+        // now we will have to hide dates which are not present in those array
+        var disabledDayArray = [];
+        for(var i = 1; i < uniqueEnabledDatesFormatedToDay.length; i++) {
+            console.log(uniqueEnabledDatesFormatedToDay[i]);
+            if(uniqueEnabledDatesFormatedToDay[i] - uniqueEnabledDatesFormatedToDay[i-1] != 1) {
+                //Not consecutive sequence, here you can break or do whatever you want
+
+                disabledDayArray.push(uniqueEnabledDatesFormatedToDay[i]);
+            }
+        }
+
+
+        console.log(disabledDayArray);
+        // var disabledDayArray = ['14','15'];
+        var disabledDatesArray = [];
+        if(disabledDayArray.length !== 0){
+            console.log('we will have to disable dates');
+            for(var i = 0; i < disabledDayArray.length; i++) {
+
+                var date = new Date();
+                var month = (date.getMonth() + 1).toString();
+                month = (month[1] ? month : '0' + month[0])
+                disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
+                // console.log(uniqueEnabledDatesFormatedToDay[i]);
+                // if(uniqueEnabledDatesFormatedToDay[i] - uniqueEnabledDatesFormatedToDay[i-1] != 1) {
+                //     //Not consecutive sequence, here you can break or do whatever you want
+                //     disabledDayArray.push(uniqueEnabledDatesFormatedToDay[i]);
+                // }
+            }
+
+        }
+
+        console.log(disabledDatesArray);
+        // disabledDatesArray = ['15/03/2017','16/03/2017'];
+
+
+        var disabledDatesString = '';
+        var finalDisabledDates = '00/00/0000';
+        if(disabledDatesArray.length !== 0){
+
+            finalDisabledDates = '';
+            disabledDatesArray.forEach(function(entry) {
+                disabledDatesString = disabledDatesString + ",'"+entry+"'";
+            });
+            var startBracket = "[";
+            var endBracket = "]";
+            finalDisabledDates = startBracket+disabledDatesString+endBracket;
+            var index = 1;
+            console.log(finalDisabledDates);
+            finalDisabledDates = finalDisabledDates.substr(0, index) + '' + finalDisabledDates.substr(index + 1);
+            console.log(finalDisabledDates);
+        }
+
+
+        if(this.props.geoLocationData !== undefined){
+            const script = document.createElement("script");
+            var t = document.createTextNode("$(document).ready(function() { var date_input=$('input[name="+"date"+"]');"+
+            "var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : 'body';"+
+            "date_input.datepicker({"+
+            "format: 'dd/mm/yyyy',"+
+            "container: container,"+
+            "todayHighlight: true,"+
+            "autoclose: true,"+
+            "startDate: "+startCalenderDate+","+
+            "endDate: "+endCalenderDate+","+
+            // "datesDisabled: ['23/02/2017','24/02/2017'],"+
+            "datesDisabled: "+finalDisabledDates+","+
+            "}); })");
+            script.appendChild(t);
+            document.body.appendChild(script);
+        }
+
 
     }
+
+    // componentDidUpdate(){
+    //     // if(this.props.getSlotsData.getSlot !== undefined){
+    //     //     console.log(this.props.getSlotsData.getSlot.data.length);
+    //     //     var firstDateObj = this.props.getSlotsData.getSlot.data[0];
+    //     //     var lastDateObj = this.props.getSlotsData.getSlot.data[this.props.getSlotsData.getSlot.data.length - 1];
+    //     //
+    //     //     console.log(new Date(firstDateObj.date).toISOString().slice(0,10));
+    //     //
+    //     //     console.log(new Date(lastDateObj.date).toISOString().slice(0,10));
+    //     //
+    //     //     this.setState(
+    //     //         {
+    //     //             firstDate : new Date(firstDateObj.date).toISOString().slice(0,10),
+    //     //             lastDateObj : new Date(lastDateObj.date).toISOString().slice(0,10)
+    //     //         }
+    //     //     )
+    //     // }
+    //
+    // }
 
     supportedModesPickup(){
         return this.props.productData.SupportedModes.map((value) => {
@@ -352,13 +505,17 @@ class PickUpPage extends React.Component {
                                             <br />
                                             {/* <input className="inputdetails" name="date"  value={this.state.date} onChange={this.handleInputFieldsChange} id="date" placeholder="DD/MM/YYYY" type="text" required /> */}
 
-                                            <DateTimeField
-                                                timeFormat={false}
-                                                dateFormat="DD/MM/YYYY"
-                                                inputProps={inputProps}
-                                                isValidDate={ valid }
-                                                closeOnSelect={ true }
-                                            />
+                                            {/*
+                                                <DateTimeField
+                                                    timeFormat={false}
+                                                    dateFormat="DD/MM/YYYY"
+                                                    inputProps={inputProps}
+                                                    isValidDate={ valid }
+                                                    closeOnSelect={ true }
+                                                />
+                                            */}
+
+                                            <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" required />
 
                                             <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                         </div>

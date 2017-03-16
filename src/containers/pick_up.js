@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 import HeaderDiv from './common/header'
 import LocationSearch from './location_search';
 import OtpPage from './otp_page';
-import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive  } from '../actions/index';
+import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal  } from '../actions/index';
 
 class PickUpPage extends React.Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class PickUpPage extends React.Component {
         }
     }
 
-    componentDidUpdate(){
+    calenderDatesDisplay(){
         // if(this.props.makePagesActive.dropOff === undefined){
         //     browserHistory.push('/');
         // }else if (this.props.makePagesActive.dropOff.status === '0') {
@@ -134,7 +134,7 @@ class PickUpPage extends React.Component {
             if(uniqueEnabledDatesFormatedToDay[i] - uniqueEnabledDatesFormatedToDay[i-1] != 1) {
                 //Not consecutive sequence, here you can break or do whatever you want
 
-                disabledDayArray.push(uniqueEnabledDatesFormatedToDay[i]);
+                disabledDayArray.push(uniqueEnabledDatesFormatedToDay[i]-1);
             }
         }
 
@@ -181,12 +181,14 @@ class PickUpPage extends React.Component {
         }
 
 
-        if(this.props.geoLocationData !== undefined){
+        // if((this.props.geoLocationData !== undefined) && (startCalenderDate !== undefined)){
+        if(this.props.getSlotsData.getSlot !== undefined){
             const script = document.createElement("script");
             var t = document.createTextNode("$(document).ready(function() { var date_input=$('input[name="+"date"+"]');"+
             "var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : 'body';"+
             "date_input.datepicker({"+
             "format: 'dd/mm/yyyy',"+
+            "orientation: 'top',"+
             "container: container,"+
             "todayHighlight: true,"+
             "autoclose: true,"+
@@ -194,6 +196,7 @@ class PickUpPage extends React.Component {
             "endDate: "+endCalenderDate+","+
             // "datesDisabled: ['23/02/2017','24/02/2017'],"+
             "datesDisabled: "+finalDisabledDates+","+
+
             "}); })");
             script.appendChild(t);
             document.body.appendChild(script);
@@ -333,6 +336,7 @@ class PickUpPage extends React.Component {
         } else {
             this.props.tempConsumerGetOTP(getOTPRequestData).then(()=>{
                 this.props.sessionStorageUserData(userDataRequest);
+                this.props.showHideModal('1');
                 this.setState({
                     displayOtpModal : 1,
                 })
@@ -373,12 +377,33 @@ class PickUpPage extends React.Component {
     }
 
     handleInputFieldsChange(event){
-        this.setState(
-            {
-                [event.target.name]: event.target.value,
-                // userName: event.target.value
+        // console.log(event.target.name);
+        switch (event.target.name) {
+            case 'userMobileNo':
+            if(event.target.value.length < 11){
+                this.setState({
+                    userMobileNo : event.target.value,
+                })
             }
-        );
+            break;
+
+            case 'userAlternateNo':
+            if(event.target.value.length < 11){
+                this.setState({
+                    userAlternateNo : event.target.value,
+                })
+            }
+            break;
+
+            default:
+            this.setState(
+                {
+                    [event.target.name]: event.target.value,
+                    // userName: event.target.value
+                }
+            );
+
+        }
     }
 
     avaliableDates(){
@@ -438,9 +463,13 @@ class PickUpPage extends React.Component {
             return current.isBetween( firstDate, lastDate, null, '[]' ) && current.day() !== 0;
         };
 
+
+        // calling calenderDatesDisplay function
+        this.calenderDatesDisplay();
+
         return(
             <div>
-                {this.state.displayOtpModal == 1 &&
+                {this.props.storedUserData.displayOtpModal == 1 &&
                     <OtpPage ServiceTypeID={this.state.ServiceTypeID}/>
                 }
                 <HeaderDiv productData={this.props.productData}/>
@@ -487,7 +516,7 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Alternate Number</label>
                                             <br />
-                                            <input type="text" name="userAlternateNo" value={this.state.userAlternateNo} onChange={this.handleInputFieldsChange} placeholder="Number" className="inputdetails" />
+                                            <input type="number" name="userAlternateNo" value={this.state.userAlternateNo} onChange={this.handleInputFieldsChange} placeholder="Number" className="inputdetails" />
 
                                         </div>
                                     </div>
@@ -619,7 +648,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive }, dispatch);
+    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal }, dispatch);
 }
 //
 export default connect(mapStateToProps, mapDispatchToProps)(PickUpPage);

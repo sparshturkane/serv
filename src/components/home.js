@@ -46,7 +46,8 @@ class Home extends React.Component {
                                                 <span className="secondTextLabel">E-waste is not what our planet deserves.</span>
                                                 <br />
                                                 <div className="recyleHomeBtnHolder">
-                                                    <button type="button" className="recyleHomeBtn">Recycle your Apple device</button>
+
+                                                    {/* <button type="button" className="recyleHomeBtn">Recycle your Apple device</button> */}
                                                 </div>
                                             </div>
                                         </div>

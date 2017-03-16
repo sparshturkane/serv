@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData } from '../actions/index';
+import { getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData, showHideModal } from '../actions/index';
 
 
 class ChooseDeviceHolder extends React.Component {
@@ -24,12 +24,13 @@ class ChooseDeviceHolder extends React.Component {
             var SupportedModes = mobile.SupportedModes;
             // productData = mobile
             this.handleProductClick(ProductIDArray, ProductName, SupportedModes, mobile)
+            this.props.showHideModal('0');
         })
         // .then(() => {
         //     // blog post create, nav to index
         //     this.renderSupportedMobiles();
         // })
-        
+
         // {
         //     "AlternateMobileNo":
         //     "MobileNo":
@@ -115,7 +116,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData }, dispatch);
+    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData, showHideModal }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseDeviceHolder);

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { tempConsumerSignUp, consumerUpdateProfile } from '../actions/index';
+import { tempConsumerSignUp, consumerUpdateProfile, tempConsumerGetOTP, showHideModal } from '../actions/index';
 
 class OtpPage extends React.Component {
     constructor(props) {
@@ -117,16 +117,37 @@ class OtpPage extends React.Component {
         //     displayOtpModal : "none"
         // })
         console.log("close modal");
+        this.props.showHideModal('0');
     }
+
+    onGetCall(){
+        // console.log("get call");
+        // {"TempConsumerID":0,"MobileNo":"8097804715", "voiceOtp" : true}
+        const getOTPRequestData = {
+            TempConsumerID : 0,// we will have to change it in revisions
+            MobileNo : this.props.sessionStorageUserData.userMobileNo,
+            voiceOtp : true
+        }
+
+        // this.getOTPRequest(getOTPRequestData, userDataRequest);
+        // otp via call
+        this.props.tempConsumerGetOTP(getOTPRequestData)
+    }
+
     render(){
         var display = {
             display: this.state.displayOtpModal,
         };
+
+        var imageStyle = {
+            cursor: "pointer",
+        };
+
         return(
             <div className="overlay"  id="overlay" style={display}>
                 <div className="otpHolder" >
                     <form onSubmit={this.handleOptFromSubmit}>
-                        <img src="images/cross.png" id="close" className="cross" alt="cross" />
+                        <img src="images/cross.png" id="close" className="cross" alt="cross" onClick={this.onCloseModal.bind(this)} />
                         <div className="otpLabel">
                             <label>OTP</label>
                             <label className="Verification">Verification</label>
@@ -140,7 +161,7 @@ class OtpPage extends React.Component {
 
                         <div className="bottomContent">
                             <span className="recived Verification">Did not receive an OTP?</span>
-                            <span className="getback" onClick={this.onCloseModal()} >Get a call back</span>
+                            <span className="getback" style={imageStyle} onClick={this.onGetCall.bind(this)} >Get a call back</span>
                         </div>
 
                         <button type="submit" className="largebutton">Submit</button>
@@ -163,6 +184,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ tempConsumerSignUp, consumerUpdateProfile }, dispatch);
+    return bindActionCreators({ tempConsumerSignUp, consumerUpdateProfile, tempConsumerGetOTP, showHideModal }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OtpPage);

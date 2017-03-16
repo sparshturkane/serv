@@ -13,6 +13,9 @@ import DropOffForm from './containers/dropoff/dropoff_form';
 import ViewUserProfile from './containers/userProfile/view_user_profile';
 import EditUserProfile from './containers/userProfile/edit_user_profile';
 
+// demo
+import Demo from './components/geolocationTest';
+
 
 // <Route path="posts/new" component={ PostsNew } />
 
@@ -134,5 +137,6 @@ export default (
         <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
         <Route path="/user-profile" component={ ViewUserProfile } />
         <Route path="/user-edit" component={ EditUserProfile } />
+        <Route path="/demo" component={ Demo } />
     </Route>
 );

@@ -24,6 +24,9 @@ export const POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST = 'POST_CONSUMER_SERVIC
 export const FETCH_LOCATION_PREDICTION = 'FETCH_LOCATION_PREDICTION';
 export const POST_REQUEST_DROPOFF_LOCATION = 'POST_REQUEST_DROPOFF_LOCATION';
 export const SET_ACTIVE_DROP_OFF_SERVICE_LOCATION = 'SET_ACTIVE_DROP_OFF_SERVICE_LOCATION';
+export const GET_BROWSER_LOCATION = 'GET_BROWSER_LOCATION';
+export const GET_ADDRESS_FROM_LAT_LNG = 'GET_ADDRESS_FROM_LAT_LNG';
+export const SET_SHOW_HIDE_MODAL = 'SET_SHOW_HIDE_MODAL';
 
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
@@ -101,6 +104,26 @@ export function fetchGeoLocation(Landmark) { //testing
     };
 }
 
+// GET BROWSER location
+export function getBrowserLocation() { //testing
+    const request = axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${GOOGLE_MAPS_GEOCODING_API_KEY}`);
+
+    return {
+        type: GET_BROWSER_LOCATION,
+        payload: request,
+    };
+}
+
+// get landmark from lat Lng
+export function getAddressFromLatLng(lat,lng) { //testing
+    const request = axios.get(`${GOOGLE_MAPS_GEOCODING_ROOT_URL}/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_MAPS_GEOCODING_API_KEY}`);
+
+    return {
+        type: GET_ADDRESS_FROM_LAT_LNG,
+        payload: request,
+    };
+}
+
 export function fetchGeoLocationPrediction(SearchKeyword) { //testing
     var config = {
         headers: {
@@ -170,6 +193,14 @@ export function activeDropOffServiceLocation(activeServiceLocationObj) {
     return {
         type: SET_ACTIVE_DROP_OFF_SERVICE_LOCATION,
         payload: activeServiceLocationObj,
+    };
+}
+
+// active modal
+export function showHideModal(status) {
+    return {
+        type: SET_SHOW_HIDE_MODAL,
+        payload: status,
     };
 }
 

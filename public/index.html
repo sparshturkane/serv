@@ -80,5 +80,27 @@
                 });
             });
         </script>
+
+        <script>
+        var  autocomplete;
+
+
+        function initAutocomplete() {
+            autocomplete = new google.maps.places.Autocomplete(
+                (document.getElementById('autocomplete')),
+                {types: ['geocode']}
+            );
+        }
+        </script>
+
+        <script type="text/javascript">
+        $(document.body).on('click', '.pac-container .j-search', function(e) {
+            console.log('click fired');
+        });
+        </script>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes&libraries=places"></script>
+
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes&libraries=places&callback=initAutocomplete" async defer></script> -->
     </body>
 </html>

@@ -6,6 +6,7 @@ import { browserHistory } from 'react-router';
 import { getSlot, activeDropOffServiceLocation } from '../../actions/index';
 import HeaderDiv from '../common/header'
 import LocationSearch from '../location_search';
+import navigation from '../../images/navigation.png';
 
 class DropOffIndex extends React.Component {
     constructor(props) {
@@ -72,7 +73,7 @@ class DropOffIndex extends React.Component {
                                 <div className="leftDropOFF">
                                     <div>
                                         <label className="MapleLabel">{location.ServiceLocationName}</label>
-                                        <label className="kmLabel"><img src="images/navigation.png"/>&nbsp;{Math.round( location.distance * 10 ) / 10 }Km</label>
+                                        <label className="kmLabel"><img src={navigation} />&nbsp;{Math.round( location.distance * 10 ) / 10 }Km</label>
                                         <label className="TechnologyLabel">{location.NameOfFirm}</label>
                                         <p className="TechnologyLabelContent">
                                             {location.address}

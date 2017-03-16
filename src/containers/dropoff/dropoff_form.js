@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
-import { sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive } from '../../actions/index';
+import { sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal } from '../../actions/index';
 import HeaderDiv from '../common/header'
 import LocationSearch from '../location_search';
 import OtpPage from '../otp_page';
@@ -126,7 +126,7 @@ class DropOffForm extends React.Component {
             if(uniqueEnabledDatesFormatedToDay[i] - uniqueEnabledDatesFormatedToDay[i-1] != 1) {
                 //Not consecutive sequence, here you can break or do whatever you want
 
-                disabledDayArray.push(uniqueEnabledDatesFormatedToDay[i]);
+                disabledDayArray.push(uniqueEnabledDatesFormatedToDay[i]-1);
             }
         }
 
@@ -178,6 +178,7 @@ class DropOffForm extends React.Component {
         "var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : 'body';"+
         "date_input.datepicker({"+
         "format: 'dd/mm/yyyy',"+
+        "orientation: 'top',"+
         "container: container,"+
         "todayHighlight: true,"+
         "autoclose: true,"+
@@ -211,12 +212,24 @@ class DropOffForm extends React.Component {
     }
 
     handleInputFieldsChange(event){
-        this.setState(
-            {
-                [event.target.name]: event.target.value,
-                // userName: event.target.value
+
+        // limiting mobile number to 10 digits
+        if ([event.target.name] == 'userMobileNo') {
+            // console.log('mobile input');
+            if(event.target.value.length<11){
+                this.setState({
+                    userMobileNo : event.target.value,
+                })
             }
-        );
+        } else {
+            this.setState(
+                {
+                    [event.target.name]: event.target.value,
+                    // userName: event.target.value
+                }
+            );
+        }
+
     }
 
     handleOnSubmitPickUpForm(event){
@@ -268,6 +281,7 @@ class DropOffForm extends React.Component {
         } else {
             this.props.tempConsumerGetOTP(getOTPRequestData).then(()=>{
                 this.props.sessionStorageUserData(userDataRequest);
+                this.props.showHideModal('1');
                 this.setState({
                     displayOtpModal : 1,
                 })
@@ -304,10 +318,22 @@ class DropOffForm extends React.Component {
 
     }
 
+    handleKeyPress(event){
+        console.log(event.target.value.length);
+        if(event.target.value.length>9){
+            console.log(false);
+            return false;
+        }else{
+            this.setState({
+                userMobileNo : event.target.value,
+            })
+        }
+    }
+
     render(){
         return(
             <div>
-                {this.state.displayOtpModal == 1 &&
+                {this.props.storedUserData.displayOtpModal == 1 &&
                     <OtpPage ServiceTypeID={this.state.ServiceTypeID}/>
                 }
                 <HeaderDiv productData={this.props.productData}/>
@@ -388,7 +414,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive }, dispatch);
+    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropOffForm);

@@ -143,7 +143,7 @@ class DropOffIndex extends React.Component {
         return(
             <div>
                 <HeaderDiv productData={this.props.productData}/>
-                <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>
+                <LocationSearch ServiceTypeID={this.state.ServiceTypeID} setLandmark={''}/>
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
                         {/* <Link to={'/pickup-dropoff'} className="pickUplabel PickUpHref">Pick Up</Link> */}

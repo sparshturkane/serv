@@ -30,6 +30,10 @@ class PickUpPage extends React.Component {
             displayOtpModal : 0,
             firstDate: '',
             lastDate: '',
+            homeBtnClass: 'btn mySmallbtn',
+            officeBtnClass: 'btn mySmallbtn',
+            otherBtnClass: 'btn mySmallbtn',
+            activeButtonName: '',
         }
     }
 
@@ -262,7 +266,13 @@ class PickUpPage extends React.Component {
     }
 
     handleOnSubmitPickUpForm(event){
+
         event.preventDefault();
+
+        if(this.props.storedUserData.LocationData == undefined){
+            alert('Please Enter Location First');
+            return false;
+        }
         // making confirmation page active
         const pageDataConfirmation = {
             pageName : 'confirmation',
@@ -361,7 +371,7 @@ class PickUpPage extends React.Component {
                 Lng : this.props.geoLocationData.longitude,
                 Landmark : this.props.storedUserData.LocationData.Landmark,
                 Address : this.state.userCompleteAddress,
-                AddressType :'Home'
+                AddressType : this.state.activeButtonName,
             },
             isNew : SignUpData.data.isNew ? true : false,
             ConsumerID :SignUpData.data.ConsumerID
@@ -421,6 +431,60 @@ class PickUpPage extends React.Component {
 
     }
 
+    setLocationDataSearchBar(){
+        // storedUserData : state.SessionStorage
+
+        if (this.props.storedUserData !== undefined && this.props.storedUserData.LocationData !== undefined) {
+            return this.props.storedUserData.LocationData.Landmark;
+        } else {
+            return '';
+        }
+    }
+
+    onKeyPressEnterLocation(){
+        if(this.props.storedUserData.LocationData == undefined){
+            alert('Please Enter Location First');
+        }
+
+    }
+
+    activeButtons(buttonName){
+        switch (buttonName) {
+            case "home":
+                console.log('home clicked');
+                this.setState({
+                    activeButtonName : 'Home',
+                    homeBtnClass: 'btn activeBtn mySmallbtn',
+                    officeBtnClass: 'btn mySmallbtn',
+                    otherBtnClass: 'btn mySmallbtn',
+                })
+            break;
+
+            case "office":
+                console.log('home office');
+                this.setState({
+                    activeButtonName : 'Office',
+                    homeBtnClass: 'btn  mySmallbtn',
+                    officeBtnClass: 'btn activeBtn mySmallbtn',
+                    otherBtnClass: 'btn mySmallbtn',
+                })
+            break;
+
+            case "other":
+                console.log('home other');
+                this.setState({
+                    activeButtonName : 'Other',
+                    homeBtnClass: 'btn mySmallbtn',
+                    officeBtnClass: 'btn mySmallbtn',
+                    otherBtnClass: 'btn activeBtn mySmallbtn',
+                })
+            break;
+
+            default:
+
+        }
+    }
+
     render(){
         //
         //
@@ -473,7 +537,7 @@ class PickUpPage extends React.Component {
                     <OtpPage ServiceTypeID={this.state.ServiceTypeID}/>
                 }
                 <HeaderDiv productData={this.props.productData}/>
-                <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>
+                <LocationSearch ServiceTypeID={this.state.ServiceTypeID} setLandmark={this.setLocationDataSearchBar()}/>
 
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
@@ -493,7 +557,7 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Name*</label>
                                             <br />
-                                            <input type="text" name="userName" value={this.state.userName} onChange={this.handleInputFieldsChange} placeholder="Name" className="inputdetails" required />
+                                            <input type="text" name="userName" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userName} onChange={this.handleInputFieldsChange} placeholder="Name" className="inputdetails" required />
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
@@ -501,14 +565,14 @@ class PickUpPage extends React.Component {
                                             <label className="labelDetails">Mobile Number*</label>
                                             <br />
 
-                                            <input type="number" name="userMobileNo" value={this.state.userMobileNo} onChange={this.handleInputFieldsChange} placeholder="Mobile No" className="inputdetails" required/>
+                                            <input type="number" name="userMobileNo" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userMobileNo} onChange={this.handleInputFieldsChange} placeholder="Mobile No" className="inputdetails" required/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Email*</label>
                                             <br />
-                                            <input type="email" name="userEmail" value={this.state.userEmail} onChange={this.handleInputFieldsChange} placeholder="Email" className="inputdetails" required />
+                                            <input type="email" name="userEmail" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userEmail} onChange={this.handleInputFieldsChange} placeholder="Email" className="inputdetails" required />
 
                                         </div>
                                     </div>
@@ -516,7 +580,7 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Alternate Number</label>
                                             <br />
-                                            <input type="number" name="userAlternateNo" value={this.state.userAlternateNo} onChange={this.handleInputFieldsChange} placeholder="Number" className="inputdetails" />
+                                            <input type="number" name="userAlternateNo" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userAlternateNo} onChange={this.handleInputFieldsChange} placeholder="Number" className="inputdetails" />
 
                                         </div>
                                     </div>
@@ -524,7 +588,7 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">IMEI Number of Device For Recycle</label>
                                             <br />
-                                            <input type="text" name="userIMEINumber" value={this.state.userIMEINumber} onChange={this.handleInputFieldsChange} className="inputdetails" />
+                                            <input type="text" name="userIMEINumber" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userIMEINumber} onChange={this.handleInputFieldsChange} className="inputdetails" />
 
                                         </div>
                                     </div>
@@ -544,7 +608,7 @@ class PickUpPage extends React.Component {
                                                 />
                                             */}
 
-                                            <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" required />
+                                            <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" readOnly required />
 
                                             <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                         </div>
@@ -553,15 +617,15 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Complete Address*</label>
                                             <br />
-                                            <input type="text" name="userCompleteAddress" value={this.state.userCompleteAddress} onChange={this.handleInputFieldsChange} placeholder="Flat, Building Name, Street, City" className="inputdetails" required />
+                                            <input type="text" name="userCompleteAddress" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userCompleteAddress} onChange={this.handleInputFieldsChange} placeholder="Flat, Building Name, Street, City" className="inputdetails" required />
 
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContentbutton">
-                                            <button type="button" className="btn mySmallbtn">Home</button>
-                                            <button type="button" className="btn mySmallbtn">Office</button>
-                                            <button type="button" className="btn mySmallbtn">Other</button>
+                                            <button type="button" className={this.state.homeBtnClass} onClick={this.activeButtons.bind(this,'home')}>Home</button>
+                                            <button type="button" className={this.state.officeBtnClass} onClick={this.activeButtons.bind(this,'office')}>Office</button>
+                                            <button type="button" className={this.state.otherBtnClass} onClick={this.activeButtons.bind(this,'other')}>Other</button>
                                         </div>
                                     </div>
                                     <div className="col-sm-12">

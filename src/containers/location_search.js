@@ -19,6 +19,16 @@ class LocationSearch extends React.Component {
     }
 
     componentDidMount(){
+        // if (this.props.browserLocationData) {
+        //     this.setState({
+        //         Landmark : this.props.browserLocationData.Landmark,
+        //     });
+        // }
+        this.setState({
+            Landmark : this.props.setLandmark,
+        });
+
+
         // const script = document.createElement("script");
         // var t = document.createTextNode("var  autocomplete;"+
         // "function initAutocomplete() {"+
@@ -262,8 +272,7 @@ class LocationSearch extends React.Component {
         })
     }
 
-    browserLocation(){
-        console.log("browserLocation hit");
+    browserLocationCode(){
         if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((pos) => {
                 const coords = pos.coords;
@@ -273,30 +282,68 @@ class LocationSearch extends React.Component {
                         lng: coords.longitude
                     }
                 })
+                this.afterBrowserLocation();
             })
         }
+        // this.afterBrowserLocation();
+    }
+
+    afterBrowserLocation(){
+        if(this.state.currentLocation !== undefined){
+            this.props.getAddressFromLatLng(this.state.currentLocation.lat, this.state.currentLocation.lng).then(()=>{
+                this.setState({
+                    Landmark : this.props.browserLocationData.Landmark,
+                });
+                this.callingLocationActions();
+            })
+        }
+    }
+    browserLocation(){
+        console.log("browserLocation hit");
+        // if (navigator && navigator.geolocation) {
+        //     navigator.geolocation.getCurrentPosition((pos) => {
+        //         const coords = pos.coords;
+        //         this.setState({
+        //             currentLocation: {
+        //                 lat: coords.latitude,
+        //                 lng: coords.longitude
+        //             }
+        //         })
+        //     })
+        // }
 
         // this.props.getBrowserLocation().then(()=>{
+
 
 
         // staring works
-        this.props.getAddressFromLatLng(this.state.currentLocation.lat, this.state.currentLocation.lng).then(()=>{
-            this.setState({
-                Landmark : this.props.browserLocationData.Landmark,
-            });
-            this.callingLocationActions();
-        })
-
-
-        // });
-        // this.props.getBrowserLocation().then(()=>{
-        //     this.props.getAddressFromLatLng(this.props.browserLocationData.latitude, this.props.browserLocationData.longitude).then(()=>{
+        // if(this.state.currentLocation !== undefined){
+        //     this.props.getAddressFromLatLng(this.state.currentLocation.lat, this.state.currentLocation.lng).then(()=>{
         //         this.setState({
         //             Landmark : this.props.browserLocationData.Landmark,
         //         });
         //         this.callingLocationActions();
         //     })
+        // }
+
+
+
         // });
+        //this will work with https
+        this.browserLocationCode();
+        // if(this.state.Landmark === ''){
+            // first this will run then other will run
+            console.log("---no https---");
+            this.props.getBrowserLocation().then(()=>{
+                this.props.getAddressFromLatLng(this.props.browserLocationData.latitude, this.props.browserLocationData.longitude).then(()=>{
+                    this.setState({
+                        Landmark : this.props.browserLocationData.Landmark,
+                    });
+                    this.callingLocationActions();
+                })
+            });
+        // }
+
 
         // not woring in http will work with https
         // getLocation();

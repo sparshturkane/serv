@@ -20,6 +20,10 @@ class DropOffForm extends React.Component {
             displayOtpModal : 0,
             firstDate: '',
             lastDate: '',
+            activeButtonName: '',
+            slot1BtnClass: 'activeBtnTime dropOffBTN',
+            slot2BtnClass: 'dropOffBTN',
+            slot3BtnClass: 'dropOffBTN',
         };
         this.handleInputFieldsChange = this.handleInputFieldsChange.bind(this);
         this.handleOnSubmitPickUpForm = this.handleOnSubmitPickUpForm.bind(this);
@@ -216,7 +220,7 @@ class DropOffForm extends React.Component {
         // limiting mobile number to 10 digits
         if ([event.target.name] == 'userMobileNo') {
             // console.log('mobile input');
-            if(event.target.value.length<11){
+            if(event.target.value.length < 11){
                 this.setState({
                     userMobileNo : event.target.value,
                 })
@@ -330,6 +334,53 @@ class DropOffForm extends React.Component {
         }
     }
 
+    setLocationDataSearchBar(){
+        // storedUserData : state.SessionStorage
+
+        if (this.props.storedUserData !== undefined && this.props.storedUserData.LocationData !== undefined) {
+            return this.props.storedUserData.LocationData.Landmark;
+        } else {
+            return '';
+        }
+    }
+
+    activeButtons(buttonName){
+        switch (buttonName) {
+            case "slot1":
+                console.log('slot1 clicked');
+                this.setState({
+                    activeButtonName : 'slot1',
+                    slot1BtnClass: 'activeBtnTime dropOffBTN',
+                    slot2BtnClass: 'dropOffBTN',
+                    slot3BtnClass: 'dropOffBTN',
+                })
+            break;
+
+            case "slot2":
+                console.log('slot2 clicked');
+                this.setState({
+                    activeButtonName : 'slot2',
+                    slot1BtnClass: 'dropOffBTN',
+                    slot2BtnClass: 'activeBtnTime dropOffBTN',
+                    slot3BtnClass: 'dropOffBTN',
+                })
+            break;
+
+            case "slot3":
+                console.log('slot3 clicked');
+                this.setState({
+                    activeButtonName : 'slot3',
+                    slot1BtnClass: 'dropOffBTN',
+                    slot2BtnClass: 'dropOffBTN',
+                    slot3BtnClass: 'activeBtnTime dropOffBTN',
+                })
+            break;
+
+            default:
+
+        }
+    }
+
     render(){
         return(
             <div>
@@ -337,7 +388,7 @@ class DropOffForm extends React.Component {
                     <OtpPage ServiceTypeID={this.state.ServiceTypeID}/>
                 }
                 <HeaderDiv productData={this.props.productData}/>
-                <LocationSearch ServiceTypeID={this.state.ServiceTypeID}/>
+                <LocationSearch ServiceTypeID={this.state.ServiceTypeID} setLandmark={this.setLocationDataSearchBar()}/>
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">
                         <Link to={'/pickup-dropoff'} className="pickUplabel PickUpHref">Pick Up</Link>
@@ -370,7 +421,7 @@ class DropOffForm extends React.Component {
                             <div className="col-sm-4">
                                 <div className="detailsContent" >
                                     <label className="labelDetails">Choose Date*</label><br />
-                                    <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" required />
+                                    <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" readOnly required />
                                     <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                 </div>
                             </div>
@@ -378,9 +429,9 @@ class DropOffForm extends React.Component {
                                 <div className="detailsContent">
                                     <label className="labelDetails">Choose Time Slot</label><br />
                                     <div className="dropoffBTNHolder">
-                                        <button type="button" className="dropOffBTN">10am - 12 pm</button>
-                                        <button type="button" className="dropOffBTN">12pm - 2pm</button>
-                                        <button type="button" className="activeBtnTime dropOffBTN">2pm - 4pm</button>
+                                        <button type="button" className={this.state.slot1BtnClass} onClick={this.activeButtons.bind(this,'slot1')}>10am - 12 pm</button>
+                                        <button type="button" className={this.state.slot2BtnClass} onClick={this.activeButtons.bind(this,'slot2')}>12pm - 2pm</button>
+                                        <button type="button" className={this.state.slot3BtnClass} onClick={this.activeButtons.bind(this,'slot3')}>2pm - 4pm</button>
                                     </div>
                                 </div>
                             </div>

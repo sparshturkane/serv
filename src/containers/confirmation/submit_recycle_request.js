@@ -8,6 +8,28 @@ class SubmitRecycleRequestButton extends React.Component {
     constructor(props) {
         super(props);
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.state = {
+            ProductRewardIDArray : []
+        }
+    }
+
+    componentDidMount(){
+        //rewardsList;
+        var ProductRewardIDArray = [];
+        this.props.rewardsList.map((value) => {
+
+            ProductRewardIDArray.push(value.ProductRewardID);
+            // console.log(value.date);
+            // value.slots.map((slots) => {
+            //     if(slots.IsActive==true){
+            //         ProductRewardIDArray.push(value.date);
+            //     }
+            // });
+        });
+        this.setState({
+            ProductRewardIDArray
+        })
+        console.log(ProductRewardIDArray);
     }
 
     componentWillMount(){
@@ -39,10 +61,11 @@ class SubmitRecycleRequestButton extends React.Component {
                 Lng : this.props.geoLocationData.longitude,
                 PartnerID : this.props.pickUpServiceLocation.PartnerID,
                 PartnerServiceLocationID : this.props.pickUpServiceLocation.PartnerServiceLocationID,
-                ProductRewardID : [
-                    1,
-                    4
-                ],
+                // ProductRewardID : [
+                //     1,
+                //     4
+                // ],
+                ProductRewardID : this.state.ProductRewardIDArray,
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
                 ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+0530', //slots
@@ -66,10 +89,11 @@ class SubmitRecycleRequestButton extends React.Component {
                 Lng : this.props.geoLocationData.longitude,
                 PartnerID : this.props.ActiveDropOffServiceLocation.PartnerID,
                 PartnerServiceLocationID : this.props.ActiveDropOffServiceLocation.PartnerServiceLocationID,
-                ProductRewardID : [
-                    1,
-                    4
-                ],
+                // ProductRewardID : [
+                //     1,
+                //     4
+                // ],
+                ProductRewardID : this.state.ProductRewardIDArray,
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
                 ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+0530', //slots
@@ -119,6 +143,7 @@ function mapStateToProps(state) {
         pickUpServiceLocation: state.PickUpDropOffServiceLocationData.PickUpServiceLocations,
         ActiveDropOffServiceLocation : state.PickUpDropOffServiceLocationData.ActiveDropOffServiceLocation,
         consumerProductDeviceData: state.ConsumerProduct,
+        rewardsList: state.rewardsList.rewardsListData,
 
 
     };

@@ -27,6 +27,7 @@ export const SET_ACTIVE_DROP_OFF_SERVICE_LOCATION = 'SET_ACTIVE_DROP_OFF_SERVICE
 export const GET_BROWSER_LOCATION = 'GET_BROWSER_LOCATION';
 export const GET_ADDRESS_FROM_LAT_LNG = 'GET_ADDRESS_FROM_LAT_LNG';
 export const SET_SHOW_HIDE_MODAL = 'SET_SHOW_HIDE_MODAL';
+export const POST_TEMP_CONSUMER_SIGN_UP_ERROR = 'POST_TEMP_CONSUMER_SIGN_UP_ERROR';
 
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
@@ -234,12 +235,20 @@ export function sessionStorageUserData(userData) {
 
 // tempconsumer signup
 export function tempConsumerSignUp(signUpRequest) {
-    const request = axios.post(`${ROOT_URL}/TempConsumer/signup`, signUpRequest);
+    const request = axios.post(`${ROOT_URL}/TempConsumer/signup`, signUpRequest)
+    .catch(function (error) {
+        console.log(error.error);;
+        return {
+            type: POST_TEMP_CONSUMER_SIGN_UP_ERROR,
+            payload: request,
+        }
+    });;
 
     return {
         type: POST_TEMP_CONSUMER_SIGN_UP,
         payload: request,
-    };
+    }
+
 }
 
 // making pages active

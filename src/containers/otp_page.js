@@ -9,7 +9,8 @@ class OtpPage extends React.Component {
         super(props);
         this.state = {
             otpNumber : '',
-            displayOtpModal : 'block'
+            displayOtpModal : 'block',
+            invalidOtp : ''
         };
         this.handelInputChange = this.handelInputChange.bind(this);
         this.handleOptFromSubmit = this.handleOptFromSubmit.bind(this);
@@ -49,6 +50,13 @@ class OtpPage extends React.Component {
             // update user profile
             this.updateUserProfile();
             // browserHistory.push('/confirmation');
+        })
+        .catch((err) => {
+            console.log(err.error);
+            console.log('invalid otp ');
+            this.setState({
+                invalidOtp : 'Invalid OTP',
+            })
         })
 
 
@@ -143,6 +151,11 @@ class OtpPage extends React.Component {
             cursor: "pointer",
         };
 
+        var otpError = {
+            color: "#B94A48",
+            fontSize: "11px",
+        }
+
         return(
             <div className="overlay"  id="overlay" style={display}>
                 <div className="otpHolder" >
@@ -152,6 +165,9 @@ class OtpPage extends React.Component {
                             <label>OTP</label>
                             <label className="Verification">Verification</label>
 
+                        </div>
+                        <div style={otpError}>
+                            {this.state.invalidOtp}
                         </div>
                         <div className="otpinputHolder">
                             <div className="newOTPHide"> </div>

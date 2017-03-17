@@ -1,4 +1,4 @@
-import { POST_TEMP_CONSUMER_SIGN_UP } from '../actions/index';
+import { POST_TEMP_CONSUMER_SIGN_UP, POST_TEMP_CONSUMER_SIGN_UP_ERROR } from '../actions/index';
 
 const INITIAL_STATE = { };
 
@@ -11,6 +11,10 @@ export default function(state = INITIAL_STATE, action) {
 
         // returning accesstoken to redux store
         return { ...state, SignUpData: action.payload.data };
+
+        case POST_TEMP_CONSUMER_SIGN_UP_ERROR:
+        console.log(action.payload);
+        return { ...state, SignUpDataError: action.payload};
 
 
         // case FETCH_POSTS:

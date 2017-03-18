@@ -36,11 +36,18 @@ class SubmitRecycleRequestButton extends React.Component {
         const addDeviceRequest = {
             BrandID : this.props.productData.BrandID,
             ConsumerID : this.props.consumerDetail.data.ConsumerID,
-            ConsumerProductID:0,
-            CurrentDateTime:"2016-06-10 14:36:49",
+            // ConsumerProductID:0,
+            // CurrentDateTime:"2016-06-10 14:36:49",
             ProductID:this.props.productData.ProductID,
             ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
         }
+
+        // {
+        //     "BrandID":4,
+        //     "ProductSubCategoryID":12,
+        //     "ConsumerID" : 825,
+        //     "ProductID":7
+        // }
 
         this.props.consumerProductAddDevice(addDeviceRequest);
     }

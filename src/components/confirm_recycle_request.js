@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
-import GreenRewards from '../containers/green_rewards';
+import GreenRewards from '../containers/green_rewards_confirmation';
 import FooterDiv from './footer.js';
 import HeaderDiv from '../containers/common/header';
 import RecycleUserDetail from '../containers/confirmation/confirm_recycle_user_detail';

@@ -30,7 +30,7 @@ class PickUpPage extends React.Component {
             displayOtpModal : 0,
             firstDate: '',
             lastDate: '',
-            homeBtnClass: 'btn mySmallbtn',
+            homeBtnClass: 'btn mySmallbtn activeBtn',
             officeBtnClass: 'btn mySmallbtn',
             otherBtnClass: 'btn mySmallbtn',
             activeButtonName: '',
@@ -194,8 +194,9 @@ class PickUpPage extends React.Component {
             "format: 'dd/mm/yyyy',"+
             "orientation: 'top',"+
             "container: container,"+
-            "todayHighlight: true,"+
+            "todayHighlight: false,"+
             "autoclose: true,"+
+            "weekStart: 1,"+
             "startDate: "+startCalenderDate+","+
             "endDate: "+endCalenderDate+","+
             // "datesDisabled: ['23/02/2017','24/02/2017'],"+

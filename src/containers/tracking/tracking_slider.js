@@ -82,8 +82,9 @@ class TrackingSlider extends React.Component {
     render(){
         return(
             <div className="tracksliderHolder">
+
                 <div className="row">
-                    <div id="first" className="carouseller carousellerMargin">
+                    <div id="first" className="carouseller">
                         <div className="tracksliderHolderMargin">
                             <a href="javascript:void(0)" className="carouseller__left"><img src={leftarrow} alt="leftarrow"/></a>
                             <div className="carouseller__wrap">

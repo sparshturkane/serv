@@ -51,7 +51,7 @@ class RecycleRequestList extends React.Component {
                         <div className="col-sm-4 ">
                             <div className="phoneLabelHolderTab">
                                 <img src={iphone4} className="iphone4" alt="iphone4" />
-                                <label className="phoneLabel">{requestList.ConsumerProductName}</label>
+                                <label className="phoneLabel">{requestList.ProductName}</label>
                             </div>
                         </div>
                         <div className="col-sm-4">

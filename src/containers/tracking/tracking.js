@@ -6,12 +6,14 @@ import { getConsumerServiceRequestTrackRequest } from '../../actions/index';
 
 // pages
 import HeaderDiv from '../common/header';
+import TrackingInfoEsclation from './tracking_info_esclation';
 import TrackingInfoBar from './tracking_info_bar';
 import TrackingSlider from './tracking_slider';
 
 // images
 import leftarrow from '../../images/leftarrow.png';
 import rightarrow from '../../images/rightarrow.png';
+
 
 
 class TrackingPage extends React.Component {
@@ -45,16 +47,29 @@ class TrackingPage extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv productData={this.props.productData} userData={this.props.userData} />
+                <HeaderDiv productData={this.props.productData} userData={this.props.userData}/>
 
                 <div className="separators"></div>
 
                 {this.state.trackingList !== undefined &&
-                    <TrackingInfoBar trackingList={this.state.trackingList} ConsumerServiceRequestID={this.props.params.ConsumerServiceRequestID}/>
+                    <TrackingInfoEsclation
+                        trackingList={this.state.trackingList}
+                        ConsumerServiceRequestID={this.props.params.ConsumerServiceRequestID}
+                    />
+                }
+                <hr className="hrmargin"/>
+
+                {this.state.trackingList !== undefined &&
+                    <TrackingInfoBar
+                        trackingList={this.state.trackingList}
+                        ConsumerServiceRequestID={this.props.params.ConsumerServiceRequestID}
+                    />
                 }
 
                 {this.state.trackingList !== undefined &&
-                    <TrackingSlider trackingList={this.state.trackingList} />
+                    <TrackingSlider
+                        trackingList={this.state.trackingList}
+                    />
                 }
 
                 <div className="separators"></div>

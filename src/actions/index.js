@@ -28,6 +28,10 @@ export const GET_BROWSER_LOCATION = 'GET_BROWSER_LOCATION';
 export const GET_ADDRESS_FROM_LAT_LNG = 'GET_ADDRESS_FROM_LAT_LNG';
 export const SET_SHOW_HIDE_MODAL = 'SET_SHOW_HIDE_MODAL';
 export const POST_TEMP_CONSUMER_SIGN_UP_ERROR = 'POST_TEMP_CONSUMER_SIGN_UP_ERROR';
+export const POST_CONSUMER_SERVICE_REQUEST_DETAILS = 'POST_CONSUMER_SERVICE_REQUEST_DETAILS';
+export const POST_CONSUMER_SERVICE_CANCEL_REQUEST = 'POST_CONSUMER_SERVICE_CANCEL_REQUEST';
+export const STORE_RESCHEDULE_PICKUP_DATA = 'STORE_RESCHEDULE_PICKUP_DATA';
+export const STORE_RESCHEDULE_DROPOFF_DATA = 'STORE_RESCHEDULE_DROPOFF_DATA';
 
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
@@ -327,5 +331,43 @@ export function getConsumerServiceRequestTrackRequest(requestObj) {
     return {
         type: POST_CONSUMER_SERVICE_REQUEST_TRACK_REQUEST,
         payload: request,
+    };
+}
+
+// recycle request Details
+export function getConsumerServiceRequestRecycleDetails(requestObj) {
+    // ConsumerServicerequest/requestDetails
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/requestDetails`, requestObj );
+    // console.log(request);
+    return {
+        type: POST_CONSUMER_SERVICE_REQUEST_DETAILS,
+        payload: request,
+    };
+}
+
+// cancel recycle request
+export function consumerServicerequestCancelRequest(requestObj) {
+    // ConsumerServicerequest/requestDetails
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/cancelRequest`, requestObj );
+    // console.log(request);
+    return {
+        type: POST_CONSUMER_SERVICE_CANCEL_REQUEST,
+        payload: request,
+    };
+}
+
+// reschedule pickup
+export function reschedulePickupData(pickupData) {
+    return {
+        type: STORE_RESCHEDULE_PICKUP_DATA,
+        payload: pickupData,
+    };
+}
+
+// reschedule dropoff data
+export function rescheduleDropoffData(pickupData) {
+    return {
+        type: STORE_RESCHEDULE_DROPOFF_DATA,
+        payload: pickupData,
     };
 }

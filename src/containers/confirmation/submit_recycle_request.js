@@ -66,8 +66,11 @@ class SubmitRecycleRequestButton extends React.Component {
                 Landmark : this.props.geoLocationData.Landmark,
                 Lat : this.props.geoLocationData.latitude,
                 Lng : this.props.geoLocationData.longitude,
+                // Zipcode : this.props.geoLocationData.pincode,
+                // Address : this.props.geoLocationData.longitude,
                 PartnerID : this.props.pickUpServiceLocation.PartnerID,
                 PartnerServiceLocationID : this.props.pickUpServiceLocation.PartnerServiceLocationID,
+                DeliveryMode : this.props.pickUpServiceLocation.DeliveryMode,
                 // ProductRewardID : [
                 //     1,
                 //     4
@@ -94,6 +97,8 @@ class SubmitRecycleRequestButton extends React.Component {
                 Landmark : this.props.geoLocationData.Landmark,
                 Lat : this.props.geoLocationData.latitude,
                 Lng : this.props.geoLocationData.longitude,
+                // Zipcode : this.props.geoLocationData.pincode,
+                // Address : this.props.geoLocationData.longitude,
                 PartnerID : this.props.ActiveDropOffServiceLocation.PartnerID,
                 PartnerServiceLocationID : this.props.ActiveDropOffServiceLocation.PartnerServiceLocationID,
                 // ProductRewardID : [

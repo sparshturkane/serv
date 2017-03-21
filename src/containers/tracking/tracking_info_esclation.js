@@ -1,17 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import ProgressBarHolder from './tracking_progress_bar_holder'
 import { getConsumerServiceRequestDetails } from '../../actions/index';
 
-class TrackingInfoBar extends React.Component {
+//images
+import escalate from '../../images/Escalate.png';
+import request from '../../images/Request.png';
+
+class TrackingInfoEsclation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             activeGroupId : undefined,
             requestList : undefined,
             ConsumerProductName : undefined,
-        }
+        };
+        this.handleRequestDetail = this.handleRequestDetail.bind(this);
     }
 
     componentWillMount(){
@@ -56,7 +62,7 @@ class TrackingInfoBar extends React.Component {
                 if (requestList.ConsumerServiceRequest.ConsumerServiceRequestID == this.props.ConsumerServiceRequestID) {
 
                     this.setState({
-                        ConsumerProductName : requestList.ConsumerProductName
+                        ConsumerProductName : requestList.ProductName
                     })
                 }
             });
@@ -74,14 +80,36 @@ class TrackingInfoBar extends React.Component {
 
         */
     }
+
+    handleRequestDetail(){
+        console.log('requestDetails clicked');
+        // on this click we have to show confirmation page modified
+        // make different request details page
+        // understand service and preceed
+    }
     render(){
         return(
             <div className="pickupInfoHolder">
                 <div className="row">
-                    <div className="col-sm-7">
-                        {this.state.activeGroupId !== undefined &&
-                            <ProgressBarHolder GroupId={this.state.activeGroupId} trackingList={this.props.trackingList}/>
-                        }
+                    <div className="col-sm-6">
+                        <div className="pickupInfoContent">
+                            <label className="congo">{this.state.ConsumerProductName}</label><br/>
+                            <label className="recyle"> Track Recycle</label>
+                        </div>
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="EscalateHolder">
+
+                            <span className="EscalateLabel">
+                                <span className="escalteIMG"><img src={escalate} /></span><label>Escalate Request</label>
+                            </span>
+
+                            <Link to={`/recycle-detail/${this.props.ConsumerServiceRequestID}`}>
+                                <span className="EscalateLabel" onClick={this.handleRequestDetail}>
+                                    <span className="escalteIMG"><img src={request} /></span><label>Request Details</label>
+                                </span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,4 +130,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ getConsumerServiceRequestDetails }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackingInfoBar);
+export default connect(mapStateToProps, mapDispatchToProps)(TrackingInfoEsclation);

@@ -12,6 +12,9 @@ import DropOffIndex from './containers/dropoff/dropoff_index';
 import DropOffForm from './containers/dropoff/dropoff_form';
 import ViewUserProfile from './containers/userProfile/view_user_profile';
 import EditUserProfile from './containers/userProfile/edit_user_profile';
+import RecycleRequestDetail from './containers/recycleRequestDetail/recycle_request_detail';
+import ReschedulePickup from './containers/recycleRequestDetail/reschedule_pickup';
+import RescheduleDropoff from './containers/recycleRequestDetail/reschedule_dropoff';
 
 // demo
 // import Demo from './components/geolocationTest';
@@ -137,5 +140,8 @@ export default (
         <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
         <Route path="/user-profile" component={ ViewUserProfile } />
         <Route path="/user-edit" component={ EditUserProfile } />
+        <Route path="/recycle-detail/:ConsumerServiceRequestID" component={ RecycleRequestDetail } />
+        <Route path="/reschedule-pickup" component={ ReschedulePickup } />
+        <Route path="/reschedule-dropoff" component={ RescheduleDropoff } />
     </Route>
 );

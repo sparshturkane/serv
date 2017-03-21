@@ -68,13 +68,13 @@ class HeaderDiv extends React.Component {
                                 </label>
                             </li>
                             <li className="userContentLI" >
-                                <img src={this.state.userLogo} alt="user" onClick={this.handleViewUserProfile} style={imageStyle} />
+                                <img src={this.state.userLogo} alt="user" onClick={this.handleViewUserProfile} style={imageStyle} className="userIMG" />
                             </li>
                             <li className="userContentLI">
-                                <img src={bell} alt="Bell" />
+                                <img src={bell} alt="Bell" className="userIMG"/>
                             </li>
                             <li className="userContentLI">
-                                <img src={setting} alt="Setting" />
+                                <img src={setting} alt="Setting" className="userIMG"/>
                             </li>
                         </ul>
                     </div>

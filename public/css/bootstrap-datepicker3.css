@@ -740,6 +740,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
     display: -webkit-box;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 /*.datepicker thead tr:first-child th:hover,
 .datepicker tfoot tr th:hover {

@@ -3,7 +3,7 @@ import HeaderDiv from '../common/header';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData } from '../../actions/index';
+import { getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData, consumerServicerequestRescheduleSlots } from '../../actions/index';
 
 // images
 import reschedule from '../../images/reshedule.png';
@@ -29,6 +29,15 @@ class RecycleRequestDetail extends React.Component {
             this.setState({
                 recycleDetail: this.props.recycleDetail.data
             });
+
+            (new Date()).toLocaleTimeString();
+
+            var rescheduleSlotsRequestObj = {
+                ConsumerServiceRequestID,
+                CurrentDate : (new Date()).toISOString().split('T')[0],
+                CurrentTime : (new Date()).toLocaleTimeString()
+            }
+            this.props.consumerServicerequestRescheduleSlots(rescheduleSlotsRequestObj);
         })
     }
 
@@ -80,12 +89,14 @@ class RecycleRequestDetail extends React.Component {
         var ServiceTypeID = this.state.recycleDetail.servicetype.ServiceTypeID
         if (ServiceTypeID==9) {
             // pickup
-            browserHistory.push('/reschedule-pickup');
             this.props.reschedulePickupData(this.state.recycleDetail);
+            browserHistory.push('/reschedule-pickup');
+
         } else if(ServiceTypeID==13) {
             // dropoff
+            this.props.rescheduleDropoffData(this.state.recycleDetail);
             browserHistory.push('/reschedule-dropoff');
-            this.props.rescheduleDropoffData(this.state.recycleDetai);
+
         }
     }
 
@@ -184,7 +195,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData }, dispatch);
+    return bindActionCreators({ getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData, consumerServicerequestRescheduleSlots }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecycleRequestDetail);

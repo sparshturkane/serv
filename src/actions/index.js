@@ -32,6 +32,8 @@ export const POST_CONSUMER_SERVICE_REQUEST_DETAILS = 'POST_CONSUMER_SERVICE_REQU
 export const POST_CONSUMER_SERVICE_CANCEL_REQUEST = 'POST_CONSUMER_SERVICE_CANCEL_REQUEST';
 export const STORE_RESCHEDULE_PICKUP_DATA = 'STORE_RESCHEDULE_PICKUP_DATA';
 export const STORE_RESCHEDULE_DROPOFF_DATA = 'STORE_RESCHEDULE_DROPOFF_DATA';
+export const POST_CONSUMER_SERVICE_RESCHEDULE_SLOTS = 'POST_CONSUMER_SERVICE_RESCHEDULE_SLOTS';
+export const POST_CONSUMER_SERVICE_RESCHEDULE_REQUEST = 'POST_CONSUMER_SERVICE_RESCHEDULE_REQUEST';
 
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
@@ -369,5 +371,23 @@ export function rescheduleDropoffData(pickupData) {
     return {
         type: STORE_RESCHEDULE_DROPOFF_DATA,
         payload: pickupData,
+    };
+}
+
+// reschedule get slots
+export function consumerServicerequestRescheduleSlots(requestObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/rescheduleSlots`, requestObj );
+    return {
+        type: POST_CONSUMER_SERVICE_RESCHEDULE_SLOTS,
+        payload: request,
+    };
+}
+
+// reschedule request
+export function consumerServicerequestRescheduleRequest(requestObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/rescheduleRequest`, requestObj );
+    return {
+        type: POST_CONSUMER_SERVICE_RESCHEDULE_REQUEST,
+        payload: request,
     };
 }

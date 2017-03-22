@@ -21,12 +21,23 @@ export default function(state = INITIAL_STATE, action) {
         };
 
         case GET_ADDRESS_FROM_LAT_LNG:
+
+        var searchAddressComponents = action.payload.data.results[1].address_components;
+        var searchPostalCode = "";
+
+        searchAddressComponents.forEach( function(map){
+            if(map.types[0]==="postal_code"){
+                searchPostalCode=map.short_name;
+            }
+        });
+
         return {
             ...state,
             LocationData: {
                 Landmark: action.payload.data.results[1].formatted_address,
                 latitude:action.payload.data.results[1].geometry.location.lat,
-                longitude:action.payload.data.results[1].geometry.location.lng
+                longitude:action.payload.data.results[1].geometry.location.lng,
+                Pincode: searchPostalCode
             }
         };
 

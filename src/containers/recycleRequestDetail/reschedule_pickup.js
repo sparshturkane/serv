@@ -3,7 +3,7 @@ import HeaderDiv from '../common/header';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { } from '../../actions/index';
+import { consumerServicerequestRescheduleRequest } from '../../actions/index';
 
 
 class ReschedulePickup extends React.Component {
@@ -14,6 +14,7 @@ class ReschedulePickup extends React.Component {
             MobileNo : '',
             EmailID: '',
             AlternateMobileNo: '',
+            ScheduledDateTimeDisplay:'',
             //send data
             ConsumerServiceRequestID: '',
             ScheduledDateTime: '',
@@ -22,8 +23,16 @@ class ReschedulePickup extends React.Component {
 
             Address: '',
             AddressType: ''
-        }
+        };
+        this.handleReschedulePickupForm = this.handleReschedulePickupForm.bind(this);
     }
+
+    // handleDate(event){
+    //     console.log(event.target.value);
+    //     this.setState({
+    //         ScheduledDateTimeDisplay: event.target.value,
+    //     })
+    // }
 
     calenderDatesDisplay(){
         // if(this.props.makePagesActive.dropOff === undefined){
@@ -36,10 +45,10 @@ class ReschedulePickup extends React.Component {
         var enabledDates = [];
 
         // getting dates which have IsActive == true
-        if(this.props.getSlotsData.getSlot !== undefined){
+        if(this.props.getSlotsData.ConsumerServiceRequestRescheduleSlots !== undefined){
             // console.log(this.props.getSlotsData.getSlot.data);
-            this.props.getSlotsData.getSlot.data.map((value) => {
-                console.log(value.date);
+            this.props.getSlotsData.ConsumerServiceRequestRescheduleSlots.data.map((value) => {
+                // console.log(value.date);
                 value.slots.map((slots) => {
                     if(slots.IsActive==true){
                         enabledDates.push(value.date);
@@ -174,7 +183,7 @@ class ReschedulePickup extends React.Component {
 
 
         // if((this.props.geoLocationData !== undefined) && (startCalenderDate !== undefined)){
-        if(this.props.getSlotsData.getSlot !== undefined){
+        if(this.props.getSlotsData.ConsumerServiceRequestRescheduleSlots !== undefined){
             const script = document.createElement("script");
             var t = document.createTextNode("$(document).ready(function() { var date_input=$('input[name="+"date"+"]');"+
             "var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : 'body';"+
@@ -200,6 +209,7 @@ class ReschedulePickup extends React.Component {
 
     componentWillMount(){
         this.calenderDatesDisplay()
+
         // // if(this.props.getSlotsData.getSlot !== undefined){
         //     const script = document.createElement("script");
         //     var t = document.createTextNode("$(document).ready(function() { var date_input=$('input[name="+"date"+"]');"+
@@ -231,6 +241,7 @@ class ReschedulePickup extends React.Component {
         // complete address...// i didnot saved this will {Address
 
         // ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+0530', //slots
+        // console.log(this.props.reschedulePickupData);
         if(this.props.userData !== undefined){
             var date = new Date(this.props.reschedulePickupData.ScheduledDateTime).toISOString().slice(0,10);
             this.setState({
@@ -238,12 +249,29 @@ class ReschedulePickup extends React.Component {
                 MobileNo : this.props.userData.data.MobileNo,
                 EmailID: this.props.userData.data.EmailID,
                 AlternateMobileNo: this.props.userData.data.AlternateMobileNo,
-                ScheduledDateTime: date.split("-").reverse().join("/"),
+                ScheduledDateTimeDisplay: date.split("-").reverse().join("/"),
+                ConsumerServiceRequestID: this.props.recycleDetail.ConsumerServiceRequestID
 
             })
         }
 
 
+    }
+
+    handleReschedulePickupForm(event){
+        event.preventDefault();
+        var rescheduleRequestObj = {
+            ConsumerServiceRequestID: this.state.ConsumerServiceRequestID,
+            ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T00:00:00.000+05:30',
+            ScheduledToTime: '19:00:00',
+            ScheduledFromTime:'10:00:00',
+            Remarks: ""
+        }
+
+        // console.log(rescheduleRequestObj);
+        this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
+            browserHistory.push('/dashboard')
+        })
     }
 
     render(){
@@ -275,29 +303,29 @@ class ReschedulePickup extends React.Component {
                     <div id="home" className="tab-pane fade in active">
                         <div className="detailsHolder ">
                             <div className="row">
-                                <form>
+                                <form onSubmit={this.handleReschedulePickupForm}>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Name*</label><br/>
-                                            <input type="text" name="Name" value={this.state.Name} placeholder="Name" className="inputdetails" required/>
+                                            <input type="text" name="Name" value={this.state.Name} placeholder="Name" className="inputdetails" required readOnly/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Mobile Number1*</label><br/>
-                                            <input type="text" name="MobileNo" value={this.state.MobileNo} placeholder="Mobile Number" className="inputdetails" required/>
+                                            <input type="text" name="MobileNo" value={this.state.MobileNo} placeholder="Mobile Number" className="inputdetails" required readOnly/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Email*</label><br/>
-                                            <input type="email" name="EmailID" value={this.state.EmailID} placeholder="Email" className="inputdetails" required/>
+                                            <input type="email" name="EmailID" value={this.state.EmailID} placeholder="Email" className="inputdetails" required readOnly/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Alternate Number</label><br/>
-                                            <input type="text" name="AlternateMobileNo" value={this.state.AlternateMobileNo} placeholder="Number" className="inputdetails" required/>
+                                            <input type="text" name="AlternateMobileNo" value={this.state.AlternateMobileNo} placeholder="Number" className="inputdetails" required readOnly/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
@@ -309,14 +337,23 @@ class ReschedulePickup extends React.Component {
                                     <div className="col-sm-4">
                                         <div className="detailsContent" >
                                             <label className="labelDetails">Pickup Date*</label><br/>
-                                            <input className="inputdetails" name="date" value={this.state.ScheduledDateTime} id="date" placeholder="MM/DD/YYYY" type="text" required/>
+                                            <input
+                                                className="inputdetails"
+                                                name="date"
+                                                value={this.state.ScheduledDateTimeDisplay}
+                                                id="date"
+                                                placeholder="DD/MM/YYYY"
+                                                type="text"
+                                                required
+                                                readOnly
+                                            />
                                             <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar"/></span>
                                         </div>
                                     </div>
                                     <div className="col-sm-8">
                                         <div className="detailsContent">
                                             <label className="labelDetails">Complete Address*</label><br/>
-                                            <input type="text" name="Address" value={this.state.Address} placeholder="Flat, Building Name, Street, City" className="inputdetails" required/>
+                                            <input type="text" name="Address" value={this.state.Address} placeholder="Flat, Building Name, Street, City" className="inputdetails" required readOnly/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
@@ -347,12 +384,14 @@ class ReschedulePickup extends React.Component {
 function mapStateToProps(state) {
     return {
         reschedulePickupData: state.RescheduleData.ReschedulePickupData,
-        userData : state.Consumer.GetConsumerDetail
+        userData : state.Consumer.GetConsumerDetail,
+        getSlotsData : state.ConsumerServicerequest,
+        recycleDetail: state.ConsumerServicerequest.ConsumerServiceRequestRecycleDetail.data,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ }, dispatch);
+    return bindActionCreators({ consumerServicerequestRescheduleRequest }, dispatch);
 }
 
-export default connect(mapStateToProps, null)(ReschedulePickup);
+export default connect(mapStateToProps, mapDispatchToProps)(ReschedulePickup);

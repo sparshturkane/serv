@@ -157,7 +157,7 @@ class LocationSearch extends React.Component {
         this.props.fetchGeoLocation(this.state.Landmark).then( () => {
 
 
-            if(this.props.geoLocationData.pincode === ''){
+            if(this.props.geoLocationData.pincode === '' && this.props.browserLocationData.Pincode ===''){
                 this.setState({
                     LandmarkError: 'Please Enter Valid Landmark'
                 })
@@ -165,11 +165,17 @@ class LocationSearch extends React.Component {
 
             if(this.props.ServiceTypeID === 9){
                 // calling fetchPickUpLocations action serviceAvailability
-
+                var Zipcode = ''
+                if(this.props.geoLocationData.pincode !== ''){
+                    Zipcode = this.props.geoLocationData.pincode;
+                }else{
+                    Zipcode = this.props.browserLocationData.Pincode;
+                }
+                console.log(Zipcode);
                 const pickUpLocationRequest = {
                     Lat: this.props.geoLocationData.latitude,
                     Lng: this.props.geoLocationData.longitude,
-                    Zipcode: this.props.geoLocationData.pincode,
+                    Zipcode: Zipcode,
                     ServiceTypeID: 9,
                     ProductID: this.props.productData.ProductID,
                 };
@@ -298,6 +304,7 @@ class LocationSearch extends React.Component {
             })
         }
     }
+
     browserLocation(){
         console.log("browserLocation hit");
         // if (navigator && navigator.geolocation) {
@@ -330,7 +337,7 @@ class LocationSearch extends React.Component {
 
         // });
         //this will work with https
-        this.browserLocationCode();
+        // this.browserLocationCode();
         // if(this.state.Landmark === ''){
             // first this will run then other will run
             console.log("---no https---");

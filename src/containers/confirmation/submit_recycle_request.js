@@ -78,7 +78,7 @@ class SubmitRecycleRequestButton extends React.Component {
                 ProductRewardID : this.state.ProductRewardIDArray,
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
-                ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+0530', //slots
+                ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+05:30', //slots
                 ScheduledFromTime : "10:00:00", //static
                 ScheduledToTime : "19:00:00", //static
                 ServiceTypeID : this.props.userData.ServiceTypeID, //vari

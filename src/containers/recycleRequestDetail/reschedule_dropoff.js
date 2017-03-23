@@ -70,6 +70,19 @@ class RescheduleDropoff extends React.Component {
 
     setActiveSlots(){
         const pickUpDate = JSON.parse(localStorage.getItem('pickUpDate'));
+
+        // refreashing time slots if dates are not selected
+        if(this.state.ScheduledDateTimeDisplay !== pickUpDate){
+            this.setState({
+                activeButtonNameFrom : '',
+                activeButtonNameTo : '',
+            });
+
+            $("#slot1").removeClass("activeBtnTime");
+            $("#slot2").removeClass("activeBtnTime");
+            $("#slot3").removeClass("activeBtnTime");
+        }
+
         this.setState({
             ScheduledDateTimeDisplay : pickUpDate
         });

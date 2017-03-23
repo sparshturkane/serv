@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
-import { sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal } from '../../actions/index';
+import $ from 'jquery';
+import { sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal, sessionStorageDropOffTimeSlot } from '../../actions/index';
 import HeaderDiv from '../common/header'
 import LocationSearch from '../location_search';
 import OtpPage from '../otp_page';
@@ -24,12 +25,20 @@ class DropOffForm extends React.Component {
             slot1BtnClass: 'activeBtnTime dropOffBTN',
             slot2BtnClass: 'dropOffBTN',
             slot3BtnClass: 'dropOffBTN',
+            ScheduledDateTimeDisplay: '',
+            slots: [],
+            activeButtonNameFrom : '',
+            activeButtonNameTo : '',
         };
         this.handleInputFieldsChange = this.handleInputFieldsChange.bind(this);
         this.handleOnSubmitPickUpForm = this.handleOnSubmitPickUpForm.bind(this);
     }
 
     componentWillMount(){
+        this.calenderDatesDisplay();
+    }
+
+    calenderDatesDisplay(){
         // if(this.props.makePagesActive.dropOff === undefined){
         //     browserHistory.push('/');
         // }else if (this.props.makePagesActive.dropOff.status === '0') {
@@ -191,6 +200,13 @@ class DropOffForm extends React.Component {
         "endDate: "+endCalenderDate+","+
         // "datesDisabled: ['23/02/2017','24/02/2017'],"+
         "datesDisabled: "+finalDisabledDates+","+
+        // "}); })");
+
+        "})"+
+        ".on('changeDate', function(ev){"+
+            "var dateData = date_input.val();"+
+            ""+
+            "localStorage.setItem('dropOffDate', JSON.stringify(dateData));"+
         "}); })");
         script.appendChild(t);
         document.body.appendChild(script);
@@ -245,6 +261,21 @@ class DropOffForm extends React.Component {
             status : '1'
         }
         this.props.makePagesActive(pageDataConfirmation);
+
+        // storing the date of activeTimeSlotsButtons selected by user
+        var timeSlotsData = {};
+        if(this.state.activeButtonNameFrom!=='' && this.state.activeButtonNameTo!==''){
+            timeSlotsData={
+                fromTime: this.state.activeButtonNameFrom,
+                toTime: this.state.activeButtonNameTo,
+            }
+        } else {
+            timeSlotsData={
+                fromTime: "10:00:00",
+                toTime: "19:00:00",
+            }
+        }
+        this.props.sessionStorageDropOffTimeSlot(timeSlotsData)
 
         const userDataRequest= {
             userName : this.state.userName,
@@ -345,41 +376,214 @@ class DropOffForm extends React.Component {
         }
     }
 
-    activeButtons(buttonName){
+    // activeButtons(buttonName){
+    //     switch (buttonName) {
+    //         case "slot1":
+    //             console.log('slot1 clicked');
+    //             this.setState({
+    //                 activeButtonName : 'slot1',
+    //                 slot1BtnClass: 'activeBtnTime dropOffBTN',
+    //                 slot2BtnClass: 'dropOffBTN',
+    //                 slot3BtnClass: 'dropOffBTN',
+    //             })
+    //         break;
+    //
+    //         case "slot2":
+    //             console.log('slot2 clicked');
+    //             this.setState({
+    //                 activeButtonName : 'slot2',
+    //                 slot1BtnClass: 'dropOffBTN',
+    //                 slot2BtnClass: 'activeBtnTime dropOffBTN',
+    //                 slot3BtnClass: 'dropOffBTN',
+    //             })
+    //         break;
+    //
+    //         case "slot3":
+    //             console.log('slot3 clicked');
+    //             this.setState({
+    //                 activeButtonName : 'slot3',
+    //                 slot1BtnClass: 'dropOffBTN',
+    //                 slot2BtnClass: 'dropOffBTN',
+    //                 slot3BtnClass: 'activeBtnTime dropOffBTN',
+    //             })
+    //         break;
+    //
+    //         default:
+    //
+    //     }
+    // }
+
+    activeButtons(buttonName, StartTimeVal, EndTimeVal ){
         switch (buttonName) {
             case "slot1":
                 console.log('slot1 clicked');
+                $("#slot1").addClass("activeBtnTime");
+                $("#slot2").removeClass("activeBtnTime");
+                $("#slot3").removeClass("activeBtnTime");
+                // console.log(buttonName);
                 this.setState({
-                    activeButtonName : 'slot1',
-                    slot1BtnClass: 'activeBtnTime dropOffBTN',
-                    slot2BtnClass: 'dropOffBTN',
-                    slot3BtnClass: 'dropOffBTN',
+
+                    activeButtonNameFrom : StartTimeVal,
+                    activeButtonNameTo : EndTimeVal,
+                    // slotBtnClass1: 'activeBtnTime dropOffBTN',
+                    // slotBtnClass2: 'dropOffBTN',
+                    // slotBtnClass3: 'dropOffBTN',
                 })
             break;
 
             case "slot2":
                 console.log('slot2 clicked');
+                $("#slot1").removeClass("activeBtnTime");
+                $("#slot2").addClass("activeBtnTime");
+                $("#slot3").removeClass("activeBtnTime");
                 this.setState({
-                    activeButtonName : 'slot2',
-                    slot1BtnClass: 'dropOffBTN',
-                    slot2BtnClass: 'activeBtnTime dropOffBTN',
-                    slot3BtnClass: 'dropOffBTN',
+                    activeButtonNameFrom : StartTimeVal,
+                    activeButtonNameTo : EndTimeVal,
+                    // slotBtnClass1: 'dropOffBTN',
+                    // slotBtnClass2: 'activeBtnTime dropOffBTN',
+                    // slotBtnClass3: 'dropOffBTN',
                 })
             break;
 
             case "slot3":
                 console.log('slot3 clicked');
+                $("#slot1").removeClass("activeBtnTime");
+                $("#slot2").removeClass("activeBtnTime");
+                $("#slot3").addClass("activeBtnTime");
                 this.setState({
-                    activeButtonName : 'slot3',
-                    slot1BtnClass: 'dropOffBTN',
-                    slot2BtnClass: 'dropOffBTN',
-                    slot3BtnClass: 'activeBtnTime dropOffBTN',
+                    activeButtonNameFrom : StartTimeVal,
+                    activeButtonNameTo : EndTimeVal,
+                    // slotBtnClass1: 'dropOffBTN',
+                    // slotBtnClass2: 'dropOffBTN',
+                    // slotBtnClass3: 'activeBtnTime dropOffBTN',
                 })
             break;
 
             default:
 
         }
+    }
+
+    componentDidMount() {
+        // storing date in localStorage
+        localStorage.setItem('dropOffDate', JSON.stringify(this.state.ScheduledDateTimeDisplay));
+        // console.log(this.refs.date);
+
+        // calling interval to get localStorage data
+        this.loadInterval = setInterval(
+            () => {
+
+                // console.log(pickUpDate);
+                this.setActiveSlots();
+            },
+            1000
+        );
+
+
+        // this.props.rescheduleDropoffData.ScheduledDateTime
+        // $(this.refs.date).datepicker()
+        // .on('changeDate', (e) => {
+        //     //  e here contains the extra attributes
+        //     this.handleChange(e);
+        // });
+
+        // we will now have to store these slots data in array and then
+        // var enabledDates = [];
+
+    }
+
+    componentWillUnmount () {
+        // alert('component unmounted');
+        this.loadInterval && clearInterval(this.loadInterval);
+        this.loadInterval = false;
+    }
+
+    setActiveSlots(){
+        const dropOffDate = JSON.parse(localStorage.getItem('dropOffDate'));
+
+        // refreashing time slots if dates are not selected
+        if(this.state.ScheduledDateTimeDisplay !== dropOffDate){
+            this.setState({
+                activeButtonNameFrom : '',
+                activeButtonNameTo : '',
+            });
+
+            $("#slot1").removeClass("activeBtnTime");
+            $("#slot2").removeClass("activeBtnTime");
+            $("#slot3").removeClass("activeBtnTime");
+        }
+
+        this.setState({
+            ScheduledDateTimeDisplay : dropOffDate
+        });
+
+
+
+        if(this.props.getSlotsData.getSlot !== undefined){
+            // console.log(this.props.getSlotsData.getSlot.data);
+            this.props.getSlotsData.getSlot.data.map((value) => {
+                // console.log(value.date);
+                // value.slots.map((slots) => {
+                //     if(slots.IsActive==true){
+                //         enabledDates.push(value.date);
+                //     }
+                // });
+
+                // if(value.date)
+                var slotsDate = new Date(value.date).toISOString().slice(0,10);
+                var slotsDateFormated = slotsDate.split("-").reverse().join("/");
+                // console.log(myFormated);
+                // console.log(slotsDateFormated + " == " +this.state.ScheduledDateTimeDisplay);
+                if(slotsDateFormated === this.state.ScheduledDateTimeDisplay){
+                    this.setState({
+                        slots: value.slots
+                    })
+                }
+            });
+        }
+    }
+
+    renderSlots(){
+        if(this.state.slots !== undefined){
+            // console.log("state changed");
+            var i = 1;
+            return this.state.slots.map((value) => {
+                var buttonName = 'slot'+i;
+                // var buttonClassName = 'slot'+i+'BtnClass';
+                // var className=this.state.{buttonClassName};
+                i = i + 1;
+                // var buttonClassName = "this.state.ScheduledDateTimeDisplay";
+                // // console.log(eval("this.state.Name"));
+                // var NameEcho = eval("this.state.Name");
+                // console.log(NameEcho);
+                // console.log(this.state.Name);
+                if(value.IsActive === true){
+                    return(
+                        <button key={buttonName} type="button"
+                            className={"dropOffBTN"}
+                            ref={buttonName}
+                            id={buttonName}
+                            onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
+                            {value.StartTime} - {value.EndTime}
+                        </button>
+                    );
+                } else if(value.IsActive === false){
+                    return(
+                        <button key={buttonName} type="button"
+                            className={"dropOffBTN"}
+                            ref={buttonName}
+                            id={buttonName}
+                            disabled
+                            onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
+                            {value.StartTime} - {value.EndTime}
+                        </button>
+                    );
+
+                }
+
+            });
+        }
+
     }
 
     render(){
@@ -422,7 +626,14 @@ class DropOffForm extends React.Component {
                             <div className="col-sm-4">
                                 <div className="detailsContent" >
                                     <label className="labelDetails">Choose Date*</label><br />
-                                    <input className="inputdetails" name="date" id="date" placeholder="DD/MM/YYYY" type="text" readOnly required />
+                                    <input className="inputdetails"
+                                        name="date"
+                                        id="date"
+                                        placeholder="DD/MM/YYYY"
+                                        type="text"
+                                        value={this.state.ScheduledDateTimeDisplay}
+                                        readOnly
+                                        required />
                                     <span className="calendarHolder"><img src="images/calIcon.png" className="calendar"  alt="calendar" /></span>
                                 </div>
                             </div>
@@ -430,9 +641,7 @@ class DropOffForm extends React.Component {
                                 <div className="detailsContent">
                                     <label className="labelDetails">Choose Time Slot</label><br />
                                     <div className="dropoffBTNHolder">
-                                        <button type="button" className={this.state.slot1BtnClass} onClick={this.activeButtons.bind(this,'slot1')}>10am - 12 pm</button>
-                                        <button type="button" className={this.state.slot2BtnClass} onClick={this.activeButtons.bind(this,'slot2')}>12pm - 2pm</button>
-                                        <button type="button" className={this.state.slot3BtnClass} onClick={this.activeButtons.bind(this,'slot3')}>2pm - 4pm</button>
+                                        {this.renderSlots()}
                                     </div>
                                 </div>
                             </div>
@@ -466,7 +675,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal }, dispatch);
+    return bindActionCreators({ sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal, sessionStorageDropOffTimeSlot }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropOffForm);

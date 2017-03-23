@@ -109,8 +109,8 @@ class SubmitRecycleRequestButton extends React.Component {
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
                 ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+0530', //slots
-                ScheduledFromTime : "10:00:00", //static
-                ScheduledToTime : "19:00:00", //static
+                ScheduledFromTime : this.props.timeSlotsData.dropOffTimeSlot.fromTime,//"10:00:00", //static this.props.timeSlotsData.dropOffTimeSlot.fromTime
+                ScheduledToTime : this.props.timeSlotsData.dropOffTimeSlot.toTime,//"19:00:00", //static this.props.timeSlotsData.dropOffTimeSlot.toTime
                 ServiceTypeID : this.props.userData.ServiceTypeID, //vari
                 claimRequestFlow : 0, //s
                 ProductUniqueID : '', //optional IMEI no if Imei given then call api  ConsumerServicerequest/validateSerialNumber
@@ -151,6 +151,7 @@ function mapStateToProps(state) {
         productData: state.productData.ActiveProductData,
         consumerDetail: state.Consumer.ConsumerDetail,
         userData: state.SessionStorage.UserData,
+        timeSlotsData: state.SessionStorage,
         geoLocationData: state.GeoLocationData,
         pickUpServiceLocation: state.PickUpDropOffServiceLocationData.PickUpServiceLocations,
         ActiveDropOffServiceLocation : state.PickUpDropOffServiceLocationData.ActiveDropOffServiceLocation,

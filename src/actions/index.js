@@ -34,6 +34,7 @@ export const STORE_RESCHEDULE_PICKUP_DATA = 'STORE_RESCHEDULE_PICKUP_DATA';
 export const STORE_RESCHEDULE_DROPOFF_DATA = 'STORE_RESCHEDULE_DROPOFF_DATA';
 export const POST_CONSUMER_SERVICE_RESCHEDULE_SLOTS = 'POST_CONSUMER_SERVICE_RESCHEDULE_SLOTS';
 export const POST_CONSUMER_SERVICE_RESCHEDULE_REQUEST = 'POST_CONSUMER_SERVICE_RESCHEDULE_REQUEST';
+export const STORE_DROP_OFF_TIME_SLOTS = 'STORE_DROP_OFF_TIME_SLOTS';
 
 
 const ROOT_URL = 'http://staging.servify.in:8018/api';
@@ -236,6 +237,14 @@ export function sessionStorageUserData(userData) {
     return {
         type: STORE_USER_DATA,
         payload: userData,
+    };
+}
+
+// session storing dropOff Button timeSlots
+export function sessionStorageDropOffTimeSlot(timeSlotsData) {
+    return {
+        type: STORE_DROP_OFF_TIME_SLOTS,
+        payload: timeSlotsData,
     };
 }
 

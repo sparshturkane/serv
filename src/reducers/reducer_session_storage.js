@@ -1,4 +1,4 @@
-import { STORE_USER_DATA, STORE_LOCATION_DATA, GET_BROWSER_LOCATION,GET_ADDRESS_FROM_LAT_LNG,SET_SHOW_HIDE_MODAL } from '../actions/index';
+import { STORE_USER_DATA, STORE_LOCATION_DATA, GET_BROWSER_LOCATION,GET_ADDRESS_FROM_LAT_LNG,SET_SHOW_HIDE_MODAL, STORE_DROP_OFF_TIME_SLOTS } from '../actions/index';
 
 const INITIAL_STATE = { };
 
@@ -45,6 +45,12 @@ export default function(state = INITIAL_STATE, action) {
         return {
             ...state,
             displayOtpModal: action.payload
+        };
+
+        case STORE_DROP_OFF_TIME_SLOTS:
+        return {
+            ...state,
+            dropOffTimeSlot: action.payload
         };
 
         default:

@@ -22,6 +22,19 @@ class Home extends React.Component {
 
     }
 
+    componentWillMount(){
+        const script = document.createElement("script");
+        var t = document.createTextNode("$(function() {"+
+            "$('#fifth').carouseller();"+
+        "});");
+
+        // $(function() {
+        //     $('#fifth').carouseller();
+        // });
+        script.appendChild(t);
+        document.body.appendChild(script);
+    }
+
     componentDidMount(){
         const script = document.createElement("script");
         var t = document.createTextNode("var swiper = new Swiper('.swiper-container', {"+

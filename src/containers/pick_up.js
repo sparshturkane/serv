@@ -8,6 +8,7 @@ import { Link } from 'react-router';
 import HeaderDiv from './common/header'
 import LocationSearch from './location_search';
 import OtpPage from './otp_page';
+import imeiInfo from '../images/imeiInfo.png';
 import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal  } from '../actions/index';
 
 class PickUpPage extends React.Component {
@@ -537,7 +538,7 @@ class PickUpPage extends React.Component {
                 {this.props.storedUserData.displayOtpModal == 1 &&
                     <OtpPage ServiceTypeID={this.state.ServiceTypeID}/>
                 }
-                <HeaderDiv productData={this.props.productData}/>
+                <HeaderDiv productData={this.props.productData} ProductName={this.props.productData.ProductName}/>
                 <LocationSearch ServiceTypeID={this.state.ServiceTypeID} setLandmark={this.setLocationDataSearchBar()}/>
 
                 <div className="menuHolder">
@@ -589,7 +590,23 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">IMEI Number of Device For Recycle</label>
                                             <br />
-                                            <input type="text" name="userIMEINumber" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userIMEINumber} onChange={this.handleInputFieldsChange} className="inputdetails" />
+                                            <input
+                                                type="text"
+                                                name="userIMEINumber"
+                                                onKeyPress={this.onKeyPressEnterLocation.bind(this)}
+                                                value={this.state.userIMEINumber}
+                                                onChange={this.handleInputFieldsChange}
+                                                className="inputdetails"
+                                            />
+                                            <br/>
+                                            <Link to={'/find-imei'} >
+                                                <span className="imeiInfoHolder">
+                                                    <img src={imeiInfo} className="imeiInfo"/>
+                                                    Where to find IMEI Number?
+                                                </span>
+                                            </Link>
+
+
 
                                         </div>
                                     </div>

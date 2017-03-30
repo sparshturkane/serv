@@ -23,7 +23,7 @@ class ConfirmRecycleRequest extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv productData={this.props.productData} userData={this.props.userData}/>
+                <HeaderDiv productData={this.props.productData} ProductName={this.props.productData.ProductName} userData={this.props.userData}/>
                 <div className="separators"></div>
 
                 <RecycleUserDetail />

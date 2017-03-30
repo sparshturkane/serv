@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { makePagesActive } from '../actions/index';
+import { makePagesActive, sessionStorageHeaderActivePhone } from '../actions/index';
 import { browserHistory } from 'react-router';
 import GreenRewards from './green_rewards';
 
@@ -45,6 +45,9 @@ class RewardList extends React.Component {
 
     handleRecyclMyPhoneClick(event){
         event.preventDefault();
+        // storing current phoneName for header
+        this.props.sessionStorageHeaderActivePhone(this.props.ProductName);
+
         console.log("recycle my phone clicked");
         const pageData = {
             pageName : 'pickUp',
@@ -91,7 +94,7 @@ class RewardList extends React.Component {
 
                 <div className="row landingSubmitButton">
                     <div className="col-sm-12">
-                        <Link to="/pickup-dropoff" type="button" onClick={this.handleRecyclMyPhoneClick} className="landingLargeButton ">Recycle My {this.props.ProductName}</Link>
+                        <Link to="/pickup-dropoff" type="button" onClick={this.handleRecyclMyPhoneClick} className="landingLargeButton textTransform">Recycle My {this.props.ProductName}</Link>
                     </div>
                 </div>
 
@@ -108,7 +111,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ makePagesActive }, dispatch);
+    return bindActionCreators({ makePagesActive, sessionStorageHeaderActivePhone }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RewardList);

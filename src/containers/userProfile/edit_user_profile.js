@@ -60,13 +60,29 @@ class EditUserProfile extends React.Component {
     // }
 
     handleInputFieldsChange(event){
-        this.setState(
-            {
-
-                [event.target.name]: event.target.value,
-
+        // limiting mobile number to 10 digits
+        if ([event.target.name] == 'MobileNo' || [event.target.name] == 'AlternateMobileNo') {
+            // console.log('mobile input');
+            if(event.target.value.length < 11){
+                this.setState({
+                    [event.target.name] : event.target.value,
+                })
             }
-        );
+        } else {
+            this.setState(
+                {
+                    [event.target.name]: event.target.value,
+                    // userName: event.target.value
+                }
+            );
+        }
+        // this.setState(
+        //     {
+        //
+        //         [event.target.name]: event.target.value,
+        //
+        //     }
+        // );
     }
 
     handleOnSubmitUpdateUser(event){
@@ -128,7 +144,7 @@ class EditUserProfile extends React.Component {
                                         </div>
                                         <div className="col-sm-3">
                                             <div className="detailsContent">
-                                                <label className="labelDetails">Mobile Number1*</label><br />
+                                                <label className="labelDetails">Mobile Number*</label><br />
                                                 <input type="text" name="MobileNo" onChange={this.handleInputFieldsChange} placeholder="Mobile Number" className="inputdetails" value={this.state.MobileNo} required />
                                             </div>
                                         </div>

@@ -142,7 +142,7 @@ class DropOffIndex extends React.Component {
 
         return(
             <div>
-                <HeaderDiv productData={this.props.productData}/>
+                <HeaderDiv productData={this.props.productData} ProductName={this.props.productData.ProductName}/>
                 <LocationSearch ServiceTypeID={this.state.ServiceTypeID} setLandmark={''}/>
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">

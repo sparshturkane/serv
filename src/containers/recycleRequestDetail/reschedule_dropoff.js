@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
 import $ from 'jquery';
-import { consumerServicerequestRescheduleRequest } from '../../actions/index';
+import { consumerServicerequestRescheduleRequest, sessionStorageRescheduleRecycleData } from '../../actions/index';
 
 // import '../../js/jquery-1.11.3.min.js';
 // import '../../js/jquery.min.js';
@@ -127,24 +127,30 @@ class RescheduleDropoff extends React.Component {
                 // console.log(this.state.Name);
                 if(value.IsActive === true){
                     return(
-                        <button key={buttonName} type="button"
-                            className={"dropOffBTN"}
-                            ref={buttonName}
-                            id={buttonName}
-                            onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
-                            {value.StartTime} - {value.EndTime}
-                        </button>
+                        <span className="dropOffBTNHolder">
+                            <button key={buttonName} type="button"
+                                className={"dropOffBTN"}
+                                ref={buttonName}
+                                id={buttonName}
+                                onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
+                                {value.StartTime} - {value.EndTime}
+                            </button>
+                        </span>
+
                     );
                 } else if(value.IsActive === false){
                     return(
-                        <button key={buttonName} type="button"
-                            className={"dropOffBTN"}
-                            ref={buttonName}
-                            id={buttonName}
-                            disabled
-                            onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
-                            {value.StartTime} - {value.EndTime}
-                        </button>
+                        <span className="dropOffBTNHolder">
+                            <button key={buttonName} type="button"
+                                className={"dropOffBTN"}
+                                ref={buttonName}
+                                id={buttonName}
+                                disabled
+                                onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
+                                {value.StartTime} - {value.EndTime}
+                            </button>
+                        </span>
+
                     );
 
                 }
@@ -384,15 +390,31 @@ class RescheduleDropoff extends React.Component {
 
     handleRescheduleDropoffForm(event){
         event.preventDefault();
+
+        var d = new Date();
+        // d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+        var datetext = d.toTimeString();
+        // datestring is "20:32:01 GMT+0530 (India Standard Time)"
+        // Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
+        // Take the first value from array :)
+        datetext = datetext.split(' ')[0];
+
+
         var rescheduleRequestObj = {
             ConsumerServiceRequestID: this.state.ConsumerServiceRequestID,
-            ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T00:00:00.000+05:30',
+            ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T'+datetext+'.000+05:30',
             ScheduledFromTime:this.state.activeButtonNameFrom, // this will not be static
             ScheduledToTime: this.state.activeButtonNameTo, // this will not be static
             Remarks: ""
         }
 
         console.log(rescheduleRequestObj);
+
+        // we will not make recycleRequest here we will make it in confirmation page
+        // so passing data to session and then confirmation page
+        this.props.sessionStorageRescheduleRecycleData(rescheduleRequestObj);
+        browserHistory.push(`/reschedule-confirmation/${this.state.ConsumerServiceRequestID}`);
+
         // this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
         //     browserHistory.push('/dashboard')
         // })
@@ -459,7 +481,7 @@ class RescheduleDropoff extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv />
+                <HeaderDiv ProductName={this.props.activePhoneName} />
                 <div className="locationHolder">
                     <div className="locationContent ">
                         <div className="row">
@@ -553,11 +575,12 @@ function mapStateToProps(state) {
         userData : state.Consumer.GetConsumerDetail,
         getSlotsData : state.ConsumerServicerequest,
         recycleDetail: state.ConsumerServicerequest.ConsumerServiceRequestRecycleDetail.data,
+        activePhoneName : state.SessionStorage.activePhoneName,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ consumerServicerequestRescheduleRequest }, dispatch);
+    return bindActionCreators({ consumerServicerequestRescheduleRequest, sessionStorageRescheduleRecycleData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RescheduleDropoff);

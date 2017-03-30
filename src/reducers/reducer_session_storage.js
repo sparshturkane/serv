@@ -1,4 +1,13 @@
-import { STORE_USER_DATA, STORE_LOCATION_DATA, GET_BROWSER_LOCATION,GET_ADDRESS_FROM_LAT_LNG,SET_SHOW_HIDE_MODAL, STORE_DROP_OFF_TIME_SLOTS } from '../actions/index';
+import {
+    STORE_USER_DATA,
+    STORE_LOCATION_DATA,
+    GET_BROWSER_LOCATION,
+    GET_ADDRESS_FROM_LAT_LNG,
+    SET_SHOW_HIDE_MODAL,
+    STORE_DROP_OFF_TIME_SLOTS,
+    STORE_RESCHEDULE_RECYCLE_REQUEST_DATA,
+    STORE_ACTIVE_PHONE
+} from '../actions/index';
 
 const INITIAL_STATE = { };
 
@@ -51,6 +60,18 @@ export default function(state = INITIAL_STATE, action) {
         return {
             ...state,
             dropOffTimeSlot: action.payload
+        };
+
+        case STORE_RESCHEDULE_RECYCLE_REQUEST_DATA:
+        return {
+            ...state,
+            rescheduleRecycleRequestData: action.payload
+        };
+
+        case STORE_ACTIVE_PHONE:
+        return {
+            ...state,
+            activePhoneName: action.payload
         };
 
         default:

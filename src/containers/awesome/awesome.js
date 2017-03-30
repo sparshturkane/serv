@@ -1,8 +1,8 @@
 import React from 'react';
 import HeaderDiv from '../common/header';
 import { Link } from 'react-router';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 // import {  } from '../actions/index';
 
 class AwesomePage extends React.Component {
@@ -13,7 +13,7 @@ class AwesomePage extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv />
+                <HeaderDiv ProductName={this.props.activePhoneName}/>
                 <div className="separators"></div>
 
                 <div className="awesomeInfoHolder">
@@ -48,11 +48,12 @@ class AwesomePage extends React.Component {
 
 export default AwesomePage;
 
-// function mapStateToProps(state) {
-//     return {
-//         supportedMobiles: state.supportedMobiles.supportedMobilesList
-//     };
-// }
+function mapStateToProps(state) {
+    return {
+        supportedMobiles: state.supportedMobiles.supportedMobilesList,
+        activePhoneName : state.SessionStorage.activePhoneName,
+    };
+}
 
 
 // function mapDispatchToProps(dispatch) {
@@ -67,4 +68,4 @@ export default AwesomePage;
 //     );
 // }
 
-// export default connect(mapStateToProps, null)(AwesomePage);
+export default connect(mapStateToProps, null)(AwesomePage);

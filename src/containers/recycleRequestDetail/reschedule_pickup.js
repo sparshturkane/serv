@@ -3,7 +3,8 @@ import HeaderDiv from '../common/header';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { consumerServicerequestRescheduleRequest } from '../../actions/index';
+import { consumerServicerequestRescheduleRequest, sessionStorageRescheduleRecycleData } from '../../actions/index';
+import imeiInfo from '../../images/imeiInfo.png';
 
 
 class ReschedulePickup extends React.Component {
@@ -243,6 +244,7 @@ class ReschedulePickup extends React.Component {
         // ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+0530', //slots
         // console.log(this.props.reschedulePickupData);
         if(this.props.userData !== undefined){
+            console.log(this.props.recycleDetail);
             var date = new Date(this.props.reschedulePickupData.ScheduledDateTime).toISOString().slice(0,10);
             this.setState({
                 Name : this.props.userData.data.Name,
@@ -250,7 +252,8 @@ class ReschedulePickup extends React.Component {
                 EmailID: this.props.userData.data.EmailID,
                 AlternateMobileNo: this.props.userData.data.AlternateMobileNo,
                 ScheduledDateTimeDisplay: date.split("-").reverse().join("/"),
-                ConsumerServiceRequestID: this.props.recycleDetail.ConsumerServiceRequestID
+                ConsumerServiceRequestID: this.props.recycleDetail.ConsumerServiceRequestID,
+                Address: this.props.recycleDetail.Address,
 
             })
         }
@@ -260,24 +263,39 @@ class ReschedulePickup extends React.Component {
 
     handleReschedulePickupForm(event){
         event.preventDefault();
+
+        var d = new Date();
+        // d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+        var datetext = d.toTimeString();
+        // datestring is "20:32:01 GMT+0530 (India Standard Time)"
+        // Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
+        // Take the first value from array :)
+        datetext = datetext.split(' ')[0];
+
+
         var rescheduleRequestObj = {
             ConsumerServiceRequestID: this.state.ConsumerServiceRequestID,
-            ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T00:00:00.000+05:30',
+            ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T'+datetext+'.000+05:30',
             ScheduledToTime: '19:00:00',
             ScheduledFromTime:'10:00:00',
             Remarks: ""
         }
 
+        // we will not make recycleRequest here we will make it in confirmation page
+        // so passing data to session and then confirmation page
+        this.props.sessionStorageRescheduleRecycleData(rescheduleRequestObj);
+        browserHistory.push(`/reschedule-confirmation/${this.state.ConsumerServiceRequestID}`);
+
         // console.log(rescheduleRequestObj);
-        this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
-            browserHistory.push('/dashboard')
-        })
+        // this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
+        //     browserHistory.push('/dashboard')
+        // })
     }
 
     render(){
         return(
             <div>
-                <HeaderDiv />
+                <HeaderDiv ProductName={this.props.activePhoneName}/>
                 <div className="locationHolder">
                     <div className="locationContent ">
                         <div className="row">
@@ -332,6 +350,14 @@ class ReschedulePickup extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">IMEI Number of Device For Recycle</label><br/>
                                             <input type="text" name="name" className="inputdetails"/>
+
+                                            {/*
+                                                <br/>
+                                                <span className="imeiInfoHolder">
+                                                    <img src={imeiInfo} className="imeiInfo"/>
+                                                    Where to find IMEI Number?
+                                                </span>
+                                            */}
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
@@ -387,11 +413,12 @@ function mapStateToProps(state) {
         userData : state.Consumer.GetConsumerDetail,
         getSlotsData : state.ConsumerServicerequest,
         recycleDetail: state.ConsumerServicerequest.ConsumerServiceRequestRecycleDetail.data,
+        activePhoneName : state.SessionStorage.activePhoneName,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ consumerServicerequestRescheduleRequest }, dispatch);
+    return bindActionCreators({ consumerServicerequestRescheduleRequest, sessionStorageRescheduleRecycleData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReschedulePickup);

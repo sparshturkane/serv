@@ -19,7 +19,7 @@ class AwesomePage extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv productData={this.props.productData} userData={this.props.userData} />
+                <HeaderDiv productData={this.props.productData} ProductName={this.props.activePhoneName} userData={this.props.userData} />
                 <div className="separators"></div>
 
                 <div className="awesomeInfoHolder">
@@ -60,6 +60,7 @@ function mapStateToProps(state) {
         productData: state.productData.ActiveProductData,
         userData: state.SessionStorage.UserData,
         makePagesActive: state.MakePagesActive,
+        activePhoneName : state.SessionStorage.activePhoneName,
 
     };
 }

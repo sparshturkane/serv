@@ -559,24 +559,31 @@ class DropOffForm extends React.Component {
                 // console.log(this.state.Name);
                 if(value.IsActive === true){
                     return(
-                        <button key={buttonName} type="button"
-                            className={"dropOffBTN"}
-                            ref={buttonName}
-                            id={buttonName}
-                            onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
-                            {value.StartTime} - {value.EndTime}
-                        </button>
+                        <span className="dropOffBTNHolder">
+                            <button key={buttonName} type="button"
+                                className={"dropOffBTN"}
+                                ref={buttonName}
+                                id={buttonName}
+                                onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
+                                {value.StartTime} - {value.EndTime}
+                            </button>
+                        </span>
+
                     );
                 } else if(value.IsActive === false){
                     return(
-                        <button key={buttonName} type="button"
-                            className={"dropOffBTN"}
-                            ref={buttonName}
-                            id={buttonName}
-                            disabled
-                            onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
-                            {value.StartTime} - {value.EndTime}
-                        </button>
+                        <span className="dropOffBTNHolder">
+                            <button key={buttonName} type="button"
+                                className={"dropOffBTN"}
+                                ref={buttonName}
+                                id={buttonName}
+                                disabled
+                                onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
+                                {value.StartTime} - {value.EndTime}
+                            </button>
+                        </span>
+
+
                     );
 
                 }
@@ -592,7 +599,7 @@ class DropOffForm extends React.Component {
                 {this.props.storedUserData.displayOtpModal == 1 &&
                     <OtpPage ServiceTypeID={this.state.ServiceTypeID}/>
                 }
-                <HeaderDiv productData={this.props.productData}/>
+                <HeaderDiv productData={this.props.productData} ProductName={this.props.productData.ProductName}/>
                 <LocationSearch ServiceTypeID={this.state.ServiceTypeID} setLandmark={this.setLocationDataSearchBar()}/>
                 <div className="menuHolder">
                     <div className="menuContent nav nav-tabs">

@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { consumerGetProfile } from '../../actions/index';
 
 
-class HeaderDiv extends React.Component {
+class HeaderDivDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -100,16 +100,7 @@ class HeaderDiv extends React.Component {
         return(
             <div className="topHadder row">
                 <div className="heartHolder col-sm-6">
-                    <img
-                        src={heart}
-                        className="heartImg"
-                        alt="Heart"
-                        onClick={this.onClickBrand.bind(this)}
-                        style={imageStyle}
-                    />
-                    <span className="topHeading">
-                        {this.props.ProductName} Recycle
-                    </span>
+                    
                 </div>
                 {this.showHideUserSettings()}
 
@@ -133,4 +124,4 @@ function mapDispatchToProps(dispatch) {
      return bindActionCreators({consumerGetProfile }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderDiv);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderDivDashboard);

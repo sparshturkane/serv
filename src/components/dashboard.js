@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
+import HeaderDivDashboard from '../containers/common/header_dashboard';
 // import './swiperlocal.js';
 // BUG: swiper is not working
 import whiteHeart from '../images/whiteheart.png';
@@ -52,16 +53,17 @@ class LoggedInDashboard extends React.Component {
         script.appendChild(t);
         document.body.appendChild(script);
     }
-    
+
     pushHomePage(){
         browserHistory.push('/home');
     }
     render(){
         return(
             <div>
+                <HeaderDivDashboard/>
                 {/* Swiper */}
                 <div className="row">
-                    <div className="spotHolder">
+                    <div className="loggedInspotHolder">
                         <div className="swiper-container">
                             <div className="swiper-wrapper">
                                 <div className="swiper-slide" id="sliderSpot5">
@@ -126,7 +128,7 @@ class LoggedInDashboard extends React.Component {
                 {/* main content */}
                 <div className="row">
                     <RecycleRequestList />
-                    <div className="col-sm-6">
+                    <div className="col-sm-4">
                         <div className="row trackHolder">
                             <div className="col-sm-12">
                                 <div className="trackHolderContent">

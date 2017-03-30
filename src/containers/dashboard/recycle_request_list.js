@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
+import Moment from 'react-moment';
 import { getConsumerServiceRequestDetails, consumerGetProfile } from '../../actions/index';
 
 import React from 'react';
@@ -57,6 +58,9 @@ class RecycleRequestList extends React.Component {
                         <div className="col-sm-4">
                             <div className="phoneLabelHolderTab">
                                 <label className="raisedLabel">{requestList.ConsumerServiceRequest.Status}</label>
+                                <label className="raisedLabelDate">
+                                    <Moment format="DD MMMM YYYY">{requestList.ConsumerServiceRequest.logUpdatedDate}</Moment>
+                                </label>
                             </div>
                         </div>
                         <div className="col-sm-4">
@@ -76,7 +80,7 @@ class RecycleRequestList extends React.Component {
 
     render(){
         return(
-            <div className="col-sm-6">
+            <div className="col-sm-8">
                 <div className="row trackHolder">
                     <div className="col-sm-12">
                         <div className="trackHolderContent">

@@ -1,16 +1,16 @@
 import React from 'react';
-import Moment from 'react-moment';
 import HeaderDiv from '../common/header';
+import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData, consumerServicerequestRescheduleSlots } from '../../actions/index';
+import { getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData, consumerServicerequestRescheduleSlots, consumerServicerequestRescheduleRequest } from '../../actions/index';
 
 // images
 import reschedule from '../../images/reshedule.png';
 import cancel from '../../images/cancel.png';
 //getConsumerServiceRequestRecycleDetails
-class RecycleRequestDetail extends React.Component {
+class RescheduleConfirmation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,6 +18,7 @@ class RecycleRequestDetail extends React.Component {
         };
         this.handleCancelRecycleRequest = this.handleCancelRecycleRequest.bind(this);
         this.handleRescheduleRecycleRequest = this.handleRescheduleRecycleRequest.bind(this);
+        this.handleRescheduleRecycle = this.handleRescheduleRecycle.bind(this);
     }
 
     componentWillMount(){
@@ -101,14 +102,20 @@ class RecycleRequestDetail extends React.Component {
         }
     }
 
+    handleRescheduleRecycle(){
+
+        this.props.consumerServicerequestRescheduleRequest(this.props.rescheduleRequestData).then(()=>{
+            browserHistory.push('/awesome')
+        })
+    }
+
     render(){
 
         return(
 
             <div>
-                {this.state.recycleDetail !== undefined &&
-                    <HeaderDiv ProductName={this.props.recycleDetail.data.product.ProductName}/>
-                }
+
+                <HeaderDiv ProductName={this.props.activePhoneName} />
 
                 <div className="separators"></div>
 
@@ -117,8 +124,8 @@ class RecycleRequestDetail extends React.Component {
                         <div className="row">
                             <div className="col-sm-8">
                                 <div className="pickupInfoContent">
-                                    <label className="congo"> Request</label><br />
-                                    <label className="recyle"> Details</label>
+                                    <label className="congo"> Congratulations!</label><br />
+                                    <label className="recyle"> Recycle Request is Registered.</label>
                                     <div className="deviceInfo">
                                         <div className="col-sm-3">
                                             <label className="devicelabel">Device</label><br />
@@ -126,13 +133,14 @@ class RecycleRequestDetail extends React.Component {
                                         </div>
                                         <div className="col-sm-6">
                                             <label className="devicelabel">Pickup Location</label><br />
-                                            <label className="deciceInfoLabel">{this.props.recycleDetail.data.Landmark}</label>
+                                            <label className="deciceInfoLabel">
+                                                {this.props.recycleDetail.data.Landmark}
+                                            </label>
                                         </div>
                                         <div className="col-sm-3">
                                             <label className="devicelabel">Pickup Date</label><br />
-
                                             <label className="deciceInfoLabel">
-                                                <Moment format="DD MMMM YYYY">{this.props.recycleDetail.data.CreatedDate}</Moment>
+                                                <Moment format="DD MMMM YYYY">{this.props.rescheduleRequestData.ScheduledDateTime}</Moment>
                                             </label>
                                         </div>
                                     </div>
@@ -162,25 +170,10 @@ class RecycleRequestDetail extends React.Component {
 
 
                     <div className="row submitButton">
-                        <div className="col-sm-12">
-                            <span className="resheduleHolder">
-                                <button type="button" onClick={this.handleRescheduleRecycleRequest} className="resheduleCancel">
-                                    <span className="resheduleImg">
-                                        <img src={reschedule} />
-
-                                    </span> Reshedule Request
-                                </button>
-                            </span>
-                            <span className="submitButtonHolder">
-                                <button type="button" onClick={this.handleCancelRecycleRequest} className="resheduleCancel">
-                                    <span className="resheduleImg">
-                                        <img src={cancel} />
-
-                                    </span> Cancel Request
-                                </button>
-                            </span>
-
+                        <div className="col-sm-4">
+                            <button type="button" className="pickUPlargebutton" onClick={this.handleRescheduleRecycle}>Submit</button>
                         </div>
+                        <div className="col-sm-8"></div>
                     </div>
                 </div>
                 <div className="separators"></div>
@@ -195,12 +188,14 @@ class RecycleRequestDetail extends React.Component {
 // export default RecycleRequestDetail;
 function mapStateToProps(state) {
     return {
-        recycleDetail: state.ConsumerServicerequest.ConsumerServiceRequestRecycleDetail
+        recycleDetail: state.ConsumerServicerequest.ConsumerServiceRequestRecycleDetail,
+        rescheduleRequestData : state.SessionStorage.rescheduleRecycleRequestData,
+        activePhoneName : state.SessionStorage.activePhoneName,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData, consumerServicerequestRescheduleSlots }, dispatch);
+    return bindActionCreators({ getConsumerServiceRequestRecycleDetails, consumerServicerequestCancelRequest, reschedulePickupData, rescheduleDropoffData, consumerServicerequestRescheduleSlots, consumerServicerequestRescheduleRequest }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecycleRequestDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(RescheduleConfirmation);

@@ -47,7 +47,7 @@ class TrackingPage extends React.Component {
     render(){
         return(
             <div>
-                <HeaderDiv productData={this.props.productData} userData={this.props.userData}/>
+                <HeaderDiv productData={this.props.productData} ProductName={this.props.activePhoneName} userData={this.props.userData}/>
 
                 <div className="separators"></div>
 
@@ -84,6 +84,7 @@ function mapStateToProps(state) {
         productData: state.productData.ActiveProductData,
         userData: state.SessionStorage.UserData,
         trackingList: state.ConsumerServicerequest.ConsumerServiceRequestTrackRequest,
+        activePhoneName : state.SessionStorage.activePhoneName,
 
     };
 }

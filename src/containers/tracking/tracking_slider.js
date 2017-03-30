@@ -26,7 +26,8 @@ class TrackingSlider extends React.Component {
 
         return this.props.trackingList.Logs.map((track) => {
             // if groupId==5 then show Download button
-            if (track.Hidden !== true) {
+            // console.log(track.DisplayInfo.Hidden);
+            if (track.DisplayInfo.Hidden !== true) {
                 // active card
                 return (
                     <div className="car__3" key={track.ConsumerServiceRequestLogID}>
@@ -34,6 +35,9 @@ class TrackingSlider extends React.Component {
                             <div className="boxContentLabelDate">
                                 <label className="boxDate">
                                     <Moment format="DD MMMM YYYY">{track.UpdatedDate}</Moment>
+                                </label>
+                                <label className="boxDate">
+                                    {track.DisplayInfo.Hidden}
                                 </label>
                             </div>
                             <div className="boxContentLabelTime">

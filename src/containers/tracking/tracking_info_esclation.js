@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import ProgressBarHolder from './tracking_progress_bar_holder'
-import { getConsumerServiceRequestDetails } from '../../actions/index';
+import { getConsumerServiceRequestDetails, sessionStorageHeaderActivePhone } from '../../actions/index';
 
 //images
 import escalate from '../../images/Escalate.png';
@@ -54,16 +54,17 @@ class TrackingInfoEsclation extends React.Component {
     }
 
     setProductName(){
-        console.log("working outside");
+        // console.log("working outside");
         if (this.state.requestList !== undefined) {
-            console.log("working");
+            // console.log("working");
             this.state.requestList.map((requestList) => {
                 // console.log("running");
                 if (requestList.ConsumerServiceRequest.ConsumerServiceRequestID == this.props.ConsumerServiceRequestID) {
 
                     this.setState({
                         ConsumerProductName : requestList.ProductName
-                    })
+                    });
+                    this.props.sessionStorageHeaderActivePhone(requestList.ProductName);
                 }
             });
         }
@@ -101,12 +102,24 @@ class TrackingInfoEsclation extends React.Component {
                         <div className="EscalateHolder">
 
                             <span className="EscalateLabel">
-                                <span className="escalteIMG"><img src={escalate} /></span><label>Escalate Request</label>
+                                <span className="escalteIMG">
+                                    <img src={escalate} />
+
+                                </span>
+                                <label className="EscalateText">
+                                    Escalate Request
+                                </label>
                             </span>
 
                             <Link to={`/recycle-detail/${this.props.ConsumerServiceRequestID}`}>
                                 <span className="EscalateLabel" onClick={this.handleRequestDetail}>
-                                    <span className="escalteIMG"><img src={request} /></span><label>Request Details</label>
+                                    <span className="escalteIMG">
+                                        <img src={request} />
+
+                                    </span>
+                                    <label className="EscalateText">
+                                        Request Details
+                                    </label>
                                 </span>
                             </Link>
                         </div>
@@ -127,7 +140,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getConsumerServiceRequestDetails }, dispatch);
+    return bindActionCreators({ getConsumerServiceRequestDetails, sessionStorageHeaderActivePhone }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackingInfoEsclation);

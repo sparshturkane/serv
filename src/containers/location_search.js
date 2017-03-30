@@ -407,7 +407,7 @@ class LocationSearch extends React.Component {
                                 <label className="locationLabel">Enter your location</label>
                             </div>
 
-                            <div className="col-sm-8">
+                            <div className="col-sm-7">
 
 
                                 <PlacesAutocomplete

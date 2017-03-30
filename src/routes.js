@@ -15,6 +15,8 @@ import EditUserProfile from './containers/userProfile/edit_user_profile';
 import RecycleRequestDetail from './containers/recycleRequestDetail/recycle_request_detail';
 import ReschedulePickup from './containers/recycleRequestDetail/reschedule_pickup';
 import RescheduleDropoff from './containers/recycleRequestDetail/reschedule_dropoff';
+import RescheduleConfirmation from './containers/recycleRequestDetail/reschedule_confirmation';
+import FindImei from './components/find_imei';
 
 // demo
 // import Demo from './components/geolocationTest';
@@ -143,5 +145,7 @@ export default (
         <Route path="/recycle-detail/:ConsumerServiceRequestID" component={ RecycleRequestDetail } />
         <Route path="/reschedule-pickup" component={ ReschedulePickup } />
         <Route path="/reschedule-dropoff" component={ RescheduleDropoff } />
+        <Route path="/reschedule-confirmation/:ConsumerServiceRequestID" component={ RescheduleConfirmation } />
+        <Route path="/find-imei" component={ FindImei } />
     </Route>
 );

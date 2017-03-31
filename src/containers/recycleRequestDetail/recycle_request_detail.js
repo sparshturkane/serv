@@ -126,7 +126,7 @@ class RecycleRequestDetail extends React.Component {
                                         </div>
                                         <div className="col-sm-6">
                                             <label className="devicelabel">Pickup Location</label><br />
-                                            <label className="deciceInfoLabel">{this.props.recycleDetail.data.Landmark}</label>
+                                            <label className="deciceInfoLabel">{this.props.recycleDetail.data.Address}</label>
                                         </div>
                                         <div className="col-sm-3">
                                             <label className="devicelabel">Pickup Date</label><br />

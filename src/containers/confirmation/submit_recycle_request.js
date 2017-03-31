@@ -94,7 +94,7 @@ class SubmitRecycleRequestButton extends React.Component {
                 ConsumerServiceRequestID : 0, //s
                 IsNonPartner : 0,//s
                 IsUrgent : 0,//s..
-                Landmark : this.props.geoLocationData.Landmark,
+                Landmark : this.props.browserLocationData.Landmark, // while type it is ok change because while selecting from browser there where some differences
                 Lat : this.props.geoLocationData.latitude,
                 Lng : this.props.geoLocationData.longitude,
                 // Zipcode : this.props.geoLocationData.pincode,
@@ -157,6 +157,7 @@ function mapStateToProps(state) {
         ActiveDropOffServiceLocation : state.PickUpDropOffServiceLocationData.ActiveDropOffServiceLocation,
         consumerProductDeviceData: state.ConsumerProduct,
         rewardsList: state.rewardsList.rewardsListData,
+        browserLocationData : state.SessionStorage.LocationData,
 
 
     };

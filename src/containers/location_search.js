@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PlacesAutocomplete from 'react-places-autocomplete'
-import { fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData, fetchDropOffLocations, getBrowserLocation, getAddressFromLatLng } from '../actions/index';
+import { fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData, fetchDropOffLocations, getBrowserLocation, getAddressFromLatLng, fetchGeoLocationPlaceID } from '../actions/index';
 
 class LocationSearch extends React.Component {
     constructor(props) {
@@ -234,6 +234,88 @@ class LocationSearch extends React.Component {
         });
     }
 
+    callingLocationActionsViaBrowserButton(){
+        console.log(" calling location actions via browser");
+        this.props.fetchGeoLocationPlaceID(this.props.browserLocationData.placeID).then( () => {
+
+
+            if(this.props.geoLocationData.pincode === '' && this.props.browserLocationData.Pincode ===''){
+                this.setState({
+                    LandmarkError: 'Please Enter Valid Landmark'
+                })
+            }
+
+            if(this.props.ServiceTypeID === 9){
+                // calling fetchPickUpLocations action serviceAvailability
+                var Zipcode = ''
+                if(this.props.geoLocationData.pincode !== ''){
+                    Zipcode = this.props.geoLocationData.pincode;
+                }else{
+                    Zipcode = this.props.browserLocationData.Pincode;
+                }
+                console.log(Zipcode);
+                const pickUpLocationRequest = {
+                    Lat: this.props.geoLocationData.latitude,
+                    Lng: this.props.geoLocationData.longitude,
+                    Zipcode: Zipcode,
+                    ServiceTypeID: 9,
+                    ProductID: this.props.productData.ProductID,
+                };
+                this.props.fetchPickUpLocations(pickUpLocationRequest).then( () =>{
+                    // this.props.fetchPickUpLocations
+                    const getSlotsRequest = {
+                        Lat : this.props.geoLocationData.latitude,//v
+                        Lng : this.props.geoLocationData.longitude,//v
+                        CurrentDate : new Date().toISOString().slice(0,10), //v
+                        ServiceTypeID : 9,//varia
+                        CurrentTime : new Date().toLocaleTimeString(), //v
+                        PartnerServiceLocationID : this.props.pickUpSerivceLocations.PartnerServiceLocationID, //variable
+                        DeliveryMode : this.props.pickUpSerivceLocations.DeliveryMode, //only at the time of pickup
+                    };
+                    this.props.getSlot(getSlotsRequest);
+                    this.props.sessionStorageLocationData(
+                        {
+                            Landmark: this.state.Landmark,
+                            latitude: this.props.geoLocationData.latitude,
+                            longitude : this.props.geoLocationData.longitude
+                        }
+                    );
+                })
+            } else if(this.props.ServiceTypeID === 13){// if ends here this space is for pickup
+                const dropOffLocationRequest = 	{
+                    Authorised:0, //s
+                    BrandID:this.props.productData.BrandID,
+                    IsExclusive:0, //s
+                    Lat: this.props.geoLocationData.latitude,
+                    Lng: this.props.geoLocationData.longitude,
+                    OrderBy:0, //s
+                    Page:1, //s
+                    Partnered:1, //s
+                    ProductID:this.props.productData.ProductID,
+                    ProductSubCategoryID:this.props.productData.ProductSubCategoryID,
+                    Radius:80 //s
+                }
+
+                this.props.fetchDropOffLocations(dropOffLocationRequest)
+                this.props.sessionStorageLocationData(
+                    {
+                        Landmark: this.state.Landmark,
+                        latitude: this.props.geoLocationData.latitude,
+                        longitude : this.props.geoLocationData.longitude
+                    }
+                );
+            }
+        } )
+
+        .catch(error => {
+            // console.log(error);
+            // alert(error);
+            this.setState({
+                LandmarkError: 'Please Enter Valid Landmark'
+            })
+        });
+    }
+
     handleOnChange(event){
         console.log("onChange");
         this.setState({
@@ -346,7 +428,7 @@ class LocationSearch extends React.Component {
                     this.setState({
                         Landmark : this.props.browserLocationData.Landmark,
                     });
-                    this.callingLocationActions();
+                    this.callingLocationActionsViaBrowserButton();
                 })
             });
         // }
@@ -447,7 +529,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData, fetchDropOffLocations, getBrowserLocation, getAddressFromLatLng }, dispatch);
+    return bindActionCreators({fetchGeoLocation,fetchGeoLocationPrediction, fetchPickUpLocations, getSlot, sessionStorageLocationData, fetchDropOffLocations, getBrowserLocation, getAddressFromLatLng, fetchGeoLocationPlaceID }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationSearch);

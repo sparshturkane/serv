@@ -46,7 +46,8 @@ export default function(state = INITIAL_STATE, action) {
                 Landmark: action.payload.data.results[1].formatted_address,
                 latitude:action.payload.data.results[1].geometry.location.lat,
                 longitude:action.payload.data.results[1].geometry.location.lng,
-                Pincode: searchPostalCode
+                Pincode: searchPostalCode,
+                placeID: action.payload.data.results[1].place_id,
             }
         };
 

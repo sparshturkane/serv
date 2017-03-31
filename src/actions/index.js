@@ -39,7 +39,7 @@ export const STORE_RESCHEDULE_RECYCLE_REQUEST_DATA = 'STORE_RESCHEDULE_RECYCLE_R
 export const STORE_ACTIVE_PHONE = 'STORE_ACTIVE_PHONE';
 
 
-const ROOT_URL = 'http://staging.servify.in:8018/api';
+const ROOT_URL = 'http://staging.servify.in:8027/api';
 
 // https://maps.googleapis.com/maps/api/geocode/json?address=anderi+west&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
 // https://maps.googleapis.com/maps/api/geocode/json?latlng=19.1363246,72.82766&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
@@ -107,6 +107,16 @@ export function pickUpPageFormSubmit(TempConsumerDetail) { //testing
 // https://maps.googleapis.com/maps/api/geocode/json?address=anderi+west&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
 export function fetchGeoLocation(Landmark) { //testing
     const request = axios.get(`${GOOGLE_MAPS_GEOCODING_ROOT_URL}/geocode/json?address=${Landmark}&key=${GOOGLE_MAPS_GEOCODING_API_KEY}`);
+
+    return {
+        type: GET_LAT_LNG,
+        payload: request,
+    };
+}
+
+// getting geo location based on place id when browser buton is clicked
+export function fetchGeoLocationPlaceID(placeID) { //testing
+    const request = axios.get(`${GOOGLE_MAPS_GEOCODING_ROOT_URL}/geocode/json?place_id=${placeID}&key=${GOOGLE_MAPS_GEOCODING_API_KEY}`);
 
     return {
         type: GET_LAT_LNG,

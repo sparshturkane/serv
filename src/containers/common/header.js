@@ -90,7 +90,13 @@ class HeaderDiv extends React.Component {
     }
 
     onClickBrand(){
-        browserHistory.push('/');
+        const SignUpData = JSON.parse(localStorage.getItem('SignUpData'));
+        if( SignUpData !== null){
+            browserHistory.push('/dashboard');
+        }else{
+            browserHistory.push('/');
+        }
+
     }
     render(){
 

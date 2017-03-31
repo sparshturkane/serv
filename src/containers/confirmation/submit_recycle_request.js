@@ -55,6 +55,14 @@ class SubmitRecycleRequestButton extends React.Component {
     handleOnClick(){
 
         var scheduleRecycleRequestData
+        var d = new Date();
+        // d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+        var datetext = d.toTimeString();
+        // datestring is "20:32:01 GMT+0530 (India Standard Time)"
+        // Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
+        // Take the first value from array :)
+        datetext = datetext.split(' ')[0];
+
         if ( this.props.userData.ServiceTypeID == 9 ) {
             scheduleRecycleRequestData = {
                 BrandID : this.props.productData.BrandID,
@@ -78,7 +86,7 @@ class SubmitRecycleRequestButton extends React.Component {
                 ProductRewardID : this.state.ProductRewardIDArray,
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
-                ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+05:30', //slots
+                ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T'+datetext+'.000+05:30', //slots
                 ScheduledFromTime : "10:00:00", //static
                 ScheduledToTime : "19:00:00", //static
                 ServiceTypeID : this.props.userData.ServiceTypeID, //vari
@@ -108,7 +116,7 @@ class SubmitRecycleRequestButton extends React.Component {
                 ProductRewardID : this.state.ProductRewardIDArray,
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
-                ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T00:00:00.000+0530', //slots
+                ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T'+datetext+'.000+05:30', //slots
                 ScheduledFromTime : this.props.timeSlotsData.dropOffTimeSlot.fromTime,//"10:00:00", //static this.props.timeSlotsData.dropOffTimeSlot.fromTime
                 ScheduledToTime : this.props.timeSlotsData.dropOffTimeSlot.toTime,//"19:00:00", //static this.props.timeSlotsData.dropOffTimeSlot.toTime
                 ServiceTypeID : this.props.userData.ServiceTypeID, //vari

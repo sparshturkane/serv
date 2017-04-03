@@ -66,36 +66,23 @@ class DropOffIndex extends React.Component {
         // });
         return this.props.DropOffServiceLocations.map((location) => {
             return (
-                <div key={location.PartnerServiceLocationID} >
-                    <div className="row" >
-                        <div className="dropOFFHolderContent">
-                            <div className="col-sm-8">
-                                <div className="leftDropOFF">
-                                    <div>
-                                        <label className="MapleLabel">{location.ServiceLocationName}</label>
-                                        <label className="kmLabel"><img src={navigation} />&nbsp;{Math.round( location.distance * 10 ) / 10 }Km</label>
-                                        <label className="TechnologyLabel">{location.NameOfFirm}</label>
-                                        <p className="TechnologyLabelContent">
-                                            {location.address}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-4">
-                                <div className="rightDropOFF">
-                                    <div className="SetAppointmentbtnHolder">
 
-                                        {/* <Link to={'/dropoff-form'} > */}
-                                        <button className="SetAppointmentbtn" onClick={this.handleSetAppointment.bind(this, location)}>Set Appointment</button>
-                                        {/* </Link> */}
-
+                        <div className="dropOFFHolderContent" key={location.PartnerServiceLocationID}>
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="leftDropOFF">
+                                        <div>
+                                            <label className="MapleLabel">{location.ServiceLocationName}</label>
+                                            <label className="kmLabel"><img src={navigation} />&nbsp;{Math.round( location.distance * 10 ) / 10 }Km</label>
+                                            <label className="TechnologyLabel">{location.NameOfFirm}</label>
+                                            <p className="TechnologyLabelContent">
+                                                {location.address}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr/>
-                </div>
 
 
             );
@@ -153,15 +140,26 @@ class DropOffIndex extends React.Component {
                         {this.supportedModesDropOff()}
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-sm-6 col-sm-push-6">
+                        <div className="mapHolder">
+                            <div id="map" className="mapStyle"></div>
 
-                <div className="dropOFFHolderContentMargin ">
-                    {this.props.DropOffServiceLocations !== undefined &&
-                        this.mapDropOffLocations()
-                    }
+                            
+                        </div>
+                    </div>
 
-                    {this.props.DropOffServiceLocations == undefined &&
-                    <p> Please Select Location</p>
-                    }
+                    <div className="col-sm-6 col-sm-pull-6">
+                        <div className="dropOFFHolderContentMargin ">
+                            {this.props.DropOffServiceLocations !== undefined &&
+                                this.mapDropOffLocations()
+                            }
+
+                            {this.props.DropOffServiceLocations == undefined &&
+                            <p> Please Select Location</p>
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div className="separators"></div>
             </div>

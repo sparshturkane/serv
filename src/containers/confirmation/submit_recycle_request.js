@@ -83,7 +83,7 @@ class SubmitRecycleRequestButton extends React.Component {
                 //     1,
                 //     4
                 // ],
-                ProductRewardID : this.state.ProductRewardIDArray,
+                ProductRewardID : this.props.ProductRewardIDArray,
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
                 ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T'+datetext+'.000+05:30', //slots
@@ -113,7 +113,7 @@ class SubmitRecycleRequestButton extends React.Component {
                 //     1,
                 //     4
                 // ],
-                ProductRewardID : this.state.ProductRewardIDArray,
+                ProductRewardID : this.props.ProductRewardIDArray,
                 ProductSubCategoryID : this.props.productData.ProductSubCategoryID,
                 // this.props.userData.date
                 ScheduledDateTime : this.props.userData.date.split("/").reverse().join("-")+'T'+datetext+'.000+05:30', //slots
@@ -166,6 +166,7 @@ function mapStateToProps(state) {
         consumerProductDeviceData: state.ConsumerProduct,
         rewardsList: state.rewardsList.rewardsListData,
         browserLocationData : state.SessionStorage.LocationData,
+        ProductRewardIDArray : state.SessionStorage.ProductRewardIDArray,
 
 
     };

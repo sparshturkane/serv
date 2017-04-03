@@ -6,7 +6,8 @@ import {
     SET_SHOW_HIDE_MODAL,
     STORE_DROP_OFF_TIME_SLOTS,
     STORE_RESCHEDULE_RECYCLE_REQUEST_DATA,
-    STORE_ACTIVE_PHONE
+    STORE_ACTIVE_PHONE,
+    STORE_PRODUCT_REWARD_ID_ARRAY
 } from '../actions/index';
 
 const INITIAL_STATE = { };
@@ -73,6 +74,12 @@ export default function(state = INITIAL_STATE, action) {
         return {
             ...state,
             activePhoneName: action.payload
+        };
+
+        case STORE_PRODUCT_REWARD_ID_ARRAY:
+        return {
+            ...state,
+            ProductRewardIDArray: action.payload
         };
 
         default:

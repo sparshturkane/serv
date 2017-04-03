@@ -19,12 +19,19 @@ class Home extends React.Component {
         //     browserHistory.push('/');
         // }
 
-
-    }
-
-    componentWillMount(){
-        const script = document.createElement("script");
+        var script = document.createElement("script");
         var t = document.createTextNode("$(function() {"+
+            "$('#first').carouseller();"+
+        "});");
+
+        // $(function() {
+        //     $('#fifth').carouseller();
+        // });
+        script.appendChild(t);
+        document.body.appendChild(script);
+
+        script = document.createElement("script");
+        t = document.createTextNode("$(function() {"+
             "$('#fifth').carouseller();"+
         "});");
 
@@ -33,10 +40,23 @@ class Home extends React.Component {
         // });
         script.appendChild(t);
         document.body.appendChild(script);
+
     }
 
+
     componentDidMount(){
-        const script = document.createElement("script");
+        // var script = document.createElement("script");
+        // var t = document.createTextNode("$(function() {"+
+        //     "$('#first').carouseller();"+
+        // "});");
+        //
+        // // $(function() {
+        // //     $('#fifth').carouseller();
+        // // });
+        // script.appendChild(t);
+        // document.body.appendChild(script);
+
+        var script = document.createElement("script");
         var t = document.createTextNode("var swiper = new Swiper('.swiper-container', {"+
             "pagination: '.swiper-pagination',"+
             "nextButton: '.swiper-button-next',"+

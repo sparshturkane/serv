@@ -62,6 +62,12 @@
 
         <script type="text/javascript">
             $(function() {
+                $('#first').carouseller();
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function() {
                 $('#fifth').carouseller();
             });
         </script>
@@ -100,6 +106,19 @@
             console.log('click fired');
         });
         </script>
+        <script>
+            function myMap() {
+                var mapOptions = {
+                    // 19.278499,72.8770093
+                    center: new google.maps.LatLng(19.278499,72.8770093),
+                    zoom: 17,
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                }
+                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            }
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClcKxFQge0V6gLs8j8JcVhOWLNTQVfZVs&callback=myMap"></script>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes&libraries=places"></script>
 

@@ -154,7 +154,7 @@ class PickUpPage extends React.Component {
                 var date = new Date();
                 var month = (date.getMonth() + 1).toString();
                 month = (month[1] ? month : '0' + month[0])
-                
+
                 if(disabledDayArray[i] !== 0){
                     disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
                     var nextMonth = parseInt(month);
@@ -574,7 +574,7 @@ class PickUpPage extends React.Component {
                                             <label className="labelDetails">Mobile Number*</label>
                                             <br />
 
-                                            <input type="number" name="userMobileNo" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userMobileNo} onChange={this.handleInputFieldsChange} placeholder="Mobile No" className="inputdetails" required/>
+                                            <input type="number" name="userMobileNo" pattern="[7-9]{1}[0-9]{9}" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userMobileNo} onChange={this.handleInputFieldsChange} placeholder="Mobile No" className="inputdetails" required/>
                                         </div>
                                     </div>
                                     <div className="col-sm-4">
@@ -589,7 +589,7 @@ class PickUpPage extends React.Component {
                                         <div className="detailsContent">
                                             <label className="labelDetails">Alternate Number</label>
                                             <br />
-                                            <input type="number" name="userAlternateNo" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userAlternateNo} onChange={this.handleInputFieldsChange} placeholder="Number" className="inputdetails" />
+                                            <input type="number" name="userAlternateNo" pattern="[7-9]{1}[0-9]{9}" title="Enter valid Mobile Number" onKeyPress={this.onKeyPressEnterLocation.bind(this)} value={this.state.userAlternateNo} onChange={this.handleInputFieldsChange} placeholder="Number" className="inputdetails" />
 
                                         </div>
                                     </div>

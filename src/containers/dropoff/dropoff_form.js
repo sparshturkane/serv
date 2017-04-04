@@ -154,7 +154,14 @@ class DropOffForm extends React.Component {
                 var date = new Date();
                 var month = (date.getMonth() + 1).toString();
                 month = (month[1] ? month : '0' + month[0])
-                disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
+
+                if(disabledDayArray[i] !== 0){
+                    disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
+                    var nextMonth = parseInt(month);
+                    nextMonth = nextMonth + 1;
+                    disabledDatesArray.push(disabledDayArray[i]+"/"+(nextMonth)+"/"+date.getFullYear());
+                }
+                // disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
                 // console.log(uniqueEnabledDatesFormatedToDay[i]);
                 // if(uniqueEnabledDatesFormatedToDay[i] - uniqueEnabledDatesFormatedToDay[i-1] != 1) {
                 //     //Not consecutive sequence, here you can break or do whatever you want
@@ -254,48 +261,56 @@ class DropOffForm extends React.Component {
     }
 
     handleOnSubmitPickUpForm(event){
-        event.preventDefault();
-        // making confirmation page active
-        const pageDataConfirmation = {
-            pageName : 'confirmation',
-            status : '1'
-        }
-        this.props.makePagesActive(pageDataConfirmation);
-
-        // storing the date of activeTimeSlotsButtons selected by user
-        var timeSlotsData = {};
-        if(this.state.activeButtonNameFrom!=='' && this.state.activeButtonNameTo!==''){
-            timeSlotsData={
-                fromTime: this.state.activeButtonNameFrom,
-                toTime: this.state.activeButtonNameTo,
+        // activeButtonNameFrom
+        // activeButtonNameTo
+        if((this.state.activeButtonNameFrom !== '') && (this.state.activeButtonNameTo !== '')){
+            event.preventDefault();
+            // making confirmation page active
+            const pageDataConfirmation = {
+                pageName : 'confirmation',
+                status : '1'
             }
-        } else {
-            timeSlotsData={
-                fromTime: "10:00:00",
-                toTime: "19:00:00",
+            this.props.makePagesActive(pageDataConfirmation);
+
+            // storing the date of activeTimeSlotsButtons selected by user
+            var timeSlotsData = {};
+            if(this.state.activeButtonNameFrom!=='' && this.state.activeButtonNameTo!==''){
+                timeSlotsData={
+                    fromTime: this.state.activeButtonNameFrom,
+                    toTime: this.state.activeButtonNameTo,
+                }
+            } else {
+                timeSlotsData={
+                    fromTime: "10:00:00",
+                    toTime: "19:00:00",
+                }
             }
+            this.props.sessionStorageDropOffTimeSlot(timeSlotsData)
+
+            const userDataRequest= {
+                userName : this.state.userName,
+                userMobileNo : this.state.userMobileNo,
+                date : event.target.date.value,
+                // dateNew : event.target.dateNew.value,
+                userEmail : this.state.userEmail,
+                ServiceTypeID : this.state.ServiceTypeID,
+            }
+
+            console.log("userDataRequest");
+            console.log(userDataRequest);
+            this.props.sessionStorageUserData(userDataRequest);
+
+            const getOTPRequestData = {
+                TempConsumerID : 0,// we will have to change it in revisions
+                MobileNo : this.state.userMobileNo,
+            }
+
+            this.getOTPRequest(getOTPRequestData, userDataRequest);
+        }else{
+            event.preventDefault();
+            alert("select time slot");
         }
-        this.props.sessionStorageDropOffTimeSlot(timeSlotsData)
 
-        const userDataRequest= {
-            userName : this.state.userName,
-            userMobileNo : this.state.userMobileNo,
-            date : event.target.date.value,
-            // dateNew : event.target.dateNew.value,
-            userEmail : this.state.userEmail,
-            ServiceTypeID : this.state.ServiceTypeID,
-        }
-
-        console.log("userDataRequest");
-        console.log(userDataRequest);
-        this.props.sessionStorageUserData(userDataRequest);
-
-        const getOTPRequestData = {
-            TempConsumerID : 0,// we will have to change it in revisions
-            MobileNo : this.state.userMobileNo,
-        }
-
-        this.getOTPRequest(getOTPRequestData, userDataRequest);
     }
 
     getOTPRequest(getOTPRequestData, userDataRequest){
@@ -559,7 +574,7 @@ class DropOffForm extends React.Component {
                 // console.log(this.state.Name);
                 if(value.IsActive === true){
                     return(
-                        <span className="dropOffBTNHolder">
+                        <span className="dropOffBTNHolder" key={value.StartTime}>
                             <button key={buttonName} type="button"
                                 className={"dropOffBTN"}
                                 ref={buttonName}
@@ -572,12 +587,13 @@ class DropOffForm extends React.Component {
                     );
                 } else if(value.IsActive === false){
                     return(
-                        <span className="dropOffBTNHolder">
+                        <span className="dropOffBTNHolder" key={value.StartTime}>
                             <button key={buttonName} type="button"
                                 className={"dropOffBTN"}
                                 ref={buttonName}
                                 id={buttonName}
                                 disabled
+                                style={{color: "grey", backgroundColor: "lightgrey", cursor: "not-allowed"}}
                                 onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
                                 {value.StartTime} - {value.EndTime}
                             </button>
@@ -590,7 +606,6 @@ class DropOffForm extends React.Component {
 
             });
         }
-
     }
 
     render(){
@@ -649,6 +664,16 @@ class DropOffForm extends React.Component {
                                     <label className="labelDetails">Choose Time Slot</label><br />
                                     <div className="dropoffBTNHolder">
                                         {this.renderSlots()}
+                                        {this.state.slots.length === 0 &&
+                                            <span className="dropOffBTNHolder" >
+                                                <button type="button"
+                                                    className={"dropOffBTN"}
+                                                    disabled
+                                                    style={{color: "grey", backgroundColor: "lightgrey", cursor: "not-allowed"}}>
+                                                    00 AM - 00 AM
+                                                </button>
+                                            </span>
+                                        }
                                     </div>
                                 </div>
                             </div>

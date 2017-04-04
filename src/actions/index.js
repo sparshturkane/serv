@@ -38,6 +38,7 @@ export const STORE_DROP_OFF_TIME_SLOTS = 'STORE_DROP_OFF_TIME_SLOTS';
 export const STORE_RESCHEDULE_RECYCLE_REQUEST_DATA = 'STORE_RESCHEDULE_RECYCLE_REQUEST_DATA';
 export const STORE_ACTIVE_PHONE = 'STORE_ACTIVE_PHONE';
 export const STORE_PRODUCT_REWARD_ID_ARRAY = 'STORE_PRODUCT_REWARD_ID_ARRAY';
+export const STORE_PRODUCT_REWARD_DATA_ARRAY = 'STORE_PRODUCT_REWARD_DATA_ARRAY';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -83,6 +84,14 @@ export function storeProductRewardIDArray(storeProductRewardIDArray) {
     return {
         type: STORE_PRODUCT_REWARD_ID_ARRAY,
         payload: storeProductRewardIDArray,
+    };
+}
+
+// storing product reward data
+export function storeProductRewardDataArray(storeProductRewardDataArray) {
+    return {
+        type: STORE_PRODUCT_REWARD_DATA_ARRAY,
+        payload: storeProductRewardDataArray,
     };
 }
 

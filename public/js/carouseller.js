@@ -8,7 +8,7 @@
 			hoverStopScroll: true,
 			easing: 'linear'
 		}, options),
-		
+
 		obj = $(this),
 		left_btn = obj.find('.carouseller__left'),
 		right_btn = obj.find('.carouseller__right'),
@@ -17,26 +17,26 @@
 		count = obj.find('[class*="car__"]').length,
 		sens = options.sens,
 		touch, startX, endX, result, wrap, t, count, can_view,
-		
+
 		init = function() {
 			this.interval = null;
 			this.stop = !1;
-			
+
 			left_btn.on('click', left);
 			right_btn.on('click', right);
 			list.on('touchstart', touchstart);
 			list.on('touchmove', touchmove);
 			list.on('touchend', touchend);
-			
+
 			if (options.hoverStopScroll) {
 				obj.on('mouseenter', mousein);
 				obj.on('mouseleave', mouseout);
 			}
-			
+
 			if (options.autoScrollDelay > 0) this.interval = window.setInterval(function(){ right('click')}, options.autoScrollDelay);
 			if (options.autoScrollDelay < 0) this.interval = window.setInterval(function(){ left('click')}, -options.autoScrollDelay);
 		},
-		
+
 		mousein = function(){
 			window.clearInterval(this.interval);
 		},
@@ -86,7 +86,7 @@
 				if (e.type == 'touchend') {
 					list.animate({
 						left: -2*t+'px'
-						
+
 					}, options.scrollSpeed, options.easing, function() {
 						obj.find('[class*="car__"]').eq(0).appendTo(list);
 						obj.find('[class*="car__"]').eq(0).appendTo(list);
@@ -110,11 +110,11 @@
 				list.animate({left: '0'},100)
 			}
 		},
-		
+
 		back = function(result){
 			t = get_el_width();
 			can_view = get_view_count(t);
-			
+
 			if( result = 0) {
 				list.animate({
 					left: '-' + t + 'px'
@@ -130,7 +130,7 @@
 			t = get_el_width();
 			can_view = get_view_count(t);;
 			result=0;
-			
+
 			if ( count > can_view ) {
 				obj.find('[class*="car__"]').eq(-1).prependTo(list);
 				list.css({ left: '-'+t+'px' });
@@ -143,14 +143,14 @@
 			t = get_el_width();
 			can_view = get_view_count(t);
 			touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-			
+
 			if ( count > can_view ) {
 				endX = touch.clientX
 				result = startX - endX;
 			} else {
 				result = 0;
 			}
-			
+
 			if ( Math.abs(result) > 30 && Math.abs(result) < t+30 ){
 				e.preventDefault();
 				list.css({ left: '-'+t-result+'px' });

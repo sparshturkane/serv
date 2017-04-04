@@ -20,6 +20,23 @@ class ConfirmRecycleRequest extends React.Component {
         // }
     }
 
+    greenRewardList(){
+        // ProductRewardDataArray
+        // <div className="grContentDiv">
+        // </div>
+        return this.props.ProductRewardDataArray.map((reward) => {
+            return(
+                <li className="conformDivLI" key={reward.ProductRewardID}>
+                    <div className="conformDiv">
+                        <label className="iphone7Label">{reward.RewardName}</label>
+                        <label className="LuckyDip">{reward.RewardValue}</label>
+                    </div>
+                </li>
+
+            );
+        });
+    }
+
     render(){
         return(
             <div>
@@ -34,7 +51,13 @@ class ConfirmRecycleRequest extends React.Component {
                             <div className="devicelabelContent">
                                 <label className="devicelabel">Green Rewards</label>
                             </div>
-                            <GreenRewards />
+                            {/* <GreenRewards /> */}
+                            <div className="conformDivHolder">
+                                <ul className="conformDivUL">
+                                    {this.greenRewardList()}
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                     <SubmitRecycleRequestButton />
@@ -51,6 +74,7 @@ function mapStateToProps(state) {
     return {
         productData: state.productData.ActiveProductData,
         userData: state.SessionStorage.UserData,
+        ProductRewardDataArray: state.SessionStorage.ProductRewardDataArray,
         makePagesActive: state.MakePagesActive,
 
     };

@@ -7,7 +7,8 @@ import {
     STORE_DROP_OFF_TIME_SLOTS,
     STORE_RESCHEDULE_RECYCLE_REQUEST_DATA,
     STORE_ACTIVE_PHONE,
-    STORE_PRODUCT_REWARD_ID_ARRAY
+    STORE_PRODUCT_REWARD_ID_ARRAY,
+    STORE_PRODUCT_REWARD_DATA_ARRAY
 } from '../actions/index';
 
 const INITIAL_STATE = { };
@@ -80,6 +81,12 @@ export default function(state = INITIAL_STATE, action) {
         return {
             ...state,
             ProductRewardIDArray: action.payload
+        };
+
+        case STORE_PRODUCT_REWARD_DATA_ARRAY:
+        return {
+            ...state,
+            ProductRewardDataArray: action.payload
         };
 
         default:

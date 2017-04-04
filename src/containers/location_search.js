@@ -502,6 +502,7 @@ class LocationSearch extends React.Component {
                                 <p style={LandmarkStyle}>{LandmarkError}</p>
                                 <img src="images/location.png" className="locationimg" alt="Location" />
                                 <span style={imageStyle} className="loadIconHolder" onClick={this.browserLocation.bind(this)} >
+                                    <span className="detect">Detect</span>
                                     <img src="images/loadIcon.png" className="loadIcon" alt="loadIcon"/>
                                 </span>
                             </div>

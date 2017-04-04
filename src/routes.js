@@ -19,7 +19,7 @@ import RescheduleConfirmation from './containers/recycleRequestDetail/reschedule
 import FindImei from './components/find_imei';
 
 // demo
-// import Demo from './components/geolocationTest';
+import Demo from './components/googleMapTest';
 
 
 // <Route path="posts/new" component={ PostsNew } />
@@ -147,5 +147,6 @@ export default (
         <Route path="/reschedule-dropoff" component={ RescheduleDropoff } />
         <Route path="/reschedule-confirmation/:ConsumerServiceRequestID" component={ RescheduleConfirmation } />
         <Route path="/find-imei" component={ FindImei } />
+        <Route path="/demo" component={ Demo } />
     </Route>
 );

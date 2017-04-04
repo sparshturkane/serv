@@ -43,7 +43,8 @@ class RescheduleConfirmation extends React.Component {
         })
     }
 
-    rewardsList(){
+    rewardsListOld(){
+        //works fine
         // console.log(this.props.rewardList);
         if( this.props.recycleDetail!== undefined){
             return this.props.recycleDetail.data.ProductReward.map((reward) => {
@@ -62,6 +63,32 @@ class RescheduleConfirmation extends React.Component {
                             <div className="grContentDivRight">
                                 <img src={reward.Rewards.RewardPartner.RewardUrl} alt="iphone7" className="appleLogoBig"/>
                             </div>
+                        </div>
+                    </li>
+                );
+            });
+        }
+
+        // return(<li>sparsh</li>);
+
+    }
+
+    rewardsList(){
+        // console.log(this.props.rewardList);
+        if( this.props.recycleDetail!== undefined){
+            return this.props.recycleDetail.data.ProductReward.map((reward) => {
+                var rewardValue = '';
+                if(reward.Rewards.RewardValue > 0){
+                    rewardValue = "INR " +reward.Rewards.RewardValue;
+                }else{
+                    rewardValue = "Eligible";
+                }
+                return (
+
+                    <li className="conformDivLI" key={reward.ProductRewardID}>
+                        <div className="conformDiv">
+                            <label className="iphone7Label">{reward.Rewards.RewardName}</label>
+                            <label className="LuckyDip">{rewardValue}</label>
                         </div>
                     </li>
                 );
@@ -158,12 +185,10 @@ class RescheduleConfirmation extends React.Component {
                             <div className="devicelabelContent">
                                 <label className="devicelabel">Green Rewards</label>
                             </div>
-                            <div className="row">
-                                <div className="greenRewordContentHolder">
-                                    <ul className="newgreenRewordContentHolderUL">
-                                        {this.rewardsList()}
-                                    </ul>
-                                </div>
+                            <div className="conformDivHolder">
+                                <ul className="conformDivUL">
+                                    {this.rewardsList()}
+                                </ul>
                             </div>
                         </div>
                     </div>

@@ -3,10 +3,24 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
+import GoogleMapReact from 'google-map-react';
 import { getSlot, activeDropOffServiceLocation } from '../../actions/index';
 import HeaderDiv from '../common/header'
 import LocationSearch from '../location_search';
 import navigation from '../../images/navigation.png';
+import gMapReg from '../../images/gMapReg.png';
+import gMapBlue from '../../images/gMapBlue.png';
+import moment from 'moment';
+
+const AnyReactComponent = ({ text }) => <div style={{
+    position: 'relative', color: 'white', backgroundImage: "url("+gMapReg+")",
+    height: 81, width: 121, top: -20, left: -30,backgroundRepeat: "no-repeat",
+}}><div style={{position: 'absolute',backgroundColor: 'white', color:'black', left: 41, top: 8, textAlign: 'center', fontSize: 13, padding: 5}}> <label>{text}</label></div></div>;
+
+const BlueMapMarker = ({ text }) => <div style={{
+    position: 'relative', color: 'white', backgroundImage: "url("+gMapBlue+")",
+    height: 81, width: 121, top: -20, left: -30,backgroundRepeat: "no-repeat",
+}}>{text}</div>;
 
 class DropOffIndex extends React.Component {
     constructor(props) {
@@ -15,6 +29,9 @@ class DropOffIndex extends React.Component {
             ServiceTypeID : 13, //dropoff ServiceTypeID
             DropOffServiceLocations : undefined,
             PartnerServiceLocationID : undefined,
+            center: {lat: this.props.geoLocationData.latitude, lng: this.props.geoLocationData.longitude},
+            zoom: 11,
+            size: { width:"1000px" , height:"1000px" }
             // userName : '',
             // userMobileNo : '',
             // date : '',
@@ -36,6 +53,22 @@ class DropOffIndex extends React.Component {
         // }else if (this.props.makePagesActive.dropOff.status === '0') {
         //     browserHistory.push('/');
         // }
+    }
+
+    componentDidUpdate(){
+        const script = document.createElement("script");
+        var t = document.createTextNode("$( '.seeMore' ).click(function() {"+
+            "$(this).next('.days').slideToggle( 'slow', function() {"+
+            "});"+
+        "});");
+        script.appendChild(t);
+        document.body.appendChild(script);
+
+        // $( ".seeMore" ).click(function() {
+        //     $(this).next(".days").slideToggle( "slow", function() {
+        //         // Animation complete.
+        //     });
+        // });
     }
 
     handleSetAppointment(location){
@@ -60,7 +93,7 @@ class DropOffIndex extends React.Component {
         });
     }
 
-    mapDropOffLocations(){
+    mapDropOffLocationsOldHome(){
         // this.setState({
         //     DropOffServiceLocations : this.props.DropOffServiceLocations,
         // });
@@ -86,6 +119,66 @@ class DropOffIndex extends React.Component {
 
 
             );
+        });
+    }
+
+    mapDropOffLocations(){
+        // this.setState({
+        //     DropOffServiceLocations : this.props.DropOffServiceLocations,
+        // });
+        return this.props.DropOffServiceLocations.map((location) => {
+            var WorkingFrom = location.WorkingFrom;
+            var formatedWorkingFrom = moment(WorkingFrom.toString(), 'HH:MM:ss').format('h:mm a');
+            var daysArray = location.WorkingDays.split(',');
+            var daysJsxStart1 = [];
+            var daysJsxStart2 = [];
+            var daysJsxLong = [];
+            var dayCounter = 0;
+            daysArray.map((day) => {
+                if(dayCounter < 1){
+                    daysJsxStart1.push(
+                        <span key={99} className="daysStyle"> {day} | {location.WorkingFrom} </span>
+                    );
+                    daysJsxStart2.push(
+                        <span key={96} className="daysStyle">{location.WorkingTo}</span>
+                    );
+                }else{
+                    daysJsxLong.push(
+                        <div key={day}><span className="daysStyle"> {day} | {location.WorkingFrom} </span> to <span className="daysStyle">{location.WorkingTo}</span></div>
+                    );
+                }
+
+                dayCounter = dayCounter + 1;
+            });
+            return (
+                <div className="dropOFFHolderContent" key={location.PartnerServiceLocationID}>
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="leftDropOFF">
+                                <div>
+                                    <span onClick={this.handleSetAppointment.bind(this,location)} style={{cursor: 'pointer'}}>
+                                        <label className="MapleLabel" style={{cursor: 'pointer'}}>{location.ServiceLocationName}</label>
+                                        <label className="kmLabel"><img src={navigation} />&nbsp;{Math.round( location.distance * 10 ) / 10 }Km</label>
+                                        <label className="TechnologyLabel" style={{cursor: 'pointer'}}>{location.NameOfFirm}</label>
+                                        <p className="TechnologyLabelContent">
+                                            {location.address}
+                                        </p>
+                                    </span>
+                                    <div className="openingStyleHolder">
+                                        <label className="openingLabel">Opening Days & Hours:</label>{daysJsxStart1} to {daysJsxStart2}<span className="seeMore">See More</span>
+                                        <div className="days" style={{display:'none'}} >
+                                            {daysJsxLong}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+        );
         });
     }
 
@@ -125,8 +218,15 @@ class DropOffIndex extends React.Component {
         });
     }
 
-    render(){
+    markerOnMap(){
+        return this.props.DropOffServiceLocations.map((location) => {
+            return (
+                <BlueMapMarker lat={location.Lat} lng={location.Lng} text={''} />
+            );
+        });
+    }
 
+    render(){
         return(
             <div>
                 <HeaderDiv productData={this.props.productData} ProductName={this.props.productData.ProductName}/>
@@ -142,10 +242,26 @@ class DropOffIndex extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-sm-6 col-sm-push-6">
-                        <div className="mapHolder">
-                            <div id="map" className="mapStyle"></div>
+                        <div className="mapHolder" style={{width: '94%', height: '600px'}}>
+                            {/* this.props.storedUserData.displayOtpModal == 1 && */}
+                            {this.props.geoLocationData.latitude != undefined &&
+                                <GoogleMapReact
+                                    defaultCenter={{lat: this.props.geoLocationData.latitude, lng: this.props.geoLocationData.longitude}}
+                                    defaultZoom={this.state.zoom}
+                                    defaultSize={this.state.size}
+                                    >
+                                    <AnyReactComponent
+                                        lat={this.props.geoLocationData.latitude}
+                                        lng={this.props.geoLocationData.longitude}
+                                        text={'YOU'}
+                                        />
+                                        {this.props.DropOffServiceLocations !== undefined &&
+                                            this.markerOnMap()
 
-                            
+                                        }
+
+                                </GoogleMapReact>
+                            }
                         </div>
                     </div>
 
@@ -153,8 +269,9 @@ class DropOffIndex extends React.Component {
                         <div className="dropOFFHolderContentMargin ">
                             {this.props.DropOffServiceLocations !== undefined &&
                                 this.mapDropOffLocations()
-                            }
 
+                            }
+                            <br/>
                             {this.props.DropOffServiceLocations == undefined &&
                             <p> Please Select Location</p>
                             }

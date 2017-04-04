@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { storeProductRewardIDArray  } from '../actions/index';
+import { storeProductRewardIDArray, storeProductRewardDataArray } from '../actions/index';
 
 class GreenRewards extends React.Component {
     constructor(props) {
@@ -52,20 +52,45 @@ class GreenRewards extends React.Component {
     //         }
     //     });
     // }
-    handleRadioClick(ProductRewardID){
+    handleRadioClick(ProductRewardID, RewardName, RewardValue){
         console.log("radio clicked!"+ProductRewardID);
         // what we should do is map the array and push
         var ProductRewardIDArray = [];
+        var ProductRewardDataArray = [];
         this.props.rewardList.map((value) => {
             if (value.IsMandatory === true) {
+                //id array
                 ProductRewardIDArray.push(value.ProductRewardID);
+                //data array
+                var rewardValue1 = '';
+                if(value.Rewards.RewardValue > 0){
+                    rewardValue1 = "INR " +value.Rewards.RewardValue;
+                }else{
+                    rewardValue1 = "Eligible";
+                }
+                ProductRewardDataArray.push(
+                    {
+                        ProductRewardID: value.ProductRewardID,
+                        RewardName: value.Rewards.RewardName,
+                        RewardValue:rewardValue1,
+                    }
+                );
             }
         });
+        //id array
         ProductRewardIDArray.push(ProductRewardID);
         this.props.storeProductRewardIDArray(ProductRewardIDArray);
         this.setState({
             ProductRewardIDArray
         })
+
+        //data array
+        ProductRewardDataArray.push({
+            ProductRewardID: ProductRewardID,
+            RewardName: RewardName,
+            RewardValue: RewardValue
+        });
+        this.props.storeProductRewardDataArray(ProductRewardDataArray);
     }
 
 
@@ -92,7 +117,7 @@ class GreenRewards extends React.Component {
                                 </div>
                             </div>
                             <div className="greenRewardChoose">
-                                <input type="radio" name="greenReward" value="w" onClick={this.handleRadioClick.bind(this, reward.ProductRewardID)}/>
+                                <input type="radio" name="greenReward" value="w" onClick={this.handleRadioClick.bind(this, reward.ProductRewardID, reward.Rewards.RewardName, rewardValue)}/>
                             </div>
                             <div className="grContentDivRight">
                                 <img src={reward.Rewards.RewardPartner.RewardUrl} className="cardSmallImg"/>
@@ -185,7 +210,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ storeProductRewardIDArray }, dispatch);
+    return bindActionCreators({ storeProductRewardIDArray, storeProductRewardDataArray }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GreenRewards);

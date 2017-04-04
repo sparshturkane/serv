@@ -24,6 +24,8 @@
         <link rel="stylesheet" href="%PUBLIC_URL%/css/bootstrap-datepicker3.css" />
         <link rel="stylesheet" href="%PUBLIC_URL%/css/carouseller.css">
         <link rel="stylesheet" href="%PUBLIC_URL%/css/swiper.min.css">
+
+        <link rel="stylesheet" href="%PUBLIC_URL%/css/horizontal.css">
         <title>Servify </title>
     </head>
     <body>
@@ -33,7 +35,7 @@
         <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="%PUBLIC_URL%/js/formden.js"></script>
         <script src="%PUBLIC_URL%/js/carouseller.js"></script>
-        <script src="%PUBLIC_URL%/js/jquery.easing.1.3.js"></script>
+        <!-- <script src="%PUBLIC_URL%/js/jquery.easing.1.3.js"></script> -->
         <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script> -->
         <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js'></script>
         <script type="text/javascript" src="%PUBLIC_URL%/js/datePicker.js"></script>
@@ -106,22 +108,35 @@
             console.log('click fired');
         });
         </script>
-        <script>
-            function myMap() {
-                var mapOptions = {
-                    // 19.278499,72.8770093
-                    center: new google.maps.LatLng(19.278499,72.8770093),
-                    zoom: 17,
-                    mapTypeId: google.maps.MapTypeId.HYBRID
-                }
-                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-            }
-        </script>
-
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClcKxFQge0V6gLs8j8JcVhOWLNTQVfZVs&callback=myMap"></script>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes&libraries=places"></script>
 
         <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes&libraries=places&callback=initAutocomplete" async defer></script> -->
+        <!-- <script src="%PUBLIC_URL%/js/modernizr.js"></script>
+        <script src="%PUBLIC_URL%/js/plugins.js"></script>
+        <script src="%PUBLIC_URL%/js/sly.js"></script>
+        <script src="%PUBLIC_URL%/js/horizontal.js"></script> -->
+
+        <script>
+        // function changeRollOverImg(imgNumPos){
+        //     $(".mobileIMGHolder").css("display", "block");
+        //     var hidDivNme = "#overPhnDispImg_"+imgNumPos;
+        //     $(hidDivNme).css("display", "none");
+        //     // reload call (imgNumPos);
+        //     console.log(imgNumPos);
+        //
+        //     // var root = document.getElementById('root');
+        //     // var imgNumPos = imgNumPos;
+        //     // ReactDOM.render(<X imgNumPos={imgNumPos}/>, root);
+        // }
+        </script>
+
+        <script>
+            // $( ".seeMore" ).click(function() {
+            //     $(this).next(".days").slideToggle( "slow", function() {
+            //         // Animation complete.
+            //     });
+            // });
+        </script>
     </body>
 </html>

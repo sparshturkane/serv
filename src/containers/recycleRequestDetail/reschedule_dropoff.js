@@ -276,7 +276,14 @@ class RescheduleDropoff extends React.Component {
                 var date = new Date();
                 var month = (date.getMonth() + 1).toString();
                 month = (month[1] ? month : '0' + month[0])
-                disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
+
+                if(disabledDayArray[i] !== 0){
+                    disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
+                    var nextMonth = parseInt(month);
+                    nextMonth = nextMonth + 1;
+                    disabledDatesArray.push(disabledDayArray[i]+"/"+(nextMonth)+"/"+date.getFullYear());
+                }
+                // disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
                 // console.log(uniqueEnabledDatesFormatedToDay[i]);
                 // if(uniqueEnabledDatesFormatedToDay[i] - uniqueEnabledDatesFormatedToDay[i-1] != 1) {
                 //     //Not consecutive sequence, here you can break or do whatever you want

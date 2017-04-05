@@ -88,6 +88,38 @@ class TrackingInfoEsclation extends React.Component {
         // make different request details page
         // understand service and preceed
     }
+
+    renderRescheduleButtons(){
+        if(this.props.trackingList.isReschedulable === true){
+            return(
+                <div className="EscalateHolder">
+
+                    <span className="EscalateLabel">
+                        <span className="escalteIMG">
+                            <img src={escalate} />
+
+                        </span>
+                        <label className="EscalateText">
+                            Escalate Request
+                        </label>
+                    </span>
+
+                    <Link to={`/recycle-detail/${this.props.ConsumerServiceRequestID}`}>
+                        <span className="EscalateLabel" onClick={this.handleRequestDetail}>
+                            <span className="escalteIMG">
+                                <img src={request} />
+
+                            </span>
+                            <label className="EscalateText">
+                                Request Details
+                            </label>
+                        </span>
+                    </Link>
+                </div>
+            );
+        }
+
+    }
     render(){
         return(
             <div className="pickupInfoHolder">

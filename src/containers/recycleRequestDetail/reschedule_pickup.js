@@ -19,6 +19,7 @@ class ReschedulePickup extends React.Component {
             //send data
             ConsumerServiceRequestID: '',
             ScheduledDateTime: '',
+            ScheduledDateTimeStarting: '',
             ScheduledToTime: '',
             ScheduledFromTime: '',
 
@@ -151,7 +152,14 @@ class ReschedulePickup extends React.Component {
                 var date = new Date();
                 var month = (date.getMonth() + 1).toString();
                 month = (month[1] ? month : '0' + month[0])
-                disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
+
+                if(disabledDayArray[i] !== 0){
+                    disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
+                    var nextMonth = parseInt(month);
+                    nextMonth = nextMonth + 1;
+                    disabledDatesArray.push(disabledDayArray[i]+"/"+(nextMonth)+"/"+date.getFullYear());
+                }
+                // disabledDatesArray.push(disabledDayArray[i]+"/"+month+"/"+date.getFullYear());
                 // console.log(uniqueEnabledDatesFormatedToDay[i]);
                 // if(uniqueEnabledDatesFormatedToDay[i] - uniqueEnabledDatesFormatedToDay[i-1] != 1) {
                 //     //Not consecutive sequence, here you can break or do whatever you want
@@ -252,6 +260,7 @@ class ReschedulePickup extends React.Component {
                 EmailID: this.props.userData.data.EmailID,
                 AlternateMobileNo: this.props.userData.data.AlternateMobileNo,
                 ScheduledDateTimeDisplay: date.split("-").reverse().join("/"),
+                ScheduledDateTimeStarting: date.split("-").reverse().join("/"),
                 ConsumerServiceRequestID: this.props.recycleDetail.ConsumerServiceRequestID,
                 Address: this.props.recycleDetail.Address,
 
@@ -262,34 +271,40 @@ class ReschedulePickup extends React.Component {
     }
 
     handleReschedulePickupForm(event){
-        event.preventDefault();
+        if (this.state.ScheduledDateTimeStarting !== event.target.date.value) {
+            event.preventDefault();
 
-        var d = new Date();
-        // d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
-        var datetext = d.toTimeString();
-        // datestring is "20:32:01 GMT+0530 (India Standard Time)"
-        // Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
-        // Take the first value from array :)
-        datetext = datetext.split(' ')[0];
+            var d = new Date();
+            // d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+            var datetext = d.toTimeString();
+            // datestring is "20:32:01 GMT+0530 (India Standard Time)"
+            // Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
+            // Take the first value from array :)
+            datetext = datetext.split(' ')[0];
 
 
-        var rescheduleRequestObj = {
-            ConsumerServiceRequestID: this.state.ConsumerServiceRequestID,
-            ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T'+datetext+'.000+05:30',
-            ScheduledToTime: '19:00:00',
-            ScheduledFromTime:'10:00:00',
-            Remarks: ""
+            var rescheduleRequestObj = {
+                ConsumerServiceRequestID: this.state.ConsumerServiceRequestID,
+                ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T'+datetext+'.000+05:30',
+                ScheduledToTime: '19:00:00',
+                ScheduledFromTime:'10:00:00',
+                Remarks: ""
+            }
+
+            // we will not make recycleRequest here we will make it in confirmation page
+            // so passing data to session and then confirmation page
+            this.props.sessionStorageRescheduleRecycleData(rescheduleRequestObj);
+            browserHistory.push(`/reschedule-confirmation/${this.state.ConsumerServiceRequestID}`);
+
+            // console.log(rescheduleRequestObj);
+            // this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
+            //     browserHistory.push('/dashboard')
+            // })
+        } else {
+            event.preventDefault();
+            alert('select different date while Rescheduling');
         }
 
-        // we will not make recycleRequest here we will make it in confirmation page
-        // so passing data to session and then confirmation page
-        this.props.sessionStorageRescheduleRecycleData(rescheduleRequestObj);
-        browserHistory.push(`/reschedule-confirmation/${this.state.ConsumerServiceRequestID}`);
-
-        // console.log(rescheduleRequestObj);
-        // this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
-        //     browserHistory.push('/dashboard')
-        // })
     }
 
     render(){

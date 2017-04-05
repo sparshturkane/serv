@@ -126,6 +126,40 @@ class RecycleRequestDetail extends React.Component {
         }
     }
 
+    renderRescheduleRequest(){
+        // isCancelable
+        // isReschedulable
+        if (this.props.trackingList.isReschedulable === true) {
+            return(
+                <span className="resheduleHolder">
+                    <button type="button" onClick={this.handleRescheduleRecycleRequest} className="resheduleCancel">
+                        <span className="resheduleImg">
+                            <img src={reschedule} />
+
+                        </span> Reschedule Request
+                    </button>
+                </span>
+            );
+        }
+
+    }
+
+    renderCancelRequest(){
+        if (this.props.trackingList.isCancelable === true) {
+            return(
+                <span className="submitButtonHolder">
+                    <button type="button" onClick={this.handleCancelRecycleRequest} className="resheduleCancel">
+                        <span className="resheduleImg">
+                            <img src={cancel} />
+
+                        </span> Cancel Request
+                    </button>
+                </span>
+            );
+        }
+
+    }
+
     render(){
 
         return(
@@ -186,23 +220,26 @@ class RecycleRequestDetail extends React.Component {
 
                     <div className="row submitButton">
                         <div className="col-sm-12">
-                            <span className="resheduleHolder">
-                                <button type="button" onClick={this.handleRescheduleRecycleRequest} className="resheduleCancel">
-                                    <span className="resheduleImg">
-                                        <img src={reschedule} />
+                            {this.renderRescheduleRequest()}
+                            {this.renderCancelRequest()}
+                            {/*
+                                <span className="resheduleHolder">
+                                    <button type="button" onClick={this.handleRescheduleRecycleRequest} className="resheduleCancel">
+                                        <span className="resheduleImg">
+                                            <img src={reschedule} />
 
-                                    </span> Reshedule Request
-                                </button>
-                            </span>
-                            <span className="submitButtonHolder">
-                                <button type="button" onClick={this.handleCancelRecycleRequest} className="resheduleCancel">
-                                    <span className="resheduleImg">
-                                        <img src={cancel} />
+                                        </span> Reschedule Request
+                                    </button>
+                                </span>
+                                <span className="submitButtonHolder">
+                                    <button type="button" onClick={this.handleCancelRecycleRequest} className="resheduleCancel">
+                                        <span className="resheduleImg">
+                                            <img src={cancel} />
 
-                                    </span> Cancel Request
-                                </button>
-                            </span>
-
+                                        </span> Cancel Request
+                                    </button>
+                                </span>
+                            */}
                         </div>
                     </div>
                 </div>
@@ -218,7 +255,8 @@ class RecycleRequestDetail extends React.Component {
 // export default RecycleRequestDetail;
 function mapStateToProps(state) {
     return {
-        recycleDetail: state.ConsumerServicerequest.ConsumerServiceRequestRecycleDetail
+        recycleDetail: state.ConsumerServicerequest.ConsumerServiceRequestRecycleDetail,
+        trackingList: state.ConsumerServicerequest.ConsumerServiceRequestTrackRequest.data,
     };
 }
 

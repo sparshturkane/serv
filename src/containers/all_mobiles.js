@@ -153,20 +153,25 @@ class ChooseDeviceHolder extends React.Component {
 
     getActiveMobileInfo(){
         const activeMobilePos = JSON.parse(localStorage.getItem('imgNumPos'));
-        // this.setState({
-        //     activeMobilePos: activeMobilePos
-        // });
-        var counterMap = 0;
-        this.props.supportedMobiles.map((mobile) => {
-            // console.log(activeMobilePos +"---"+ counterMap);
-            if(activeMobilePos == counterMap){
-                var ProductIDArray = {
-                    ProductIDs: [mobile.ProductID]
-                };
-                this.handleProductClick(ProductIDArray, mobile.ProductName, mobile.SupportedModes, mobile)
-            }
-            counterMap = counterMap + 1;
-        });
+
+        // moving further if active mobile is different from saved mobile
+        if (activeMobilePos !== this.state.activeMobilePos) {
+            this.setState({
+                activeMobilePos: activeMobilePos
+            });
+            var counterMap = 0;
+            this.props.supportedMobiles.map((mobile) => {
+                // console.log(activeMobilePos +"---"+ counterMap);
+                if(activeMobilePos == counterMap){
+                    var ProductIDArray = {
+                        ProductIDs: [mobile.ProductID]
+                    };
+                    this.handleProductClick(ProductIDArray, mobile.ProductName, mobile.SupportedModes, mobile)
+                }
+                counterMap = counterMap + 1;
+            });
+        }
+
 
 
     }

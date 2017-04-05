@@ -10,6 +10,7 @@ import {
     STORE_PRODUCT_REWARD_ID_ARRAY,
     STORE_PRODUCT_REWARD_DATA_ARRAY,
     STORE_ACTIVE_PAGE_DATA,
+    STORE_CURRENT_ADDRESS
 } from '../actions/index';
 
 const INITIAL_STATE = { };
@@ -94,6 +95,12 @@ export default function(state = INITIAL_STATE, action) {
         return {
             ...state,
             storeActivePageData: action.payload
+        };
+
+        case STORE_CURRENT_ADDRESS:
+        return {
+            ...state,
+            storeCurrentAddress: action.payload
         };
 
         default:

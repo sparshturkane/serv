@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import { makePagesActive, sessionStorageHeaderActivePhone, consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations  } from '../actions/index';
+import { makePagesActive, sessionStorageHeaderActivePhone, consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress  } from '../actions/index';
 import HeaderDiv from './common/header'
 import LocationSearchSavedAddress from './location_search_saved_address'
 import rightNewPage from '../images/rightNewPage.png';
@@ -57,6 +57,11 @@ class SavedAddress extends React.Component {
         //4. fetchDropOffLocations
 
         // browserHistory.push('/pickup-dropoff');
+        const currentAddressObj = {
+            userCompleteAddress : location.Address,
+            activeButtonName : location.AddressType,
+        }
+        this.props.storeCurrentAddress(currentAddressObj);
         this.callingLocationActions(location);
 
 
@@ -201,7 +206,7 @@ function mapStateToProps(state) {
 //
 //
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations }, dispatch);
+     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SavedAddress);

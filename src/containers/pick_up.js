@@ -38,6 +38,13 @@ class PickUpPage extends React.Component {
         }
     }
 
+    componentWillMount(){
+
+        this.setState({
+            userCompleteAddress : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
+        })
+    }
+
     calenderDatesDisplay(){
         // if(this.props.makePagesActive.dropOff === undefined){
         //     browserHistory.push('/');

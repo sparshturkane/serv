@@ -42,6 +42,7 @@ export const STORE_PRODUCT_REWARD_DATA_ARRAY = 'STORE_PRODUCT_REWARD_DATA_ARRAY'
 export const STORE_ACTIVE_PAGE_DATA = 'STORE_ACTIVE_PAGE_DATA';
 export const CONSUMER_FAVORITE_LOCATION_ADD_LOCATION = 'CONSUMER_FAVORITE_LOCATION_ADD_LOCATION';
 export const CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS = 'CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS';
+export const STORE_CURRENT_ADDRESS = 'STORE_CURRENT_ADDRESS';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -439,6 +440,14 @@ export function rescheduleDropoffData(pickupData) {
     return {
         type: STORE_RESCHEDULE_DROPOFF_DATA,
         payload: pickupData,
+    };
+}
+
+// store current address
+export function storeCurrentAddress(currentAddressObj) {
+    return {
+        type: STORE_CURRENT_ADDRESS,
+        payload: currentAddressObj,
     };
 }
 

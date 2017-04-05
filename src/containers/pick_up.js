@@ -9,7 +9,7 @@ import HeaderDiv from './common/header'
 import LocationSearch from './location_search';
 import OtpPage from './otp_page';
 import imeiInfo from '../images/imeiInfo.png';
-import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal  } from '../actions/index';
+import { pickUpPageFormSubmit, fetchPickUpLocations, setActiveProductData, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal, consumerFavoriteLocationAddLocation  } from '../actions/index';
 
 class PickUpPage extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class PickUpPage extends React.Component {
             homeBtnClass: 'btn mySmallbtn activeBtn',
             officeBtnClass: 'btn mySmallbtn',
             otherBtnClass: 'btn mySmallbtn',
-            activeButtonName: '',
+            activeButtonName: 'Home',
         }
     }
 
@@ -322,6 +322,7 @@ class PickUpPage extends React.Component {
             userIMEINumber : this.state.userIMEINumber,
             userCompleteAddress : this.state.userCompleteAddress,
             ServiceTypeID : this.state.ServiceTypeID,
+            AddressType: this.state.activeButtonName,
         }
 
         console.log(userDataRequest);
@@ -386,7 +387,17 @@ class PickUpPage extends React.Component {
             ConsumerID :SignUpData.data.ConsumerID
         }
 
-
+        // addingfavorite location
+        var addLocationObj =  {
+            AddressType: this.state.activeButtonName,
+            Landmark: this.props.storedUserData.LocationData.Landmark,
+            ConsumerID: SignUpData.data.ConsumerID,
+            Address: this.state.userCompleteAddress,
+            Lat: this.props.geoLocationData.latitude,
+            Lng: this.props.geoLocationData.longitude,
+            Zipcode: this.props.geoLocationData.pincode,
+        }
+        this.props.consumerFavoriteLocationAddLocation(addLocationObj);
 
         console.log(updateProfileData);
         this.props.consumerUpdateProfile(updateProfileData).then( () => {
@@ -737,7 +748,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal }, dispatch);
+    return bindActionCreators({ setActiveProductData, fetchPickUpLocations, sessionStorageUserData, tempConsumerGetOTP, consumerUpdateProfile, makePagesActive, showHideModal, consumerFavoriteLocationAddLocation }, dispatch);
 }
 //
 export default connect(mapStateToProps, mapDispatchToProps)(PickUpPage);

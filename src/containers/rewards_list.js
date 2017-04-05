@@ -61,7 +61,7 @@ class RewardList extends React.Component {
             status : '1'
         }
         this.props.makePagesActive(pageDataDropOff);
-        browserHistory.push('/pickup-dropoff');
+        browserHistory.push('/saved-address');
 
     }
 
@@ -94,7 +94,7 @@ class RewardList extends React.Component {
 
                 <div className="row landingSubmitButton">
                     <div className="col-sm-12">
-                        <Link to="/pickup-dropoff" type="button" onClick={this.handleRecyclMyPhoneClick} className="landingLargeButton textTransform">Recycle My {this.props.ProductName}</Link>
+                        <Link to="/saved-address" type="button" onClick={this.handleRecyclMyPhoneClick} className="landingLargeButton textTransform">Recycle My {this.props.ProductName}</Link>
                     </div>
                 </div>
 

@@ -19,6 +19,7 @@ import RescheduleConfirmation from './containers/recycleRequestDetail/reschedule
 import FindImei from './components/find_imei';
 import ViewUserProfileNew from './containers/userProfile/view_user_profile_new';
 import EditUserProfileNew from './containers/userProfile/edit_user_profile_new';
+import SavedAddress from './containers/saved_address';
 
 // demo
 import Demo from './components/googleMapTest';
@@ -142,7 +143,7 @@ export default (
         <Route path="/home" component={ Home } />
         // <Route path="tracking" component={ TrackingPage } />
         <Route path="/tracking/:ConsumerServiceRequestID" component={ TrackingPage } />
-        <Route path="/user-profile" component={ ViewUserProfile } />
+
         <Route path="/user-edit" component={ EditUserProfile } />
         <Route path="/recycle-detail/:ConsumerServiceRequestID" component={ RecycleRequestDetail } />
         <Route path="/reschedule-pickup" component={ ReschedulePickup } />
@@ -151,7 +152,8 @@ export default (
         <Route path="/find-imei" component={ FindImei } />
         <Route path="/demo" component={ Demo } />
 
-        <Route path="/user-profile-new" component={ ViewUserProfileNew } />
-        <Route path="/edit-profile-new" component={ EditUserProfileNew } />
+        <Route path="/user-profile" component={ ViewUserProfileNew } />
+        <Route path="/saved-address" component={ SavedAddress } />
+        // <Route path="/user-profile" component={ ViewUserProfile } />
     </Route>
 );

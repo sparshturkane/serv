@@ -40,6 +40,8 @@ export const STORE_ACTIVE_PHONE = 'STORE_ACTIVE_PHONE';
 export const STORE_PRODUCT_REWARD_ID_ARRAY = 'STORE_PRODUCT_REWARD_ID_ARRAY';
 export const STORE_PRODUCT_REWARD_DATA_ARRAY = 'STORE_PRODUCT_REWARD_DATA_ARRAY';
 export const STORE_ACTIVE_PAGE_DATA = 'STORE_ACTIVE_PAGE_DATA';
+export const CONSUMER_FAVORITE_LOCATION_ADD_LOCATION = 'CONSUMER_FAVORITE_LOCATION_ADD_LOCATION';
+export const CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS = 'CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -61,6 +63,8 @@ export function getProductBasedOnSupportedModes() {
         payload: request,
     };
 }
+
+
 
 // Handelling on click of mobiles
 export function getRewardsList(ProductID) {
@@ -452,6 +456,27 @@ export function consumerServicerequestRescheduleRequest(requestObj) {
     const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/rescheduleRequest`, requestObj );
     return {
         type: POST_CONSUMER_SERVICE_RESCHEDULE_REQUEST,
+        payload: request,
+    };
+}
+
+// add consumer favorite location
+// getting mobile on supportedModes
+export function consumerFavoriteLocationAddLocation(addLocationObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerFavouritelocation/addLocation`, addLocationObj);
+
+    return {
+        type: CONSUMER_FAVORITE_LOCATION_ADD_LOCATION,
+        payload: request,
+    };
+}
+
+//  ConsumerFavouritelocation/getUserLocations
+export function consumerFavoriteLocationGetUserLocations(consumerIDObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerFavouritelocation/getUserLocations`, consumerIDObj);
+
+    return {
+        type: CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS,
         payload: request,
     };
 }

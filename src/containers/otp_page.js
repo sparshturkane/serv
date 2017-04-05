@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { tempConsumerSignUp, consumerUpdateProfile, tempConsumerGetOTP, showHideModal } from '../actions/index';
+import { tempConsumerSignUp, consumerUpdateProfile, tempConsumerGetOTP, showHideModal, consumerFavoriteLocationAddLocation } from '../actions/index';
 
 class OtpPage extends React.Component {
     constructor(props) {
@@ -89,11 +89,24 @@ class OtpPage extends React.Component {
                     Lng : this.props.sessionStorageLocationData.longitude,
                     Landmark : this.props.sessionStorageLocationData.Landmark,
                     Address : this.props.sessionStorageUserData.userCompleteAddress,
-                    AddressType :'Home'
+                    AddressType :this.props.sessionStorageUserData.AddressType,
                 },
                 isNew : SignUpData.data.isNew ? true : false,
                 ConsumerID :SignUpData.data.ConsumerID
+            };
+
+            // add consumer favorite location
+            var addLocationObj =  {
+                AddressType:this.props.sessionStorageUserData.AddressType,
+                Landmark:this.props.sessionStorageLocationData.Landmark,
+                ConsumerID:SignUpData.data.ConsumerID,
+                Address:this.props.sessionStorageUserData.userCompleteAddress,
+                Lat:this.props.sessionStorageLocationData.latitude,
+                Lng:this.props.sessionStorageLocationData.longitude,
+                Zipcode: this.props.sessionStorageLocationData.pincode,
             }
+            this.props.consumerFavoriteLocationAddLocation(addLocationObj);
+
         } else if( this.props.ServiceTypeID == '13' ) {
             updateProfileData = {
                 updateObj : {
@@ -200,6 +213,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ tempConsumerSignUp, consumerUpdateProfile, tempConsumerGetOTP, showHideModal }, dispatch);
+    return bindActionCreators({ tempConsumerSignUp, consumerUpdateProfile, tempConsumerGetOTP, showHideModal, consumerFavoriteLocationAddLocation }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OtpPage);

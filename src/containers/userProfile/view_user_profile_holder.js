@@ -67,10 +67,15 @@ class ViewUserProfileHolder extends React.Component {
                             <div className="col-lg-2 col-sm-12">
                                 <div className="profiledetailsContent">
                                     <label className="profileDetails">Alternate Number</label><br/>
-                                    <label className="profileDetailsLabel">{this.state.userData.AlternateMobileNo ? '': "N/A"}</label>
+                                    <label className="profileDetailsLabel">{this.state.userData.AlternateMobileNo }</label>
                                 </div>
                             </div>
-                            <span className="rightNewPageHolder"><img src={edit} className="editImg" /><label className="editLabel" style={{cursor: "pointer"}} onClick={this.handleEditProfileClick.bind(this)} >edit</label></span>
+                            <span className="rightNewPageHolder" onClick={this.handleEditProfileClick.bind(this)}>
+                                <img src={edit} className="editImg" />
+                                <label className="editLabel" style={{cursor: "pointer"}} onClick={this.handleEditProfileClick.bind(this)} >
+                                    edit
+                                </label>
+                            </span>
                         </div>
                     </form>
                 </div>

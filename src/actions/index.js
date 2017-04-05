@@ -39,6 +39,7 @@ export const STORE_RESCHEDULE_RECYCLE_REQUEST_DATA = 'STORE_RESCHEDULE_RECYCLE_R
 export const STORE_ACTIVE_PHONE = 'STORE_ACTIVE_PHONE';
 export const STORE_PRODUCT_REWARD_ID_ARRAY = 'STORE_PRODUCT_REWARD_ID_ARRAY';
 export const STORE_PRODUCT_REWARD_DATA_ARRAY = 'STORE_PRODUCT_REWARD_DATA_ARRAY';
+export const STORE_ACTIVE_PAGE_DATA = 'STORE_ACTIVE_PAGE_DATA';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -76,6 +77,14 @@ export function setActiveProductData(ProductData) {
     return {
         type: SET_ACTIVE_PRODUCT_DATA,
         payload: ProductData,
+    };
+}
+
+//storing selected gift list array
+export function storeActivePageData(storeActivePageData) {
+    return {
+        type: STORE_ACTIVE_PAGE_DATA,
+        payload: storeActivePageData,
     };
 }
 

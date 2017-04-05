@@ -18,6 +18,7 @@ class RescheduleDropoff extends React.Component {
             MobileNo : '',
             EmailID: '',
             ScheduledDateTimeDisplay:'',
+            ScheduledDateTimeStarting:'',
             //send data
             ConsumerServiceRequestID: '',
             ScheduledDateTime: '',
@@ -146,6 +147,7 @@ class RescheduleDropoff extends React.Component {
                                 ref={buttonName}
                                 id={buttonName}
                                 disabled
+                                style={{color: "grey", backgroundColor: "lightgrey", cursor: "not-allowed"}}
                                 onClick={this.activeButtons.bind(this,buttonName,value.StartTimeVal,value.EndTimeVal)}>
                                 {value.StartTime} - {value.EndTime}
                             </button>
@@ -387,6 +389,7 @@ class RescheduleDropoff extends React.Component {
                 MobileNo : this.props.userData.data.MobileNo,
                 EmailID: this.props.userData.data.EmailID,
                 ScheduledDateTimeDisplay: date.split("-").reverse().join("/"),
+                ScheduledDateTimeStarting: date.split("-").reverse().join("/"),
                 ConsumerServiceRequestID: this.props.recycleDetail.ConsumerServiceRequestID
 
             })
@@ -396,35 +399,48 @@ class RescheduleDropoff extends React.Component {
     }
 
     handleRescheduleDropoffForm(event){
-        event.preventDefault();
-
-        var d = new Date();
-        // d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
-        var datetext = d.toTimeString();
-        // datestring is "20:32:01 GMT+0530 (India Standard Time)"
-        // Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
-        // Take the first value from array :)
-        datetext = datetext.split(' ')[0];
+        //sparsh here
+        if (this.state.ScheduledDateTimeStarting !== event.target.date.value) {
 
 
-        var rescheduleRequestObj = {
-            ConsumerServiceRequestID: this.state.ConsumerServiceRequestID,
-            ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T'+datetext+'.000+05:30',
-            ScheduledFromTime:this.state.activeButtonNameFrom, // this will not be static
-            ScheduledToTime: this.state.activeButtonNameTo, // this will not be static
-            Remarks: ""
+            if((this.state.activeButtonNameFrom !== '') && (this.state.activeButtonNameTo !== '')){
+                event.preventDefault();
+
+                var d = new Date();
+                // d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+                var datetext = d.toTimeString();
+                // datestring is "20:32:01 GMT+0530 (India Standard Time)"
+                // Split with ' ' and we get: ["20:32:01", "GMT+0530", "(India", "Standard", "Time)"]
+                // Take the first value from array :)
+                datetext = datetext.split(' ')[0];
+
+
+                var rescheduleRequestObj = {
+                    ConsumerServiceRequestID: this.state.ConsumerServiceRequestID,
+                    ScheduledDateTime: event.target.date.value.split("/").reverse().join("-")+'T'+datetext+'.000+05:30',
+                    ScheduledFromTime:this.state.activeButtonNameFrom, // this will not be static
+                    ScheduledToTime: this.state.activeButtonNameTo, // this will not be static
+                    Remarks: ""
+                }
+
+                console.log(rescheduleRequestObj);
+
+                // we will not make recycleRequest here we will make it in confirmation page
+                // so passing data to session and then confirmation page
+                this.props.sessionStorageRescheduleRecycleData(rescheduleRequestObj);
+                browserHistory.push(`/reschedule-confirmation/${this.state.ConsumerServiceRequestID}`);
+
+                // this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
+                //     browserHistory.push('/dashboard')
+                // })
+            } else {
+                event.preventDefault();
+                alert("select time slot");
+            }
+        } else {
+            event.preventDefault();
+            alert('select different date while Rescheduling');
         }
-
-        console.log(rescheduleRequestObj);
-
-        // we will not make recycleRequest here we will make it in confirmation page
-        // so passing data to session and then confirmation page
-        this.props.sessionStorageRescheduleRecycleData(rescheduleRequestObj);
-        browserHistory.push(`/reschedule-confirmation/${this.state.ConsumerServiceRequestID}`);
-
-        // this.props.consumerServicerequestRescheduleRequest(rescheduleRequestObj).then(()=>{
-        //     browserHistory.push('/dashboard')
-        // })
     }
 
     activeButtons(buttonName, StartTimeVal, EndTimeVal ){
@@ -555,6 +571,16 @@ class RescheduleDropoff extends React.Component {
                                             <label className="labelDetails">Choose Time Slot</label><br/>
                                             <div className="dropoffBTNHolder">
                                                 {this.renderSlots()}
+                                                {this.state.slots.length === 0 &&
+                                                    <span className="dropOffBTNHolder" >
+                                                        <button type="button"
+                                                            className={"dropOffBTN"}
+                                                            disabled
+                                                            style={{color: "grey", backgroundColor: "lightgrey", cursor: "not-allowed"}}>
+                                                            00 AM - 00 AM
+                                                        </button>
+                                                    </span>
+                                                }
                                             </div>
                                         </div>
                                     </div>

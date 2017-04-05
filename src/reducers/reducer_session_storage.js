@@ -8,7 +8,8 @@ import {
     STORE_RESCHEDULE_RECYCLE_REQUEST_DATA,
     STORE_ACTIVE_PHONE,
     STORE_PRODUCT_REWARD_ID_ARRAY,
-    STORE_PRODUCT_REWARD_DATA_ARRAY
+    STORE_PRODUCT_REWARD_DATA_ARRAY,
+    STORE_ACTIVE_PAGE_DATA,
 } from '../actions/index';
 
 const INITIAL_STATE = { };
@@ -87,6 +88,12 @@ export default function(state = INITIAL_STATE, action) {
         return {
             ...state,
             ProductRewardDataArray: action.payload
+        };
+
+        case STORE_ACTIVE_PAGE_DATA:
+        return {
+            ...state,
+            storeActivePageData: action.payload
         };
 
         default:

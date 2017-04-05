@@ -17,6 +17,8 @@ import ReschedulePickup from './containers/recycleRequestDetail/reschedule_picku
 import RescheduleDropoff from './containers/recycleRequestDetail/reschedule_dropoff';
 import RescheduleConfirmation from './containers/recycleRequestDetail/reschedule_confirmation';
 import FindImei from './components/find_imei';
+import ViewUserProfileNew from './containers/userProfile/view_user_profile_new';
+import EditUserProfileNew from './containers/userProfile/edit_user_profile_new';
 
 // demo
 import Demo from './components/googleMapTest';
@@ -148,5 +150,8 @@ export default (
         <Route path="/reschedule-confirmation/:ConsumerServiceRequestID" component={ RescheduleConfirmation } />
         <Route path="/find-imei" component={ FindImei } />
         <Route path="/demo" component={ Demo } />
+
+        <Route path="/user-profile-new" component={ ViewUserProfileNew } />
+        <Route path="/edit-profile-new" component={ EditUserProfileNew } />
     </Route>
 );

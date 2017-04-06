@@ -6,7 +6,7 @@ import user from '../../images/user.png';
 import bell from '../../images/bell.png';
 import setting from '../../images/setting.png';
 import { bindActionCreators } from 'redux';
-import { consumerGetProfile } from '../../actions/index';
+import { consumerGetProfile, getConsumerAppConfig } from '../../actions/index';
 
 
 class HeaderDivDashboard extends React.Component {
@@ -24,6 +24,8 @@ class HeaderDivDashboard extends React.Component {
         // console.log("signupdata" +SignUpData);
 
         if (SignUpData !== null) {
+            // calling app config
+            this.props.getConsumerAppConfig();
             const consumerID = {ConsumerID : SignUpData.data.ConsumerID}
             this.props.consumerGetProfile(consumerID).then(()=>{
                 this.setState({
@@ -100,7 +102,7 @@ class HeaderDivDashboard extends React.Component {
         return(
             <div className="topHadder row">
                 <div className="heartHolder col-sm-6">
-                    
+
                 </div>
                 {this.showHideUserSettings()}
 
@@ -121,7 +123,7 @@ function mapStateToProps(state) {
 //
 //
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({consumerGetProfile }, dispatch);
+     return bindActionCreators({consumerGetProfile, getConsumerAppConfig }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderDivDashboard);

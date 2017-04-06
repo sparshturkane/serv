@@ -113,7 +113,9 @@ cursor: pointer;
  }
  .ActivemobileIMG
  {
-	 width: 50%;
+	 /*width: 50%;*/
+	 width: 60%;
+	 padding-bottom: 10px;
 
  }
  .mobileIMGHolder

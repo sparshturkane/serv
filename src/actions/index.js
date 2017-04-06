@@ -43,6 +43,8 @@ export const STORE_ACTIVE_PAGE_DATA = 'STORE_ACTIVE_PAGE_DATA';
 export const CONSUMER_FAVORITE_LOCATION_ADD_LOCATION = 'CONSUMER_FAVORITE_LOCATION_ADD_LOCATION';
 export const CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS = 'CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS';
 export const STORE_CURRENT_ADDRESS = 'STORE_CURRENT_ADDRESS';
+export const FETCH_CONSUMER_APP_CONFIG = 'FETCH_CONSUMER_APP_CONFIG';
+export const CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION = 'CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -54,6 +56,16 @@ const GOOGLE_MAPS_GEOCODING_ROOT_URL = 'https://maps.googleapis.com/maps/api'; /
 // RAW https://maps.googleapis.com/maps/api/place/autocomplete/json?input=miraroad&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes
 // const GOOGLE_MAPS_AUTOCOMPLETE_ROOT_URL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=miraroad&types=geocode&key=AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes';
 const GOOGLE_MAPS_GEOCODING_API_KEY = 'AIzaSyB5roJvGx-u49wYK6niNSC2e44N0JyvQes';
+
+// getting appconfig
+export function getConsumerAppConfig() {
+    const request = axios.get(`${ROOT_URL}/Consumer/appConfig`);
+
+    return {
+        type: FETCH_CONSUMER_APP_CONFIG,
+        payload: request,
+    };
+}
 
 // getting mobile on supportedModes
 export function getProductBasedOnSupportedModes() {
@@ -476,6 +488,16 @@ export function consumerFavoriteLocationAddLocation(addLocationObj) {
 
     return {
         type: CONSUMER_FAVORITE_LOCATION_ADD_LOCATION,
+        payload: request,
+    };
+}
+
+// getting mobile on supportedModes
+export function consumerFavoriteLocationUpdateLocation(updateLocationObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerFavouritelocation/updateLocation`, updateLocationObj);
+
+    return {
+        type: CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION,
         payload: request,
     };
 }

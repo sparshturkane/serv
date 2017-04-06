@@ -1,4 +1,4 @@
-import { CONSUMER_UPDATE_PROFILE, CONSUMER_GET_PROFILE } from '../actions/index';
+import { CONSUMER_UPDATE_PROFILE, CONSUMER_GET_PROFILE, FETCH_CONSUMER_APP_CONFIG } from '../actions/index';
 
 const INITIAL_STATE = { rewardsListData: [] };
 
@@ -12,6 +12,9 @@ export default function(state = INITIAL_STATE, action) {
         // console.log(action.payload.data.data);
         // localStorage.setItem('ConsumerProfieData', JSON.stringify(action.payload.data));
         return { ...state, GetConsumerDetail: action.payload.data };
+
+        case FETCH_CONSUMER_APP_CONFIG:
+        return { ...state, AppConfig: action.payload.data };
         // case FETCH_POSTS:
         // return { ...state, all: action.payload.data };
         default:

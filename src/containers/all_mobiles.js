@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import { getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData, showHideModal } from '../actions/index';
+import { getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData, showHideModal,  getConsumerAppConfig} from '../actions/index';
 import MobileHolder from './mobile_holder';
 
 
@@ -18,6 +18,9 @@ class ChooseDeviceHolder extends React.Component {
     }
 
     componentWillMount(){
+        //calling app config
+        this.props.getConsumerAppConfig();
+        
         this.props.getProductBasedOnSupportedModes()
         .then( () => {
             const mobile = this.props.supportedMobiles[0];
@@ -377,7 +380,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData, showHideModal }, dispatch);
+    return bindActionCreators({getProductBasedOnSupportedModes, getRewardsList, setMobileName, setSupportedModes, setActiveProductData, showHideModal, getConsumerAppConfig }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseDeviceHolder);

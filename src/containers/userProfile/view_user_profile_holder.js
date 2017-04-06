@@ -42,12 +42,34 @@ class ViewUserProfileHolder extends React.Component {
         this.props.storeActivePageData(storeActivePageDataObj);
     }
 
+    titleCase() {
+        var str = "sparsh turkane"
+        var words = str.toLowerCase().split(' ');
+
+        for(var i = 0; i < words.length; i++) {
+            var letters = words[i].split('');
+            letters[0] = letters[0].toUpperCase();
+            words[i] = letters.join('');
+        }
+        return words.join(' ');
+        console.log(words.join(' '));
+    }
+
     render(){
         return(
             <div className="profileHolder">
                 <div className="profileImgHolder">
-                    <span className="profileIMGContent">SP</span>
-                    <label className="profileName">{this.state.userData.Name}</label>
+                    <span className="profileIMGContent">
+                        {/* <input type="file" name="fileToUpload" id="fileToUpload"/> */}
+
+                        SP
+                    </span>
+                    
+                    <label className="profileName">
+                        {this.state.userData.Name !== '' &&
+                            this.titleCase(this.state.userData.Name)
+                        }
+                    </label>
                 </div>
                 <div className="ProfiledetailsHolder">
                     <form>

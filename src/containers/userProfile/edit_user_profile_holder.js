@@ -107,12 +107,29 @@ class EditUserProfileHolder extends React.Component {
         })
     }
 
+    titleCase() {
+        var str = "sparsh turkane"
+        var words = str.toLowerCase().split(' ');
+
+        for(var i = 0; i < words.length; i++) {
+            var letters = words[i].split('');
+            letters[0] = letters[0].toUpperCase();
+            words[i] = letters.join('');
+        }
+        return words.join(' ');
+        console.log(words.join(' '));
+    }
+
     render(){
         return(
             <div className="profileHolder">
                 <div className="profileImgHolder">
                     <span className="profileIMGContent">SP</span>
-                    <label className="profileName">{this.state.Name}</label>
+                    <label className="profileName">
+                        {this.state.Name !== '' &&
+                            this.titleCase(this.state.Name)
+                        }
+                    </label>
                 </div>
                 <div className="ProfiledetailsHolder">
                     <form onSubmit={this.handleOnSubmitUpdateUser}>

@@ -39,11 +39,13 @@ class PickUpPage extends React.Component {
     }
 
     componentWillMount(){
+        if (this.props.storedUserData.storeCurrentAddress !== undefined) {
+            this.setState({
+                userCompleteAddress : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
+                activeButtonName : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
+            })
+        }
 
-        this.setState({
-            userCompleteAddress : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
-            activeButtonName : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
-        })
     }
 
     calenderDatesDisplay(){

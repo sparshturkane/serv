@@ -14,6 +14,8 @@ class LocationSearchSavedAddress extends React.Component {
             address: '',
             PickUpAvaliable: 0,
             DropOffAvaliable: 0,
+            PickUpStuffDone : '',
+            DropOffStuffDone : '',
 
         }
         this.handleLocationFormSubmit = this.handleLocationFormSubmit.bind(this);
@@ -22,9 +24,24 @@ class LocationSearchSavedAddress extends React.Component {
     }
 
     componentDidMount(){
-        this.setState({
-            Landmark : this.props.setLandmark,
-        });
+        // this.setState({
+        //     Landmark : this.props.setLandmark,
+        // });
+    }
+    componentDidUpdate(){
+        if(this.state.PickUpAvaliable==1 && this.state.DropOffAvaliable==1){
+            if(this.state.PickUpStuffDone==true && this.state.DropOffStuffDone==true){
+                browserHistory.push('/pickup-dropoff');
+            }
+        } else if (this.state.PickUpAvaliable==1) {
+            if(this.state.PickUpStuffDone==true){
+                browserHistory.push('/pickup-dropoff');
+            }
+        } else if (this.state.DropOffAvaliable==1) {
+            if(this.state.DropOffStuffDone==true){
+                browserHistory.push('/pickup-dropoff');
+            }
+        }
     }
 
     componentWillMount(){
@@ -33,12 +50,14 @@ class LocationSearchSavedAddress extends React.Component {
             if (modes === 9) {
                 this.setState({
                     PickUpAvaliable : 1,
+                    PickUpStuffDone : false,
                 })
             }
 
             if (modes === 13) {
                 this.setState({
                     DropOffAvaliable : 1,
+                    DropOffStuffDone : false,
                 })
             }
         })
@@ -97,6 +116,8 @@ class LocationSearchSavedAddress extends React.Component {
                 };
                 this.props.fetchPickUpLocations(pickUpLocationRequest).then( () =>{
                     // this.props.fetchPickUpLocations
+                    console.log(this.props.pickUpSerivceLocations);
+
                     const getSlotsRequest = {
                         Lat : this.props.geoLocationData.latitude,//v
                         Lng : this.props.geoLocationData.longitude,//v
@@ -106,14 +127,20 @@ class LocationSearchSavedAddress extends React.Component {
                         PartnerServiceLocationID : this.props.pickUpSerivceLocations.PartnerServiceLocationID, //variable
                         DeliveryMode : this.props.pickUpSerivceLocations.DeliveryMode, //only at the time of pickup
                     };
-                    this.props.getSlot(getSlotsRequest);
-                    this.props.sessionStorageLocationData(
-                        {
-                            Landmark: this.state.Landmark,
-                            latitude: this.props.geoLocationData.latitude,
-                            longitude : this.props.geoLocationData.longitude
-                        }
-                    );
+                    this.props.getSlot(getSlotsRequest).then(()=>{
+                        this.props.sessionStorageLocationData(
+                            {
+                                Landmark: this.state.Landmark,
+                                latitude: this.props.geoLocationData.latitude,
+                                longitude : this.props.geoLocationData.longitude
+                            }
+                        )
+
+                        this.setState({
+                            PickUpStuffDone: true,
+                        });
+                    })
+
                 })
             }
 
@@ -132,16 +159,22 @@ class LocationSearchSavedAddress extends React.Component {
                     Radius:80 //s
                 }
 
-                this.props.fetchDropOffLocations(dropOffLocationRequest)
-                this.props.sessionStorageLocationData(
-                    {
-                        Landmark: this.state.Landmark,
-                        latitude: this.props.geoLocationData.latitude,
-                        longitude : this.props.geoLocationData.longitude
-                    }
-                );
+                this.props.fetchDropOffLocations(dropOffLocationRequest).then(()=>{
+                    this.props.sessionStorageLocationData(
+                        {
+                            Landmark: this.state.Landmark,
+                            latitude: this.props.geoLocationData.latitude,
+                            longitude : this.props.geoLocationData.longitude
+                        }
+                    );
+
+                    this.setState({
+                        DropOffStuffDone: true,
+                    })
+                })
+
             }
-            browserHistory.push('/pickup-dropoff');
+            // browserHistory.push('/pickup-dropoff');
         } )
 
         .catch(error => {
@@ -182,6 +215,7 @@ class LocationSearchSavedAddress extends React.Component {
                 };
                 this.props.fetchPickUpLocations(pickUpLocationRequest).then( () =>{
                     // this.props.fetchPickUpLocations
+                    console.log(this.props.pickUpSerivceLocations);
                     const getSlotsRequest = {
                         Lat : this.props.geoLocationData.latitude,//v
                         Lng : this.props.geoLocationData.longitude,//v
@@ -191,7 +225,40 @@ class LocationSearchSavedAddress extends React.Component {
                         PartnerServiceLocationID : this.props.pickUpSerivceLocations.PartnerServiceLocationID, //variable
                         DeliveryMode : this.props.pickUpSerivceLocations.DeliveryMode, //only at the time of pickup
                     };
-                    this.props.getSlot(getSlotsRequest);
+                    this.props.getSlot(getSlotsRequest).then(()=>{
+                        this.props.sessionStorageLocationData(
+                            {
+                                Landmark: this.state.Landmark,
+                                latitude: this.props.geoLocationData.latitude,
+                                longitude : this.props.geoLocationData.longitude
+                            }
+                        )
+
+                        this.setState({
+                            PickUpStuffDone: true,
+                        });
+                    })
+
+                })
+            }
+
+            // drop off avaliable
+            if(this.state.DropOffAvaliable === 1){ // if ends here
+                const dropOffLocationRequest = 	{
+                    Authorised:0, //s
+                    BrandID:this.props.productData.BrandID,
+                    IsExclusive:0, //s
+                    Lat: this.props.geoLocationData.latitude,
+                    Lng: this.props.geoLocationData.longitude,
+                    OrderBy:0, //s
+                    Page:1, //s
+                    Partnered:1, //s
+                    ProductID:this.props.productData.ProductID,
+                    ProductSubCategoryID:this.props.productData.ProductSubCategoryID,
+                    Radius:80 //s
+                }
+
+                this.props.fetchDropOffLocations(dropOffLocationRequest).then(()=>{
                     this.props.sessionStorageLocationData(
                         {
                             Landmark: this.state.Landmark,
@@ -200,37 +267,16 @@ class LocationSearchSavedAddress extends React.Component {
                         }
                     );
 
-                    // drop off avaliable
-                    if(this.state.DropOffAvaliable === 1){ // if ends here
-                        const dropOffLocationRequest = 	{
-                            Authorised:0, //s
-                            BrandID:this.props.productData.BrandID,
-                            IsExclusive:0, //s
-                            Lat: this.props.geoLocationData.latitude,
-                            Lng: this.props.geoLocationData.longitude,
-                            OrderBy:0, //s
-                            Page:1, //s
-                            Partnered:1, //s
-                            ProductID:this.props.productData.ProductID,
-                            ProductSubCategoryID:this.props.productData.ProductSubCategoryID,
-                            Radius:80 //s
-                        }
-
-                        this.props.fetchDropOffLocations(dropOffLocationRequest)
-                        this.props.sessionStorageLocationData(
-                            {
-                                Landmark: this.state.Landmark,
-                                latitude: this.props.geoLocationData.latitude,
-                                longitude : this.props.geoLocationData.longitude
-                            }
-                        );
-                    }
+                    this.setState({
+                        DropOffStuffDone: true,
+                    });
                 })
+
             }
 
 
 
-            browserHistory.push('/pickup-dropoff');
+            // browserHistory.push('/pickup-dropoff');
         } )
 
         .catch(error => {

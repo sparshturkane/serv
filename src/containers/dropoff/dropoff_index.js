@@ -53,9 +53,23 @@ class DropOffIndex extends React.Component {
         // }else if (this.props.makePagesActive.dropOff.status === '0') {
         //     browserHistory.push('/');
         // }
+
+        // const script = document.createElement("script");
+        // var t = document.createTextNode("$( '.seeMore' ).click(function() {"+
+        //     "$(this).next('.days').slideToggle( 'slow', function() {"+
+        //     "});"+
+        // "});");
+        // script.appendChild(t);
+        // document.body.appendChild(script);
+
+        // $( ".seeMore" ).click(function() {
+        //     $(this).next(".days").slideToggle( "slow", function() {
+        //
+        //     });
+        // });
     }
 
-    componentDidUpdate(){
+    componentDidMount(){
         const script = document.createElement("script");
         var t = document.createTextNode("$( '.seeMore' ).click(function() {"+
             "$(this).next('.days').slideToggle( 'slow', function() {"+
@@ -221,7 +235,7 @@ class DropOffIndex extends React.Component {
     markerOnMap(){
         return this.props.DropOffServiceLocations.map((location) => {
             return (
-                <BlueMapMarker lat={location.Lat} lng={location.Lng} text={''} />
+                <BlueMapMarker lat={location.Lat} lng={location.Lng} text={''} key={location.Lat}/>
             );
         });
     }
@@ -245,6 +259,7 @@ class DropOffIndex extends React.Component {
                         <div className="mapHolder" style={{width: '94%', height: '600px'}}>
                             {/* this.props.storedUserData.displayOtpModal == 1 && */}
                             {this.props.geoLocationData.latitude != undefined &&
+
                                 <GoogleMapReact
                                     defaultCenter={{lat: this.props.geoLocationData.latitude, lng: this.props.geoLocationData.longitude}}
                                     defaultZoom={this.state.zoom}

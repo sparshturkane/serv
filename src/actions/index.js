@@ -45,6 +45,7 @@ export const CONSUMER_FAVORITE_LOCATION_GET_USER_LOCATIONS = 'CONSUMER_FAVORITE_
 export const STORE_CURRENT_ADDRESS = 'STORE_CURRENT_ADDRESS';
 export const FETCH_CONSUMER_APP_CONFIG = 'FETCH_CONSUMER_APP_CONFIG';
 export const CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION = 'CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION';
+export const GET_LAT_LNG_FROM_SAVED_LOCATION = 'GET_LAT_LNG_FROM_SAVED_LOCATION';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -165,6 +166,15 @@ export function fetchGeoLocationPlaceID(placeID) { //testing
     return {
         type: GET_LAT_LNG,
         payload: request,
+    };
+}
+
+// storing lat lng zipcode from saved addresses
+export function fetchGeoLocationDataFromSavedLocation(savedLocationObj) { //testing
+
+    return {
+        type: GET_LAT_LNG_FROM_SAVED_LOCATION,
+        payload: savedLocationObj,
     };
 }
 

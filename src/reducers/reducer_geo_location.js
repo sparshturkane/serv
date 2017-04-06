@@ -1,4 +1,4 @@
-import { GET_LAT_LNG, FETCH_LOCATION_PREDICTION } from '../actions/index';
+import { GET_LAT_LNG, FETCH_LOCATION_PREDICTION, GET_LAT_LNG_FROM_SAVED_LOCATION } from '../actions/index';
 
 const INITIAL_STATE = {  };
 
@@ -23,6 +23,15 @@ export default function(state = INITIAL_STATE, action) {
 
         case FETCH_LOCATION_PREDICTION:
         return { ...state,  LocationPrediction: action.payload};
+
+        case GET_LAT_LNG_FROM_SAVED_LOCATION:
+        return {
+            ...state,
+            latitude: action.payload.lat,
+            longitude: action.payload.lng,
+            pincode: action.payload.searchPostalCode,
+            Landmark: action.payload.Landmark,
+        };
 
         default:
         return state;

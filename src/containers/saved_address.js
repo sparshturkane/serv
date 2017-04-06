@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import { makePagesActive, sessionStorageHeaderActivePhone, consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress  } from '../actions/index';
+import { makePagesActive, sessionStorageHeaderActivePhone, consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress, fetchGeoLocationDataFromSavedLocation  } from '../actions/index';
 import HeaderDiv from './common/header'
 import LocationSearchSavedAddress from './location_search_saved_address'
 import rightNewPage from '../images/rightNewPage.png';
@@ -78,6 +78,14 @@ class SavedAddress extends React.Component {
         //     })
         // }
 
+        // storing location data got from saved address
+        var savedLocationObj = {
+            lat: parseFloat(location.Lat),
+            lng: parseFloat(location.Lng),
+            searchPostalCode: location.Zipcode,
+            Landmark: location.Landmark,
+        }
+        this.props.fetchGeoLocationDataFromSavedLocation(savedLocationObj);
         if(this.state.PickUpAvaliable === 1){
             // calling fetchPickUpLocations action serviceAvailability
             const pickUpLocationRequest = {
@@ -206,7 +214,7 @@ function mapStateToProps(state) {
 //
 //
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress }, dispatch);
+     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress, fetchGeoLocationDataFromSavedLocation }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SavedAddress);

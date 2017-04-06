@@ -42,6 +42,7 @@ class PickUpPage extends React.Component {
 
         this.setState({
             userCompleteAddress : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
+            activeButtonName : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
         })
     }
 

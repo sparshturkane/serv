@@ -160,6 +160,44 @@ class RecycleRequestDetail extends React.Component {
 
     }
 
+    renderLocation(){
+        if(this.props.recycleDetail.data.ServiceTypeID == 9){
+            return(
+                <div className="col-sm-6">
+                    <label className="devicelabel">Pickup Location</label><br />
+                    <label className="deciceInfoLabel">{this.props.recycleDetail.data.Address}</label>
+                </div>
+            );
+        } else {
+            <div className="col-sm-6">
+            </div>
+        }
+
+    }
+
+    renderDate(){
+        if(this.props.recycleDetail.data.ServiceTypeID == 9){
+            return(
+                <div className="col-sm-3">
+                    <label className="devicelabel">Pickup Date</label><br />
+
+                    <label className="deciceInfoLabel">
+                        <Moment format="DD MMMM YYYY">{this.props.recycleDetail.data.ScheduledDateTime}</Moment>
+                    </label>
+                </div>
+            );
+        } else if(this.props.recycleDetail.data.ServiceTypeID == 13){
+            return(
+                <div className="col-sm-3">
+                    <label className="devicelabel">DropOff Date</label><br />
+
+                    <label className="deciceInfoLabel">
+                        <Moment format="DD MMMM YYYY">{this.props.recycleDetail.data.ScheduledDateTime}</Moment>
+                    </label>
+                </div>
+            );
+        }
+    }
     render(){
 
         return(
@@ -183,17 +221,8 @@ class RecycleRequestDetail extends React.Component {
                                             <label className="devicelabel">Device</label><br />
                                             <label className="deciceInfoLabel">{this.props.recycleDetail.data.product.ProductName}</label>
                                         </div>
-                                        <div className="col-sm-6">
-                                            <label className="devicelabel">Pickup Location</label><br />
-                                            <label className="deciceInfoLabel">{this.props.recycleDetail.data.Address}</label>
-                                        </div>
-                                        <div className="col-sm-3">
-                                            <label className="devicelabel">Pickup Date</label><br />
-
-                                            <label className="deciceInfoLabel">
-                                                <Moment format="DD MMMM YYYY">{this.props.recycleDetail.data.CreatedDate}</Moment>
-                                            </label>
-                                        </div>
+                                        {this.renderLocation()}
+                                        {this.renderDate()}
                                     </div>
 
                                 </div>

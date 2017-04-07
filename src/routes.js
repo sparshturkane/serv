@@ -20,6 +20,7 @@ import FindImei from './components/find_imei';
 import ViewUserProfileNew from './containers/userProfile/view_user_profile_new';
 import EditUserProfileNew from './containers/userProfile/edit_user_profile_new';
 import SavedAddress from './containers/saved_address';
+import GreenRewardInfo from './containers/green_rewards_info';
 
 // demo
 import Demo from './components/googleMapTest';
@@ -154,6 +155,7 @@ export default (
 
         <Route path="/user-profile" component={ ViewUserProfileNew } />
         <Route path="/saved-address" component={ SavedAddress } />
+        <Route path="/reward-info" component={ GreenRewardInfo } />
         // <Route path="/user-profile" component={ ViewUserProfile } />
     </Route>
 );

@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Moment from 'react-moment';
+import { Link } from 'react-router';
 import { storeProductRewardIDArray, storeProductRewardDataArray } from '../actions/index';
+import imeiInfo from '../images/imeiInfo.png';
 
 class GreenRewards extends React.Component {
     constructor(props) {
@@ -212,6 +214,17 @@ class GreenRewards extends React.Component {
     render(){
         return(
             <div>
+                <br/>
+                <div className="row">
+                    <div className="divHeadinglabelHolder">
+                        <label className="TopdivHeadinglabelGreenRewardInfo">Green Rewards</label>
+                        <Link to={'/reward-info'} >
+                            <span className="imeiInfoHolder">
+                                <img src={imeiInfo} className="rewardInfo"/>
+                            </span>
+                        </Link>
+                    </div>
+                </div>
                 <br/>
                 <div className="row">
                     <div className="divHeadinglabelHolder">

@@ -93,6 +93,10 @@ input:focus
 {
 	padding: 0px 5px 0 0;
 }
+.rewardInfo
+{
+	padding: 0px 5px 0 9px;
+}
 .contentButtonHolder
 {
 	margin: 0 10px 0 0;
@@ -1317,6 +1321,12 @@ font-size: 14px;
 {
 	font-family: Gotham-Medium;
 	font-size: 16px;
+}
+.TopdivHeadinglabelGreenRewardInfo
+{
+	font-family: Gotham-Medium;
+	font-size: 16px;
+	padding-top: 7px;
 }
 .deviceNamelabelHolder
 {

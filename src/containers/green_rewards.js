@@ -14,18 +14,10 @@ class GreenRewards extends React.Component {
         }
     }
 
-    // componentWillMount(){
-    //     const script = document.createElement("script");
-    //     var t = document.createTextNode("$(function() {"+
-    //         "$('#first').carouseller();"+
-    //     "});");
-    //
-    //     // $(function() {
-    //     //     $('#fifth').carouseller();
-    //     // });
-    //     script.appendChild(t);
-    //     document.body.appendChild(script);
-    // }
+    componentWillMount(){
+        // in starting we will clear selected gift data
+        this.props.storeProductRewardIDArray(0)
+    }
 
     // renderRewardsList(){
     //     console.log(this.props.rewardList);

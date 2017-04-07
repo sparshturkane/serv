@@ -44,25 +44,29 @@ class RewardList extends React.Component {
     // }
 
     handleRecyclMyPhoneClick(event){
-        event.preventDefault();
-        // storing current phoneName for header
-        this.props.sessionStorageHeaderActivePhone(this.props.ProductName);
+        if(this.props.ProductRewardIDArray.ProductRewardIDArray.length >= 0 ){
+            event.preventDefault();
+            // storing current phoneName for header
+            this.props.sessionStorageHeaderActivePhone(this.props.ProductName);
 
-        console.log("recycle my phone clicked");
-        const pageData = {
-            pageName : 'pickUp',
-            status : '1'
+            console.log("recycle my phone clicked");
+            const pageData = {
+                pageName : 'pickUp',
+                status : '1'
+            }
+            // console.log(pageData);
+            this.props.makePagesActive(pageData);
+
+            const pageDataDropOff = {
+                pageName : 'dropOff',
+                status : '1'
+            }
+            this.props.makePagesActive(pageDataDropOff);
+            browserHistory.push('/saved-address');
+        } else {
+            event.preventDefault();
+            alert("Select atleast one gift");
         }
-        // console.log(pageData);
-        this.props.makePagesActive(pageData);
-
-        const pageDataDropOff = {
-            pageName : 'dropOff',
-            status : '1'
-        }
-        this.props.makePagesActive(pageDataDropOff);
-        browserHistory.push('/saved-address');
-
     }
 
     render(){
@@ -94,7 +98,13 @@ class RewardList extends React.Component {
 
                 <div className="row landingSubmitButton">
                     <div className="col-sm-12">
-                        <Link to="/saved-address" type="button" onClick={this.handleRecyclMyPhoneClick} className="landingLargeButton textTransform">Recycle My {this.props.ProductName}</Link>
+                        <Link
+                            to="/saved-address"
+                            type="button"
+                            onClick={this.handleRecyclMyPhoneClick}
+                            className="landingLargeButton textTransform">
+                            Recycle My {this.props.ProductName}
+                        </Link>
                     </div>
                 </div>
 
@@ -106,7 +116,8 @@ class RewardList extends React.Component {
 function mapStateToProps(state) {
     return {
         rewardList: state.rewardsList.rewardsListData,
-        ProductName: state.productData.ProductName
+        ProductName: state.productData.ProductName,
+        ProductRewardIDArray : state.SessionStorage,
     };
 }
 

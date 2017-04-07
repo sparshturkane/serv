@@ -1,10 +1,19 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 import HeaderDiv from '../common/header';
 import settingLogo from '../../images/SettingsFill.png';
 
+// browserHistory.push('/edit-profile-new');
 class ViewSettings extends React.Component {
     constructor(props) {
         super(props);
+        this.handleLogout  = this.handleLogout.bind(this);
+    }
+
+    handleLogout(){
+        // here remove all the stored data in local storage
+        localStorage.clear();
+        browserHistory.push('/home');
     }
 
     render(){
@@ -59,8 +68,8 @@ class ViewSettings extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-sm-8 borderSetting">
-                                    <div className="NewnotificationDiv">
-                                        <span className="notificationContent">Logout</span>
+                                    <div className="NewnotificationDiv" >
+                                        <span className="notificationContent" style={{cursor: "pointer"}} onClick={this.handleLogout} >Logout</span>
                                     </div>
                                 </div>
                             </div>

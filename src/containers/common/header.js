@@ -14,9 +14,14 @@ class HeaderDiv extends React.Component {
         super(props);
         this.state = {
             userData: undefined,
-            userLogo: user
+            userLogo: user,
+            bellLogo: bell,
+            settingLogo: setting,
         };
         this.handleViewUserProfile = this.handleViewUserProfile.bind(this);
+        this.handleNotification = this.handleNotification.bind(this);
+        this.handleSetting = this.handleSetting.bind(this);
+
     }
 
     componentWillMount(){
@@ -32,9 +37,24 @@ class HeaderDiv extends React.Component {
             })
         }
 
+        // userLogo
         if(this.props.userLogo != undefined){
             this.setState({
                 userLogo : this.props.userLogo
+            })
+        }
+
+        // bell logo
+        if(this.props.bellLogo != undefined){
+            this.setState({
+                bellLogo : this.props.bellLogo
+            })
+        }
+
+        // setting logo
+        if(this.props.settingLogo != undefined){
+            this.setState({
+                settingLogo : this.props.settingLogo
             })
         }
 
@@ -46,6 +66,15 @@ class HeaderDiv extends React.Component {
     handleViewUserProfile(){
         console.log("you are viewing userprofile");
         browserHistory.push('/user-profile');
+    }
+
+    handleNotification(){
+        console.log("you are viewing notification");
+        browserHistory.push('/user-notification');
+    }
+
+    handleSetting(){
+        console.log("you are viewing settings");
     }
 
     showHideUserSettings(){
@@ -71,10 +100,10 @@ class HeaderDiv extends React.Component {
                                 <img src={this.state.userLogo} alt="user" onClick={this.handleViewUserProfile} style={imageStyle} className="userIMG" />
                             </li>
                             <li className="userContentLI">
-                                <img src={bell} alt="Bell" className="userIMG"/>
+                                <img src={this.state.bellLogo} alt="Bell" onClick={this.handleNotification} style={imageStyle} className="userIMG"/>
                             </li>
                             <li className="userContentLI">
-                                <img src={setting} alt="Setting" className="userIMG"/>
+                                <img src={this.state.settingLogo} alt="Setting" onClick={this.handleSetting} style={imageStyle} className="userIMG"/>
                             </li>
                         </ul>
                     </div>

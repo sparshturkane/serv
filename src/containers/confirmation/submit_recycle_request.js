@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { consumerProductAddDevice, consumerScheduleRecycleRequest, makePagesActive } from '../../actions/index';
+import { consumerProductAddDevice, consumerScheduleRecycleRequest, makePagesActive, validateSerialNumber } from '../../actions/index';
 
 class SubmitRecycleRequestButton extends React.Component {
     constructor(props) {
@@ -64,6 +64,15 @@ class SubmitRecycleRequestButton extends React.Component {
         datetext = datetext.split(' ')[0];
 
         if ( this.props.userData.ServiceTypeID == 9 ) {
+            // making imei verify call  call
+            var validateObj = {
+                ConsumerProductID: this.props.consumerProductDeviceData.AddDevice.data.ConsumerProductID,
+                ProductUniqueID : this.props.userData.userIMEINumber,
+            }
+            if (this.props.userData.userIMEINumber !== '') {
+                this.props.validateSerialNumber(validateObj);
+            }
+
             scheduleRecycleRequestData = {
                 BrandID : this.props.productData.BrandID,
                 ConsumerID : this.props.consumerDetail.data.ConsumerID,
@@ -91,7 +100,7 @@ class SubmitRecycleRequestButton extends React.Component {
                 ScheduledToTime : "19:00:00", //static
                 ServiceTypeID : this.props.userData.ServiceTypeID, //vari
                 claimRequestFlow : 0, //s
-                ProductUniqueID : '', //optional IMEI no if Imei given then call api  ConsumerServicerequest/validateSerialNumber
+                ProductUniqueID : this.props.userData.userIMEINumber, //optional IMEI no if Imei given then call api  ConsumerServicerequest/validateSerialNumber
 
             }
         } else if(  this.props.userData.ServiceTypeID == 13 ){
@@ -173,7 +182,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ consumerProductAddDevice, consumerScheduleRecycleRequest, makePagesActive }, dispatch);
+    return bindActionCreators({ consumerProductAddDevice, consumerScheduleRecycleRequest, makePagesActive, validateSerialNumber }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitRecycleRequestButton);

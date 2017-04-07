@@ -46,6 +46,7 @@ export const STORE_CURRENT_ADDRESS = 'STORE_CURRENT_ADDRESS';
 export const FETCH_CONSUMER_APP_CONFIG = 'FETCH_CONSUMER_APP_CONFIG';
 export const CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION = 'CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION';
 export const GET_LAT_LNG_FROM_SAVED_LOCATION = 'GET_LAT_LNG_FROM_SAVED_LOCATION';
+export const VALIDATE_SERIAL_NUMBER = 'VALIDATE_SERIAL_NUMBER';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -64,6 +65,16 @@ export function getConsumerAppConfig() {
 
     return {
         type: FETCH_CONSUMER_APP_CONFIG,
+        payload: request,
+    };
+}
+
+// imei number vaidate
+export function validateSerialNumber(validateObj) {
+    const request = axios.post(`${ROOT_URL}/ConsumerServicerequest/validateSerialNumber`, validateObj);
+
+    return {
+        type: VALIDATE_SERIAL_NUMBER,
         payload: request,
     };
 }

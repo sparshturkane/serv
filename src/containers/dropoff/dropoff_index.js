@@ -136,6 +136,16 @@ class DropOffIndex extends React.Component {
         });
     }
 
+    timeConvert (time24) {
+        var ts = time24;
+        var H = +ts.substr(0, 2);
+        var h = (H % 12) || 12;
+        h = (h < 10)?("0"+h):h;  // leading 0 at the left for 1 digit hours
+        var ampm = H < 12 ? " AM" : " PM";
+        ts = h + ts.substr(2, 3) + ampm;
+        return ts;
+    };
+
     mapDropOffLocations(){
         // this.setState({
         //     DropOffServiceLocations : this.props.DropOffServiceLocations,
@@ -151,14 +161,14 @@ class DropOffIndex extends React.Component {
             daysArray.map((day) => {
                 if(dayCounter < 1){
                     daysJsxStart1.push(
-                        <span key={99} className="daysStyle"> {day} | {location.WorkingFrom} </span>
+                        <span key={99} className="daysStyle"> {day} | {this.timeConvert(location.WorkingFrom)} </span>
                     );
                     daysJsxStart2.push(
-                        <span key={96} className="daysStyle">{location.WorkingTo}</span>
+                        <span key={96} className="daysStyle">{this.timeConvert(location.WorkingTo)}</span>
                     );
                 }else{
                     daysJsxLong.push(
-                        <div key={day}><span className="daysStyle"> {day} | {location.WorkingFrom} </span> to <span className="daysStyle">{location.WorkingTo}</span></div>
+                        <div key={day}><span className="daysStyle"> {day} | {this.timeConvert(location.WorkingFrom)} </span> to <span className="daysStyle">{this.timeConvert(location.WorkingTo)}</span></div>
                     );
                 }
 

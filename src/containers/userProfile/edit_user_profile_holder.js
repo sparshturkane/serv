@@ -107,8 +107,8 @@ class EditUserProfileHolder extends React.Component {
         })
     }
 
-    titleCase() {
-        var str = "sparsh turkane"
+    titleCase(str) {
+        // var str = "sparsh turkane"
         var words = str.toLowerCase().split(' ');
 
         for(var i = 0; i < words.length; i++) {
@@ -124,64 +124,69 @@ class EditUserProfileHolder extends React.Component {
         return(
             <div className="profileHolder">
                 <div className="profileImgHolder">
-                    <span className="profileIMGContent">SP</span>
-                    <label className="profileName">
-                        {this.state.Name !== '' &&
-                            this.titleCase(this.state.Name)
-                        }
-                    </label>
-                </div>
-                <div className="ProfiledetailsHolder">
-                    <form onSubmit={this.handleOnSubmitUpdateUser}>
-                        <div className="row">
-                            <div className="col-lg-2 col-sm-12">
-                                <div className="profiledetailsContent">
-                                    <label className="profileDetails">Mobile Number</label><br/>
-                                    <input
-                                        type="text"
-                                        name="MobileNo"
-                                        onChange={this.handleInputFieldsChange}
-                                        placeholder="Mobile Number"
-                                        className="inputdetails"
-                                        value={this.state.MobileNo}
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-lg-3 col-sm-12">
-                                <div className="profiledetailsContent">
-                                    <label className="profileDetails">Email</label><br/>
-                                    <input
-                                        type="email"
-                                        name="EmailID"
-                                        onChange={this.handleInputFieldsChange}
-                                        placeholder="Email"
-                                        className="inputdetails"
-                                        value={this.state.EmailID}
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-lg-2 col-sm-12">
-                                <div className="profiledetailsContent">
-                                    <label className="profileDetails">Alternate Number</label><br/>
-                                    <input
-                                        type="text"
-                                        name="AlternateMobileNo"
-                                        onChange={this.handleInputFieldsChange}
-                                        placeholder="Mobile Number"
-                                        className="inputdetails"
-                                        value={this.state.AlternateMobileNo}
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-lg-2">
-                                <button type="Submit" className="SaveButtonProfile">Save</button>
-                            </div>
+                    <div className="profileIMGContent">
+                        <img src="images/homepageslider3.png" alt="profilePIC" className="profilePIC"/>
+                    </div>
+                    <div className="profileIMGContentRight">
+                        <label className="profileName">
+                            {this.state.Name !== '' &&
+                                this.titleCase(this.state.Name)
+                            }
+                        </label>
 
+                        <div className="ProfiledetailsHolder">
+                            <form onSubmit={this.handleOnSubmitUpdateUser}>
+                                <div className="row">
+                                    <div className="col-lg-2 col-sm-12">
+                                        <div className="profiledetailsContent">
+                                            <label className="profileDetails">Mobile Number</label><br/>
+                                            <input
+                                                type="text"
+                                                name="MobileNo"
+                                                onChange={this.handleInputFieldsChange}
+                                                placeholder="Mobile Number"
+                                                className="inputdetails"
+                                                value={this.state.MobileNo}
+                                                required
+                                                />
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-3 col-sm-12">
+                                        <div className="profiledetailsContent">
+                                            <label className="profileDetails">Email</label><br/>
+                                            <input
+                                                type="email"
+                                                name="EmailID"
+                                                onChange={this.handleInputFieldsChange}
+                                                placeholder="Email"
+                                                className="inputdetails"
+                                                value={this.state.EmailID}
+                                                required
+                                                />
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-2 col-sm-12">
+                                        <div className="profiledetailsContent">
+                                            <label className="profileDetails">Alternate Number</label><br/>
+                                            <input
+                                                type="text"
+                                                name="AlternateMobileNo"
+                                                onChange={this.handleInputFieldsChange}
+                                                placeholder="Mobile Number"
+                                                className="inputdetails"
+                                                value={this.state.AlternateMobileNo}
+                                                required
+                                                />
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-2">
+                                        <button type="Submit" className="SaveButtonProfile">Save</button>
+                                    </div>
+
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         );
@@ -200,7 +205,7 @@ function mapStateToProps(state) {
 //
 //
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData }, dispatch);
+    return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditUserProfileHolder);

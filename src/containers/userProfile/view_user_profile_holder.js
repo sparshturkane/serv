@@ -59,47 +59,51 @@ class ViewUserProfileHolder extends React.Component {
         return(
             <div className="profileHolder">
                 <div className="profileImgHolder">
-                    <span className="profileIMGContent">
+                    <div className="profileIMGContent">
                         {/* <input type="file" name="fileToUpload" id="fileToUpload"/> */}
+                        <img src="images/homepageslider3.png" alt="profilePIC" className="profilePIC"/>
+                    </div>
 
-                        SP
-                    </span>
-                    
-                    <label className="profileName">
-                        {this.state.userData.Name !== '' &&
-                            this.titleCase(this.state.userData.Name)
-                        }
-                    </label>
-                </div>
-                <div className="ProfiledetailsHolder">
-                    <form>
-                        <div className="row">
-                            <div className="col-lg-2 col-sm-12">
-                                <div className="profiledetailsContent">
-                                    <label className="profileDetails">Mobile Number</label><br/>
-                                    <label className="profileDetailsLabel">{this.state.userData.MobileNo}</label>
+
+
+                    <div className="profileIMGContentRight">
+
+                        <label className="profileName">
+                            {this.state.userData.Name !== '' &&
+                                this.titleCase(this.state.userData.Name)
+                            }
+                        </label>
+                        <div className="ProfiledetailsHolder">
+                            <form>
+                                <div className="row">
+                                    <div className="col-lg-2 col-sm-12">
+                                        <div className="profiledetailsContent">
+                                            <label className="profileDetails">Mobile Number</label><br/>
+                                            <label className="profileDetailsLabel">{this.state.userData.MobileNo}</label>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-3 col-sm-12">
+                                        <div className="profiledetailsContent">
+                                            <label className="profileDetails">Email ID</label><br/>
+                                            <label className="profileDetailsLabel">{this.state.userData.EmailID}</label>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-2 col-sm-12">
+                                        <div className="profiledetailsContent">
+                                            <label className="profileDetails">Alternate Number</label><br/>
+                                            <label className="profileDetailsLabel">{this.state.userData.AlternateMobileNo }</label>
+                                        </div>
+                                    </div>
+                                    <span className="rightNewPageHolder" onClick={this.handleEditProfileClick.bind(this)}>
+                                        <img src={edit} className="editImg" />
+                                        <label className="editLabel" style={{cursor: "pointer"}} onClick={this.handleEditProfileClick.bind(this)} >
+                                            edit
+                                        </label>
+                                    </span>
                                 </div>
-                            </div>
-                            <div className="col-lg-3 col-sm-12">
-                                <div className="profiledetailsContent">
-                                    <label className="profileDetails">Email ID</label><br/>
-                                    <label className="profileDetailsLabel">{this.state.userData.EmailID}</label>
-                                </div>
-                            </div>
-                            <div className="col-lg-2 col-sm-12">
-                                <div className="profiledetailsContent">
-                                    <label className="profileDetails">Alternate Number</label><br/>
-                                    <label className="profileDetailsLabel">{this.state.userData.AlternateMobileNo }</label>
-                                </div>
-                            </div>
-                            <span className="rightNewPageHolder" onClick={this.handleEditProfileClick.bind(this)}>
-                                <img src={edit} className="editImg" />
-                                <label className="editLabel" style={{cursor: "pointer"}} onClick={this.handleEditProfileClick.bind(this)} >
-                                    edit
-                                </label>
-                            </span>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         );
@@ -120,7 +124,7 @@ function mapStateToProps(state) {
 //
 //
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData }, dispatch);
+    return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewUserProfileHolder);

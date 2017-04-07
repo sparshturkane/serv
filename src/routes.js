@@ -19,6 +19,7 @@ import RescheduleConfirmation from './containers/recycleRequestDetail/reschedule
 import FindImei from './components/find_imei';
 import ViewUserProfileNew from './containers/userProfile/view_user_profile_new';
 import ViewNotification from './containers/notification/view_notification';
+import ViewSettings from './containers/settings/view_settings';
 import EditUserProfileNew from './containers/userProfile/edit_user_profile_new';
 import SavedAddress from './containers/saved_address';
 import GreenRewardInfo from './containers/green_rewards_info';
@@ -156,6 +157,8 @@ export default (
 
         <Route path="/user-profile" component={ ViewUserProfileNew } />
         <Route path="/user-notification" component={ ViewNotification } />
+        <Route path="/user-settings" component={ ViewSettings } />
+
         <Route path="/saved-address" component={ SavedAddress } />
         <Route path="/reward-info" component={ GreenRewardInfo } />
         // <Route path="/user-profile" component={ ViewUserProfile } />

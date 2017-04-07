@@ -75,6 +75,7 @@ class HeaderDiv extends React.Component {
 
     handleSetting(){
         console.log("you are viewing settings");
+        browserHistory.push('/user-settings');
     }
 
     showHideUserSettings(){

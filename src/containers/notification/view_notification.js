@@ -22,30 +22,30 @@ class ViewNotification extends React.Component {
             <div>
                 <HeaderDiv bellLogo={bellLogo}/>
                 <div className="separators"></div>
-                    <div className="pickupInfoHolder">
-                        <div className="yourDetailsHolderTOP">
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <div className="yourDetailsLabel">
-                                        <label className="congo">Your</label><br/>
-                                        <label className="recyle">Notifications</label>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="editContent">
-                                        <label className="editContentLabel">Edit</label>
-                                    </div>
+                <div className="pickupInfoHolder">
+                    <div className="yourDetailsHolderTOP">
+                        <div className="row">
+                            <div className="col-sm-6">
+                                <div className="yourDetailsLabel">
+                                    <label className="congo">Your</label><br/>
+                                    <label className="recyle">Notifications</label>
                                 </div>
                             </div>
-                        </div>
-                        <div className="notificationHolder">
-                            <div className="row">
-                                {/* <div className="activeDIVCircle"></div> */}
-                                {this.renderNotification()}
+                            <div className="col-sm-6">
+                                <div className="editContent">
+                                    <label className="editContentLabel">Edit</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="separators"></div>
+                    <div className="notificationHolder">
+                        <div className="row">
+                            {/* <div className="activeDIVCircle"></div> */}
+                            {this.renderNotification()}
+                        </div>
+                    </div>
+                </div>
+                <div className="separators"></div>
             </div>
         );
     }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-import { makePagesActive, sessionStorageHeaderActivePhone, consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress, fetchGeoLocationDataFromSavedLocation  } from '../actions/index';
+import { makePagesActive, sessionStorageHeaderActivePhone, consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress, fetchGeoLocationDataFromSavedLocation, sessionStorageLocationData  } from '../actions/index';
 import HeaderDiv from './common/header'
 import LocationSearchSavedAddress from './location_search_saved_address'
 import rightNewPage from '../images/rightNewPage.png';
@@ -107,6 +107,13 @@ class SavedAddress extends React.Component {
                     DeliveryMode : this.props.pickUpSerivceLocations.DeliveryMode, //only at the time of pickup
                 };
                 this.props.getSlot(getSlotsRequest).then(() => {
+                    this.props.sessionStorageLocationData(
+                        {
+                            Landmark: location.Landmark,
+                            latitude: location.Lat,
+                            longitude : location.Lng
+                        }
+                    )
                     browserHistory.push('/pickup-dropoff');
                 });
             })
@@ -127,7 +134,15 @@ class SavedAddress extends React.Component {
                 Radius:80 //s
             }
 
-            this.props.fetchDropOffLocations(dropOffLocationRequest)
+            this.props.fetchDropOffLocations(dropOffLocationRequest).then(()=>{
+                this.props.sessionStorageLocationData(
+                    {
+                        Landmark: location.Landmark,
+                        latitude: location.Lat,
+                        longitude : location.Lng
+                    }
+                )
+            })
         }
 
 
@@ -214,7 +229,7 @@ function mapStateToProps(state) {
 //
 //
 function mapDispatchToProps(dispatch) {
-     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress, fetchGeoLocationDataFromSavedLocation }, dispatch);
+     return bindActionCreators({consumerGetProfile, consumerUpdateProfile, storeActivePageData, consumerFavoriteLocationGetUserLocations, fetchPickUpLocations, getSlot, fetchDropOffLocations, storeCurrentAddress, fetchGeoLocationDataFromSavedLocation, sessionStorageLocationData }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SavedAddress);

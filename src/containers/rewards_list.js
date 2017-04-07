@@ -70,7 +70,7 @@ class RewardList extends React.Component {
             <div className="greenReword">
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="deviceNamelabelHolder">
+                        <div className="NewdeviceNamelabelHolder">
                             <label className="deviceName">{this.props.ProductName}</label>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Moment from 'react-moment';
 import { storeProductRewardIDArray, storeProductRewardDataArray } from '../actions/index';
 
 class GreenRewards extends React.Component {
@@ -94,7 +95,7 @@ class GreenRewards extends React.Component {
     }
 
 
-    renderRewardsList(){
+    renderRewardsListScroller(){
         // console.log(this.props.rewardList);
         return this.props.rewardList.map((reward) => {
             if (reward.IsMandatory === false) {
@@ -128,6 +129,51 @@ class GreenRewards extends React.Component {
             }
         });
     }
+
+
+    renderRewardsList(){
+        // console.log(this.props.rewardList);
+        return this.props.rewardList.map((reward) => {
+            if (reward.IsMandatory === false) {
+                var rewardValue = '';
+                var rewardTill = '';
+                var rewardTillPre= '';
+                if(reward.Rewards.RewardValue > 0){
+                    rewardValue = "INR " +reward.Rewards.RewardValue;
+
+                    rewardTill = "Till "+reward.Rewards.EndDate;
+                    rewardTill = <Moment format="Do MMM YY">{reward.Rewards.EndDate}</Moment>
+                    rewardTillPre = "Till "
+                }else{
+                    rewardValue = reward.Rewards.RewardTypeName;
+                    rewardTill = "Eligible";
+                }
+                return (
+
+                    <li className="homepageCardContentLI" key={reward.ProductRewardID}>
+                        <div className="homepageCardContent">
+                            <div className="grContentDivLeft">
+                                <label className="iphone7Label">{reward.Rewards.RewardName}</label>
+                                <label className="LuckyDip">{rewardValue}</label>
+                                <label className="LuckyDip">{rewardTillPre}{rewardTill}</label>
+                                <div className="cutapple">
+                                    <img src={reward.Rewards.RewardPartner.PartnerLogoUrl} alt="partnerLogo" className="cardSmallLogo"/>
+                                </div>
+                            </div>
+                            <div className="greenRewardChoose">
+                                <input type="radio" name="greenReward" value="" onClick={this.handleRadioClick.bind(this, reward.ProductRewardID, reward.Rewards.RewardName, rewardValue)}/>
+                            </div>
+                            <div className="grContentDivRight">
+                                <img src={reward.Rewards.RewardUrl} alt="reward" className="cardSmallImg"/>
+                            </div>
+                        </div>
+                    </li>
+                );
+            }
+        });
+    }
+
+
 
     renderMandatoryRewardsList(){
         // console.log(this.props.rewardList);
@@ -166,37 +212,21 @@ class GreenRewards extends React.Component {
     render(){
         return(
             <div>
+                <br/>
                 <div className="row">
                     <div className="divHeadinglabelHolder">
-                        <label className="TopdivHeadinglabel">Green Rewards</label>
+                        <label className="divHeadinglabel">Select 1 Green Reward</label>
                     </div>
-                    <div className="col-sm-12">
-                        <div className="NewTOPgreenRewordContentHolder">
-                            <ul className="topgreenRewordContentHolderUL">
-                                {this.renderMandatoryRewardsList()}
-                            </ul>
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="homepageCardContentHolder">
+                                <ul className="homepageCardContentUL">
+                                    {this.renderRewardsList()}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <br/>
-                    <div className="row">
-                        <div className="divHeadinglabelHolder">
-                            <label className="divHeadinglabel">Select 1 Green Reward</label>
-                        </div>
-                        <div className="col-sm-12">
-                            <div className="greenCardHolder">
-                            <div id="first" className="carouseller carousellerHomeRadioSMall carousellerHomeRadio ">
-                                <a href="javascript:void(0)" className="carouseller__left"><img src="images/leftarrow.png" alt="leftarrow" className="homePageleftArro"/></a>
-                                <div className="carouseller__wrap">
-                                    <div className="carouseller__list">
-                                        {this.renderRewardsList()}
-                                    </div>
-                                </div>
-                                <a href="javascript:void(0)" className="carouseller__right"><img src="images/rightarrow.png" alt="rightarrow" className="homePagerightArro"/></a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
             </div>
         );
     }

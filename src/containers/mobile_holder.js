@@ -20,8 +20,8 @@ class MobileHolder extends React.Component {
             return (
                 <li key={mobile.ProductID}>
                     <div className="HomemobileHolder">
-                        <span className="mobileIMGHolder" id={idCounter}><img src="images/devImgs/3g.png" className="mobileIMG" /></span>
-                        <span className="mobileIMGHolderActive" ><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" /></span>
+                        <span className="mobileIMGHolder" id={idCounter}><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span>
+                        <span className="mobileIMGHolderActive" ><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                         <label className="mobileLabel">{mobile.ProductName}</label>
                     </div>
                 </li>
@@ -43,67 +43,67 @@ class MobileHolder extends React.Component {
                                         {/* his.renderSupportedMobiles() */}
 
                                             <li className="active">
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_0" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_0" ><img src="images/devImgs/3g.png" className="mobileIMG"  role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 3GS</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_1" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_1" ><img src="images/devImgs/3g.png" className="mobileIMG"  role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 4</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_2" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_2" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 4s</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_3" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_3" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 5</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_4" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_4" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 5c</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_5" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_5" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 5s</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_6" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_6" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 6</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_7" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_7" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 6 Plus</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_8" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_8" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 6s</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_9" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_9" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 6s Plus</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_10" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_10" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone SE</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_11" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_11" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 7</label>
                                                 </div>
                                             </li>
                                             <li>
-                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_12" ><img src="images/devImgs/3g.png" className="mobileIMG"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG"/></span>
+                                                <div className="HomemobileHolder"><span className="mobileIMGHolder" id="overPhnDispImg_12" ><img src="images/devImgs/3g.png" className="mobileIMG" role="presentation"/></span><span className="mobileIMGHolderActive"><img src="images/devImgs/3g_ro.png" className="ActivemobileIMG" role="presentation"/></span>
                                                     <label className="mobileLabel">iPhone 7 Plus</label>
                                                 </div>
                                             </li>

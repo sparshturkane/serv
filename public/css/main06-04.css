@@ -103,12 +103,6 @@ input:focus
 	text-align: right;
 	margin-right: 50px;
 }
-.profilePIC
-{
-	width: 100%;
-	border-radius: 50%;
-	height: 100%;
-}
 .cancelText
 {
 	font-family: Gotham-Medium;
@@ -194,14 +188,10 @@ input:focus
 {
 	margin-right: 25px;
 }
-.newCancelHolder
-{
-	float: right;
-}
 .resheduleCancel
 {
 	font-family: Gotham-Medium;
-	font-size: 13px;
+	font-size: 14px;
 	background-color: white;
 	border: 1px solid black;
 	padding: 8px 10px;
@@ -387,30 +377,6 @@ input[type=number]::-webkit-outer-spin-button {
 	margin-left: 20px;
 	margin-right: 20px;
 }
-.homepageCardContent
-{
-	width: 250px;
-background: #f2f2f2;
-height: 150px;
-padding: 20px;
-border-radius: 5px;
-position: relative;
-}
-.homepageCardContentUL
-{
-  padding: 0;
-  margin: auto;
-  list-style-type: none;
-  left: 0;
-  right: 0;
-  width: 800px;
-}
-.homepageCardContentLI
-{
-  float: left;
-  margin: 1%;
-  padding-bottom: 10px;
-}
 .dropofflabel
 {
 	font-size: 18px;
@@ -439,7 +405,7 @@ position: relative;
 }
 .yourDetailsHolderTOP
 {
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #bbbbbb;
 	padding-top: 20px;
 	margin-left: 5%;
 	margin-right: 5%;
@@ -469,6 +435,7 @@ position: relative;
 .profiledetailsContent
 {
 	padding-bottom: 10px;
+    padding-left: 10px;
     padding-right: 10px;
 }
 .inputdetails
@@ -501,18 +468,9 @@ position: relative;
 	background:transparent;
 	z-index: 1;
 }
-.borderSetting
-{
-	    border-bottom: 1px solid #eee;
-}
 .notificationDiv
 {
 	padding:20px 20px 20px 25px;
-	position: relative;
-}
-.NewnotificationDiv
-{
-	padding:20px 25px 20px 0px;
 	position: relative;
 }
 .notificationDivBorder
@@ -575,32 +533,11 @@ input[type="checkbox"]:checked + label span {
 	font-family: Gotham-Book;
 	background-color: white;
 }
-.NewnotificationCheckBox
-{
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	right:0px;
-	top: 22px;
-	font-size: 12px;
-	font-family: Gotham-Book;
-	background-color: white;
-}
 .notificationHolder
 {
 	padding-left: 5%;
 	padding-right: 5%;
 	padding-top: 30px;
-	padding-bottom: 80px;
-}
-.aboutServify
-{
-	cursor: pointer;
-}
-.NewnotificationHolder
-{
-	padding-left: 5%;
-	padding-right: 5%;
 	padding-bottom: 80px;
 }
 .notificationLabel
@@ -729,12 +666,6 @@ input[type="checkbox"]:checked + label span {
 	position: absolute;
 	right: 20px;
 }
-.rewardBottomright
-{
-	bottom: 0;
-	position: absolute;
-	right: 0;
-}
 .cutapple
 {
 	position: absolute;
@@ -815,42 +746,6 @@ input[type="checkbox"]:checked + label span {
 	margin-left: 3%;
 	margin-right: 3%;
 	padding-top: 25px;
-}
-.cardRewardInfoHolder
-{
-	margin-left: 3%;
-	margin-right: 3%;
- 	padding-top: 20px;
-
-	  padding-left: 3%;
-	   padding-right: 3%;
-}
-.cardRewardInfoContentUL
-{
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
-}
-.cardRewardInfoContentLI
-{
-	float: left;
-	width: 50%;
-}
-.cardRewardInfoContentDetails
-{
-	padding: 15px 0;
-	font-family: Gotham-Book;
-	font-size: 14px;
-}
-.cardRewardInfoContent
-{
-	padding-top: 15px;
-	padding-bottom: 15px;
-}
-.rewordInfoMenu
-{
-	margin-left: 3%;
-	margin-right: 3%;
 }
 .mapHolder
 {
@@ -1324,12 +1219,6 @@ font-size: 14px;
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
-.NewdeviceNamelabelHolder
-{
-	text-align: center;
-	padding-top: 30px;
-
-}
 .chooseDevice
 {
 	font-size: 24px;
@@ -1466,10 +1355,6 @@ font-size: 14px;
 {
 	padding-top: 20px;
 	padding-left: 3%;
-}
-.homepageCardContentHolder
-{
-	padding-bottom: 20px;
 }
 .iphone4
 {
@@ -2101,21 +1986,16 @@ a:focus, a:hover
 	padding-top: 15px;
 	position: relative;
 }
-.rewordInfoHolder
-{
-	margin-left: 3%;
-	margin-right: 3%;
-	padding: 10px;
-	padding-top: 20px;
-}
 .profileIMGContent
 {
-	width: 80px;
-	height: 80px;
-	float: left;
-	left: 0;
-	right: 0;
-	margin: auto;
+	border: 1px solid #eaeaea;
+	    border-radius: 50%;
+	    font-size: 30px;
+	    padding: 20px;
+	    color: grey;
+	    text-align: center;
+	    font-family: Gotham-XLight;
+	    background: #f6f6f6;
 }
 .profileName
 {
@@ -2147,16 +2027,11 @@ a:focus, a:hover
 	max-height: 80px;
 
 }
-.rewardBottomrightImg
-{
-	max-width: 80px;
-	max-height: 80px;
-}
 .ProfiledetailsHolder
 {
 	padding-top: 20px;
-/*padding-left: 80px;
-padding-right: 80px;*/
+padding-left: 80px;
+padding-right: 80px;
 }
 .rightNewPageHolder
 {
@@ -2167,10 +2042,6 @@ padding-right: 80px;*/
     margin: auto;
 	cursor: pointer;
 
-}
-.profileIMGContentRight
-{
-	margin-left: 80px;
 }
 .detect
 {
@@ -2267,10 +2138,6 @@ padding-right: 80px;*/
 	}
 }
 @media only screen and (max-width: 1000px) {
-	.homepageCardContentUL
-	{
-		width: 522px;
-	}
 	.TopgrContentDiv
 	{
 		width: 280px;
@@ -2286,11 +2153,6 @@ padding-right: 80px;*/
 	.mySmallbtn
 	{
 		padding: 5px 2px !important;
-	}
-	.userContentLI
-	{
-		padding-left: 8px;
-		font-size: 12px;
 	}
 }
 @media only screen and (max-width: 820px) {
@@ -2372,10 +2234,6 @@ padding-right: 80px;*/
 }
 
 @media only screen and (max-width: 766px) {
-	.rightNewPageHolder
-	{
-		top: 15px;
-	}
 	.requestMobileDataHolderRight
 	{
 		float: left;
@@ -2429,13 +2287,6 @@ padding-right: 80px;*/
 		margin-left: 4%;
 		margin-right: 0;
 		margin-bottom: 10px;
-	}
-}
-
-@media only screen and (max-width: 640px) {
-	.homepageCardContentUL
-	{
-		width: 250px;
 	}
 }
 @media only screen and (max-width: 600px) {
@@ -2495,8 +2346,6 @@ padding-right: 80px;*/
 	{
 		width: 98%;
 	}
-
-
 	.grContentDiv
 	{
 		left: 0;
@@ -2548,18 +2397,6 @@ padding-right: 80px;*/
 
 }
 @media only screen and (max-width: 500px) {
-	.profiledetailsContent
-	{
-		padding-right: 0;
-	}
-	.profileIMGContent
-	{
-		float: none;
-	}
-	.profileIMGContentRight
-	{
-		margin-left: 0;
-	}
 	.SaveAddress
 	{
 		margin-right: 10px;
@@ -2580,10 +2417,6 @@ padding-right: 80px;*/
 }
 
 @media only screen and (max-width: 400px) {
-	.homepageCardContentUL
-	{
-		width: 220px;
-	}
 	.SaveAddress
 	{
 		margin-right: 2px;
@@ -2623,12 +2456,6 @@ padding-right: 80px;*/
 	{
 		width: 100%;
 
-	}
-	.homepageCardContent
-	{
-		width: 220px;
-		height: 145px;
-		padding: 15px;
 	}
 }
 

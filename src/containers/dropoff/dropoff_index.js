@@ -14,12 +14,12 @@ import moment from 'moment';
 
 const AnyReactComponent = ({ text }) => <div style={{
     position: 'relative', color: 'white', backgroundImage: "url("+gMapReg+")",
-    height: 81, width: 121, top: -20, left: -30,backgroundRepeat: "no-repeat",
+    height: 81, width: 121, top: -50, left: -21,backgroundRepeat: "no-repeat",
 }}><div style={{position: 'absolute',backgroundColor: 'white', color:'black', left: 41, top: 8, textAlign: 'center', fontSize: 13, padding: 5}}> <label>{text}</label></div></div>;
 
 const BlueMapMarker = ({ text }) => <div style={{
     position: 'relative', color: 'white', backgroundImage: "url("+gMapBlue+")",
-    height: 81, width: 121, top: -20, left: -30,backgroundRepeat: "no-repeat",
+    height: 81, width: 121, top: -31, left: -15,backgroundRepeat: "no-repeat",
 }}>{text}</div>;
 
 class DropOffIndex extends React.Component {
@@ -107,31 +107,32 @@ class DropOffIndex extends React.Component {
         });
     }
 
+    handleMouseEnter(){
+        console.log('mouse-over-done');
+    }
+
     mapDropOffLocationsOldHome(){
         // this.setState({
         //     DropOffServiceLocations : this.props.DropOffServiceLocations,
         // });
         return this.props.DropOffServiceLocations.map((location) => {
             return (
-
-                        <div className="dropOFFHolderContent" key={location.PartnerServiceLocationID}>
-                            <div className="row">
-                                <div className="col-sm-12">
-                                    <div className="leftDropOFF">
-                                        <div>
-                                            <label className="MapleLabel">{location.ServiceLocationName}</label>
-                                            <label className="kmLabel"><img src={navigation} />&nbsp;{Math.round( location.distance * 10 ) / 10 }Km</label>
-                                            <label className="TechnologyLabel">{location.NameOfFirm}</label>
-                                            <p className="TechnologyLabelContent">
-                                                {location.address}
-                                            </p>
-                                        </div>
-                                    </div>
+                <div className="dropOFFHolderContent" key={location.PartnerServiceLocationID} >
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="leftDropOFF">
+                                <div>
+                                    <label className="MapleLabel">{location.ServiceLocationName}</label>
+                                    <label className="kmLabel"><img src={navigation} />&nbsp;{Math.round( location.distance * 10 ) / 10 }Km</label>
+                                    <label className="TechnologyLabel">{location.NameOfFirm}</label>
+                                    <p className="TechnologyLabelContent">
+                                        {location.address}
+                                    </p>
                                 </div>
                             </div>
                         </div>
-
-
+                    </div>
+                </div>
             );
         });
     }
@@ -175,7 +176,7 @@ class DropOffIndex extends React.Component {
                 dayCounter = dayCounter + 1;
             });
             return (
-                <div className="dropOFFHolderContent" key={location.PartnerServiceLocationID}>
+                <div className="dropOFFHolderContent" onMouseEnter={this.handleMouseEnter.bind(this)} key={location.PartnerServiceLocationID}>
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="leftDropOFF">

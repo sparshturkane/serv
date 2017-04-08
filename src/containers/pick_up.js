@@ -42,8 +42,46 @@ class PickUpPage extends React.Component {
         if (this.props.storedUserData.storeCurrentAddress !== undefined) {
             this.setState({
                 userCompleteAddress : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
-                activeButtonName : this.props.storedUserData.storeCurrentAddress.userCompleteAddress,
+                activeButtonName : this.props.storedUserData.storeCurrentAddress.activeButtonName,
             })
+            console.log(this.props.storedUserData.storeCurrentAddress.activeButtonName);
+            // this.activeButtons(this.props.storedUserData.storeCurrentAddress.activeButtonName);
+            var buttonName = this.props.storedUserData.storeCurrentAddress.activeButtonName.toString()
+            console.log(buttonName);
+            switch (buttonName) {
+                case "Home":
+                    console.log('home clicked');
+                    this.setState({
+                        activeButtonName : 'Home',
+                        homeBtnClass: 'btn activeBtn mySmallbtn',
+                        officeBtnClass: 'btn mySmallbtn',
+                        otherBtnClass: 'btn mySmallbtn',
+                    })
+                break;
+
+                case "Office":
+                    console.log('home office');
+                    this.setState({
+                        activeButtonName : 'Office',
+                        homeBtnClass: 'btn  mySmallbtn',
+                        officeBtnClass: 'btn activeBtn mySmallbtn',
+                        otherBtnClass: 'btn mySmallbtn',
+                    })
+                break;
+
+                case "Other":
+                    console.log('home other');
+                    this.setState({
+                        activeButtonName : 'Other',
+                        homeBtnClass: 'btn mySmallbtn',
+                        officeBtnClass: 'btn mySmallbtn',
+                        otherBtnClass: 'btn activeBtn mySmallbtn',
+                    })
+                break;
+
+                default:
+
+            }
         }
 
     }
@@ -479,6 +517,7 @@ class PickUpPage extends React.Component {
     }
 
     activeButtons(buttonName){
+        console.log('active buttons was called');
         switch (buttonName) {
             case "home":
                 console.log('home clicked');

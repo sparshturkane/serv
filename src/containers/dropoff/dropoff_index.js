@@ -17,10 +17,16 @@ const AnyReactComponent = ({ text }) => <div style={{
     height: 81, width: 121, top: -50, left: -21,backgroundRepeat: "no-repeat",
 }}><div style={{position: 'absolute',backgroundColor: 'white', color:'black', left: 41, top: 8, textAlign: 'center', fontSize: 13, padding: 5}}> <label>{text}</label></div></div>;
 
-const BlueMapMarker = ({ text }) => <div style={{
-    position: 'relative', color: 'white', backgroundImage: "url("+gMapBlue+")",
-    height: 81, width: 121, top: -31, left: -15,backgroundRepeat: "no-repeat",
-}}>{text}</div>;
+const BlueMapMarker = ({ text }) => <div style={{position: text.position,
+    color: text.color,
+    backgroundRepeat: text.backgroundRepeat,
+    backgroundImage: text.backgroundImage,
+    height: text.height,
+    width: text.width,
+    top: text.top,
+    left: text.left,
+    backgroundSize: text.backgroundSize
+}}></div>;
 
 class DropOffIndex extends React.Component {
     constructor(props) {
@@ -31,7 +37,17 @@ class DropOffIndex extends React.Component {
             PartnerServiceLocationID : undefined,
             center: {lat: this.props.geoLocationData.latitude, lng: this.props.geoLocationData.longitude},
             zoom: 11,
-            size: { width:"1000px" , height:"1000px" }
+            size: { width:"1000px" , height:"1000px" },
+            position : 'relative',
+            color: 'white',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: "url("+gMapBlue+")",
+            height: 81,
+            width: 121,
+            top: -31,
+            left: -15,
+            backgroundSize: "30px 35px",
+            allBackGroundSize: [],
             // userName : '',
             // userMobileNo : '',
             // date : '',
@@ -67,6 +83,21 @@ class DropOffIndex extends React.Component {
         //
         //     });
         // });
+
+        var backGroundArray = [];
+        this.props.DropOffServiceLocations.map((location) => {
+            var back = "back"+location.PartnerServiceLocationID;
+
+            var backObj = {
+                [back] : "30px 35px",
+                ["top"+location.PartnerServiceLocationID]: -31,
+                ["left"+location.PartnerServiceLocationID]: -15,
+            }
+            backGroundArray.push(backObj)
+        });
+        this.setState({
+            allBackGroundSize : backGroundArray,
+        })
     }
 
     componentDidMount(){
@@ -107,8 +138,58 @@ class DropOffIndex extends React.Component {
         });
     }
 
-    handleMouseEnter(){
-        console.log('mouse-over-done');
+    handleMouseEnter(PartnerServiceLocationID){
+        var backGroundArray = [];
+        this.props.DropOffServiceLocations.map((location) => {
+            var back = "back"+location.PartnerServiceLocationID;
+
+            if(PartnerServiceLocationID !== location.PartnerServiceLocationID){
+                var backObj = {
+                    [back] : "30px 35px",
+                    ["top"+location.PartnerServiceLocationID]: -31,
+                    ["left"+location.PartnerServiceLocationID]: -15,
+                }
+            }else{
+                // 40px 45px
+                var backObj = {
+                    [back] : "40px 45px",
+                    ["top"+location.PartnerServiceLocationID]: -43,
+                    ["left"+location.PartnerServiceLocationID]: -20,
+                }
+            }
+
+            backGroundArray.push(backObj)
+        });
+        this.setState({
+            allBackGroundSize : backGroundArray,
+        })
+
+        console.log('mouse-enter');
+        // this.setState({
+        //     backgroundSize: "35px 40px",
+        // })
+    }
+
+    handleMouseLeave(PartnerServiceLocationID){
+        // console.log('mouse-leave');
+        // this.setState({
+        //     backgroundSize: "30px 35px",
+        // })
+
+        var backGroundArray = [];
+        this.props.DropOffServiceLocations.map((location) => {
+            var back = "back"+location.PartnerServiceLocationID;
+
+            var backObj = {
+                [back] : "30px 35px",
+                ["top"+location.PartnerServiceLocationID]: -31,
+                ["left"+location.PartnerServiceLocationID]: -15,
+            }
+            backGroundArray.push(backObj)
+        });
+        this.setState({
+            allBackGroundSize : backGroundArray,
+        })
     }
 
     mapDropOffLocationsOldHome(){
@@ -176,7 +257,10 @@ class DropOffIndex extends React.Component {
                 dayCounter = dayCounter + 1;
             });
             return (
-                <div className="dropOFFHolderContent" onMouseEnter={this.handleMouseEnter.bind(this)} key={location.PartnerServiceLocationID}>
+                <div className="dropOFFHolderContent"
+                    onMouseEnter={this.handleMouseEnter.bind(this,location.PartnerServiceLocationID)}
+                    onMouseLeave={this.handleMouseLeave.bind(this,location.PartnerServiceLocationID)}
+                    key={location.PartnerServiceLocationID}>
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="leftDropOFF">
@@ -244,9 +328,31 @@ class DropOffIndex extends React.Component {
     }
 
     markerOnMap(){
+        // location.PartnerServiceLocationID
+        var counter = -1;
         return this.props.DropOffServiceLocations.map((location) => {
+            counter++;
+            var back = "back"+location.PartnerServiceLocationID;
+            var blueMapStyle = {
+                position : this.state.position,
+                color: this.state.color,
+                backgroundRepeat: this.state.backgroundRepeat,
+                backgroundImage: this.state.backgroundImage,
+                height: this.state.height,
+                width: this.state.width,
+                top: this.state.allBackGroundSize[counter]["top"+location.PartnerServiceLocationID],
+                left: this.state.allBackGroundSize[counter]["left"+location.PartnerServiceLocationID],
+                backgroundSize: this.state.allBackGroundSize[counter][back],
+            }
+            // console.log(location.Lat);
+            // console.log(location.Lng);
+            // console.log(this.state.allBackGroundSize[counter][back]);
             return (
-                <BlueMapMarker lat={location.Lat} lng={location.Lng} text={''} key={location.Lat}/>
+                <BlueMapMarker
+                    lat={location.Lat}
+                    lng={location.Lng}
+                    text={blueMapStyle}
+                    key={location.Lat}/>
             );
         });
     }

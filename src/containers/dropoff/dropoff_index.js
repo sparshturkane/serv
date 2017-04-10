@@ -170,7 +170,62 @@ class DropOffIndex extends React.Component {
         // })
     }
 
+
+    handleTouchStart(PartnerServiceLocationID){
+        var backGroundArray = [];
+        this.props.DropOffServiceLocations.map((location) => {
+            var back = "back"+location.PartnerServiceLocationID;
+
+            if(PartnerServiceLocationID !== location.PartnerServiceLocationID){
+                var backObj = {
+                    [back] : "30px 35px",
+                    ["top"+location.PartnerServiceLocationID]: -31,
+                    ["left"+location.PartnerServiceLocationID]: -15,
+                }
+            }else{
+                // 40px 45px
+                var backObj = {
+                    [back] : "40px 45px",
+                    ["top"+location.PartnerServiceLocationID]: -43,
+                    ["left"+location.PartnerServiceLocationID]: -20,
+                }
+            }
+
+            backGroundArray.push(backObj)
+        });
+        this.setState({
+            allBackGroundSize : backGroundArray,
+        })
+
+        console.log('mouse-enter');
+        // this.setState({
+        //     backgroundSize: "35px 40px",
+        // })
+    }
+
     handleMouseLeave(PartnerServiceLocationID){
+        // console.log('mouse-leave');
+        // this.setState({
+        //     backgroundSize: "30px 35px",
+        // })
+
+        var backGroundArray = [];
+        this.props.DropOffServiceLocations.map((location) => {
+            var back = "back"+location.PartnerServiceLocationID;
+
+            var backObj = {
+                [back] : "30px 35px",
+                ["top"+location.PartnerServiceLocationID]: -31,
+                ["left"+location.PartnerServiceLocationID]: -15,
+            }
+            backGroundArray.push(backObj)
+        });
+        this.setState({
+            allBackGroundSize : backGroundArray,
+        })
+    }
+
+    handleTouchEnd(PartnerServiceLocationID){
         // console.log('mouse-leave');
         // this.setState({
         //     backgroundSize: "30px 35px",
@@ -259,7 +314,10 @@ class DropOffIndex extends React.Component {
             return (
                 <div className="dropOFFHolderContent"
                     onMouseEnter={this.handleMouseEnter.bind(this,location.PartnerServiceLocationID)}
+                    onTouchStart={this.handleTouchStart.bind(this,location.PartnerServiceLocationID)}
+
                     onMouseLeave={this.handleMouseLeave.bind(this,location.PartnerServiceLocationID)}
+                    onTouchEnd={this.handleTouchEnd.bind(this,location.PartnerServiceLocationID)}
                     key={location.PartnerServiceLocationID}>
                     <div className="row">
                         <div className="col-sm-12">

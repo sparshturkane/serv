@@ -14,6 +14,7 @@ import Consumer from './reducer_consumer';
 import ConsumerProduct from './reducer_consumer_product';
 import RescheduleData from './reschedule_data';
 import ConsumerFavoriteLocation from './reducer_consumer_favorite_location';
+import FileUpload from './reducer_file_upload';
 
 
 const rootReducer = combineReducers({
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
     Consumer: Consumer,
     ConsumerProduct: ConsumerProduct,
     RescheduleData: RescheduleData,
-    ConsumerFavoriteLocation: ConsumerFavoriteLocation
+    ConsumerFavoriteLocation: ConsumerFavoriteLocation,
+    FileUpload: FileUpload
 });
 
 export default rootReducer;

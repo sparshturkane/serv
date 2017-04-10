@@ -47,6 +47,9 @@ export const FETCH_CONSUMER_APP_CONFIG = 'FETCH_CONSUMER_APP_CONFIG';
 export const CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION = 'CONSUMER_FAVORITE_LOCATION_UPDATE_LOCATION';
 export const GET_LAT_LNG_FROM_SAVED_LOCATION = 'GET_LAT_LNG_FROM_SAVED_LOCATION';
 export const VALIDATE_SERIAL_NUMBER = 'VALIDATE_SERIAL_NUMBER';
+export const FETCH_FILE_UPLOAD_URL = 'FETCH_FILE_UPLOAD_URL';
+export const PUT_URL_AWS = 'PUT_URL_AWS';
+export const CONSUMER_UPDATE_PROFILE_IMAGE = 'CONSUMER_UPDATE_PROFILE_IMAGE';
 
 
 const ROOT_URL = 'http://staging.servify.in:8027/api';
@@ -68,6 +71,43 @@ export function getConsumerAppConfig() {
         payload: request,
     };
 }
+
+// get file upload url
+export function getFileUploadUrl(getUrlObj) {
+    const request = axios.post(`${ROOT_URL}/FileUpload/getUrl`,getUrlObj);
+
+    return {
+        type: FETCH_FILE_UPLOAD_URL,
+        payload: request,
+    };
+}
+
+// get file upload url
+// export function putUrlAWS(putUrl,put) {
+//     const request = axios.post(`${ROOT_URL}/FileUpload/getUrl`,getUrlObj);
+//
+//     return {
+//         type: PUT_URL_AWS,
+//         payload: request,
+//     };
+// }
+
+//---------------------------------
+// var querystring = require('querystring');
+// //...
+// axios.post(authServerUrl + token_access_path,
+//     querystring.stringify({
+//             username: 'abcd', //gave the values directly for testing
+//             password: '1235!',
+//             client_id: 'user-client'
+//     }), {
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded"
+//       }
+//     }).then(function(response) {
+//         console.log(response);
+//     });
+//---------------------------------
 
 // imei number vaidate
 export function validateSerialNumber(validateObj) {
@@ -384,6 +424,16 @@ export function consumerUpdateProfile(updateProfileData) {
 
     return {
         type: CONSUMER_UPDATE_PROFILE,
+        payload: request,
+    };
+}
+
+//updating consumer profileImage
+export function consumerUpdateProfileImage(updateProfileData) {
+    const request = axios.post(`${ROOT_URL}/Consumer/updateProfileImage`, updateProfileData);
+
+    return {
+        type: CONSUMER_UPDATE_PROFILE_IMAGE,
         payload: request,
     };
 }
